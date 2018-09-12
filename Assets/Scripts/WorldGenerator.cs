@@ -12,7 +12,7 @@ public class WorldGenerator : MonoBehaviour {
     public GameObject[] stoneTypes;
     public GameObject[] goldTypes;
     public GameObject playerHouse;
-    public GameObject fenceObstancle;
+    public GameObject fenceObstacle;
 	
     // This is where we will store all the map segments into one
     // whole game world as we create each segment
@@ -95,6 +95,18 @@ public class WorldGenerator : MonoBehaviour {
                 {
                     gameWorld[y, x] = 8;
                 }
+                    
+                // Adding stone in the rocky forest biome
+                if (((x > 20 && x < 40) && ((y < 19) || (y > 21))) && Random.RandomRange(0, 101) > 96 && gameWorld[y, x] != 0)
+                {
+                    gameWorld[y, x] = 15;
+                }
+                
+                // Adding stone in the house region
+                if (((x > 60 && x < 80) && ((y < 15) || (y > 26))) && Random.RandomRange(0, 101) > 99 && gameWorld[y, x] != 0)
+                {
+                    gameWorld[y, x] = 15;
+                }
             }
         }
 
@@ -124,7 +136,7 @@ public class WorldGenerator : MonoBehaviour {
                         Instantiate(playerHouse,
                             new Vector2(currentX, currentY), Quaternion.identity);
                         break;
-                    case 4: // Iron
+                    case 4: // Stone
                         // We are placing the grass and then the fence with its transparent
                         // background on top, so that they blend together
                         Instantiate(rockyGround[Random.RandomRange(0, rockyGround.Length)],
@@ -151,17 +163,31 @@ public class WorldGenerator : MonoBehaviour {
                             new Vector2(currentX, currentY), Quaternion.identity);
                         break;
                     case 9: // Boundaries / fences
-                        Instantiate(ground[Random.RandomRange(0, 2)],
-                            new Vector2(currentX, currentY), Quaternion.identity);
-                        Instantiate(fenceObstancle,
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                        if (Random.RandomRange(0, 101) > 70)
+                        {
+                            Instantiate(ground[Random.RandomRange(0, 2)],
+                                new Vector2(currentX, currentY), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(ground[Random.RandomRange(0, 2)],
+                                new Vector2(currentX, currentY), Quaternion.identity);
+                            Instantiate(fenceObstacle,
+                                new Vector2(currentX, currentY), Quaternion.identity); 
+                        }
                         break;
                     case 0: // Trees
                         Instantiate(forestTrees[Random.RandomRange(0, forestTrees.Length)],
                             new Vector2(currentX, currentY), Quaternion.identity);
                         break;
-                    case 14:
+                    case 14: // Rocky ground for the natural resources
                         Instantiate(rockyGround[Random.RandomRange(0, rockyGround.Length)],
+                            new Vector2(currentX, currentY), Quaternion.identity);
+                        break;
+                    case 15: // Stone only in the forest
+                        Instantiate(ground[Random.RandomRange(0, 2)],
+                            new Vector2(currentX, currentY), Quaternion.identity);
+                        Instantiate(stoneTypes[Random.RandomRange(0, stoneTypes.Length)],
                             new Vector2(currentX, currentY), Quaternion.identity);
                         break;
                 }
