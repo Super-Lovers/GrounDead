@@ -9,6 +9,9 @@
       <change afterPath="$PROJECT_DIR$/.idea/.idea.SurvivalConcept/riderModule.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/SurvivalConcept/ForestGenerator.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/SurvivalConcept/RockyPlains.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SurvivalConcept/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/SurvivalConcept/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SurvivalConcept/bin/Debug/SurvivalConcept.exe" beforeDir="false" afterPath="$PROJECT_DIR$/SurvivalConcept/bin/Debug/SurvivalConcept.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SurvivalConcept/bin/Debug/SurvivalConcept.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/SurvivalConcept/bin/Debug/SurvivalConcept.pdb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,12 +39,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cs" value="2443" />
+          <entry key="cs" value="3015" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="C#" value="2443" />
+          <entry key="C#" value="3015" />
         </counts>
       </usages-collector>
     </session>
@@ -51,27 +54,32 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SurvivalConcept/Program.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
+            <state relative-caret-position="697">
+              <caret line="92" column="44" selection-start-line="92" selection-start-column="44" selection-end-line="92" selection-end-column="44" />
               <folding>
-                <marker date="1536767056883" expanded="true" signature="6:132" ph="..." />
-                <marker date="1536767056883" expanded="true" signature="159:3509" ph="{...}" />
-                <marker date="1536767056883" expanded="true" signature="186:3507" ph="{...}" />
-                <marker date="1536767056883" expanded="true" signature="201:315" ph="/* This is where we will store all the map segments into one ... */" />
-                <marker date="1536767056883" expanded="true" signature="419:516" ph="/* We need to constantly keep track of where to draw next ... */" />
-                <marker date="1536767056883" expanded="true" signature="741:3501" ph="{...}" />
-                <marker date="1536767056883" expanded="true" signature="958:1060" ph="/* Then we are generating the small but well-populated ... */" />
-                <marker date="1536767056883" expanded="true" signature="1604:2751" ph="{...}" />
-                <marker date="1536767056883" expanded="true" signature="1669:2700" ph="{...}" />
-                <marker date="1536767056883" expanded="true" signature="1708:1800" ph="/* We also create the boundaries of the ... */" />
-                <marker date="1536767056883" expanded="true" signature="1888:2214" ph="{...}" />
-                <marker date="1536767056883" expanded="true" signature="1961:2062" ph="{...}" />
-                <marker date="1536767056883" expanded="true" signature="2091:2192" ph="{...}" />
-                <marker date="1536767056883" expanded="true" signature="2257:2346" ph="{...}" />
-                <marker date="1536767056883" expanded="true" signature="2390:2479" ph="{...}" />
-                <marker date="1536767056883" expanded="true" signature="2541:2630" ph="{...}" />
-                <marker date="1536767056883" expanded="true" signature="2765:2944" ph="/* StreamReader reader = new StreamReader(&quot;file.txt&quot;); ... */" />
-                <marker date="1536767056883" expanded="true" signature="2957:3491" ph="/* using (reader) ... */" />
+                <marker date="1536771289579" expanded="true" signature="6:132" ph="..." />
+                <marker date="1536771289579" expanded="true" signature="159:4577" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="186:4575" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="201:315" ph="/* This is where we will store all the map segments into one ... */" />
+                <marker date="1536771289579" expanded="true" signature="419:516" ph="/* We need to constantly keep track of where to draw next ... */" />
+                <marker date="1536771289579" expanded="true" signature="741:4569" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="958:1060" ph="/* Then we are generating the small but well-populated ... */" />
+                <marker date="1536771289579" expanded="true" signature="1604:3819" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="1669:3768" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="1708:1800" ph="/* We also create the boundaries of the ... */" />
+                <marker date="1536771289579" expanded="true" signature="1888:2540" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="1961:2364" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="2043:2173" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="2206:2338" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="2393:2518" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="2583:2687" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="2731:2843" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="2905:3018" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="3184:3317" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="3437:3526" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="3609:3698" ph="{...}" />
+                <marker date="1536771289579" expanded="true" signature="3833:4012" ph="/* StreamReader reader = new StreamReader(&quot;file.txt&quot;); ... */" />
+                <marker date="1536771289579" expanded="true" signature="4025:4559" ph="/* using (reader) ... */" />
               </folding>
             </state>
           </provider>
@@ -251,12 +259,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1536756481859</updated>
-      <workItem from="1536756483088" duration="11053000" />
+      <workItem from="1536756483088" duration="12610000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11053000" />
+    <option name="totallyTimeSpent" value="12610000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -371,27 +379,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SurvivalConcept/Program.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
+        <state relative-caret-position="697">
+          <caret line="92" column="44" selection-start-line="92" selection-start-column="44" selection-end-line="92" selection-end-column="44" />
           <folding>
-            <marker date="1536767056883" expanded="true" signature="6:132" ph="..." />
-            <marker date="1536767056883" expanded="true" signature="159:3509" ph="{...}" />
-            <marker date="1536767056883" expanded="true" signature="186:3507" ph="{...}" />
-            <marker date="1536767056883" expanded="true" signature="201:315" ph="/* This is where we will store all the map segments into one ... */" />
-            <marker date="1536767056883" expanded="true" signature="419:516" ph="/* We need to constantly keep track of where to draw next ... */" />
-            <marker date="1536767056883" expanded="true" signature="741:3501" ph="{...}" />
-            <marker date="1536767056883" expanded="true" signature="958:1060" ph="/* Then we are generating the small but well-populated ... */" />
-            <marker date="1536767056883" expanded="true" signature="1604:2751" ph="{...}" />
-            <marker date="1536767056883" expanded="true" signature="1669:2700" ph="{...}" />
-            <marker date="1536767056883" expanded="true" signature="1708:1800" ph="/* We also create the boundaries of the ... */" />
-            <marker date="1536767056883" expanded="true" signature="1888:2214" ph="{...}" />
-            <marker date="1536767056883" expanded="true" signature="1961:2062" ph="{...}" />
-            <marker date="1536767056883" expanded="true" signature="2091:2192" ph="{...}" />
-            <marker date="1536767056883" expanded="true" signature="2257:2346" ph="{...}" />
-            <marker date="1536767056883" expanded="true" signature="2390:2479" ph="{...}" />
-            <marker date="1536767056883" expanded="true" signature="2541:2630" ph="{...}" />
-            <marker date="1536767056883" expanded="true" signature="2765:2944" ph="/* StreamReader reader = new StreamReader(&quot;file.txt&quot;); ... */" />
-            <marker date="1536767056883" expanded="true" signature="2957:3491" ph="/* using (reader) ... */" />
+            <marker date="1536771289579" expanded="true" signature="6:132" ph="..." />
+            <marker date="1536771289579" expanded="true" signature="159:4577" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="186:4575" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="201:315" ph="/* This is where we will store all the map segments into one ... */" />
+            <marker date="1536771289579" expanded="true" signature="419:516" ph="/* We need to constantly keep track of where to draw next ... */" />
+            <marker date="1536771289579" expanded="true" signature="741:4569" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="958:1060" ph="/* Then we are generating the small but well-populated ... */" />
+            <marker date="1536771289579" expanded="true" signature="1604:3819" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="1669:3768" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="1708:1800" ph="/* We also create the boundaries of the ... */" />
+            <marker date="1536771289579" expanded="true" signature="1888:2540" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="1961:2364" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="2043:2173" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="2206:2338" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="2393:2518" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="2583:2687" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="2731:2843" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="2905:3018" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="3184:3317" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="3437:3526" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="3609:3698" ph="{...}" />
+            <marker date="1536771289579" expanded="true" signature="3833:4012" ph="/* StreamReader reader = new StreamReader(&quot;file.txt&quot;); ... */" />
+            <marker date="1536771289579" expanded="true" signature="4025:4559" ph="/* using (reader) ... */" />
           </folding>
         </state>
       </provider>
