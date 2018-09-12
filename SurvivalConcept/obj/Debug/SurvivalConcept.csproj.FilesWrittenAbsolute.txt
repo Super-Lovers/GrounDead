@@ -1,0 +1,5 @@
+/home/sdsquid/RiderProjects/SurvivalConcept/SurvivalConcept/obj/Debug/.NETFramework,Version=v4.7.1.AssemblyAttribute.cs
+/home/sdsquid/RiderProjects/SurvivalConcept/SurvivalConcept/bin/Debug/SurvivalConcept.pdb
+/home/sdsquid/RiderProjects/SurvivalConcept/SurvivalConcept/bin/Debug/SurvivalConcept.exe
+/home/sdsquid/RiderProjects/SurvivalConcept/SurvivalConcept/obj/Debug/SurvivalConcept.exe
+/home/sdsquid/RiderProjects/SurvivalConcept/SurvivalConcept/obj/Debug/SurvivalConcept.pdb

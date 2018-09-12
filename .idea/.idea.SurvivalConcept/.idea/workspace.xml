@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c8ad0382-0801-4b1d-a8ab-32c59fb336e5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.SurvivalConcept/.idea/contentModel.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.SurvivalConcept/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.SurvivalConcept/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.SurvivalConcept/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.SurvivalConcept/riderModule.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SurvivalConcept/ForestGenerator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SurvivalConcept/RockyPlains.cs" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1985885013">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="cs" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="C#" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="cs" value="2443" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="C#" value="2443" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SurvivalConcept/Program.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="365">
+              <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
+              <folding>
+                <marker date="1536767056883" expanded="true" signature="6:132" ph="..." />
+                <marker date="1536767056883" expanded="true" signature="159:3509" ph="{...}" />
+                <marker date="1536767056883" expanded="true" signature="186:3507" ph="{...}" />
+                <marker date="1536767056883" expanded="true" signature="201:315" ph="/* This is where we will store all the map segments into one ... */" />
+                <marker date="1536767056883" expanded="true" signature="419:516" ph="/* We need to constantly keep track of where to draw next ... */" />
+                <marker date="1536767056883" expanded="true" signature="741:3501" ph="{...}" />
+                <marker date="1536767056883" expanded="true" signature="958:1060" ph="/* Then we are generating the small but well-populated ... */" />
+                <marker date="1536767056883" expanded="true" signature="1604:2751" ph="{...}" />
+                <marker date="1536767056883" expanded="true" signature="1669:2700" ph="{...}" />
+                <marker date="1536767056883" expanded="true" signature="1708:1800" ph="/* We also create the boundaries of the ... */" />
+                <marker date="1536767056883" expanded="true" signature="1888:2214" ph="{...}" />
+                <marker date="1536767056883" expanded="true" signature="1961:2062" ph="{...}" />
+                <marker date="1536767056883" expanded="true" signature="2091:2192" ph="{...}" />
+                <marker date="1536767056883" expanded="true" signature="2257:2346" ph="{...}" />
+                <marker date="1536767056883" expanded="true" signature="2390:2479" ph="{...}" />
+                <marker date="1536767056883" expanded="true" signature="2541:2630" ph="{...}" />
+                <marker date="1536767056883" expanded="true" signature="2765:2944" ph="/* StreamReader reader = new StreamReader(&quot;file.txt&quot;); ... */" />
+                <marker date="1536767056883" expanded="true" signature="2957:3491" ph="/* using (reader) ... */" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SurvivalConcept/ForestGenerator.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="66" column="25" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
+              <folding>
+                <marker date="1536765794693" expanded="true" signature="6:132" ph="..." />
+                <marker date="1536765794693" expanded="true" signature="159:4795" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="194:4793" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="387:713" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="492:703" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="604:689" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="831:2949" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="1102:2939" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="1158:2738" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="1281:1544" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="1390:1477" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="1595:1827" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="1673:1760" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="1878:2142" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="1988:2075" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="2193:2425" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="2271:2358" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="2512:2720" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="2755:2925" ph="/* if (totalSteps &gt; 80) ... */" />
+                <marker date="1536765794693" expanded="false" signature="3014:3882" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="3205:3872" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="3318:3858" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="3438:3755" ph="{...}" />
+                <marker date="1536765794693" expanded="true" signature="3485:3733" ph="/* Console.Write(map[y, x]); ... */" />
+                <marker date="1536765794693" expanded="true" signature="3776:3840" ph="/* Console.WriteLine(); ... */" />
+                <marker date="1536765794693" expanded="true" signature="3975:4787" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SurvivalConcept/RockyPlains.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="658">
+              <caret line="43" column="48" selection-start-line="43" selection-start-column="48" selection-end-line="43" selection-end-column="48" />
+              <folding>
+                <marker date="1536765794073" expanded="true" signature="6:132" ph="..." />
+                <marker date="1536765794073" expanded="true" signature="159:1629" ph="{...}" />
+                <marker date="1536765794073" expanded="true" signature="190:1627" ph="{...}" />
+                <marker date="1536765794073" expanded="true" signature="391:1079" ph="{...}" />
+                <marker date="1536765794073" expanded="true" signature="496:1069" ph="{...}" />
+                <marker date="1536765794073" expanded="true" signature="608:1055" ph="{...}" />
+                <marker date="1536765794073" expanded="true" signature="681:778" ph="{...}" />
+                <marker date="1536765794073" expanded="true" signature="818:915" ph="{...}" />
+                <marker date="1536765794073" expanded="true" signature="940:1037" ph="{...}" />
+                <marker date="1536765794073" expanded="true" signature="1177:1621" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>randomPointInMapX</find>
+      <find>GenerateForest</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>Program.currentPositionX</replace>
+      <replace>GenerateRockyPlains</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/SurvivalConcept/ForestGenerator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/SurvivalConcept/RockyPlains.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/SurvivalConcept/Program.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/SurvivalConcept/ForestGenerator.cs" />
+        <option value="$PROJECT_DIR$/SurvivalConcept/RockyPlains.cs" />
+        <option value="$PROJECT_DIR$/SurvivalConcept/Program.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="322" />
+    <option name="y" value="120" />
+    <option name="width" value="963" />
+    <option name="height" value="698" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="SolutionExplorer" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="SolutionExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="SurvivalConcept" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="SurvivalConcept" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="SurvivalConcept" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <option name="show-all-files" value="false" />
+      </pane>
+      <pane id="FileSystemExplorer" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
+    <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Default" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/SurvivalConcept/bin/Debug/SurvivalConcept.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SurvivalConcept/bin/Debug" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/SurvivalConcept/SurvivalConcept.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="Console" />
+      <option name="PROJECT_TFM" value=".NETFramework,Version=v4.7.1" />
+      <method v="2">
+        <option name="Build" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c8ad0382-0801-4b1d-a8ab-32c59fb336e5" name="Default Changelist" comment="" />
+      <created>1536756481859</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1536756481859</updated>
+      <workItem from="1536756483088" duration="11053000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="11053000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-1" y="35" width="1922" height="1046" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Favorites" order="0" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4983127" visible="true" weight="0.18943436" />
+      <window_info id="Structure" order="2" sideWeight="0.5016873" side_tool="true" visible="true" weight="0.18943436" />
+      <window_info anchor="bottom" id="NuGet" order="0" />
+      <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="2" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="3" />
+      <window_info anchor="bottom" id="Unit Tests" order="4" />
+      <window_info anchor="bottom" id="Terminal" order="5" />
+      <window_info anchor="bottom" id="Event Log" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="7" />
+      <window_info anchor="bottom" id="Find" order="8" />
+      <window_info anchor="bottom" id="Debug" order="9" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="12" />
+      <window_info anchor="right" id="Errors In Solution" order="0" />
+      <window_info anchor="right" id="Database" order="1" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="2" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
+      <window_info active="true" anchor="right" id="Run" order="5" visible="true" weight="0.481857" />
+      <window_info anchor="right" id="Build" order="6" weight="0.32924226" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" suspend="NONE" type="DotNet Exception Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/SurvivalConcept/RockyPlains.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="658">
+          <caret line="43" column="48" selection-start-line="43" selection-start-column="48" selection-end-line="43" selection-end-column="48" />
+          <folding>
+            <marker date="1536765794073" expanded="true" signature="6:132" ph="..." />
+            <marker date="1536765794073" expanded="true" signature="159:1629" ph="{...}" />
+            <marker date="1536765794073" expanded="true" signature="190:1627" ph="{...}" />
+            <marker date="1536765794073" expanded="true" signature="391:1079" ph="{...}" />
+            <marker date="1536765794073" expanded="true" signature="496:1069" ph="{...}" />
+            <marker date="1536765794073" expanded="true" signature="608:1055" ph="{...}" />
+            <marker date="1536765794073" expanded="true" signature="681:778" ph="{...}" />
+            <marker date="1536765794073" expanded="true" signature="818:915" ph="{...}" />
+            <marker date="1536765794073" expanded="true" signature="940:1037" ph="{...}" />
+            <marker date="1536765794073" expanded="true" signature="1177:1621" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SurvivalConcept/ForestGenerator.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="66" column="25" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
+          <folding>
+            <marker date="1536765794693" expanded="true" signature="6:132" ph="..." />
+            <marker date="1536765794693" expanded="true" signature="159:4795" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="194:4793" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="387:713" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="492:703" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="604:689" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="831:2949" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="1102:2939" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="1158:2738" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="1281:1544" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="1390:1477" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="1595:1827" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="1673:1760" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="1878:2142" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="1988:2075" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="2193:2425" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="2271:2358" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="2512:2720" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="2755:2925" ph="/* if (totalSteps &gt; 80) ... */" />
+            <marker date="1536765794693" expanded="false" signature="3014:3882" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="3205:3872" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="3318:3858" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="3438:3755" ph="{...}" />
+            <marker date="1536765794693" expanded="true" signature="3485:3733" ph="/* Console.Write(map[y, x]); ... */" />
+            <marker date="1536765794693" expanded="true" signature="3776:3840" ph="/* Console.WriteLine(); ... */" />
+            <marker date="1536765794693" expanded="true" signature="3975:4787" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SurvivalConcept/Program.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
+          <folding>
+            <marker date="1536767056883" expanded="true" signature="6:132" ph="..." />
+            <marker date="1536767056883" expanded="true" signature="159:3509" ph="{...}" />
+            <marker date="1536767056883" expanded="true" signature="186:3507" ph="{...}" />
+            <marker date="1536767056883" expanded="true" signature="201:315" ph="/* This is where we will store all the map segments into one ... */" />
+            <marker date="1536767056883" expanded="true" signature="419:516" ph="/* We need to constantly keep track of where to draw next ... */" />
+            <marker date="1536767056883" expanded="true" signature="741:3501" ph="{...}" />
+            <marker date="1536767056883" expanded="true" signature="958:1060" ph="/* Then we are generating the small but well-populated ... */" />
+            <marker date="1536767056883" expanded="true" signature="1604:2751" ph="{...}" />
+            <marker date="1536767056883" expanded="true" signature="1669:2700" ph="{...}" />
+            <marker date="1536767056883" expanded="true" signature="1708:1800" ph="/* We also create the boundaries of the ... */" />
+            <marker date="1536767056883" expanded="true" signature="1888:2214" ph="{...}" />
+            <marker date="1536767056883" expanded="true" signature="1961:2062" ph="{...}" />
+            <marker date="1536767056883" expanded="true" signature="2091:2192" ph="{...}" />
+            <marker date="1536767056883" expanded="true" signature="2257:2346" ph="{...}" />
+            <marker date="1536767056883" expanded="true" signature="2390:2479" ph="{...}" />
+            <marker date="1536767056883" expanded="true" signature="2541:2630" ph="{...}" />
+            <marker date="1536767056883" expanded="true" signature="2765:2944" ph="/* StreamReader reader = new StreamReader(&quot;file.txt&quot;); ... */" />
+            <marker date="1536767056883" expanded="true" signature="2957:3491" ph="/* using (reader) ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
