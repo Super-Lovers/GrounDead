@@ -1,33 +1,27 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 
 namespace SurvivalConcept
 {
     public class RockyPlains
     {
         static Random rng = new Random();
-        static int totalSteps = 0;
-        static int numberOfSteps;
         
-        static void GenerateRockyPlains(int height, int width, int[,] map)
+        static void GenerateRockyPlains(int height, int width)
         {
-            for (int y = WorldGenerator.currentPositionY; y < WorldGenerator.currentPositionY + height; y++)
+            for (int y = WorldGenerator.CurrentPositionY; y < WorldGenerator.CurrentPositionY + height; y++)
             {
-                for (int x = WorldGenerator.currentPositionX; x < WorldGenerator.currentPositionX + width; x++)
+                for (int x = WorldGenerator.CurrentPositionX; x < WorldGenerator.CurrentPositionX + width; x++)
                 {
                     if (rng.Next(0, 101) > 90) // Iron
                     {
-                        WorldGenerator.gameWorld[y, x] = 4;
+                        WorldGenerator.GameWorld[y, x] = 4;
                     } else if (rng.Next(0, 101) > 95) // Gold
                     {
-                        WorldGenerator.gameWorld[y, x] = 5;
+                        WorldGenerator.GameWorld[y, x] = 5;
                     }
                     else
                     {
-                        WorldGenerator.gameWorld[y, x] = 14;
+                        WorldGenerator.GameWorld[y, x] = 14;
                     }
                 }
             }
@@ -35,15 +29,11 @@ namespace SurvivalConcept
 
         public static void GenerateRockyPlains(int mapWidth, int mapHeight, int numberOfObjects)
         {
+            // The map properties
             int width = mapWidth;
             int height = mapHeight;
-            numberOfSteps = numberOfObjects;
 
-            // The map properties
-            int[,] map = new int[height, width];
-
-            GenerateRockyPlains(height, width, WorldGenerator.gameWorld);
-            //PrintMap(WorldGenerator.currentPositionY + height, WorldGenerator.currentPositionX + width, WorldGenerator.gameWorld);
+            GenerateRockyPlains(height, width);
         }
     }
 }

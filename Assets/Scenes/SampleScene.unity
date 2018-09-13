@@ -452,41 +452,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6db760cc7c2a45b690208e51707c58c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ground:
+  Ground:
   - {fileID: 1288126433437652, guid: 781c127ac20af42c5838ea6d4e0395e9, type: 2}
   - {fileID: 1533273369041476, guid: 4c01c15a35c2f484699431983af0170d, type: 2}
   - {fileID: 1473283280533630, guid: acf247b2121174deba80e410f0e0bcca, type: 2}
   - {fileID: 1231786585994224, guid: 40fd98ef3a6a8440aab4b287ff8b8456, type: 2}
-  waterTypes:
+  WaterTypes:
   - {fileID: 1564680252978140, guid: abd5613d95da843acb3acafa6f866011, type: 2}
   - {fileID: 1403822789839010, guid: 43353b262dd934df59fdd72c5e966e58, type: 2}
-  forestTrees:
+  ForestTrees:
+  - {fileID: 1388966112541718, guid: ff388afdf1ef746118eed86155db9a55, type: 2}
   - {fileID: 1569412327527046, guid: 3b11cc4d341bd4d14a29d685bb9bddde, type: 2}
-  - {fileID: 1569412327527046, guid: 3b11cc4d341bd4d14a29d685bb9bddde, type: 2}
-  - {fileID: 1569412327527046, guid: 3b11cc4d341bd4d14a29d685bb9bddde, type: 2}
-  - {fileID: 1569412327527046, guid: 3b11cc4d341bd4d14a29d685bb9bddde, type: 2}
-  rockyGround:
+  - {fileID: 1368736098939180, guid: 3ce85380545024ae2bec2b1fd7d73666, type: 2}
+  RockyGround:
   - {fileID: 1174162166717614, guid: f276aefe0da18450faf4cd0f18e7c95a, type: 2}
   - {fileID: 1307920819608092, guid: 4e716beea9618447aa4405546a29e18a, type: 2}
-  grassPaths:
+  GrassPaths:
   - {fileID: 1165515025644608, guid: f790a8abd68bf423ca8830de3ebed00a, type: 2}
-  - {fileID: 1513790674045734, guid: 3bfd05d54428d46609db0e4fa4bece88, type: 2}
   - {fileID: 1629942300603054, guid: 88339c3b4f5784f2d8c7b40b9e28f376, type: 2}
-  stoneTypes:
+  - {fileID: 1513790674045734, guid: 3bfd05d54428d46609db0e4fa4bece88, type: 2}
+  StoneTypes:
   - {fileID: 1724828210568118, guid: 4effb1fb9e6d44f7dade7b9b792ff0d6, type: 2}
   - {fileID: 1039069163428458, guid: 4688c33d8045341c49752213c7ac3fce, type: 2}
   - {fileID: 1113139786164934, guid: a91e803d33061437db32e08ac2a67f1d, type: 2}
   - {fileID: 1055241724559338, guid: e515d7f7edcbb4d358c8789b19946168, type: 2}
-  goldTypes:
+  GoldTypes:
   - {fileID: 1757631602457850, guid: e88f120880cf84ec49b982ceaef566ed, type: 2}
   - {fileID: 1306659553682236, guid: c7f7794a6029b498487403129cb59640, type: 2}
   - {fileID: 1687737921154872, guid: c33b59905b2204eb3b963ec3ee215820, type: 2}
   - {fileID: 1790799200689256, guid: 26435a081639e43c6b19f3da728d42c5, type: 2}
-  playerHouse: {fileID: 1387359072628356, guid: 57edcb071b95e417dbd341fa56e0e0b6,
+  PlayerHouse: {fileID: 1387359072628356, guid: 57edcb071b95e417dbd341fa56e0e0b6,
     type: 2}
-  fenceObstacle: {fileID: 1687940884881650, guid: 3d535e8b10ca84a80818b7dad294b57c,
+  FenceObstacle: {fileID: 1687940884881650, guid: 3d535e8b10ca84a80818b7dad294b57c,
     type: 2}
-  boundaries: {fileID: 1530560235270520, guid: c8717b98e4baa4182bbb50e880efd37d, type: 2}
+  Boundaries: {fileID: 1530560235270520, guid: c8717b98e4baa4182bbb50e880efd37d, type: 2}
 --- !u!1 &2010778177
 GameObject:
   m_ObjectHideFlags: 0
