@@ -162,6 +162,7 @@ public class WorldGenerator : MonoBehaviour {
 
         currentX = 0;
         currentY = 0;
+        int sortingLayer = mapHeight;
 
         // We begin instantiating every object on the map so
         // that we can visualize it with randomized sprites
@@ -231,8 +232,9 @@ public class WorldGenerator : MonoBehaviour {
                     case 0: // Trees
                         Instantiate(ground[Random.RandomRange(0, 2)],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
-                        Instantiate(forestTrees[Random.RandomRange(0, forestTrees.Length)],
+                        var tree = Instantiate(forestTrees[Random.RandomRange(0, forestTrees.Length)],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Forest Trees").transform);
+                        tree.GetComponent<SpriteRenderer>().sortingOrder = sortingLayer;
                         break;
                     case 14: // Rocky ground for the natural resources
                         Instantiate(rockyGround[Random.RandomRange(0, rockyGround.Length)],
@@ -255,6 +257,7 @@ public class WorldGenerator : MonoBehaviour {
 
             currentX = 0;
             currentY += 0.64f;
+            sortingLayer--;
         }
     }
 	
