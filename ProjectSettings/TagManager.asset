@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Greener Ground
+  - Water Pools
+  - Forest Trees
+  - Rocky Ground
+  - Grass Paths
+  - Stones
+  - Golds
+  - Fences
+  - Boundaries
   layers:
   - Default
   - TransparentFX

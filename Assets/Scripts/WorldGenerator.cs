@@ -3,6 +3,9 @@ using SurvivalConcept;
 using UnityEngine;
 
 public class WorldGenerator : MonoBehaviour {
+    private float worldWidthBounds = 0;
+    private float worldHeightBounds = 0;
+    
     // Storing the collection of all the game objects we will
     // be using to generate the map with
     public GameObject[] ground;
@@ -14,6 +17,7 @@ public class WorldGenerator : MonoBehaviour {
     public GameObject[] goldTypes;
     public GameObject playerHouse;
     public GameObject fenceObstacle;
+    public GameObject boundaries;
 	
     // This is where we will store all the map segments into one
     // whole game world as we create each segment
@@ -119,9 +123,48 @@ public class WorldGenerator : MonoBehaviour {
             }
         }
 
+        // In this section I draw the boundaries of the map's width and height
+        // so that the player can never leave the world and break the game
         float currentX = 0;
         float currentY = 0;
 
+        for (int y = 0; y < mapHeight; y++)
+        {
+            Instantiate(boundaries,
+                new Vector2(currentX - 0.64f, currentY), Quaternion.identity, GameObject.FindWithTag("Boundaries").transform);
+            currentY += 0.64f;
+        }
+
+        for (int x = 0; x < mapWidth; x++)
+        {
+            Instantiate(boundaries,
+                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Boundaries").transform);
+            currentX += 0.64f;
+        }
+        
+        // We need to start at 0 after we iterate on the map so that
+        // its easier to calculate the boundaries
+        currentX = 0;
+        currentY = 0;
+        
+        for (int x = 0; x < mapWidth; x++)
+        {
+            Instantiate(boundaries,
+                new Vector2(currentX, currentY - 0.64f), Quaternion.identity, GameObject.FindWithTag("Boundaries").transform);
+            currentX += 0.64f;
+        }
+        for (int y = mapHeight; y > 0; y--)
+        {
+            Instantiate(boundaries,
+                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Boundaries").transform);
+            currentY += 0.64f;
+        }
+
+        currentX = 0;
+        currentY = 0;
+
+        // We begin instantiating every object on the map so
+        // that we can visualize it with randomized sprites
         for (int y = 0; y < mapHeight; y++)
         {
             for (int x = 0; x < mapWidth; x++)
@@ -186,6 +229,8 @@ public class WorldGenerator : MonoBehaviour {
                         }
                         break;
                     case 0: // Trees
+                        Instantiate(ground[Random.RandomRange(0, 2)],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
                         Instantiate(forestTrees[Random.RandomRange(0, forestTrees.Length)],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Forest Trees").transform);
                         break;
