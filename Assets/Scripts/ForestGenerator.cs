@@ -118,8 +118,6 @@ namespace SurvivalConcept
             GenerateForest(height, width, WorldGenerator.gameWorld, totalSteps, numberOfSteps, rng);
             GenerateForest(height, width, WorldGenerator.gameWorld, totalSteps, numberOfSteps, rng);
             //PrintMap(WorldGenerator.currentPositionY + height, WorldGenerator.currentPositionX + width, WorldGenerator.gameWorld);
-
-            WorldGenerator.currentPositionX += 20;
         }
     }
 }

@@ -6,6 +6,7 @@ public class WorldGenerator : MonoBehaviour {
     // Storing the collection of all the game objects we will
     // be using to generate the map with
     public GameObject[] ground;
+    public GameObject[] waterTypes;
     public GameObject[] forestTrees;
     public GameObject[] rockyGround;
     public GameObject[] grassPaths;
@@ -28,22 +29,30 @@ public class WorldGenerator : MonoBehaviour {
 
     void Start () {
         RockyPlains.GenerateRockyPlains(20, 20, 5);
+        currentPositionX = 20;
         ForestGenerator.GenerateForest(20, 20, 30);
-        ForestGenerator.GenerateForest(20, 20, 40);
+        currentPositionX = 40;
+        ForestGenerator.GenerateForest(20, 20, 20);
+        currentPositionX = 60;
             
         // Then we are generating the small but well-populated
         // woods in both sides of the house
         ForestGenerator.GenerateForest(20, 14, 10);
-        currentPositionX -= 20;
-        currentPositionY += 27;
+        currentPositionX = 60;
+        currentPositionY = 27;
         ForestGenerator.GenerateForest(20, 13, 10);
-        currentPositionX -= 40;
-        currentPositionY -= 7;
+        currentPositionX = 40;
+        currentPositionY = 20;
         ForestGenerator.GenerateForest(20, 20, 40);
-        currentPositionX -= 40;
+        currentPositionX = 20;
         ForestGenerator.GenerateForest(20, 20, 30);
-        currentPositionX -= 40;
-        RockyPlains.GenerateRockyPlains(20, 20, 5);
+        currentPositionX = 0;
+        RockyPlains.GenerateRockyPlains(20, 20, 15);
+
+        // Creating the river with the fish spawners
+        currentPositionX = 20;
+        currentPositionY = 0;
+        RiverGenerator.GenerateRiver(20, 40, 20);
 
         for (int y = 0; y < mapHeight; y++)
         {
@@ -124,15 +133,15 @@ public class WorldGenerator : MonoBehaviour {
                         // objects from the arrays randomly so the environment
                         // always turns out unique
                         Instantiate(ground[Random.RandomRange(0, 2)],
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
                         break;
                     case 2: // Path
                         Instantiate(grassPaths[0],
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Grass Paths").transform);
                         break;
                     case 3: // Player House
                         Instantiate(ground[Random.RandomRange(0, 2)],
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
                         Instantiate(playerHouse,
                             new Vector2(currentX, currentY), Quaternion.identity);
                         break;
@@ -140,55 +149,59 @@ public class WorldGenerator : MonoBehaviour {
                         // We are placing the grass and then the fence with its transparent
                         // background on top, so that they blend together
                         Instantiate(rockyGround[Random.RandomRange(0, rockyGround.Length)],
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Rocky Ground").transform);
                         Instantiate(stoneTypes[Random.RandomRange(0, stoneTypes.Length)],
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Stones").transform);
                         break;
                     case 5: // Gold
                         Instantiate(rockyGround[Random.RandomRange(0, rockyGround.Length)],
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Rocky Ground").transform);
                         Instantiate(goldTypes[Random.RandomRange(0, goldTypes.Length)],
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Golds").transform);
                         break;
                     case 6: // Path up
                         Instantiate(grassPaths[2],
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Grass Paths").transform);
                         break;
                     case 7: // Path down
                         Instantiate(grassPaths[1],
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Grass Paths").transform);
                         break;
                     case 8: // Dirt
                         Instantiate(ground[Random.RandomRange(2, ground.Length)],
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
                         break;
                     case 9: // Boundaries / fences
                         if (Random.RandomRange(0, 101) > 70)
                         {
                             Instantiate(ground[Random.RandomRange(0, 2)],
-                                new Vector2(currentX, currentY), Quaternion.identity);
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
                         }
                         else
                         {
                             Instantiate(ground[Random.RandomRange(0, 2)],
-                                new Vector2(currentX, currentY), Quaternion.identity);
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
                             Instantiate(fenceObstacle,
-                                new Vector2(currentX, currentY), Quaternion.identity); 
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Fences").transform); 
                         }
                         break;
                     case 0: // Trees
                         Instantiate(forestTrees[Random.RandomRange(0, forestTrees.Length)],
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Forest Trees").transform);
                         break;
                     case 14: // Rocky ground for the natural resources
                         Instantiate(rockyGround[Random.RandomRange(0, rockyGround.Length)],
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Rocky Ground").transform);
                         break;
                     case 15: // Stone only in the forest
                         Instantiate(ground[Random.RandomRange(0, 2)],
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Rocky Ground").transform);
                         Instantiate(stoneTypes[Random.RandomRange(0, stoneTypes.Length)],
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Stones").transform);
+                        break;
+                    case 16: // Water tiles for "ponds" or small pools of water
+                        Instantiate(waterTypes[Random.RandomRange(0, waterTypes.Length)],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Water Pools").transform);
                         break;
                 }
 

@@ -44,8 +44,6 @@ namespace SurvivalConcept
 
             GenerateRockyPlains(height, width, WorldGenerator.gameWorld);
             //PrintMap(WorldGenerator.currentPositionY + height, WorldGenerator.currentPositionX + width, WorldGenerator.gameWorld);
-
-            WorldGenerator.currentPositionX += 20;
         }
     }
 }

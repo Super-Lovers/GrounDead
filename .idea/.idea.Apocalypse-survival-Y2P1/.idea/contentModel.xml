@@ -10,6 +10,7 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="ForestGenerator.cs" t="Include" />
+          <e p="RiverGenerator.cs" t="Include" />
           <e p="RockyPlains.cs" t="Include" />
           <e p="WorldGenerator.cs" t="Include" />
         </e>
