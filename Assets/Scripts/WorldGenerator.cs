@@ -16,7 +16,7 @@ public class WorldGenerator : MonoBehaviour {
 	
     // This is where we will store all the map segments into one
     // whole game world as we create each segment
-    private static int mapWidth = 120;
+    private static int mapWidth = 100;
     private static int mapHeight = 40;
         
     // We need to constantly keep track of where to draw next
@@ -84,7 +84,18 @@ public class WorldGenerator : MonoBehaviour {
                 {
                     GameWorld[y, x] = 8;
                 }
-                    
+                
+                // Water to represent the ocean
+                if (x > 90)
+                {
+                    GameWorld[y, x] = 16;
+                }
+                
+                if (x == 90)
+                {
+                    GameWorld[y, x] = 17;
+                }
+                
                 // Adding stone in the rocky forest biome
                 if (((x > 20 && x < 40) && ((y < 19) || (y > 21))) && Random.Range(0, 101) > 96 && GameWorld[y, x] != 0)
                 {
@@ -245,7 +256,11 @@ public class WorldGenerator : MonoBehaviour {
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Stones").transform);
                         break;
                     case 16: // Water tiles for "ponds" or small pools of water
-                        Instantiate(WaterTypes[Random.Range(0, WaterTypes.Length)],
+                        Instantiate(WaterTypes[0],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Water Pools").transform);
+                        break;
+                    case 17: // Water tiles for "ponds" or small pools of water
+                        Instantiate(WaterTypes[1],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Water Pools").transform);
                         break;
                 }

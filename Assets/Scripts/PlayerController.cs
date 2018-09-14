@@ -23,30 +23,26 @@ public class PlayerController : MonoBehaviour
         // whenever he is pressing the buttons on the axis
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            _animator.enabled = true;
             _animator.SetInteger("direction", 3); // Right
         } else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            _animator.enabled = true;
             _animator.SetInteger("direction", 4); // Left
         } else  if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            _animator.enabled = true;
             _animator.SetInteger("direction", 2); // Top
         } else  if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            _animator.enabled = true;
             _animator.SetInteger("direction", 1); // Bottom
         }
         else if (Input.GetAxis("Horizontal") == 0f && Input.GetAxis("Vertical") == 0f)
         {
-            _animator.enabled = false;
+            _animator.SetInteger("direction", 5); // Idle
         }
     }
 
     void FixedUpdate()
     {
-        Vector2 targetVelocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        _rb.velocity = targetVelocity * speed;
+        Vector2 newPlayerVelocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        _rb.velocity = newPlayerVelocity * speed;
     }
 }
