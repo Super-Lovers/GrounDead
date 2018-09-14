@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4215838889728556}
   - component: {fileID: 212355984601238330}
   m_Layer: 0
-  m_Name: dirt2
+  m_Name: sand2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5c0ed5860241049919aea6b602ce1f86, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5781c31a6ef354a9f81be3519a19c2cb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
