@@ -1,5 +1,4 @@
-﻿using SurvivalConcept;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WorldGenerator : MonoBehaviour {
     // Storing the collection of all the game objects we will
@@ -58,26 +57,7 @@ public class WorldGenerator : MonoBehaviour {
         {
             for (int x = 0; x < mapWidth; x++)
             {
-                // We also create the Boundaries of the
-                // game world in this code block
-                if ((x < 63) && (y == mapHeight / 2 - 1 || y == mapHeight / 2 + 1))
-                {
-                    if (x % 13 == 0 && x != 0)
-                    {
-                        if (y == mapHeight / 2 - 1)
-                        {
-                            GameWorld[y, x] = 6; // path going up
-                        }
-                        else
-                        {
-                            GameWorld[y, x] = 7; // path going down
-                        }
-                    }
-                    else
-                    {
-                        GameWorld[y, x] = 9; // Boundaries of biomes
-                    }
-                } else if ((x < 63) && (y == mapHeight / 2))
+                if ((x < 63) && (y == mapHeight / 2))
                 {
                     GameWorld[y, x] = 2; // path / road
                 } else if ((x == 75) && (y == mapHeight / 2))
@@ -115,6 +95,28 @@ public class WorldGenerator : MonoBehaviour {
                 if (((x > 60 && x < 80) && ((y < 15) || (y > 26))) && Random.Range(0, 101) > 99 && GameWorld[y, x] != 0)
                 {
                     GameWorld[y, x] = 15;
+                }
+                
+                // We also create the Boundaries of the
+                // game world in this code block
+                if ((x < 63) && (y == mapHeight / 2 - 1 || y == mapHeight / 2 + 1))
+                {
+                    if (x > 20 && x % 13 == 0 && x != 0)
+                    {
+                        for (int i = mapHeight / 2 - Random.Range(3, 7); i < mapHeight / 2; i++)
+                        {
+                            GameWorld[i, x] = 7; // path going down
+                        }
+
+                        for (int i = mapHeight / 2 + 1; i < mapHeight / 2 + Random.Range(4, 7); i++)
+                        {
+                            GameWorld[i, x] = 6; // path going down
+                        }
+                    }
+                    else
+                    {
+                        GameWorld[y, x] = 9; // Boundaries of biomes
+                    }
                 }
             }
         }
@@ -212,7 +214,7 @@ public class WorldGenerator : MonoBehaviour {
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
                         break;
                     case 9: // Boundaries / fences
-                        if (Random.Range(0, 101) > 70)
+                        if (Random.Range(0, 101) > 12)
                         {
                             Instantiate(Ground[Random.Range(0, 2)],
                                 new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
@@ -222,7 +224,7 @@ public class WorldGenerator : MonoBehaviour {
                             Instantiate(Ground[Random.Range(0, 2)],
                                 new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
                             Instantiate(FenceObstacle,
-                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Fences").transform); 
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Fences").transform);
                         }
                         break;
                     case 0: // Trees
