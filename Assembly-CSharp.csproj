@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\EnvironmentController.cs" />
     <Compile Include="Assets\Scripts\ForestGenerator.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\RiverGenerator.cs" />
