@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4597387386522736}
   - component: {fileID: 212156307952077310}
   - component: {fileID: 61600276422839654}
+  - component: {fileID: 114402646082472216}
   m_Layer: 0
   m_Name: tree1
   m_TagString: Untagged
@@ -57,7 +58,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1.78, y: 1.79}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -66,6 +67,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
+--- !u!114 &114402646082472216
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388966112541718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8922cfa60c141388884649d9d36a25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hammer: {fileID: 2800000, guid: a27b0195a00bf4c29843863e9594f380, type: 3}
 --- !u!212 &212156307952077310
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -81,7 +94,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ca6ffc26e2e8d43aea1b135f77795d42, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

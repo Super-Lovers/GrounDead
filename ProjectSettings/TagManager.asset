@@ -13,6 +13,7 @@ TagManager:
   - Golds
   - Fences
   - Boundaries
+  - ActionUI
   layers:
   - Default
   - TransparentFX
