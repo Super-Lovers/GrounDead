@@ -8,7 +8,7 @@ public class UiButtonController : MonoBehaviour
 	
     // Blocks for instantiation on the map
     public GameObject Wood;
-    private List<GameObject> _placedBlocks;
+    static public List<GameObject> _placedBlocks = new List<GameObject>();
 	
     // *******************************
     // SECTION FOR DISPLAYING ACTIONS ON GROUND
@@ -21,7 +21,6 @@ public class UiButtonController : MonoBehaviour
     {
         _actionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
         _pickUi = GameObject.FindGameObjectsWithTag("PickUI");
-        _placedBlocks = new List<GameObject>();
     }
 
     public void BuildBlockButton()

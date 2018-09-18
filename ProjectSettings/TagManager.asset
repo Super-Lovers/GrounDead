@@ -16,6 +16,7 @@ TagManager:
   - ActionUI
   - PickUI
   - PlacedBlock
+  - Tree
   layers:
   - Default
   - TransparentFX
