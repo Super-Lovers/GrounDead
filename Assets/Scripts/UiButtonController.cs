@@ -18,10 +18,15 @@ public class UiButtonController : MonoBehaviour
     private bool _showWood = true;
     private bool _showStone = true;
 
+    private AudioSource _cameraAudioSource;
+    public AudioClip Mining;
+    public AudioClip TreeFalling;
+
     private void Start()
     {
         _actionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
         _pickUi = GameObject.FindGameObjectsWithTag("PickUI");
+        _cameraAudioSource = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
     }
 
     public void BuildBlockButton()
@@ -90,24 +95,26 @@ public class UiButtonController : MonoBehaviour
                     nameOfBlock += block.name[i];
                     if (nameOfBlock == "tree")
                     {
-                        PlayerPrefs.SetFloat("Wood", PlayerController.wood++);
-                        GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerController.wood.ToString();
-                        Debug.Log(PlayerPrefs.GetFloat("Wood"));
+                        PlayerPrefs.SetFloat("Wood", PlayerController.Wood++);
+                        GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerController.Wood.ToString();
+                        
+                        //Playing a sound effect
+                        _cameraAudioSource.PlayOneShot(TreeFalling);
                         break;
                     }
 
                     if (nameOfBlock == "stone")
                     {
-                        PlayerPrefs.SetFloat("Stone", PlayerController.stone++);
-                        GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerController.stone.ToString();
-                        Debug.Log(PlayerPrefs.GetFloat("Stone"));
+                        PlayerPrefs.SetFloat("Stone", PlayerController.Stone++);
+                        GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerController.Stone.ToString();
+                        _cameraAudioSource.PlayOneShot(Mining);
                         break;
                     }
                     if (nameOfBlock == "gold")
                     {
-                        PlayerPrefs.SetFloat("Gold", PlayerController.gold++);
-                        GameObject.FindGameObjectWithTag("PlayerGold").GetComponent<Text>().text = PlayerController.gold.ToString();
-                        Debug.Log(PlayerPrefs.GetFloat("Gold"));
+                        PlayerPrefs.SetFloat("Gold", PlayerController.Gold++);
+                        GameObject.FindGameObjectWithTag("PlayerGold").GetComponent<Text>().text = PlayerController.Gold.ToString();
+                        _cameraAudioSource.PlayOneShot(Mining);
                         break;
                     }
                 }

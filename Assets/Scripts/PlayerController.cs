@@ -15,21 +15,27 @@ public class PlayerController : MonoBehaviour
     // Ui
     private GameObject[] _actionsUi;
     private GameObject[] _pickUi;
-    public static int wood = 0;
-    public static int stone = 0;
-    public static int gold = 0;
+    public static int Wood = 0;
+    public static int Stone = 0;
+    public static int Gold = 0;
+    
+    // Sound Effects for the player himself
+    public AudioClip Walking;
+    private AudioSource _audioSource;
+    private bool _isWalking = false;
 	
     void Start ()
     {
         // Player resources
-        PlayerPrefs.SetFloat("Wood", wood);
-        PlayerPrefs.SetFloat("Stone", stone);
-        PlayerPrefs.SetFloat("Gold", gold);
+        PlayerPrefs.SetFloat("Wood", Wood);
+        PlayerPrefs.SetFloat("Stone", Stone);
+        PlayerPrefs.SetFloat("Gold", Gold);
         
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         _actionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
         _pickUi = GameObject.FindGameObjectsWithTag("PickUI");
+        _audioSource = gameObject.GetComponent<AudioSource>();
     }
 	
     void Update () {
@@ -44,26 +50,58 @@ public class PlayerController : MonoBehaviour
             // up then it will be automatically closed
             CloseButtonOnClick();
             ClosePickingBlocks();
+            
+            // Play the walking sound effect
+            if (!_isWalking)
+            {
+                _audioSource.Play();
+                _isWalking = true;
+            }
+            
             _animator.SetInteger("direction", 3);
         } else if (horizontalMovement < 0) // Left
         {
             CloseButtonOnClick();
             ClosePickingBlocks();
+            
+            if (!_isWalking)
+            {
+                _audioSource.Play();
+                _isWalking = true;
+            }
+            
             _animator.SetInteger("direction", 4);
         } else  if (verticalMovement > 0) // Top
         {
             CloseButtonOnClick();
             ClosePickingBlocks();
+            
+            if (!_isWalking)
+            {
+                _audioSource.Play();
+                _isWalking = true;
+            }
+            
             _animator.SetInteger("direction", 2);
         } else  if (verticalMovement < 0) // Bottom
         {
             CloseButtonOnClick();
             ClosePickingBlocks();
+            
+            if (!_isWalking)
+            {
+                _audioSource.Play();
+                _isWalking = true;
+            }
+            
             _animator.SetInteger("direction", 1);
         }
         else // Idle
         {
             _animator.SetInteger("direction", 5);
+            
+            _audioSource.Stop();
+            _isWalking = false;
         }
     }
 
