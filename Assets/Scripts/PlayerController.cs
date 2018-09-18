@@ -11,32 +11,45 @@ public class PlayerController : MonoBehaviour
     private bool _bottom;
 
     private float speed = 4f;
+    
+    // Ui
+    private GameObject[] _actionsUi;
 	
     void Start ()
     {
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
+        _actionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
     }
 	
     void Update () {
         // Setting the animation of the player to face the right direction
         // whenever he is pressing the buttons on the axis
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        var horizontalMovement = Input.GetAxis("Horizontal");
+        var verticalMovement = Input.GetAxis("Vertical");
+        
+        if (horizontalMovement > 0) // Right
         {
-            _animator.SetInteger("direction", 3); // Right
-        } else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            // If the player moves when he has the menu for actions
+            // up then it will be automatically closed
+            CloseButtonOnClick();
+            _animator.SetInteger("direction", 3);
+        } else if (horizontalMovement < 0) // Left
         {
-            _animator.SetInteger("direction", 4); // Left
-        } else  if (Input.GetKeyDown(KeyCode.UpArrow))
+            CloseButtonOnClick();
+            _animator.SetInteger("direction", 4);
+        } else  if (verticalMovement > 0) // Top
         {
-            _animator.SetInteger("direction", 2); // Top
-        } else  if (Input.GetKeyDown(KeyCode.DownArrow))
+            CloseButtonOnClick();
+            _animator.SetInteger("direction", 2);
+        } else  if (verticalMovement < 0) // Bottom
         {
-            _animator.SetInteger("direction", 1); // Bottom
+            CloseButtonOnClick();
+            _animator.SetInteger("direction", 1);
         }
-        else if (Input.GetAxis("Horizontal") == 0f && Input.GetAxis("Vertical") == 0f)
+        else // Idle
         {
-            _animator.SetInteger("direction", 5); // Idle
+            _animator.SetInteger("direction", 5);
         }
     }
 
@@ -44,5 +57,13 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 newPlayerVelocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         _rb.velocity = newPlayerVelocity * speed;
+    }
+
+    public void CloseButtonOnClick()
+    {
+        foreach (var ui in _actionsUi)
+        {
+            ui.SetActive(false);
+        }
     }
 }
