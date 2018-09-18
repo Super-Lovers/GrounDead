@@ -245,7 +245,6 @@ public class WorldGenerator : MonoBehaviour {
                                     grassPosition = new Vector3(grassFence.transform.position.x - 0.01f, grassFence.transform.position.y + 0.15f);
                                     grassFence.transform.position = grassPosition;
                                 }*/
-                                break;
                             }
                             else
                             {

@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour
     
     // Ui
     private GameObject[] _actionsUi;
+    private GameObject[] _pickUi;
 	
     void Start ()
     {
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         _actionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
+        _pickUi = GameObject.FindGameObjectsWithTag("PickUI");
     }
 	
     void Update () {
@@ -33,18 +35,22 @@ public class PlayerController : MonoBehaviour
             // If the player moves when he has the menu for actions
             // up then it will be automatically closed
             CloseButtonOnClick();
+            ClosePickingBlocks();
             _animator.SetInteger("direction", 3);
         } else if (horizontalMovement < 0) // Left
         {
             CloseButtonOnClick();
+            ClosePickingBlocks();
             _animator.SetInteger("direction", 4);
         } else  if (verticalMovement > 0) // Top
         {
             CloseButtonOnClick();
+            ClosePickingBlocks();
             _animator.SetInteger("direction", 2);
         } else  if (verticalMovement < 0) // Bottom
         {
             CloseButtonOnClick();
+            ClosePickingBlocks();
             _animator.SetInteger("direction", 1);
         }
         else // Idle
@@ -62,6 +68,14 @@ public class PlayerController : MonoBehaviour
     public void CloseButtonOnClick()
     {
         foreach (var ui in _actionsUi)
+        {
+            ui.SetActive(false);
+        }
+    }
+
+    public void ClosePickingBlocks()
+    {
+        foreach (var ui in _pickUi)
         {
             ui.SetActive(false);
         }

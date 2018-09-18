@@ -14,7 +14,7 @@
           <e p="PlayerController.cs" t="Include" />
           <e p="RiverGenerator.cs" t="Include" />
           <e p="RockyPlains.cs" t="Include" />
-          <e p="UIButtonController.cs" t="Include" />
+          <e p="UiButtonController.cs" t="Include" />
           <e p="WorldGenerator.cs" t="Include" />
         </e>
       </e>
