@@ -17,6 +17,9 @@ TagManager:
   - PickUI
   - PlacedBlock
   - Tree
+  - PlayerWood
+  - PlayerStone
+  - PlayerGold
   layers:
   - Default
   - TransparentFX

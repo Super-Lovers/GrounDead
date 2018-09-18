@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiButtonController : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class UiButtonController : MonoBehaviour
 	
     // Blocks for instantiation on the map
     public GameObject Wood;
-    static public List<GameObject> _placedBlocks = new List<GameObject>();
+    static public List<GameObject> PlacedBlocks = new List<GameObject>();
 	
     // *******************************
     // SECTION FOR DISPLAYING ACTIONS ON GROUND
@@ -78,13 +79,41 @@ public class UiButtonController : MonoBehaviour
 
     public void DestroyBlockButton()
     {
-        foreach (GameObject block in _placedBlocks.ToArray())
+        foreach (GameObject block in PlacedBlocks.ToArray())
         {
             if (HoverController.BlockClickedX == block.transform.position.x &&
                 HoverController.BlockClickedY == block.transform.position.y)
             {
+                string nameOfBlock = "";
+                for (int i = 0; i < block.name.Length; i++)
+                {
+                    nameOfBlock += block.name[i];
+                    if (nameOfBlock == "tree")
+                    {
+                        PlayerPrefs.SetFloat("Wood", PlayerController.wood++);
+                        GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerController.wood.ToString();
+                        Debug.Log(PlayerPrefs.GetFloat("Wood"));
+                        break;
+                    }
+
+                    if (nameOfBlock == "stone")
+                    {
+                        PlayerPrefs.SetFloat("Stone", PlayerController.stone++);
+                        GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerController.stone.ToString();
+                        Debug.Log(PlayerPrefs.GetFloat("Stone"));
+                        break;
+                    }
+                    if (nameOfBlock == "gold")
+                    {
+                        PlayerPrefs.SetFloat("Gold", PlayerController.gold++);
+                        GameObject.FindGameObjectWithTag("PlayerGold").GetComponent<Text>().text = PlayerController.gold.ToString();
+                        Debug.Log(PlayerPrefs.GetFloat("Gold"));
+                        break;
+                    }
+                }
+                
                 Destroy(block);
-                _placedBlocks.Remove(block);
+                PlacedBlocks.Remove(block);
         
                 foreach (var ui in _actionsUi)
                 {
@@ -122,7 +151,7 @@ public class UiButtonController : MonoBehaviour
         woodWall.GetComponent<SpriteRenderer>().sortingOrder = 40;
         woodWall.tag = "PlacedBlock";
 		
-        _placedBlocks.Add(woodWall);
+        PlacedBlocks.Add(woodWall);
         
         ClosePickingBlocks();
         

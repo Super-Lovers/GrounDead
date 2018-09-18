@@ -15,9 +15,17 @@ public class PlayerController : MonoBehaviour
     // Ui
     private GameObject[] _actionsUi;
     private GameObject[] _pickUi;
+    public static int wood = 0;
+    public static int stone = 0;
+    public static int gold = 0;
 	
     void Start ()
     {
+        // Player resources
+        PlayerPrefs.SetFloat("Wood", wood);
+        PlayerPrefs.SetFloat("Stone", stone);
+        PlayerPrefs.SetFloat("Gold", gold);
+        
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         _actionsUi = GameObject.FindGameObjectsWithTag("ActionUI");

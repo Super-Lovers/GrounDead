@@ -215,7 +215,7 @@ public class WorldGenerator : MonoBehaviour {
                             var rockStone = Instantiate(StoneTypes[Random.Range(0, StoneTypes.Length)],
                                 new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Stones").transform);
                             rockStone.tag = "PlacedBlock";
-                            UiButtonController._placedBlocks.Add(rockStone);
+                            UiButtonController.PlacedBlocks.Add(rockStone);
                             break;
                         case 5: // Gold
                             Instantiate(RockyGround[Random.Range(0, RockyGround.Length)],
@@ -223,7 +223,7 @@ public class WorldGenerator : MonoBehaviour {
                             var gold = Instantiate(GoldTypes[Random.Range(0, GoldTypes.Length)],
                                 new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Golds").transform);
                             gold.tag = "PlacedBlock";
-                            UiButtonController._placedBlocks.Add(gold);
+                            UiButtonController.PlacedBlocks.Add(gold);
                             break;
                         case 6: // Path up
                             Instantiate(GrassPaths[2],
@@ -274,7 +274,7 @@ public class WorldGenerator : MonoBehaviour {
                             grassTree.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
                             tree.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerTrees + 1;
                             tree.tag = "PlacedBlock";
-                            UiButtonController._placedBlocks.Add(tree);
+                            UiButtonController.PlacedBlocks.Add(tree);
                                 
                             /*{
                                 var grassPosition = grassTree.transform.position;
@@ -294,7 +294,7 @@ public class WorldGenerator : MonoBehaviour {
                                 grassStone.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
                                 stone.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
                                 stone.tag = "PlacedBlock";
-                                UiButtonController._placedBlocks.Add(stone);
+                                UiButtonController.PlacedBlocks.Add(stone);
                                     
                             /*{
                                 var grassPosition = grassStone.transform.position;
