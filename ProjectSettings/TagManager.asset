@@ -10,7 +10,6 @@ TagManager:
   - Rocky Ground
   - Grass Paths
   - Stones
-  - Golds
   - Fences
   - Boundaries
   - ActionUI
@@ -19,7 +18,8 @@ TagManager:
   - Tree
   - PlayerWood
   - PlayerStone
-  - PlayerGold
+  - PlayerCopper
+  - Coppers
   layers:
   - Default
   - TransparentFX

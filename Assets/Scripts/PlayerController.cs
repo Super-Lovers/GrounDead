@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private GameObject[] _pickUi;
     public static int Wood = 0;
     public static int Stone = 0;
-    public static int Gold = 0;
+    public static int Copper = 0;
     
     // Sound Effects for the player himself
     public AudioClip Walking;
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
         // Player resources
         PlayerPrefs.SetFloat("Wood", Wood);
         PlayerPrefs.SetFloat("Stone", Stone);
-        PlayerPrefs.SetFloat("Gold", Gold);
+        PlayerPrefs.SetFloat("Copper", Copper);
         
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();

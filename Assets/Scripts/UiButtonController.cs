@@ -127,8 +127,9 @@ public class UiButtonController : MonoBehaviour
                     nameOfBlock += block.name[i];
                     if (nameOfBlock == "tree")
                     {
-                        PlayerPrefs.SetFloat("Wood", PlayerController.Wood++);
-                        GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerController.Wood.ToString();
+                            PlayerPrefs.SetFloat("Wood", PlayerController.Wood += 1);
+                        GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerPrefs.GetFloat("Wood").ToString();
+                        Debug.Log(PlayerPrefs.GetFloat("Wood"));
                         
                         //Playing a sound effect
                         _cameraAudioSource.PlayOneShot(TreeFalling);
@@ -137,15 +138,15 @@ public class UiButtonController : MonoBehaviour
 
                     if (nameOfBlock == "stone" || nameOfBlock == "fence")
                     {
-                        PlayerPrefs.SetFloat("Stone", PlayerController.Stone++);
-                        GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerController.Stone.ToString();
+                        PlayerPrefs.SetFloat("Stone", PlayerController.Stone += 1);
+                        GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerPrefs.GetFloat("Stone").ToString();
                         _cameraAudioSource.PlayOneShot(Mining);
                         break;
                     }
-                    if (nameOfBlock == "gold")
+                    if (nameOfBlock == "copper")
                     {
-                        PlayerPrefs.SetFloat("Gold", PlayerController.Gold++);
-                        GameObject.FindGameObjectWithTag("PlayerGold").GetComponent<Text>().text = PlayerController.Gold.ToString();
+                        PlayerPrefs.SetFloat("Copper", PlayerController.Copper += 1);
+                        GameObject.FindGameObjectWithTag("PlayerCopper").GetComponent<Text>().text = PlayerPrefs.GetFloat("Copper").ToString();
                         _cameraAudioSource.PlayOneShot(Mining);
                         break;
                     }
@@ -209,108 +210,146 @@ public class UiButtonController : MonoBehaviour
 
     public void BuildWoodWall()
     {
-        var woodWall = Instantiate(Wood, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-        woodWall.GetComponent<SpriteRenderer>().sortingOrder = 40;
-        woodWall.tag = "PlacedBlock";
-		
-        PlacedBlocks.Add(woodWall);
-        
-        ClosePickingBlocks();
-        
-        foreach (var ui in _actionsUi)
+        Debug.Log(PlayerPrefs.GetFloat("Wood"));
+        if (PlayerPrefs.GetFloat("Wood") > 1)
         {
-            var uiPos = ui.transform.position;
-            uiPos.x += 1000;
-            ui.transform.position = uiPos;
+            // Updating the player's inventory
+            PlayerPrefs.SetFloat("Wood", PlayerController.Wood -= 2);
+            GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerPrefs.GetFloat("Wood").ToString();
+            
+            var woodWall = Instantiate(Wood, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
+            woodWall.GetComponent<SpriteRenderer>().sortingOrder = 40;
+            woodWall.tag = "PlacedBlock";
+		
+            PlacedBlocks.Add(woodWall);
+        
+            ClosePickingBlocks();
+        
+            foreach (var ui in _actionsUi)
+            {
+                var uiPos = ui.transform.position;
+                uiPos.x += 1000;
+                ui.transform.position = uiPos;
+            }
         }
     }
 	
     public void BuildStonewall()
     {
-        var stoneWall = Instantiate(Stone, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-        stoneWall.GetComponent<SpriteRenderer>().sortingOrder = 40;
-        stoneWall.tag = "PlacedBlock";
-		
-        PlacedBlocks.Add(stoneWall);
-        
-        ClosePickingBlocks();
-        
-        foreach (var ui in _actionsUi)
+        if (PlayerPrefs.GetFloat("Stone") > 1)
         {
-            var uiPos = ui.transform.position;
-            uiPos.x += 1000;
-            ui.transform.position = uiPos;
+            PlayerPrefs.SetFloat("Stone", PlayerController.Stone -= 2);
+            GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerPrefs.GetFloat("Stone").ToString();
+            
+            var stoneWall = Instantiate(Stone, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
+            stoneWall.GetComponent<SpriteRenderer>().sortingOrder = 40;
+            stoneWall.tag = "PlacedBlock";
+		
+            PlacedBlocks.Add(stoneWall);
+        
+            ClosePickingBlocks();
+        
+            foreach (var ui in _actionsUi)
+            {
+                var uiPos = ui.transform.position;
+                uiPos.x += 1000;
+                ui.transform.position = uiPos;
+            }
         }
     }
 	
     public void BuildPlatform()
     {
-        var platform = Instantiate(Platform, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-        platform.GetComponent<SpriteRenderer>().sortingOrder = 39;
-        platform.tag = "PlacedBlock";
-        
-        foreach (GameObject block in PlacedWaterBlocks.ToArray())
+        if (PlayerPrefs.GetFloat("Wood") > 1)
         {
-            if (platform.transform.position.x == block.transform.position.x &&
-                platform.transform.position.y == block.transform.position.y)
+            // Updating the player's inventory
+            PlayerPrefs.SetFloat("Wood", PlayerController.Wood -= 2);
+            GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text =
+                PlayerPrefs.GetFloat("Wood").ToString();
+
+            var platform = Instantiate(Platform, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
+            platform.GetComponent<SpriteRenderer>().sortingOrder = 39;
+            platform.tag = "PlacedBlock";
+        
+            foreach (GameObject block in PlacedWaterBlocks.ToArray())
             {
-                string nameOfBlock = "";
-                for (int i = 0; i < block.name.Length; i++)
+                if (platform.transform.position.x == block.transform.position.x &&
+                    platform.transform.position.y == block.transform.position.y)
                 {
-                    nameOfBlock += block.name[i];
-                    if (nameOfBlock == "water")
+                    string nameOfBlock = "";
+                    for (int i = 0; i < block.name.Length; i++)
                     {
-                        block.GetComponent<BoxCollider2D>().enabled = false;
+                        nameOfBlock += block.name[i];
+                        if (nameOfBlock == "water")
+                        {
+                            block.GetComponent<BoxCollider2D>().enabled = false;
+                        }
                     }
                 }
             }
-        }
 		
-        PlacedBlocks.Add(platform);
+            PlacedBlocks.Add(platform);
         
-        ClosePickingBlocks();
+            ClosePickingBlocks();
         
-        foreach (var ui in _actionsUi)
-        {
-            var uiPos = ui.transform.position;
-            uiPos.x += 1000;
-            ui.transform.position = uiPos;
+            foreach (var ui in _actionsUi)
+            {
+                var uiPos = ui.transform.position;
+                uiPos.x += 1000;
+                ui.transform.position = uiPos;
+            }
         }
     }
 	
     public void BuildSpikes()
     {
-        var spikes = Instantiate(Spikes, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-        spikes.GetComponent<SpriteRenderer>().sortingOrder = 40;
-        spikes.tag = "PlacedBlock";
-		
-        PlacedBlocks.Add(spikes);
-        
-        ClosePickingBlocks();
-        
-        foreach (var ui in _actionsUi)
+        if (PlayerPrefs.GetFloat("Stone") > 2)
         {
-            var uiPos = ui.transform.position;
-            uiPos.x += 1000;
-            ui.transform.position = uiPos;
+            PlayerPrefs.SetFloat("Stone", PlayerController.Stone -= 3);
+            GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerPrefs.GetFloat("Stone").ToString();
+            
+            var spikes = Instantiate(Spikes, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
+            spikes.GetComponent<SpriteRenderer>().sortingOrder = 40;
+            spikes.tag = "PlacedBlock";
+		
+            PlacedBlocks.Add(spikes);
+        
+            ClosePickingBlocks();
+        
+            foreach (var ui in _actionsUi)
+            {
+                var uiPos = ui.transform.position;
+                uiPos.x += 1000;
+                ui.transform.position = uiPos;
+            }
         }
     }
 	
     public void BuildFence()
     {
-        var fence = Instantiate(Fence, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-        fence.GetComponent<SpriteRenderer>().sortingOrder = 40;
-        fence.tag = "PlacedBlock";
-		
-        PlacedBlocks.Add(fence);
-        
-        ClosePickingBlocks();
-        
-        foreach (var ui in _actionsUi)
+        if (PlayerPrefs.GetFloat("Stone") > 0 && PlayerPrefs.GetFloat("Copper") > 1)
         {
-            var uiPos = ui.transform.position;
-            uiPos.x += 1000;
-            ui.transform.position = uiPos;
+            PlayerPrefs.SetFloat("Stone", PlayerController.Stone -= 1);
+            PlayerPrefs.SetFloat("Copper", PlayerController.Copper -= 2);
+            GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text =
+                PlayerPrefs.GetFloat("Stone").ToString();
+            GameObject.FindGameObjectWithTag("PlayerCopper").GetComponent<Text>().text =
+                PlayerPrefs.GetFloat("Copper").ToString();
+
+            var fence = Instantiate(Fence, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
+            fence.GetComponent<SpriteRenderer>().sortingOrder = 40;
+            fence.tag = "PlacedBlock";
+		
+            PlacedBlocks.Add(fence);
+        
+            ClosePickingBlocks();
+        
+            foreach (var ui in _actionsUi)
+            {
+                var uiPos = ui.transform.position;
+                uiPos.x += 1000;
+                ui.transform.position = uiPos;
+            }
         }
     }
 }

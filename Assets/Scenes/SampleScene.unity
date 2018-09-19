@@ -220,8 +220,8 @@ GameObject:
   m_Component:
   - component: {fileID: 128814387}
   m_Layer: 0
-  m_Name: Golds
-  m_TagString: Golds
+  m_Name: Coppers
+  m_TagString: Coppers
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1109,7 +1109,7 @@ GameObject:
   - component: {fileID: 918352032}
   m_Layer: 5
   m_Name: Text
-  m_TagString: PlayerGold
+  m_TagString: PlayerCopper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1801,7 +1801,7 @@ MonoBehaviour:
   - {fileID: 1039069163428458, guid: 4688c33d8045341c49752213c7ac3fce, type: 2}
   - {fileID: 1113139786164934, guid: a91e803d33061437db32e08ac2a67f1d, type: 2}
   - {fileID: 1055241724559338, guid: e515d7f7edcbb4d358c8789b19946168, type: 2}
-  GoldTypes:
+  CopperTypes:
   - {fileID: 1757631602457850, guid: e88f120880cf84ec49b982ceaef566ed, type: 2}
   - {fileID: 1306659553682236, guid: c7f7794a6029b498487403129cb59640, type: 2}
   - {fileID: 1687737921154872, guid: c33b59905b2204eb3b963ec3ee215820, type: 2}
@@ -2596,7 +2596,7 @@ GameObject:
   - component: {fileID: 1769023169}
   - component: {fileID: 1769023168}
   m_Layer: 5
-  m_Name: Gold
+  m_Name: Copper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

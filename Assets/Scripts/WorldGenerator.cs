@@ -9,7 +9,7 @@ public class WorldGenerator : MonoBehaviour {
     public GameObject[] RockyGround;
     public GameObject[] GrassPaths;
     public GameObject[] StoneTypes;
-    public GameObject[] GoldTypes;
+    public GameObject[] CopperTypes;
     public GameObject PlayerHouse;
     public GameObject FenceObstacle;
     public GameObject Boundaries;
@@ -217,13 +217,13 @@ public class WorldGenerator : MonoBehaviour {
                             rockStone.tag = "PlacedBlock";
                             UiButtonController.PlacedBlocks.Add(rockStone);
                             break;
-                        case 5: // Gold
+                        case 5: // Copper
                             Instantiate(RockyGround[Random.Range(0, RockyGround.Length)],
                                 new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Rocky Ground").transform);
-                            var gold = Instantiate(GoldTypes[Random.Range(0, GoldTypes.Length)],
-                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Golds").transform);
-                            gold.tag = "PlacedBlock";
-                            UiButtonController.PlacedBlocks.Add(gold);
+                            var copper = Instantiate(CopperTypes[Random.Range(0, CopperTypes.Length)],
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Coppers").transform);
+                            copper.tag = "PlacedBlock";
+                            UiButtonController.PlacedBlocks.Add(copper);
                             break;
                         case 6: // Path up
                             Instantiate(GrassPaths[2],
