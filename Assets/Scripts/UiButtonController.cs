@@ -14,6 +14,7 @@ public class UiButtonController : MonoBehaviour
     public GameObject Spikes;
     public GameObject Fence;
     static public List<GameObject> PlacedBlocks = new List<GameObject>();
+    static public List<GameObject> PlacedWaterBlocks = new List<GameObject>();
 	
     // *******************************
     // SECTION FOR DISPLAYING ACTIONS ON GROUND
@@ -134,7 +135,7 @@ public class UiButtonController : MonoBehaviour
                         break;
                     }
 
-                    if (nameOfBlock == "stone")
+                    if (nameOfBlock == "stone" || nameOfBlock == "fence")
                     {
                         PlayerPrefs.SetFloat("Stone", PlayerController.Stone++);
                         GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerController.Stone.ToString();
@@ -158,6 +159,25 @@ public class UiButtonController : MonoBehaviour
                     var uiPos = ui.transform.position;
                     uiPos.x += 1000;
                     ui.transform.position = uiPos;
+                }
+            }
+        }
+        
+        // This loop checks if we are destroying a platform block and then
+        // turns on the waters' collider below it
+        foreach (GameObject block in PlacedWaterBlocks.ToArray())
+        {
+            if (HoverController.BlockClickedX == block.transform.position.x &&
+                HoverController.BlockClickedY == block.transform.position.y)
+            {
+                string nameOfBlock = "";
+                for (int i = 0; i < block.name.Length; i++)
+                {
+                    nameOfBlock += block.name[i];
+                    if (nameOfBlock == "water")
+                    {
+                        block.GetComponent<BoxCollider2D>().enabled = true;
+                    }
                 }
             }
         }
@@ -226,8 +246,25 @@ public class UiButtonController : MonoBehaviour
     public void BuildPlatform()
     {
         var platform = Instantiate(Platform, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-        platform.GetComponent<SpriteRenderer>().sortingOrder = 40;
+        platform.GetComponent<SpriteRenderer>().sortingOrder = 39;
         platform.tag = "PlacedBlock";
+        
+        foreach (GameObject block in PlacedWaterBlocks.ToArray())
+        {
+            if (platform.transform.position.x == block.transform.position.x &&
+                platform.transform.position.y == block.transform.position.y)
+            {
+                string nameOfBlock = "";
+                for (int i = 0; i < block.name.Length; i++)
+                {
+                    nameOfBlock += block.name[i];
+                    if (nameOfBlock == "water")
+                    {
+                        block.GetComponent<BoxCollider2D>().enabled = false;
+                    }
+                }
+            }
+        }
 		
         PlacedBlocks.Add(platform);
         

@@ -258,6 +258,8 @@ public class WorldGenerator : MonoBehaviour {
                                     new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Fences").transform);
                                 grassFence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
                                 fence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
+                                fence.tag = "PlacedBlock";
+                                UiButtonController.PlacedBlocks.Add(fence);
                                 
                                 /*{
                                     var grassPosition = grassFence.transform.position;
@@ -303,12 +305,14 @@ public class WorldGenerator : MonoBehaviour {
                             }*/
                         break;
                     case 16: // Water tiles for "ponds" or small pools of water
-                        Instantiate(WaterTypes[0],
+                        var water1 = Instantiate(WaterTypes[0],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Water Pools").transform);
+                        UiButtonController.PlacedWaterBlocks.Add(water1);
                         break;
                     case 17: // Water tiles for "ponds" or small pools of water
-                        Instantiate(WaterTypes[1],
+                        var water2 = Instantiate(WaterTypes[1],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Water Pools").transform);
+                        UiButtonController.PlacedWaterBlocks.Add(water2);
                         break;
                 }
 
