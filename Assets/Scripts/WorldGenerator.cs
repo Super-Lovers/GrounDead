@@ -173,6 +173,8 @@ public class WorldGenerator : MonoBehaviour {
         currentY = 0;
         int sortingLayerGrass = mapHeight;
         int sortingLayerTrees = mapHeight * 2;
+        
+        System.Random rng = new System.Random();
 
         // We begin instantiating every object on the map so
         // that we can visualize it with randomized sprites
@@ -186,10 +188,23 @@ public class WorldGenerator : MonoBehaviour {
                         // The random range generator will help us pick
                         // objects from the arrays randomly so the environment
                         // always turns out unique
-                        var grass = Instantiate(Ground[Random.Range(0, 2)],
-                            new Vector2(currentX, currentY), Quaternion.identity,
-                            GameObject.FindWithTag("Greener Ground").transform);
-                        grass.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        int normalOrDecoratedGrass = rng.Next(0, 201);
+                        int whichDecoratedGrass;
+                        if (normalOrDecoratedGrass > 190)
+                        {
+                            whichDecoratedGrass = rng.Next(1, 3);
+                            var grass = Instantiate(Ground[whichDecoratedGrass],
+                                new Vector2(currentX, currentY), Quaternion.identity,
+                                GameObject.FindWithTag("Greener Ground").transform);
+                            grass.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        }
+                        else
+                        {
+                            var grass = Instantiate(Ground[0],
+                                new Vector2(currentX, currentY), Quaternion.identity,
+                                GameObject.FindWithTag("Greener Ground").transform);
+                            grass.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        }
                         
                         /*{
                             var grassPosition = grass.transform.position;
@@ -234,7 +249,7 @@ public class WorldGenerator : MonoBehaviour {
                                 new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Grass Paths").transform);
                             break; // x 18.92 y 17.87408
                         case 8: // Dirt
-                            Instantiate(Ground[Random.Range(2, Ground.Length)],
+                            Instantiate(Ground[Random.Range(4, Ground.Length)],
                                 new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
                             break;
                         case 9: // Boundaries / fences

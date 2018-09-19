@@ -36,6 +36,10 @@ public class PlayerController : MonoBehaviour
         _actionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
         _pickUi = GameObject.FindGameObjectsWithTag("PickUI");
         _audioSource = gameObject.GetComponent<AudioSource>();
+        
+        // Hide the UI at the start of the game AFTER you select the components
+        CloseButtonOnClick();
+        ClosePickingBlocks();
     }
 	
     void Update () {

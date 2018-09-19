@@ -1777,7 +1777,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ground:
   - {fileID: 1616286932647844, guid: 92e17bb07373448768d13f343e112838, type: 2}
-  - {fileID: 1616286932647844, guid: 92e17bb07373448768d13f343e112838, type: 2}
+  - {fileID: 1616286932647844, guid: 5fbfdf37c9ded45608e4d6ed4db4a9c4, type: 2}
+  - {fileID: 1616286932647844, guid: f8a417b8de3344294a6dd67edf027bff, type: 2}
   - {fileID: 1473283280533630, guid: acf247b2121174deba80e410f0e0bcca, type: 2}
   - {fileID: 1231786585994224, guid: 40fd98ef3a6a8440aab4b287ff8b8456, type: 2}
   WaterTypes:
