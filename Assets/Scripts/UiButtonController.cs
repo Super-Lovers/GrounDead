@@ -9,6 +9,10 @@ public class UiButtonController : MonoBehaviour
 	
     // Blocks for instantiation on the map
     public GameObject Wood;
+    public GameObject Stone;
+    public GameObject Platform;
+    public GameObject Spikes;
+    public GameObject Fence;
     static public List<GameObject> PlacedBlocks = new List<GameObject>();
 	
     // *******************************
@@ -17,6 +21,9 @@ public class UiButtonController : MonoBehaviour
 
     private bool _showWood = true;
     private bool _showStone = true;
+    private bool _showPlatform = true;
+    private bool _showSpike = true;
+    private bool _showFence = true;
 
     private AudioSource _cameraAudioSource;
     public AudioClip Mining;
@@ -40,11 +47,17 @@ public class UiButtonController : MonoBehaviour
             {
                 _showWood = false;
                 _showStone = false;
+                _showPlatform = false;
+                _showSpike = false;
+                _showFence = false;
             }
             else
             {
                 _showWood = true;
                 _showStone = true;
+                _showPlatform = true;
+                _showSpike = true;
+                _showFence = true;
             }
         }
         
@@ -57,13 +70,31 @@ public class UiButtonController : MonoBehaviour
             {
                 ui.SetActive(true);
                 actionsUiPos.x = Input.mousePosition.x + 25;
-                actionsUiPos.y = Input.mousePosition.y + 50;
+                actionsUiPos.y = Input.mousePosition.y + 100;
             }
             else if (ui.name == "BlockStoneWall" && _showStone)
             {
                 ui.SetActive(true);
-                actionsUiPos.x = Input.mousePosition.x + 156;
-                actionsUiPos.y = Input.mousePosition.y + 50;
+                actionsUiPos.x = Input.mousePosition.x + 64 + 25;
+                actionsUiPos.y = Input.mousePosition.y + 100;
+            }
+            else if (ui.name == "BlockPlatform" && _showPlatform)
+            {
+                ui.SetActive(true);
+                actionsUiPos.x = Input.mousePosition.x + 128 + 25;
+                actionsUiPos.y = Input.mousePosition.y + 100;
+            }
+            else if (ui.name == "BlockSpike" && _showSpike)
+            {
+                ui.SetActive(true);
+                actionsUiPos.x = Input.mousePosition.x + 25;
+                actionsUiPos.y = Input.mousePosition.y + 30;
+            }
+            else if (ui.name == "BlockFence" && _showFence)
+            {
+                ui.SetActive(true);
+                actionsUiPos.x = Input.mousePosition.x + 64 + 25;
+                actionsUiPos.y = Input.mousePosition.y + 30;
             }
             else if (ui.name == "CloseButton")
             {
@@ -136,7 +167,9 @@ public class UiButtonController : MonoBehaviour
     {
         foreach (var ui in _actionsUi)
         {
-            ui.SetActive(false);
+            var uiPos = ui.transform.position;
+            uiPos.x += 1000;
+            ui.transform.position = uiPos;
         }
     }
 	
@@ -148,7 +181,9 @@ public class UiButtonController : MonoBehaviour
     {
         foreach (var ui in _pickUi)
         {
-            ui.SetActive(false);
+            var uiPos = ui.transform.position;
+            uiPos.x += 1000;
+            ui.transform.position = uiPos;
         }
     }
 
@@ -172,6 +207,66 @@ public class UiButtonController : MonoBehaviour
 	
     public void BuildStonewall()
     {
+        var stoneWall = Instantiate(Stone, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
+        stoneWall.GetComponent<SpriteRenderer>().sortingOrder = 40;
+        stoneWall.tag = "PlacedBlock";
+		
+        PlacedBlocks.Add(stoneWall);
+        
+        ClosePickingBlocks();
+        
+        foreach (var ui in _actionsUi)
+        {
+            var uiPos = ui.transform.position;
+            uiPos.x += 1000;
+            ui.transform.position = uiPos;
+        }
+    }
+	
+    public void BuildPlatform()
+    {
+        var platform = Instantiate(Platform, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
+        platform.GetComponent<SpriteRenderer>().sortingOrder = 40;
+        platform.tag = "PlacedBlock";
+		
+        PlacedBlocks.Add(platform);
+        
+        ClosePickingBlocks();
+        
+        foreach (var ui in _actionsUi)
+        {
+            var uiPos = ui.transform.position;
+            uiPos.x += 1000;
+            ui.transform.position = uiPos;
+        }
+    }
+	
+    public void BuildSpikes()
+    {
+        var spikes = Instantiate(Spikes, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
+        spikes.GetComponent<SpriteRenderer>().sortingOrder = 40;
+        spikes.tag = "PlacedBlock";
+		
+        PlacedBlocks.Add(spikes);
+        
+        ClosePickingBlocks();
+        
+        foreach (var ui in _actionsUi)
+        {
+            var uiPos = ui.transform.position;
+            uiPos.x += 1000;
+            ui.transform.position = uiPos;
+        }
+    }
+	
+    public void BuildFence()
+    {
+        var fence = Instantiate(Fence, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
+        fence.GetComponent<SpriteRenderer>().sortingOrder = 40;
+        fence.tag = "PlacedBlock";
+		
+        PlacedBlocks.Add(fence);
+        
         ClosePickingBlocks();
         
         foreach (var ui in _actionsUi)

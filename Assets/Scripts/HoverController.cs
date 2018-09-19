@@ -16,6 +16,7 @@ public class HoverController : MonoBehaviour
     //
     private GameObject[] _actionsUi;
     private GameObject[] _pickUi;
+    private bool CanBuild = true;
 	
     void Start ()
     {
@@ -49,6 +50,14 @@ public class HoverController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1)) // If player right clicks (1), left click (0)
         {
+            if (gameObject.tag == "PlacedBlock")
+            {
+                CanBuild = false;
+            }
+            else
+            {
+                CanBuild = true;
+            }
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 foreach (var ui in _pickUi)
@@ -62,12 +71,21 @@ public class HoverController : MonoBehaviour
                     ui.SetActive(true);
                     var actionsUiPos = ui.transform.position;
 				
-                    if (ui.name == "BuildButton")
+                    if (ui.name == "BuildButton" && CanBuild)
                     {
                         actionsUiPos.x = Input.mousePosition.x + 25;
                         actionsUiPos.y = Input.mousePosition.y + 50;
                     }
-                    else if (ui.name == "DestroyButton")
+                    else
+                    {
+                        actionsUiPos.x = Input.mousePosition.x + 25;
+                        actionsUiPos.y = Input.mousePosition.y + 50;
+                        if (ui.name == "BuildButton")
+                        {
+                            ui.SetActive(false);
+                        }
+                    }
+                    if (ui.name == "DestroyButton")
                     {
                         actionsUiPos.x = Input.mousePosition.x + 156;
                         actionsUiPos.y = Input.mousePosition.y + 50;

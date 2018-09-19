@@ -115,7 +115,9 @@ public class PlayerController : MonoBehaviour
     {
         foreach (var ui in _actionsUi)
         {
-            ui.SetActive(false);
+            var uiPos = ui.transform.position;
+            uiPos.x += 1000;
+            ui.transform.position = uiPos;
         }
     }
 
@@ -123,7 +125,9 @@ public class PlayerController : MonoBehaviour
     {
         foreach (var ui in _pickUi)
         {
-            ui.SetActive(false);
+            var uiPos = ui.transform.position;
+            uiPos.x += 1000;
+            ui.transform.position = uiPos;
         }
     }
 }
