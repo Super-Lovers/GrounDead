@@ -56,8 +56,8 @@ public class WorldGenerator : MonoBehaviour {
         for (int y = 0; y < mapHeight; y++)
         {
             for (int x = 0; x < mapWidth; x++)
-            {
-                if ((x < 63) && (y == mapHeight / 2))
+            { 
+                if ((x < 61) && (y == mapHeight / 2))
                 {
                     GameWorld[y, x] = 2; // path / road
                 } else if ((x == 75) && (y == mapHeight / 2))
@@ -69,7 +69,7 @@ public class WorldGenerator : MonoBehaviour {
                 }
                     
                 // Drawing the path head and tail
-                if ((x == 0 && y == mapHeight / 2) || (x == 62 && y == mapHeight / 2))
+                if ((x == 0 && y == mapHeight / 2))
                 {
                     GameWorld[y, x] = 1; // path endings can be grass for simplicity
                 }
@@ -110,7 +110,7 @@ public class WorldGenerator : MonoBehaviour {
                 
                 // We also create the Boundaries of the
                 // game world in this code block
-                if ((x < 63) && (y == mapHeight / 2 - 1 || y == mapHeight / 2 + 1))
+                if ((x < 61) && (y == mapHeight / 2 - 1 || y == mapHeight / 2 + 1))
                 {
                     if (x > 20 && x % 13 == 0 && x != 0)
                     {
@@ -128,6 +128,56 @@ public class WorldGenerator : MonoBehaviour {
                     {
                         GameWorld[y, x] = 9; // Boundaries of biomes
                     }
+                }
+
+                // Left Zombie border
+                if (x == 61 && (y >= 14 && y <= 21))
+                {
+                    GameWorld[y, x] = 33; // Dirt split left
+                }
+
+                if (x == 61 && (y >= 22 && y <= 26))
+                {
+                    GameWorld[y, x] = 33; // Dirt split left
+                }
+
+                if ((x > 61 && x < 80) && y == 26)
+                {
+                    GameWorld[y, x] = 34; // Dirt split top
+                }
+                if ((x > 61 && x < 80) && y == 14)
+                {
+                    GameWorld[y, x] = 35; // Dirt split bottom
+                }
+
+                if (x == 80 && (y > 26 && y < 40))
+                {
+                    GameWorld[y, x] = 33; // Dirt split left
+                }
+
+                if (x == 80 && (y >= 0 && y < 14))
+                {
+                    GameWorld[y, x] = 33; // Dirt split left
+                }
+                
+                if (x == 79 && y == 13)
+                {
+                    //GameWorld[y, x] = 36; // Dirt top right
+                }
+                
+                if (x == 61 && y == 14)
+                {
+                    GameWorld[y, x] = 31; // Dirt top left
+                }
+                
+                if (x == 61 && y == 26)
+                {
+                    GameWorld[y, x] = 32; // Dirt bottom left
+                }
+                
+                if (x == 80 && y == 26)
+                {
+                    //GameWorld[y, x] = 37; // Dirt bottom left
                 }
             }
         }
@@ -182,6 +232,48 @@ public class WorldGenerator : MonoBehaviour {
             {
                 switch (GameWorld[y, x])
                 {
+                    case 31: // Dirt top left
+                        var dirtTopLeft = Instantiate(Ground[6],
+                            new Vector2(currentX, currentY), Quaternion.identity,
+                            GameObject.FindWithTag("Greener Ground").transform);
+                        dirtTopLeft.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        break;
+                    case 32: // Dirt bottom left
+                        var dirtBottomLeft = Instantiate(Ground[7],
+                            new Vector2(currentX, currentY), Quaternion.identity,
+                            GameObject.FindWithTag("Greener Ground").transform);
+                        dirtBottomLeft.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        break;
+                    case 33: // Dirt split left
+                        var dirtSplitLeft = Instantiate(Ground[8],
+                            new Vector2(currentX, currentY), Quaternion.identity,
+                            GameObject.FindWithTag("Greener Ground").transform);
+                        dirtSplitLeft.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        break;
+                    case 34: // Dirt split top
+                        var dirtSplitTop = Instantiate(Ground[9],
+                            new Vector2(currentX, currentY), Quaternion.identity,
+                            GameObject.FindWithTag("Greener Ground").transform);
+                        dirtSplitTop.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        break;
+                    case 35: // Dirt split bottom
+                        var dirtBottomSplit = Instantiate(Ground[10],
+                            new Vector2(currentX, currentY), Quaternion.identity,
+                            GameObject.FindWithTag("Greener Ground").transform);
+                        dirtBottomSplit.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        break;
+                    case 36: // Dirt top right
+                        var dirtTopRight = Instantiate(Ground[11],
+                            new Vector2(currentX, currentY), Quaternion.identity,
+                            GameObject.FindWithTag("Greener Ground").transform);
+                        dirtTopRight.GetComponent<SpriteRenderer>().sortingOrder = 26;
+                        break;
+                    case 37: // Dirt bottom right
+                        var dirtBottomRight = Instantiate(Ground[12],
+                            new Vector2(currentX, currentY), Quaternion.identity,
+                            GameObject.FindWithTag("Greener Ground").transform);
+                        dirtBottomRight.GetComponent<SpriteRenderer>().sortingOrder = 5;
+                        break;
                     case 21: // Grass 3
                         var grassFlower = Instantiate(Ground[1],
                             new Vector2(currentX, currentY), Quaternion.identity,
@@ -193,6 +285,18 @@ public class WorldGenerator : MonoBehaviour {
                             new Vector2(currentX, currentY), Quaternion.identity,
                             GameObject.FindWithTag("Greener Ground").transform);
                         grassRocks.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        break;
+                    case 23: // Grass 4
+                        var grassFirstFlower = Instantiate(Ground[3],
+                            new Vector2(currentX, currentY), Quaternion.identity,
+                            GameObject.FindWithTag("Greener Ground").transform);
+                        grassFirstFlower.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        break;
+                    case 24: // Grass 5
+                        var grassSecondFlower = Instantiate(Ground[4],
+                            new Vector2(currentX, currentY), Quaternion.identity,
+                            GameObject.FindWithTag("Greener Ground").transform);
+                        grassSecondFlower.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
                         break;
                     case 1: // Grass 1
                         // The random range generator will help us pick
@@ -240,7 +344,7 @@ public class WorldGenerator : MonoBehaviour {
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Grass Paths").transform);
                         break; // x 18.92 y 17.87408
                     case 8: // Dirt
-                        Instantiate(Ground[Random.Range(4, Ground.Length)],
+                        Instantiate(Ground[5],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
                         break;
                     case 9: // Boundaries / fences

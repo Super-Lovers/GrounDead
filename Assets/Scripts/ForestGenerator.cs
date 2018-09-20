@@ -14,13 +14,21 @@ public class ForestGenerator
             {
                 if (rng.Next(0, 100) > 90)
                 {
-                    if (rng.Next(0, 100) > 98)
+                    if (rng.Next(0, 100) > 33)
+                    {
+                        WorldGenerator.GameWorld[y, x] = 23;
+                    }
+                    else if (rng.Next(0, 100) > 66)
+                    {
+                        WorldGenerator.GameWorld[y, x] = 22;
+                    }
+                    else if (rng.Next(0, 100) > 98)
                     {
                         WorldGenerator.GameWorld[y, x] = 21;
                     }
                     else
                     {
-                        WorldGenerator.GameWorld[y, x] = 22;
+                        WorldGenerator.GameWorld[y, x] = 24;
                     }
                 }
                 else
