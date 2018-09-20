@@ -12,7 +12,21 @@ public class ForestGenerator
         {
             for (int x = WorldGenerator.CurrentPositionX; x < WorldGenerator.CurrentPositionX + width; x++)
             {
-                WorldGenerator.GameWorld[y, x] = 1;
+                if (rng.Next(0, 100) > 90)
+                {
+                    if (rng.Next(0, 100) > 98)
+                    {
+                        WorldGenerator.GameWorld[y, x] = 21;
+                    }
+                    else
+                    {
+                        WorldGenerator.GameWorld[y, x] = 22;
+                    }
+                }
+                else
+                {
+                    WorldGenerator.GameWorld[y, x] = 1;
+                }
             }
         }
     }

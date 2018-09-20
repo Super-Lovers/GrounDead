@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +30,7 @@ public class UiButtonController : MonoBehaviour
     private AudioSource _cameraAudioSource;
     public AudioClip Mining;
     public AudioClip TreeFalling;
-
+    
     private void Start()
     {
         _actionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
@@ -127,9 +128,11 @@ public class UiButtonController : MonoBehaviour
                     nameOfBlock += block.name[i];
                     if (nameOfBlock == "tree")
                     {
-                            PlayerPrefs.SetFloat("Wood", PlayerController.Wood += 1);
+                        
+                        PlayerPrefs.SetFloat("Wood", PlayerController.Wood += 1);
+                        PlayerPrefs.SetFloat("Apples", (Random.Range(0, 101) > 49) ? PlayerController.Apples += 2 : PlayerController.Apples += 4);
                         GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerPrefs.GetFloat("Wood").ToString();
-                        Debug.Log(PlayerPrefs.GetFloat("Wood"));
+                        GameObject.FindGameObjectWithTag("PlayerApples").GetComponent<Text>().text = PlayerPrefs.GetFloat("Apples").ToString();
                         
                         //Playing a sound effect
                         _cameraAudioSource.PlayOneShot(TreeFalling);

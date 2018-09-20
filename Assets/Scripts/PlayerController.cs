@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +20,9 @@ public class PlayerController : MonoBehaviour
     public static int Wood = 0;
     public static int Stone = 0;
     public static int Copper = 0;
+    public static int GunPowder = 0;
+    public static int Apples = 0;
+    public static List<List<GameObject>> inventory = new List<List<GameObject>>();
     
     // Sound Effects for the player himself
     public AudioClip Walking;
@@ -30,6 +35,8 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetFloat("Wood", Wood);
         PlayerPrefs.SetFloat("Stone", Stone);
         PlayerPrefs.SetFloat("Copper", Copper);
+        PlayerPrefs.SetFloat("Gun Powder", GunPowder);
+        PlayerPrefs.SetFloat("Apples", Apples);
         
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();

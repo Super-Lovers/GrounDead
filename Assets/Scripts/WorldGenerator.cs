@@ -173,8 +173,6 @@ public class WorldGenerator : MonoBehaviour {
         currentY = 0;
         int sortingLayerGrass = mapHeight;
         int sortingLayerTrees = mapHeight * 2;
-        
-        System.Random rng = new System.Random();
 
         // We begin instantiating every object on the map so
         // that we can visualize it with randomized sprites
@@ -184,140 +182,133 @@ public class WorldGenerator : MonoBehaviour {
             {
                 switch (GameWorld[y, x])
                 {
-                    case 1: // Grass
+                    case 21: // Grass 3
+                        var grassFlower = Instantiate(Ground[1],
+                            new Vector2(currentX, currentY), Quaternion.identity,
+                            GameObject.FindWithTag("Greener Ground").transform);
+                        grassFlower.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        break;
+                    case 22: // Grass 2
+                        var grassRocks = Instantiate(Ground[2],
+                            new Vector2(currentX, currentY), Quaternion.identity,
+                            GameObject.FindWithTag("Greener Ground").transform);
+                        grassRocks.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        break;
+                    case 1: // Grass 1
                         // The random range generator will help us pick
                         // objects from the arrays randomly so the environment
                         // always turns out unique
-                        int normalOrDecoratedGrass = rng.Next(0, 201);
-                        int whichDecoratedGrass;
-                        if (normalOrDecoratedGrass > 190)
+                        var grass = Instantiate(Ground[0],
+                            new Vector2(currentX, currentY), Quaternion.identity,
+                            GameObject.FindWithTag("Greener Ground").transform);
+                        grass.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        break;
+                    case 2: // Path
+                        Instantiate(GrassPaths[0],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Grass Paths").transform);
+                        break;
+                    case 3: // Player House
+                        Instantiate(Ground[Random.Range(0, 2)],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
+                        Instantiate(PlayerHouse,
+                            new Vector2(currentX, currentY), Quaternion.identity);
+                        break;
+                    case 4: // Stone
+                        // We are placing the grass and then the fence with its transparent
+                        // backGround on top, so that they blend together
+                        Instantiate(RockyGround[Random.Range(0, RockyGround.Length)],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Rocky Ground").transform);
+                        var rockStone = Instantiate(StoneTypes[Random.Range(0, StoneTypes.Length)],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Stones").transform);
+                        rockStone.tag = "PlacedBlock";
+                        UiButtonController.PlacedBlocks.Add(rockStone);
+                        break;
+                    case 5: // Copper
+                        Instantiate(RockyGround[Random.Range(0, RockyGround.Length)],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Rocky Ground").transform);
+                        var copper = Instantiate(CopperTypes[Random.Range(0, CopperTypes.Length)],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Coppers").transform);
+                        copper.tag = "PlacedBlock";
+                        UiButtonController.PlacedBlocks.Add(copper);
+                        break;
+                    case 6: // Path up
+                        Instantiate(GrassPaths[2],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Grass Paths").transform);
+                        break;
+                    case 7: // Path down
+                        Instantiate(GrassPaths[1],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Grass Paths").transform);
+                        break; // x 18.92 y 17.87408
+                    case 8: // Dirt
+                        Instantiate(Ground[Random.Range(4, Ground.Length)],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
+                        break;
+                    case 9: // Boundaries / fences
+                        if (Random.Range(0, 101) > 12)
                         {
-                            whichDecoratedGrass = rng.Next(1, 3);
-                            var grass = Instantiate(Ground[whichDecoratedGrass],
-                                new Vector2(currentX, currentY), Quaternion.identity,
-                                GameObject.FindWithTag("Greener Ground").transform);
-                            grass.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                            var grassFence = Instantiate(Ground[Random.Range(0, 2)],
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
+                            grassFence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                                
+                            /*{
+                                var grassPosition = grassFence.transform.position;
+                                grassPosition = new Vector3(grassFence.transform.position.x - 0.01f, grassFence.transform.position.y + 0.15f);
+                                grassFence.transform.position = grassPosition;
+                            }*/
                         }
                         else
                         {
-                            var grass = Instantiate(Ground[0],
-                                new Vector2(currentX, currentY), Quaternion.identity,
-                                GameObject.FindWithTag("Greener Ground").transform);
-                            grass.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                            var grassFence = Instantiate(Ground[Random.Range(0, 2)],
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
+                            var fence = Instantiate(FenceObstacle,
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Fences").transform);
+                            grassFence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                            fence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
+                            fence.tag = "PlacedBlock";
+                            UiButtonController.PlacedBlocks.Add(fence);
+                                
+                            /*{
+                                var grassPosition = grassFence.transform.position;
+                                grassPosition = new Vector3(grassFence.transform.position.x - 0.01f, grassFence.transform.position.y + 0.15f);
+                                grassFence.transform.position = grassPosition;
+                            }*/
                         }
-                        
+                        break;
+                    case 0: // Trees
+                        var grassTree = Instantiate(Ground[Random.Range(0, 2)],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
+                        var tree = Instantiate(ForestTrees[Random.Range(0, ForestTrees.Length)],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Forest Trees").transform);
+                        grassTree.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        tree.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerTrees + 1;
+                        tree.tag = "PlacedBlock";
+                        UiButtonController.PlacedBlocks.Add(tree);
+                                
                         /*{
-                            var grassPosition = grass.transform.position;
-                            grassPosition = new Vector3(grass.transform.position.x - 0.01f, grass.transform.position.y + 0.15f);
-                            grass.transform.position = grassPosition;
+                            var grassPosition = grassTree.transform.position;
+                            grassPosition = new Vector3(grassTree.transform.position.x - 0.01f, grassTree.transform.position.y + 0.15f);
+                            grassTree.transform.position = grassPosition;
                         }*/
-                            break;
-                        case 2: // Path
-                            Instantiate(GrassPaths[0],
-                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Grass Paths").transform);
-                            break;
-                        case 3: // Player House
-                            Instantiate(Ground[Random.Range(0, 2)],
-                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
-                            Instantiate(PlayerHouse,
-                                new Vector2(currentX, currentY), Quaternion.identity);
-                            break;
-                        case 4: // Stone
-                            // We are placing the grass and then the fence with its transparent
-                            // backGround on top, so that they blend together
-                            Instantiate(RockyGround[Random.Range(0, RockyGround.Length)],
-                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Rocky Ground").transform);
-                            var rockStone = Instantiate(StoneTypes[Random.Range(0, StoneTypes.Length)],
-                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Stones").transform);
-                            rockStone.tag = "PlacedBlock";
-                            UiButtonController.PlacedBlocks.Add(rockStone);
-                            break;
-                        case 5: // Copper
-                            Instantiate(RockyGround[Random.Range(0, RockyGround.Length)],
-                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Rocky Ground").transform);
-                            var copper = Instantiate(CopperTypes[Random.Range(0, CopperTypes.Length)],
-                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Coppers").transform);
-                            copper.tag = "PlacedBlock";
-                            UiButtonController.PlacedBlocks.Add(copper);
-                            break;
-                        case 6: // Path up
-                            Instantiate(GrassPaths[2],
-                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Grass Paths").transform);
-                            break;
-                        case 7: // Path down
-                            Instantiate(GrassPaths[1],
-                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Grass Paths").transform);
-                            break; // x 18.92 y 17.87408
-                        case 8: // Dirt
-                            Instantiate(Ground[Random.Range(4, Ground.Length)],
-                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
-                            break;
-                        case 9: // Boundaries / fences
-                            if (Random.Range(0, 101) > 12)
-                            {
-                                var grassFence = Instantiate(Ground[Random.Range(0, 2)],
-                                    new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
-                                grassFence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
-                                
-                                /*{
-                                    var grassPosition = grassFence.transform.position;
-                                    grassPosition = new Vector3(grassFence.transform.position.x - 0.01f, grassFence.transform.position.y + 0.15f);
-                                    grassFence.transform.position = grassPosition;
-                                }*/
-                            }
-                            else
-                            {
-                                var grassFence = Instantiate(Ground[Random.Range(0, 2)],
-                                    new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
-                                var fence = Instantiate(FenceObstacle,
-                                    new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Fences").transform);
-                                grassFence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
-                                fence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
-                                fence.tag = "PlacedBlock";
-                                UiButtonController.PlacedBlocks.Add(fence);
-                                
-                                /*{
-                                    var grassPosition = grassFence.transform.position;
-                                    grassPosition = new Vector3(grassFence.transform.position.x - 0.01f, grassFence.transform.position.y + 0.15f);
-                                    grassFence.transform.position = grassPosition;
-                                }*/
-                            }
-                            break;
-                        case 0: // Trees
-                            var grassTree = Instantiate(Ground[Random.Range(0, 2)],
-                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
-                            var tree = Instantiate(ForestTrees[Random.Range(0, ForestTrees.Length)],
-                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Forest Trees").transform);
-                            grassTree.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
-                            tree.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerTrees + 1;
-                            tree.tag = "PlacedBlock";
-                            UiButtonController.PlacedBlocks.Add(tree);
-                                
-                            /*{
-                                var grassPosition = grassTree.transform.position;
-                                grassPosition = new Vector3(grassTree.transform.position.x - 0.01f, grassTree.transform.position.y + 0.15f);
-                                grassTree.transform.position = grassPosition;
-                            }*/
-                                break;
-                            case 14: // Rocky Ground for the natural resources
-                                Instantiate(RockyGround[Random.Range(0, RockyGround.Length)],
-                                    new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Rocky Ground").transform);
-                                break;
-                            case 15: // Stone only in the forest
-                                var grassStone = Instantiate(Ground[Random.Range(0, 2)],
-                                    new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Rocky Ground").transform);
-                                var stone = Instantiate(StoneTypes[Random.Range(0, StoneTypes.Length)],
-                                    new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Stones").transform);
-                                grassStone.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
-                                stone.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
-                                stone.tag = "PlacedBlock";
-                                UiButtonController.PlacedBlocks.Add(stone);
+                        break;
+                    case 14: // Rocky Ground for the natural resources
+                        Instantiate(RockyGround[Random.Range(0, RockyGround.Length)],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Rocky Ground").transform);
+                        break;
+                    case 15: // Stone only in the forest
+                        var grassStone = Instantiate(Ground[Random.Range(0, 2)],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Rocky Ground").transform);
+                        var stone = Instantiate(StoneTypes[Random.Range(0, StoneTypes.Length)],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Stones").transform);
+                        grassStone.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        stone.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
+                        stone.tag = "PlacedBlock";
+                        UiButtonController.PlacedBlocks.Add(stone);
                                     
-                            /*{
-                                var grassPosition = grassStone.transform.position;
-                                grassPosition = new Vector3(grassStone.transform.position.x - 0.01f, grassStone.transform.position.y + 0.15f);
-                                grassStone.transform.position = grassPosition;
-                            }*/
+                        /*{
+                            var grassPosition = grassStone.transform.position;
+                            grassPosition = new Vector3(grassStone.transform.position.x - 0.01f, grassStone.transform.position.y + 0.15f);
+                            grassStone.transform.position = grassPosition;
+                        }*/
                         break;
                     case 16: // Water tiles for "ponds" or small pools of water
                         var water1 = Instantiate(WaterTypes[0],
