@@ -177,7 +177,12 @@ public class WorldGenerator : MonoBehaviour {
                 
                 if (x == 80 && y == 26)
                 {
-                    //GameWorld[y, x] = 37; // Dirt bottom left
+                    GameWorld[y, x] = 37; // Dirt bottom left
+                }
+
+                if (x == 80 && y == 14)
+                {
+                    GameWorld[y, x] = 38; // Dirt bottom left
                 }
             }
         }
@@ -268,11 +273,17 @@ public class WorldGenerator : MonoBehaviour {
                             GameObject.FindWithTag("Greener Ground").transform);
                         dirtTopRight.GetComponent<SpriteRenderer>().sortingOrder = 26;
                         break;
-                    case 37: // Dirt bottom right
-                        var dirtBottomRight = Instantiate(Ground[12],
+                    case 37: // Dirt bottom left edge
+                        var dirtBottomLeftEdge = Instantiate(Ground[13],
                             new Vector2(currentX, currentY), Quaternion.identity,
                             GameObject.FindWithTag("Greener Ground").transform);
-                        dirtBottomRight.GetComponent<SpriteRenderer>().sortingOrder = 5;
+                        dirtBottomLeftEdge.GetComponent<SpriteRenderer>().sortingOrder = 5;
+                        break;
+                    case 38: // Dirt top left edge
+                        var dirtTopLeftEdge = Instantiate(Ground[14],
+                            new Vector2(currentX, currentY), Quaternion.identity,
+                            GameObject.FindWithTag("Greener Ground").transform);
+                        dirtTopLeftEdge.GetComponent<SpriteRenderer>().sortingOrder = 5;
                         break;
                     case 21: // Grass 3
                         var grassFlower = Instantiate(Ground[1],
