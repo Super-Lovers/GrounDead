@@ -317,16 +317,23 @@ public class WorldGenerator : MonoBehaviour {
                             new Vector2(currentX, currentY), Quaternion.identity,
                             GameObject.FindWithTag("Greener Ground").transform);
                         grass.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        if (Random.Range(0, 2) == 1)
+                        {
+                            var invertedGrass = Instantiate(Ground[15],
+                                new Vector2(currentX, currentY), Quaternion.identity,
+                                GameObject.FindWithTag("Greener Ground").transform);
+                            invertedGrass.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        }
                         break;
                     case 2: // Path
-                        Instantiate(GrassPaths[0],
+                        Instantiate(Ground[5],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Grass Paths").transform);
                         break;
                     case 3: // Player House
-                        Instantiate(Ground[Random.Range(0, 2)],
+                        Instantiate(Ground[5],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
-                        Instantiate(PlayerHouse,
-                            new Vector2(currentX, currentY), Quaternion.identity);
+                        /*Instantiate(PlayerHouse,
+                            new Vector2(currentX, currentY), Quaternion.identity);*/
                         break;
                     case 4: // Stone
                         // We are placing the grass and then the fence with its transparent
@@ -347,11 +354,11 @@ public class WorldGenerator : MonoBehaviour {
                         UiButtonController.PlacedBlocks.Add(copper);
                         break;
                     case 6: // Path up
-                        Instantiate(GrassPaths[2],
+                        Instantiate(Ground[5],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Grass Paths").transform);
                         break;
                     case 7: // Path down
-                        Instantiate(GrassPaths[1],
+                        Instantiate(Ground[5],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Grass Paths").transform);
                         break; // x 18.92 y 17.87408
                     case 8: // Dirt
