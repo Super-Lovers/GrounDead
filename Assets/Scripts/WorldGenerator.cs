@@ -3,6 +3,8 @@
 public class WorldGenerator : MonoBehaviour {
     // Storing the collection of all the game objects we will
     // be using to generate the map with
+    [Range(0, 100)]
+    public int RateOfSoilVariety;
     public GameObject[] Ground;
     public GameObject[] WaterTypes;
     public GameObject[] ForestTrees;
@@ -25,6 +27,8 @@ public class WorldGenerator : MonoBehaviour {
     public static int CurrentPositionY;
         
     public static int[,] GameWorld = new int[mapHeight, mapWidth];
+    
+    static System.Random _rng = new System.Random();
 
     void Start () {
         RockyPlains.GenerateRockyPlains(20, 20, 5);
@@ -36,10 +40,10 @@ public class WorldGenerator : MonoBehaviour {
             
         // Then we are generating the small but well-populated
         // woods in both sides of the house
-        ForestGenerator.GenerateForest(20, 14, 10);
+        ForestGenerator.GenerateForest(20, 14, 30);
         CurrentPositionX = 60;
         CurrentPositionY = 27;
-        ForestGenerator.GenerateForest(20, 13, 10);
+        ForestGenerator.GenerateForest(20, 13, 30);
         CurrentPositionX = 40;
         CurrentPositionY = 20;
         ForestGenerator.GenerateForest(20, 20, 40);
@@ -93,7 +97,7 @@ public class WorldGenerator : MonoBehaviour {
                 
                 if (x == 90)
                 {
-                    GameWorld[y, x] = 17;
+                    GameWorld[y, x] = 18;
                 }
                 
                 // Adding stone in the rocky forest biome
@@ -187,32 +191,6 @@ public class WorldGenerator : MonoBehaviour {
             }
         }
 
-        /*
-        bool seenGrass = true;
-        
-        for (int waterX = 0; waterX < mapWidth; waterX++)
-        {
-            for (int waterY = 39; waterY > 1; waterY--)
-            {
-                int nextTile = waterY--;
-                if (GameWorld[waterY, waterX] == 16 && seenGrass)
-                {
-                    GameWorld[nextTile, waterX] = 19;
-                    seenGrass = false;
-                }
-                else
-                {
-                    for (int cont = waterY; cont > 1; cont--)
-                    {
-                        if (GameWorld[cont, waterX] != 16 && GameWorld[cont, waterX] != 19)
-                        {
-                            seenGrass = true;
-                        }
-                    }
-                }
-            }
-        }
-        */
         for (int waterX = 0; waterX < mapWidth; waterX++)
         {
             for (int waterY = 39; waterY > 0; waterY--)
@@ -325,44 +303,46 @@ public class WorldGenerator : MonoBehaviour {
                             GameObject.FindWithTag("Greener Ground").transform);
                         dirtTopLeftEdge.GetComponent<SpriteRenderer>().sortingOrder = 5;
                         break;
-                    case 21: // Grass 3
-                        var grassFlower = Instantiate(Ground[1],
-                            new Vector2(currentX, currentY), Quaternion.identity,
-                            GameObject.FindWithTag("Greener Ground").transform);
-                        grassFlower.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
-                        break;
-                    case 22: // Grass 2
-                        var grassRocks = Instantiate(Ground[2],
-                            new Vector2(currentX, currentY), Quaternion.identity,
-                            GameObject.FindWithTag("Greener Ground").transform);
-                        grassRocks.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
-                        break;
-                    case 23: // Grass 4
-                        var grassFirstFlower = Instantiate(Ground[3],
-                            new Vector2(currentX, currentY), Quaternion.identity,
-                            GameObject.FindWithTag("Greener Ground").transform);
-                        grassFirstFlower.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
-                        break;
-                    case 24: // Grass 5
-                        var grassSecondFlower = Instantiate(Ground[4],
-                            new Vector2(currentX, currentY), Quaternion.identity,
-                            GameObject.FindWithTag("Greener Ground").transform);
-                        grassSecondFlower.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
-                        break;
                     case 1: // Grass 1
                         // The random range generator will help us pick
                         // objects from the arrays randomly so the environment
                         // always turns out unique
-                        var grass = Instantiate(Ground[0],
-                            new Vector2(currentX, currentY), Quaternion.identity,
-                            GameObject.FindWithTag("Greener Ground").transform);
-                        grass.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
-                        if (Random.Range(0, 2) == 1)
+                        
+                        int pickedGrass = 0;
+                        if (Random.Range(0, 100) > RateOfSoilVariety)
+                        {
+                            int rng = Random.Range(0, 100);
+                            if (rng > 0 && rng < 1)
+                            {
+                                pickedGrass = 0;
+                            }
+                            else if (rng > 1 && rng < 50)
+                            {
+                                pickedGrass = 2;
+                            }
+                            else if (rng > 50 && rng < 75)
+                            {
+                                pickedGrass = 3;
+                            }
+                            else if (rng > 75 && rng < 100)
+                            {
+                                pickedGrass = 4;
+                            }
+                        }
+
+                        if (pickedGrass == 0 && Random.Range(0, 100) < 61)
                         {
                             var invertedGrass = Instantiate(Ground[15],
                                 new Vector2(currentX, currentY), Quaternion.identity,
                                 GameObject.FindWithTag("Greener Ground").transform);
                             invertedGrass.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        }
+                        else
+                        {
+                            var grass = Instantiate(Ground[pickedGrass],
+                                new Vector2(currentX, currentY), Quaternion.identity,
+                                GameObject.FindWithTag("Greener Ground").transform);
+                            grass.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
                         }
                         break;
                     case 2: // Path
@@ -408,7 +388,7 @@ public class WorldGenerator : MonoBehaviour {
                     case 9: // Boundaries / fences
                         if (Random.Range(0, 101) > 12)
                         {
-                            var grassFence = Instantiate(Ground[Random.Range(0, 2)],
+                            var grassFence = Instantiate(Ground[0],
                                 new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
                             grassFence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
                                 
@@ -437,7 +417,7 @@ public class WorldGenerator : MonoBehaviour {
                         }
                         break;
                     case 0: // Trees
-                        var grassTree = Instantiate(Ground[Random.Range(0, 2)],
+                        var grassTree = Instantiate(Ground[0],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
                         var tree = Instantiate(ForestTrees[Random.Range(0, ForestTrees.Length)],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Forest Trees").transform);
@@ -478,7 +458,7 @@ public class WorldGenerator : MonoBehaviour {
                         UiButtonController.PlacedWaterBlocks.Add(water1);
                         break;
                     case 18: // Water tiles for "ponds" or small pools of water
-                        var water2 = Instantiate(WaterTypes[0],
+                        var water2 = Instantiate(WaterTypes[2],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Water Pools").transform);
                         UiButtonController.PlacedWaterBlocks.Add(water2);
                         break;

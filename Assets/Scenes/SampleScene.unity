@@ -1920,6 +1920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6db760cc7c2a45b690208e51707c58c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RateOfSoilVariety: 79
   Ground:
   - {fileID: 1616286932647844, guid: 92e17bb07373448768d13f343e112838, type: 2}
   - {fileID: 1616286932647844, guid: f8a417b8de3344294a6dd67edf027bff, type: 2}
@@ -1940,6 +1941,7 @@ MonoBehaviour:
   WaterTypes:
   - {fileID: 1616286932647844, guid: d1018b1b9e7af46c09e7e76c84e93c0c, type: 2}
   - {fileID: 1616286932647844, guid: f0560642da96a4fd4972bcf510af7ecd, type: 2}
+  - {fileID: 1616286932647844, guid: 33dc14811e34c4c9898e5cc504a84291, type: 2}
   ForestTrees:
   - {fileID: 1388966112541718, guid: ff388afdf1ef746118eed86155db9a55, type: 2}
   - {fileID: 1569412327527046, guid: 3b11cc4d341bd4d14a29d685bb9bddde, type: 2}
