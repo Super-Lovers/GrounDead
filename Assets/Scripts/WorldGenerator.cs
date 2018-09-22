@@ -186,7 +186,41 @@ public class WorldGenerator : MonoBehaviour {
                 }
             }
         }
+        
+       /* for (int waterY = 0; waterY < mapHeight; waterY++)
+        {
+            for (int waterX = 0; waterX < mapWidth; waterX++)
+            {
+                if (GameWorld[waterY, waterX] == 16)
+                {
+                    Debug.Log(string.Format("Match!"));
+                    GameWorld[waterY, waterX] = 19;
+                }
+            }
+        }*/
 
+        bool seenGrass = false;
+
+        for (int waterX = 0; waterX < mapWidth; waterX++)
+        {
+            for (int waterY = 39; waterY > 1; waterY--)
+            {
+                if (GameWorld[waterY, waterX] == 16)
+                {
+                    GameWorld[waterY, waterX] = 19;
+                    Debug.Log(waterX + " " + waterY);
+                    waterY -= 1;
+                    for (int cont = waterY; cont > 1; cont--)
+                    {
+                        if (GameWorld[waterY, waterX] != 16)
+                        {
+                            Debug.Log("Seen grass at " + waterX + " " + cont);
+                        }
+                    }
+                }
+            }
+        }
+        
         // In this section I draw the Boundaries of the map's width and height
         // so that the player can never leave the world and break the game
         float currentX = 0;
@@ -437,10 +471,15 @@ public class WorldGenerator : MonoBehaviour {
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Water Pools").transform);
                         UiButtonController.PlacedWaterBlocks.Add(water1);
                         break;
-                    case 17: // Water tiles for "ponds" or small pools of water
-                        var water2 = Instantiate(WaterTypes[1],
+                    case 18: // Water tiles for "ponds" or small pools of water
+                        var water2 = Instantiate(WaterTypes[0],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Water Pools").transform);
                         UiButtonController.PlacedWaterBlocks.Add(water2);
+                        break;
+                    case 19: // Water tiles for "ponds" or small pools of water
+                        var water3 = Instantiate(WaterTypes[1],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Water Pools").transform);
+                        UiButtonController.PlacedWaterBlocks.Add(water3);
                         break;
                 }
 

@@ -1939,7 +1939,7 @@ MonoBehaviour:
   - {fileID: 1616286932647844, guid: aad3b92729e544cfca58f7fd584d781f, type: 2}
   WaterTypes:
   - {fileID: 1564680252978140, guid: abd5613d95da843acb3acafa6f866011, type: 2}
-  - {fileID: 1403822789839010, guid: 43353b262dd934df59fdd72c5e966e58, type: 2}
+  - {fileID: 1616286932647844, guid: f0560642da96a4fd4972bcf510af7ecd, type: 2}
   ForestTrees:
   - {fileID: 1388966112541718, guid: ff388afdf1ef746118eed86155db9a55, type: 2}
   - {fileID: 1569412327527046, guid: 3b11cc4d341bd4d14a29d685bb9bddde, type: 2}
