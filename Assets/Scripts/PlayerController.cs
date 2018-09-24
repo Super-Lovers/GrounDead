@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,12 +20,11 @@ public class PlayerController : MonoBehaviour
     public static int Copper = 0;
     public static int GunPowder = 0;
     public static int Apples = 0;
-    public static List<List<GameObject>> inventory = new List<List<GameObject>>();
     
     // Sound Effects for the player himself
     public AudioClip Walking;
     private AudioSource _audioSource;
-    private bool _isWalking = false;
+    private bool _isWalking;
 	
     void Start ()
     {

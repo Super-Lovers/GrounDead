@@ -16,6 +16,8 @@ public class UiButtonController : MonoBehaviour
     public GameObject Fence;
     static public List<GameObject> PlacedBlocks = new List<GameObject>();
     static public List<GameObject> PlacedWaterBlocks = new List<GameObject>();
+
+    public GameObject WoodUi;
 	
     // *******************************
     // SECTION FOR DISPLAYING ACTIONS ON GROUND
@@ -115,6 +117,12 @@ public class UiButtonController : MonoBehaviour
         }
     }
 
+    private void StopWoodShineAnimation()
+    {
+        WoodUi.GetComponent<Animator>().SetBool("shineWood", false);
+        Debug.Log(WoodUi.GetComponent<Animator>().GetBool("shineWood"));
+    }
+
     public void DestroyBlockButton()
     {
         foreach (GameObject block in PlacedBlocks.ToArray())
@@ -128,6 +136,9 @@ public class UiButtonController : MonoBehaviour
                     nameOfBlock += block.name[i];
                     if (nameOfBlock == "tree")
                     {
+                        WoodUi.GetComponent<Animator>().SetBool("shineWood", true);
+                        Invoke("StopWoodShineAnimation", 1);
+                        Debug.Log(WoodUi.GetComponent<Animator>().GetBool("shineWood"));
                         
                         PlayerPrefs.SetFloat("Wood", PlayerController.Wood += 1);
                         PlayerPrefs.SetFloat("Apples", (Random.Range(0, 101) > 49) ? PlayerController.Apples += 2 : PlayerController.Apples += 4);

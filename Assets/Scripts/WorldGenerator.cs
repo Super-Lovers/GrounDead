@@ -27,8 +27,6 @@ public class WorldGenerator : MonoBehaviour {
     public static int CurrentPositionY;
         
     public static int[,] GameWorld = new int[mapHeight, mapWidth];
-    
-    static System.Random _rng = new System.Random();
 
     void Start () {
         RockyPlains.GenerateRockyPlains(20, 20, 5);
@@ -391,12 +389,6 @@ public class WorldGenerator : MonoBehaviour {
                             var grassFence = Instantiate(Ground[0],
                                 new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Greener Ground").transform);
                             grassFence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
-                                
-                            /*{
-                                var grassPosition = grassFence.transform.position;
-                                grassPosition = new Vector3(grassFence.transform.position.x - 0.01f, grassFence.transform.position.y + 0.15f);
-                                grassFence.transform.position = grassPosition;
-                            }*/
                         }
                         else
                         {
@@ -408,12 +400,6 @@ public class WorldGenerator : MonoBehaviour {
                             fence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
                             fence.tag = "PlacedBlock";
                             UiButtonController.PlacedBlocks.Add(fence);
-                                
-                            /*{
-                                var grassPosition = grassFence.transform.position;
-                                grassPosition = new Vector3(grassFence.transform.position.x - 0.01f, grassFence.transform.position.y + 0.15f);
-                                grassFence.transform.position = grassPosition;
-                            }*/
                         }
                         break;
                     case 0: // Trees
@@ -425,12 +411,6 @@ public class WorldGenerator : MonoBehaviour {
                         tree.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerTrees + 1;
                         tree.tag = "PlacedBlock";
                         UiButtonController.PlacedBlocks.Add(tree);
-                                
-                        /*{
-                            var grassPosition = grassTree.transform.position;
-                            grassPosition = new Vector3(grassTree.transform.position.x - 0.01f, grassTree.transform.position.y + 0.15f);
-                            grassTree.transform.position = grassPosition;
-                        }*/
                         break;
                     case 14: // Rocky Ground for the natural resources
                         Instantiate(RockyGround[Random.Range(0, RockyGround.Length)],
@@ -445,12 +425,6 @@ public class WorldGenerator : MonoBehaviour {
                         stone.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
                         stone.tag = "PlacedBlock";
                         UiButtonController.PlacedBlocks.Add(stone);
-                                    
-                        /*{
-                            var grassPosition = grassStone.transform.position;
-                            grassPosition = new Vector3(grassStone.transform.position.x - 0.01f, grassStone.transform.position.y + 0.15f);
-                            grassStone.transform.position = grassPosition;
-                        }*/
                         break;
                     case 16: // Water tiles for "ponds" or small pools of water
                         var water1 = Instantiate(WaterTypes[0],
