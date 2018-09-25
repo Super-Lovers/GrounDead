@@ -21,9 +21,14 @@ public class PlayerController : MonoBehaviour
     public static int GunPowder = 0;
     public static int Apples = 0;
     
-    // Sound Effects for the player himself
-    public AudioClip Walking;
+    // Sound Effects and Music for the player himself
+    public GameObject CameraAudioSource;
+    private AudioSource _cameraAudioSource;
     private AudioSource _audioSource;
+    
+    public AudioClip Walking;
+    public AudioClip DayTheme;
+    public AudioClip NightTheme;
     private bool _isWalking;
 	
     void Start ()
@@ -40,10 +45,14 @@ public class PlayerController : MonoBehaviour
         _actionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
         _pickUi = GameObject.FindGameObjectsWithTag("PickUI");
         _audioSource = gameObject.GetComponent<AudioSource>();
+        _cameraAudioSource = CameraAudioSource.GetComponent<AudioSource>();
         
         // Hide the UI at the start of the game AFTER you select the components
         CloseButtonOnClick();
         ClosePickingBlocks();
+
+        _cameraAudioSource.clip = DayTheme;
+        _cameraAudioSource.Play();
     }
 	
     void Update () {
@@ -110,6 +119,27 @@ public class PlayerController : MonoBehaviour
             
             _audioSource.Stop();
             _isWalking = false;
+        }
+        
+        // *******
+        // Day/Night Cycle (work in progress)
+        // *******
+        if (gameObject.GetComponentInChildren<Light>().transform.rotation.x < -45)
+        {
+            //_cameraAudioSource.clip = NightTheme;
+        } else if (gameObject.GetComponentInChildren<Light>().transform.rotation.x < 0 &&
+                   gameObject.GetComponentInChildren<Light>().transform.rotation.x > -46)
+        {
+            //_cameraAudioSource.clip = DayTheme;
+        }
+
+        // Changing the light (dark/bright) for debug purposes
+        if (Input.GetKey(KeyCode.J))
+        {
+            gameObject.GetComponentInChildren<Light>().transform.Rotate(-0.5f, 0, 0);
+        } else if (Input.GetKey(KeyCode.K))
+        {
+            gameObject.GetComponentInChildren<Light>().transform.Rotate(0.5f, 0, 0);
         }
     }
 

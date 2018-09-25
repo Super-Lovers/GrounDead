@@ -32,6 +32,7 @@ public class UiButtonController : MonoBehaviour
     private AudioSource _cameraAudioSource;
     public AudioClip Mining;
     public AudioClip TreeFalling;
+    public AudioClip StructurePlacement;
     
     private void Start()
     {
@@ -103,7 +104,7 @@ public class UiButtonController : MonoBehaviour
             else if (ui.name == "CloseButton")
             {
                 ui.SetActive(true);
-                actionsUiPos.x = Input.mousePosition.x + 286;
+                actionsUiPos.x = Input.mousePosition.x + 295;
                 actionsUiPos.y = Input.mousePosition.y + 133;
             }
             else if (ui.name == "Panel")
@@ -245,6 +246,8 @@ public class UiButtonController : MonoBehaviour
                 uiPos.x += 1000;
                 ui.transform.position = uiPos;
             }
+            
+            _cameraAudioSource.PlayOneShot(StructurePlacement);
         }
     }
 	
@@ -269,6 +272,8 @@ public class UiButtonController : MonoBehaviour
                 uiPos.x += 1000;
                 ui.transform.position = uiPos;
             }
+            
+            _cameraAudioSource.PlayOneShot(StructurePlacement);
         }
     }
 	
@@ -312,6 +317,8 @@ public class UiButtonController : MonoBehaviour
                 uiPos.x += 1000;
                 ui.transform.position = uiPos;
             }
+            
+            _cameraAudioSource.PlayOneShot(StructurePlacement);
         }
     }
 	
@@ -336,6 +343,8 @@ public class UiButtonController : MonoBehaviour
                 uiPos.x += 1000;
                 ui.transform.position = uiPos;
             }
+            
+            _cameraAudioSource.PlayOneShot(StructurePlacement);
         }
     }
 	
@@ -364,6 +373,8 @@ public class UiButtonController : MonoBehaviour
                 uiPos.x += 1000;
                 ui.transform.position = uiPos;
             }
+            
+            _cameraAudioSource.PlayOneShot(StructurePlacement);
         }
     }
 }

@@ -92,7 +92,7 @@ public class HoverController : MonoBehaviour
                     }
                     else if (ui.name == "CloseButton")
                     {
-                        actionsUiPos.x = Input.mousePosition.x + 286;
+                        actionsUiPos.x = Input.mousePosition.x + 295;
                         actionsUiPos.y = Input.mousePosition.y + 133;
                     }
                     else if (ui.name == "Panel")
