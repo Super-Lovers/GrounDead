@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212824627508909192}
   - component: {fileID: 114066662955780256}
   - component: {fileID: 61705279840864312}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: water3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0.02}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.34}
     oldSize: {x: 0.96, y: 0.96}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5

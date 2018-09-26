@@ -18,6 +18,8 @@
           <e p="RockyPlains.cs" t="Include" />
           <e p="UiButtonController.cs" t="Include" />
           <e p="WorldGenerator.cs" t="Include" />
+          <e p="ZombieNavigationController.cs" t="Include" />
+          <e p="ZombiesController.cs" t="Include" />
         </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />

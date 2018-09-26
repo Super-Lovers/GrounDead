@@ -95,7 +95,7 @@ public class WorldGenerator : MonoBehaviour {
                 
                 if (x == 90)
                 {
-                    GameWorld[y, x] = 18;
+                    GameWorld[y, x] = 16;
                 }
                 
                 // Adding stone in the rocky forest biome

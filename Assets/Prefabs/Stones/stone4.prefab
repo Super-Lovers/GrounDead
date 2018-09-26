@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212440038940205658}
   - component: {fileID: 61960511368986186}
   - component: {fileID: 114416016210654596}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: stone4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8922cfa60c141388884649d9d36a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hammer: {fileID: 0}
 --- !u!212 &212440038940205658
 SpriteRenderer:
   m_ObjectHideFlags: 1

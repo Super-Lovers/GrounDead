@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     void Start ()
     {
         // Player resources
-        PlayerPrefs.SetFloat("Wood", Wood);
+        PlayerPrefs.SetFloat("Wood", Wood + 50);
         PlayerPrefs.SetFloat("Stone", Stone);
         PlayerPrefs.SetFloat("Copper", Copper);
         PlayerPrefs.SetFloat("Gun Powder", GunPowder);
@@ -50,8 +50,7 @@ public class PlayerController : MonoBehaviour
         // Hide the UI at the start of the game AFTER you select the components
         CloseButtonOnClick();
         ClosePickingBlocks();
-
-        _cameraAudioSource.clip = DayTheme;
+        
         _cameraAudioSource.Play();
     }
 	
