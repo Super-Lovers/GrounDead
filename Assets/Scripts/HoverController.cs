@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class HoverController : MonoBehaviour
 {
@@ -16,7 +17,11 @@ public class HoverController : MonoBehaviour
     //
     private GameObject[] _actionsUi;
     private GameObject[] _pickUi;
+    private GameObject _notification;
     private bool _canBuild = true;
+    
+    // Player play modes
+    private string _playMode = "Creative";
 	
     void Start ()
     {
@@ -25,7 +30,27 @@ public class HoverController : MonoBehaviour
         _renderer = GetComponent<Renderer>();
         _actionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
         _pickUi = GameObject.FindGameObjectsWithTag("PickUI");
+        _notification = GameObject.FindGameObjectWithTag("NotificationUi");
         _transform = GetComponent<Transform>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            PlayerController.ClosePickingBlocks();
+            PlayerController.CloseButtonOnClick();
+            if (_playMode == "Creative")
+            {
+                _playMode = "Survival";
+                _notification.GetComponentInChildren<Text>().text = "You are now in " + _playMode + " mode";
+            }
+            else
+            {
+                _playMode = "Creative";
+                _notification.GetComponentInChildren<Text>().text = "You are now in " + _playMode + " mode";
+            }
+        }
     }
 
     private void OnMouseEnter()
@@ -48,7 +73,7 @@ public class HoverController : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(1)) // If player right clicks (1), left click (0)
+        if (Input.GetMouseButtonDown(1) && _playMode == "Creative") // If player right clicks (1), left click (0)
         {
             if (gameObject.tag == "PlacedBlock")
             {

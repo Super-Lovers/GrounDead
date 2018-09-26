@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
     private float speed = 4f;
     
     // Ui
-    private GameObject[] _actionsUi;
-    private GameObject[] _pickUi;
+    protected static GameObject[] ActionsUi;
+    protected static GameObject[] PickUi;
     public static int Wood = 0;
     public static int Stone = 0;
     public static int Copper = 0;
@@ -42,8 +42,8 @@ public class PlayerController : MonoBehaviour
         
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
-        _actionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
-        _pickUi = GameObject.FindGameObjectsWithTag("PickUI");
+        ActionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
+        PickUi = GameObject.FindGameObjectsWithTag("PickUI");
         _audioSource = gameObject.GetComponent<AudioSource>();
         _cameraAudioSource = CameraAudioSource.GetComponent<AudioSource>();
         
@@ -149,9 +149,9 @@ public class PlayerController : MonoBehaviour
         _rb.velocity = newPlayerVelocity * speed;
     }
 
-    public void CloseButtonOnClick()
+    public static void CloseButtonOnClick()
     {
-        foreach (var ui in _actionsUi)
+        foreach (var ui in ActionsUi)
         {
             var uiPos = ui.transform.position;
             uiPos.x += 1000;
@@ -159,9 +159,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ClosePickingBlocks()
+    public static void ClosePickingBlocks()
     {
-        foreach (var ui in _pickUi)
+        foreach (var ui in PickUi)
         {
             var uiPos = ui.transform.position;
             uiPos.x += 1000;
