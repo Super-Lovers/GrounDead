@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BulletController : MonoBehaviour
 {
@@ -78,6 +79,9 @@ public class BulletController : MonoBehaviour
 				// then destroy that obstacle and bullet, so that the bullet doesnt
 				// keep going afterwards.
 				Destroy(_obstacle);
+				PlayerController.Score += 50;
+				// Updating the score UI and player score after a obstacle is destroyed
+				GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
 				Destroy(gameObject);
 			}
 			else
@@ -97,6 +101,9 @@ public class BulletController : MonoBehaviour
 				if (_obstacle.GetComponent<ZombieController>().HitPoints <= 0)
 				{
 					Destroy(_obstacle);
+					PlayerController.Score += 100;
+					// Updating the score UI and player score after a zombie is killed
+					GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
 					Destroy(gameObject);
 				}
 				else

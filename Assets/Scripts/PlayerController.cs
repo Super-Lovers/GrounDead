@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    // Player stats
+    public static int HitPoints = 10;
+    public static ulong Score = 0;
+    
     public static Animator Animator;
     private Rigidbody2D _rb;
 
@@ -15,11 +20,15 @@ public class PlayerController : MonoBehaviour
     // Ui
     protected static GameObject[] ActionsUi;
     protected static GameObject[] PickUi;
+    private GameObject _notification;
     public static int Wood = 0;
     public static int Stone = 0;
     public static int Copper = 0;
     public static int GunPowder = 0;
     public static int Apples = 0;
+    
+    // Player play modes
+    public static string PlayMode = "Creative";
     
     // Sound Effects and Music for the player himself
     public GameObject CameraAudioSource;
@@ -35,6 +44,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _gunHolePos;
     private bool _isWalking;
     private int _lastDir;
+    private bool _strafing = false;
 	
     void Start ()
     {
@@ -51,6 +61,7 @@ public class PlayerController : MonoBehaviour
         PickUi = GameObject.FindGameObjectsWithTag("PickUI");
         _audioSource = gameObject.GetComponent<AudioSource>();
         _cameraAudioSource = CameraAudioSource.GetComponent<AudioSource>();
+        _notification = GameObject.FindGameObjectWithTag("NotificationUi");
         
         // Hide the UI at the start of the game AFTER you select the components
         CloseButtonOnClick();
@@ -68,7 +79,7 @@ public class PlayerController : MonoBehaviour
         var horizontalMovement = Input.GetAxis("Horizontal");
         var verticalMovement = Input.GetAxis("Vertical");
         
-        if (horizontalMovement > 0) // Right
+        if (horizontalMovement > 0 && _strafing == false) // Right
         {
             Animator.enabled = true;
             // If the player moves when he has the menu for actions
@@ -88,7 +99,7 @@ public class PlayerController : MonoBehaviour
             
             Animator.SetInteger("direction", 3);
             _lastDir = 3;
-        } else if (horizontalMovement < 0) // Left
+        } else if (horizontalMovement < 0 && _strafing == false) // Left
         {
             Animator.enabled = true;
             CloseButtonOnClick();
@@ -105,7 +116,7 @@ public class PlayerController : MonoBehaviour
             
             Animator.SetInteger("direction", 4);
             _lastDir = 4;
-        } else  if (verticalMovement > 0) // Top
+        } else  if (verticalMovement > 0 && _strafing == false) // Top
         {
             Animator.enabled = true;
             CloseButtonOnClick();
@@ -122,7 +133,7 @@ public class PlayerController : MonoBehaviour
             
             Animator.SetInteger("direction", 2);
             _lastDir = 2;
-        } else  if (verticalMovement < 0) // Bottom
+        } else  if (verticalMovement < 0 && _strafing == false) // Bottom
         {
             Animator.enabled = true;
             CloseButtonOnClick();
@@ -174,7 +185,32 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponentInChildren<Light>().transform.Rotate(0.5f, 0, 0);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            _strafing = true;
+        }
+        else
+        {
+            _strafing = false;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ClosePickingBlocks();
+            CloseButtonOnClick();
+            if (PlayMode == "Creative")
+            {
+                PlayMode = "Survival";
+                _notification.GetComponentInChildren<Text>().text = "You are now in " + PlayMode + " mode";
+            }
+            else
+            {
+                PlayMode = "Creative";
+                _notification.GetComponentInChildren<Text>().text = "You are now in " + PlayMode + " mode";
+            }
+        }
+
+        if (Input.GetMouseButtonDown(0) && PlayMode == "Survival")
         {
             if (Animator.GetInteger("direction") == 1 || Animator.GetInteger("direction") == 2)
             {

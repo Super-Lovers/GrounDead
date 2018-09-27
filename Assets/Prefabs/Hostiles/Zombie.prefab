@@ -296,7 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   HitPoints: 5
 --- !u!212 &212745658519473328
 SpriteRenderer:

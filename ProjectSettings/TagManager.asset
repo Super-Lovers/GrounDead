@@ -26,6 +26,8 @@ TagManager:
   - Zombie
   - GunHole
   - Floor
+  - PlayerScore
+  - PlayerWave
   layers:
   - Default
   - TransparentFX
