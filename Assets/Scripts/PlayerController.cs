@@ -2,7 +2,7 @@
 
 public class PlayerController : MonoBehaviour
 {
-    private Animator _animator;
+    public static Animator Animator;
     private Rigidbody2D _rb;
 
     private bool _right;
@@ -29,7 +29,12 @@ public class PlayerController : MonoBehaviour
     public AudioClip Walking;
     public AudioClip DayTheme;
     public AudioClip NightTheme;
+    public GameObject Weapon;
+    public GameObject Ammo;
+    private Transform gunHole;
+    private Vector3 gunHolePos;
     private bool _isWalking;
+    private int _lastDir;
 	
     void Start ()
     {
@@ -40,7 +45,7 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetFloat("Gun Powder", GunPowder);
         PlayerPrefs.SetFloat("Apples", Apples);
         
-        _animator = GetComponent<Animator>();
+        Animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         ActionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
         PickUi = GameObject.FindGameObjectsWithTag("PickUI");
@@ -52,6 +57,9 @@ public class PlayerController : MonoBehaviour
         ClosePickingBlocks();
         
         _cameraAudioSource.Play();
+        
+        gunHole = GameObject.FindGameObjectWithTag("GunHole").transform;
+        gunHolePos = gunHole.position;
     }
 	
     void Update () {
@@ -73,20 +81,28 @@ public class PlayerController : MonoBehaviour
                 _audioSource.Play();
                 _isWalking = true;
             }
+
+            gunHolePos.x = transform.position.x + 0.32f;
+            gunHole.position = gunHolePos;
             
-            _animator.SetInteger("direction", 3);
+            Animator.SetInteger("direction", 3);
+            _lastDir = 3;
         } else if (horizontalMovement < 0) // Left
         {
             CloseButtonOnClick();
             ClosePickingBlocks();
-            
+
             if (!_isWalking)
             {
                 _audioSource.Play();
                 _isWalking = true;
             }
+
+            gunHolePos.x = transform.position.x - 0.32f;
+            gunHole.position = gunHolePos;
             
-            _animator.SetInteger("direction", 4);
+            Animator.SetInteger("direction", 4);
+            _lastDir = 4;
         } else  if (verticalMovement > 0) // Top
         {
             CloseButtonOnClick();
@@ -97,8 +113,12 @@ public class PlayerController : MonoBehaviour
                 _audioSource.Play();
                 _isWalking = true;
             }
+
+            gunHolePos.y = transform.position.y + 0.32f;
+            gunHole.position = gunHolePos;
             
-            _animator.SetInteger("direction", 2);
+            Animator.SetInteger("direction", 2);
+            _lastDir = 2;
         } else  if (verticalMovement < 0) // Bottom
         {
             CloseButtonOnClick();
@@ -109,12 +129,20 @@ public class PlayerController : MonoBehaviour
                 _audioSource.Play();
                 _isWalking = true;
             }
+
+            gunHolePos.y = transform.position.y - 0.32f;
+            gunHole.position = gunHolePos;
             
-            _animator.SetInteger("direction", 1);
+            Animator.SetInteger("direction", 1);
+            _lastDir = 1;
         }
         else // Idle
         {
-            _animator.SetInteger("direction", 5);
+            Animator.SetInteger("direction", _lastDir);
+            
+            gunHolePos.x = transform.position.x;
+            gunHolePos.y = transform.position.y - 0.16f;
+            gunHole.position = gunHolePos;
             
             _audioSource.Stop();
             _isWalking = false;
@@ -139,6 +167,23 @@ public class PlayerController : MonoBehaviour
         } else if (Input.GetKey(KeyCode.K))
         {
             gameObject.GetComponentInChildren<Light>().transform.Rotate(0.5f, 0, 0);
+        }
+
+        if (Input.GetMouseButtonDown(0) && HoverController.PlayMode == "Survival")
+        {
+            if (Animator.GetInteger("direction") == 1 || Animator.GetInteger("direction") == 2)
+            {
+                var bullet = Instantiate(Ammo,
+                    new Vector3(gunHole.position.x, gunHole.position.y, gunHole.position.z)
+                    , Quaternion.identity, gunHole);
+                bullet.GetComponent<Transform>().Rotate(0, 0, 90);
+            }
+            else if (Animator.GetInteger("direction") == 3 || Animator.GetInteger("direction") == 4)
+            {
+                var bullet = Instantiate(Ammo,
+                    new Vector3(gunHole.position.x, gunHole.position.y, gunHole.position.z)
+                    , Quaternion.identity, gunHole);
+            }
         }
     }
 

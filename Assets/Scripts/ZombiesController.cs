@@ -27,11 +27,20 @@ public class ZombiesController : MonoBehaviour
         {
             // Make the zombie walk when the player is in radius
             gameObject.GetComponent<Animator>().SetBool("isWalking", true);
-            transform.position = Vector2.MoveTowards(transform.position, hit.transform.position, 0.04f);
+            transform.position = Vector2.MoveTowards(transform.position, hit.transform.position, 0.03f);
         }
         else
         {
             gameObject.GetComponent<Animator>().SetBool("isWalking", false);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.transform.tag == "Player")
+        {
+            gameObject.GetComponent<Rigidbody2D>().constraints =
+                RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
         }
     }
 }

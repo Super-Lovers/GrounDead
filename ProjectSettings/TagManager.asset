@@ -23,6 +23,8 @@ TagManager:
   - PlayerGunPowder
   - PlayerApples
   - NotificationUi
+  - Zombie
+  - GunHole
   layers:
   - Default
   - TransparentFX

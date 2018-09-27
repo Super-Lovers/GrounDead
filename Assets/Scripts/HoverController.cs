@@ -21,7 +21,7 @@ public class HoverController : MonoBehaviour
     private bool _canBuild = true;
     
     // Player play modes
-    private string _playMode = "Creative";
+    public static string PlayMode = "Creative";
 	
     void Start ()
     {
@@ -40,15 +40,15 @@ public class HoverController : MonoBehaviour
         {
             PlayerController.ClosePickingBlocks();
             PlayerController.CloseButtonOnClick();
-            if (_playMode == "Creative")
+            if (PlayMode == "Creative")
             {
-                _playMode = "Survival";
-                _notification.GetComponentInChildren<Text>().text = "You are now in " + _playMode + " mode";
+                PlayMode = "Survival";
+                _notification.GetComponentInChildren<Text>().text = "You are now in " + PlayMode + " mode";
             }
             else
             {
-                _playMode = "Creative";
-                _notification.GetComponentInChildren<Text>().text = "You are now in " + _playMode + " mode";
+                PlayMode = "Creative";
+                _notification.GetComponentInChildren<Text>().text = "You are now in " + PlayMode + " mode";
             }
         }
     }
@@ -73,7 +73,7 @@ public class HoverController : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(1) && _playMode == "Creative") // If player right clicks (1), left click (0)
+        if (Input.GetMouseButtonDown(1) && PlayMode == "Creative") // If player right clicks (1), left click (0)
         {
             if (gameObject.tag == "PlacedBlock")
             {
