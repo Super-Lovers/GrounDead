@@ -278,6 +278,31 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 212745658519473328, guid: 6ec8842d451254e3c87195f1bde036a4,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212745658519473328, guid: 6ec8842d451254e3c87195f1bde036a4,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212745658519473328, guid: 6ec8842d451254e3c87195f1bde036a4,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212745658519473328, guid: 6ec8842d451254e3c87195f1bde036a4,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212745658519473328, guid: 6ec8842d451254e3c87195f1bde036a4,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 23d84b0917bfe4e469f1c377ec34e789, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ec8842d451254e3c87195f1bde036a4, type: 2}
   m_IsPrefabAsset: 0
@@ -4084,7 +4109,7 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2029945142}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 291c64b5cdf30478484ec1bfdd8debd7, type: 3}

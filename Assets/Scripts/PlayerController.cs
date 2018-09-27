@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
         
         if (horizontalMovement > 0) // Right
         {
+            Animator.enabled = true;
             // If the player moves when he has the menu for actions
             // up then it will be automatically closed
             CloseButtonOnClick();
@@ -89,6 +90,7 @@ public class PlayerController : MonoBehaviour
             _lastDir = 3;
         } else if (horizontalMovement < 0) // Left
         {
+            Animator.enabled = true;
             CloseButtonOnClick();
             ClosePickingBlocks();
 
@@ -105,6 +107,7 @@ public class PlayerController : MonoBehaviour
             _lastDir = 4;
         } else  if (verticalMovement > 0) // Top
         {
+            Animator.enabled = true;
             CloseButtonOnClick();
             ClosePickingBlocks();
             
@@ -121,6 +124,7 @@ public class PlayerController : MonoBehaviour
             _lastDir = 2;
         } else  if (verticalMovement < 0) // Bottom
         {
+            Animator.enabled = true;
             CloseButtonOnClick();
             ClosePickingBlocks();
             
@@ -139,6 +143,7 @@ public class PlayerController : MonoBehaviour
         else // Idle
         {
             Animator.SetInteger("direction", _lastDir);
+            Animator.enabled = false;
             
             gunHolePos.x = transform.position.x;
             gunHolePos.y = transform.position.y - 0.16f;
@@ -169,7 +174,7 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponentInChildren<Light>().transform.Rotate(0.5f, 0, 0);
         }
 
-        if (Input.GetMouseButtonDown(0) && HoverController.PlayMode == "Survival")
+        if (Input.GetMouseButtonDown(0))
         {
             if (Animator.GetInteger("direction") == 1 || Animator.GetInteger("direction") == 2)
             {

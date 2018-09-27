@@ -25,6 +25,7 @@ TagManager:
   - NotificationUi
   - Zombie
   - GunHole
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -36,7 +37,7 @@ TagManager:
   - 
   - Player
   - ZombieObstacles
-  - 
+  - BulletObstacles
   - 
   - 
   - 
