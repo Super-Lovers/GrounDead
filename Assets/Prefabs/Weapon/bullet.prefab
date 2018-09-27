@@ -92,6 +92,7 @@ MonoBehaviour:
   SpeedX: 15
   SpeedY: 15
   RedFlash: {fileID: 2100000, guid: f2ebd144b5006406eb47dfb7462ec15f, type: 2}
+  YellowFlash: {fileID: 2100000, guid: 0c06ed59eaff84a359c3061ca412f9b2, type: 2}
   WhiteFlash: {fileID: 2100000, guid: 23d84b0917bfe4e469f1c377ec34e789, type: 2}
 --- !u!212 &212739821171354462
 SpriteRenderer:

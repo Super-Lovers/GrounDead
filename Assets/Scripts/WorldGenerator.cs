@@ -400,6 +400,7 @@ public class WorldGenerator : MonoBehaviour {
                             fence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
                             fence.tag = "PlacedBlock";
                             UiButtonController.PlacedBlocks.Add(fence);
+                            fence.AddComponent<HitPointsController>();
                         }
                         break;
                     case 0: // Trees

@@ -86,8 +86,8 @@ GameObject:
   - component: {fileID: 50048524269861254}
   - component: {fileID: 212745658519473328}
   - component: {fileID: 95428700910415650}
-  - component: {fileID: 114266290880268040}
   - component: {fileID: 61148608838027220}
+  - component: {fileID: 114819845172443924}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Zombie
@@ -141,7 +141,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1828038574458888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.51, y: 13.76, z: 0}
+  m_LocalPosition: {x: 51.58, y: 12.87, z: 0}
   m_LocalScale: {x: 1.5607346, y: 1.5607346, z: 1.5607346}
   m_Children:
   - {fileID: 4963888840588240}
@@ -241,20 +241,6 @@ MonoBehaviour:
   ObstaclesLayerMask:
     serializedVersion: 2
     m_Bits: 512
---- !u!114 &114266290880268040
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1828038574458888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da2514327a04d474a9df9e0b4c3e1473, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerLayerMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &114347800131761968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,6 +283,21 @@ MonoBehaviour:
   ObstaclesLayerMask:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &114819845172443924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1828038574458888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2514327a04d474a9df9e0b4c3e1473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  HitPoints: 5
 --- !u!212 &212745658519473328
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -312,7 +313,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 23d84b0917bfe4e469f1c377ec34e789, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

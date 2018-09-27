@@ -7,10 +7,11 @@ public class BulletController : MonoBehaviour
 	private float _bulletSpeedVel;
 	public float SpeedX;
 	public float SpeedY;
-	private GameObject _hostile;
+	private GameObject _obstacle;
 
 	// Visual on-hit effects
 	public Material RedFlash;
+	public Material YellowFlash;
 	public Material WhiteFlash;
 	
 	void Start ()
@@ -43,19 +44,49 @@ public class BulletController : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-
 		if (other.gameObject.layer == 10)
 		{
-			Destroy(gameObject);
+			// Make the game object invisible and undetectable after it hits the
+			// zombie so that it can still run the flash animation but not look
+			// like its still going
+			DisableBullet();
+			// The obstacle variable will be used for storing the current
+			// object hit by the bullet, and depending on that object, different
+			// code blocks will be executed.
+			_obstacle = other.gameObject;
+			
+			_obstacle.GetComponent<HitPointsController>().HitPoints--;
+			if (_obstacle.GetComponent<HitPointsController>().HitPoints <= 0)
+			{
+				// If the structure the bullet is hitting has no hitpoints left,
+				// then destroy that obstacle and bullet, so that the bullet doesnt
+				// keep going afterwards.
+				Destroy(_obstacle);
+				Destroy(gameObject);
+			}
+			else
+			{
+				StartCoroutine("FlashObstacle");
+			}
 		}
 		
 		if (other.transform.tag != "Player")
 		{
 			if (other.transform.tag == "Zombie")
 			{
-				_hostile = other.gameObject;
-
-				StartCoroutine("FlashColors");
+				DisableBullet();
+				
+				_obstacle = other.gameObject;
+				_obstacle.GetComponent<ZombieController>().HitPoints--;
+				if (_obstacle.GetComponent<ZombieController>().HitPoints <= 0)
+				{
+					Destroy(_obstacle);
+					Destroy(gameObject);
+				}
+				else
+				{
+					StartCoroutine("FlashZombie");	
+				}
 			}
 		}
 		// And if the bullet doesnt hit anything, itll dissapear
@@ -63,20 +94,26 @@ public class BulletController : MonoBehaviour
 		Invoke("DestroyObject", 1f);
 	}
 
-	private IEnumerator FlashColors()
+	private IEnumerator FlashZombie()
 	{
-		// Make the game object invisible and undetectable after it hits the
-		// zombie so that it can still run the flash animation but not look
-		// like its still going
-		gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
-		gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
-		
 		for (int i = 0; i < 2; i++)
 		{
-		
-			_hostile.GetComponent<SpriteRenderer>().material = RedFlash;
+			_obstacle.GetComponent<SpriteRenderer>().material = RedFlash;
 			yield return new WaitForSeconds(.1f);
-			_hostile.GetComponent<SpriteRenderer>().material = WhiteFlash;
+			_obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
+			yield return new WaitForSeconds(.1f);	
+		}
+				
+		Destroy(gameObject);
+	}
+
+	private IEnumerator FlashObstacle()
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			_obstacle.GetComponent<SpriteRenderer>().material = YellowFlash;
+			yield return new WaitForSeconds(.1f);
+			_obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
 			yield return new WaitForSeconds(.1f);	
 		}
 				
@@ -86,5 +123,13 @@ public class BulletController : MonoBehaviour
 	private void DestroyObject()
 	{
 		Destroy(gameObject);
+	}
+
+	private void DisableBullet()
+	{
+		gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
+		var newPos = gameObject.transform.position;
+		newPos.x = 1000;
+		gameObject.transform.position = newPos;
 	}
 }

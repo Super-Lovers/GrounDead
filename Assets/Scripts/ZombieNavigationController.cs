@@ -43,17 +43,17 @@ public class ZombieNavigationController : MonoBehaviour {
             if ((transform.name == "RightRayCollider" || transform.name == "LeftRayCollider"))
             {
                 Debug.Log(transform.name);
-                ZombiesController.CloseToAWall = true;
+                ZombieController.CloseToAWall = true;
                 WalkToTheDirection("up");
             } else if ((transform.name == "TopRayCollider" || transform.name == "BottomRayCollider"))
             {
                 Debug.Log(transform.name);
-                ZombiesController.CloseToAWall = true;
+                ZombieController.CloseToAWall = true;
                 WalkToTheDirection("left");
             }
             else
             {
-                ZombiesController.CloseToAWall = false;
+                ZombieController.CloseToAWall = false;
             }
         }
     }

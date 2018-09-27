@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     void Start ()
     {
         // Player resources
-        PlayerPrefs.SetFloat("Wood", Wood + 50);
+        PlayerPrefs.SetFloat("Wood", Wood);
         PlayerPrefs.SetFloat("Stone", Stone);
         PlayerPrefs.SetFloat("Copper", Copper);
         PlayerPrefs.SetFloat("Gun Powder", GunPowder);

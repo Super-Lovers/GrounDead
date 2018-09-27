@@ -248,11 +248,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4853884538290870, guid: 6ec8842d451254e3c87195f1bde036a4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 43.51
+      value: 51.58
       objectReference: {fileID: 0}
     - target: {fileID: 4853884538290870, guid: 6ec8842d451254e3c87195f1bde036a4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 13.76
+      value: 12.87
       objectReference: {fileID: 0}
     - target: {fileID: 4853884538290870, guid: 6ec8842d451254e3c87195f1bde036a4, type: 2}
       propertyPath: m_LocalPosition.z
@@ -278,31 +278,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 212745658519473328, guid: 6ec8842d451254e3c87195f1bde036a4,
+    - target: {fileID: 114819845172443924, guid: 6ec8842d451254e3c87195f1bde036a4,
         type: 2}
-      propertyPath: m_Color.a
-      value: 1
+      propertyPath: PlayerLayerMask.m_Bits
+      value: 256
       objectReference: {fileID: 0}
-    - target: {fileID: 212745658519473328, guid: 6ec8842d451254e3c87195f1bde036a4,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212745658519473328, guid: 6ec8842d451254e3c87195f1bde036a4,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212745658519473328, guid: 6ec8842d451254e3c87195f1bde036a4,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212745658519473328, guid: 6ec8842d451254e3c87195f1bde036a4,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 23d84b0917bfe4e469f1c377ec34e789, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ec8842d451254e3c87195f1bde036a4, type: 2}
   m_IsPrefabAsset: 0
@@ -4075,7 +4055,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2029945142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 52.7, y: 13.98, z: 0}
+  m_LocalPosition: {x: 42.08, y: 15.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 627497717}

@@ -234,6 +234,7 @@ public class UiButtonController : MonoBehaviour
             
             var woodWall = Instantiate(Wood, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
             woodWall.GetComponent<SpriteRenderer>().sortingOrder = 40;
+            woodWall.AddComponent<HitPointsController>();
             woodWall.tag = "PlacedBlock";
 		
             PlacedBlocks.Add(woodWall);
@@ -260,6 +261,7 @@ public class UiButtonController : MonoBehaviour
             
             var stoneWall = Instantiate(Stone, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
             stoneWall.GetComponent<SpriteRenderer>().sortingOrder = 40;
+            stoneWall.AddComponent<HitPointsController>();
             stoneWall.tag = "PlacedBlock";
 		
             PlacedBlocks.Add(stoneWall);
@@ -289,6 +291,7 @@ public class UiButtonController : MonoBehaviour
             var platform = Instantiate(Platform, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
             platform.GetComponent<SpriteRenderer>().sortingOrder = 39;
             platform.tag = "PlacedBlock";
+            platform.AddComponent<HitPointsController>();
         
             foreach (GameObject block in PlacedWaterBlocks.ToArray())
             {
@@ -331,6 +334,7 @@ public class UiButtonController : MonoBehaviour
             
             var spikes = Instantiate(Spikes, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
             spikes.GetComponent<SpriteRenderer>().sortingOrder = 40;
+            spikes.AddComponent<HitPointsController>();
             spikes.tag = "PlacedBlock";
 		
             PlacedBlocks.Add(spikes);
@@ -361,6 +365,7 @@ public class UiButtonController : MonoBehaviour
 
             var fence = Instantiate(Fence, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
             fence.GetComponent<SpriteRenderer>().sortingOrder = 40;
+            fence.AddComponent<HitPointsController>();
             fence.tag = "PlacedBlock";
 		
             PlacedBlocks.Add(fence);
