@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour
     public AudioClip NightTheme;
     public GameObject Weapon;
     public GameObject Ammo;
-    private Transform gunHole;
-    private Vector3 gunHolePos;
+    private Transform _gunHole;
+    private Vector3 _gunHolePos;
     private bool _isWalking;
     private int _lastDir;
 	
@@ -58,8 +58,8 @@ public class PlayerController : MonoBehaviour
         
         _cameraAudioSource.Play();
         
-        gunHole = GameObject.FindGameObjectWithTag("GunHole").transform;
-        gunHolePos = gunHole.position;
+        _gunHole = GameObject.FindGameObjectWithTag("GunHole").transform;
+        _gunHolePos = _gunHole.position;
     }
 	
     void Update () {
@@ -83,8 +83,8 @@ public class PlayerController : MonoBehaviour
                 _isWalking = true;
             }
 
-            gunHolePos.x = transform.position.x + 0.32f;
-            gunHole.position = gunHolePos;
+            _gunHolePos.x = transform.position.x + 0.32f;
+            _gunHole.position = _gunHolePos;
             
             Animator.SetInteger("direction", 3);
             _lastDir = 3;
@@ -100,8 +100,8 @@ public class PlayerController : MonoBehaviour
                 _isWalking = true;
             }
 
-            gunHolePos.x = transform.position.x - 0.32f;
-            gunHole.position = gunHolePos;
+            _gunHolePos.x = transform.position.x - 0.32f;
+            _gunHole.position = _gunHolePos;
             
             Animator.SetInteger("direction", 4);
             _lastDir = 4;
@@ -117,8 +117,8 @@ public class PlayerController : MonoBehaviour
                 _isWalking = true;
             }
 
-            gunHolePos.y = transform.position.y + 0.32f;
-            gunHole.position = gunHolePos;
+            _gunHolePos.y = transform.position.y + 0.32f;
+            _gunHole.position = _gunHolePos;
             
             Animator.SetInteger("direction", 2);
             _lastDir = 2;
@@ -134,8 +134,8 @@ public class PlayerController : MonoBehaviour
                 _isWalking = true;
             }
 
-            gunHolePos.y = transform.position.y - 0.32f;
-            gunHole.position = gunHolePos;
+            _gunHolePos.y = transform.position.y - 0.32f;
+            _gunHole.position = _gunHolePos;
             
             Animator.SetInteger("direction", 1);
             _lastDir = 1;
@@ -145,9 +145,9 @@ public class PlayerController : MonoBehaviour
             Animator.SetInteger("direction", _lastDir);
             Animator.enabled = false;
             
-            gunHolePos.x = transform.position.x;
-            gunHolePos.y = transform.position.y - 0.16f;
-            gunHole.position = gunHolePos;
+            _gunHolePos.x = transform.position.x;
+            _gunHolePos.y = transform.position.y - 0.16f;
+            _gunHole.position = _gunHolePos;
             
             _audioSource.Stop();
             _isWalking = false;
@@ -179,15 +179,15 @@ public class PlayerController : MonoBehaviour
             if (Animator.GetInteger("direction") == 1 || Animator.GetInteger("direction") == 2)
             {
                 var bullet = Instantiate(Ammo,
-                    new Vector3(gunHole.position.x, gunHole.position.y, gunHole.position.z)
-                    , Quaternion.identity, gunHole);
+                    new Vector3(transform.position.x, transform.position.y, transform.position.z)
+                    , Quaternion.identity, transform);
                 bullet.GetComponent<Transform>().Rotate(0, 0, 90);
             }
             else if (Animator.GetInteger("direction") == 3 || Animator.GetInteger("direction") == 4)
             {
-                var bullet = Instantiate(Ammo,
-                    new Vector3(gunHole.position.x, gunHole.position.y, gunHole.position.z)
-                    , Quaternion.identity, gunHole);
+                Instantiate(Ammo,
+                    new Vector3(transform.position.x, transform.position.y, transform.position.z)
+                    , Quaternion.identity, transform);
             }
         }
     }

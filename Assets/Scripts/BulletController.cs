@@ -44,6 +44,22 @@ public class BulletController : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
+		// Before the bullet hits the object, we have to check if the
+		// object is a platform or traps, because platforms and traps
+		// work like bridges and the bullets shouldnt destroy them.
+		/*string objName = "";
+		bool isPlatform = true;
+		
+		for (int i = 0; i < other.name.Length; i++)
+		{
+			objName += other.name[i];
+			if (objName == "platform" || objName == "BlockElectricFence" || objName == "BlockSpikes")
+			{
+				isPlatform = false;
+				break;
+			}
+		} */
+		
 		if (other.gameObject.layer == 10)
 		{
 			// Make the game object invisible and undetectable after it hits the
