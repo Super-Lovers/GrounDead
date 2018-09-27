@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _gunHolePos;
     private bool _isWalking;
     private int _lastDir;
-    private bool _strafing = false;
+    private bool _strafing;
 	
     void Start ()
     {

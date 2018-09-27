@@ -14,6 +14,8 @@ public class BulletController : MonoBehaviour
 	public Material RedFlash;
 	public Material YellowFlash;
 	public Material WhiteFlash;
+	public AudioClip ZombieHitSound;
+	public AudioClip StructureHitSound;
 	
 	void Start ()
 	{
@@ -72,21 +74,35 @@ public class BulletController : MonoBehaviour
 			// code blocks will be executed.
 			_obstacle = other.gameObject;
 			
-			_obstacle.GetComponent<HitPointsController>().HitPoints--;
-			if (_obstacle.GetComponent<HitPointsController>().HitPoints <= 0)
+			// The error handling is necessary because not every game object contains
+			// an AudioSource or a HitPointsController script, so it's causing errors.
+			if (_obstacle.GetComponent<AudioSource>() != null)
 			{
-				// If the structure the bullet is hitting has no hitpoints left,
-				// then destroy that obstacle and bullet, so that the bullet doesnt
-				// keep going afterwards.
-				Destroy(_obstacle);
-				PlayerController.Score += 50;
-				// Updating the score UI and player score after a obstacle is destroyed
-				GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
-				Destroy(gameObject);
+				_obstacle.GetComponent<AudioSource>().PlayOneShot(StructureHitSound);
 			}
-			else
+
+			if (_obstacle.GetComponent<HitPointsController>() != null)
 			{
-				StartCoroutine("FlashObstacle");
+				_obstacle.GetComponent<HitPointsController>().HitPoints--;
+				if (_obstacle.GetComponent<HitPointsController>().HitPoints <= 0)
+				{
+					// If the structure the bullet is hitting has no hitpoints left,
+					// then destroy that obstacle and bullet, so that the bullet doesnt
+					// keep going afterwards. We shouldn't forget to remove that object from the array of game objects
+					// that stores all the game objects the player can interact with, because
+					// that causes an error where the player is accessing an object that doesnt exist.
+					Destroy(_obstacle);
+					UiButtonController.PlacedBlocks.Remove(_obstacle);
+				
+					PlayerController.Score += 50;
+					// Updating the score UI and player score after a obstacle is destroyed
+					GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
+					Destroy(gameObject);
+				}
+				else
+				{
+					StartCoroutine("FlashObstacle");
+				}
 			}
 		}
 		
@@ -97,6 +113,7 @@ public class BulletController : MonoBehaviour
 				DisableBullet();
 				
 				_obstacle = other.gameObject;
+				_obstacle.GetComponent<AudioSource>().PlayOneShot(ZombieHitSound);
 				_obstacle.GetComponent<ZombieController>().HitPoints--;
 				if (_obstacle.GetComponent<ZombieController>().HitPoints <= 0)
 				{
@@ -108,6 +125,7 @@ public class BulletController : MonoBehaviour
 				}
 				else
 				{
+					// When the zombie is hit, its audioSource components runs the zombieHitSound
 					StartCoroutine("FlashZombie");	
 				}
 			}

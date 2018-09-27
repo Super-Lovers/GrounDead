@@ -120,7 +120,6 @@ public class UiButtonController : MonoBehaviour
     private void StopWoodShineAnimation()
     {
         WoodUi.GetComponent<Animator>().SetBool("shineWood", false);
-        Debug.Log(WoodUi.GetComponent<Animator>().GetBool("shineWood"));
     }
 
     public void DestroyBlockButton()
@@ -138,7 +137,6 @@ public class UiButtonController : MonoBehaviour
                     {
                         WoodUi.GetComponent<Animator>().SetBool("shineWood", true);
                         Invoke("StopWoodShineAnimation", 1);
-                        Debug.Log(WoodUi.GetComponent<Animator>().GetBool("shineWood"));
                         
                         PlayerPrefs.SetFloat("Wood", PlayerController.Wood += 1);
                         PlayerPrefs.SetFloat("Apples", (Random.Range(0, 101) > 49) ? PlayerController.Apples += 2 : PlayerController.Apples += 4);
@@ -224,7 +222,6 @@ public class UiButtonController : MonoBehaviour
 
     public void BuildWoodWall()
     {
-        Debug.Log(PlayerPrefs.GetFloat("Wood"));
         if (PlayerPrefs.GetFloat("Wood") > 1)
         {
             // Updating the player's inventory

@@ -94,6 +94,8 @@ MonoBehaviour:
   RedFlash: {fileID: 2100000, guid: f2ebd144b5006406eb47dfb7462ec15f, type: 2}
   YellowFlash: {fileID: 2100000, guid: 0c06ed59eaff84a359c3061ca412f9b2, type: 2}
   WhiteFlash: {fileID: 2100000, guid: 23d84b0917bfe4e469f1c377ec34e789, type: 2}
+  ZombieHitSound: {fileID: 8300000, guid: 4ef24df35f2a140e6a663cece382211f, type: 3}
+  StructureHitSound: {fileID: 8300000, guid: 328d0a2bede3e409d9e0bbdf34a3c439, type: 3}
 --- !u!212 &212739821171354462
 SpriteRenderer:
   m_ObjectHideFlags: 1

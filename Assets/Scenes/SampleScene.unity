@@ -278,10 +278,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114819845172443924, guid: 6ec8842d451254e3c87195f1bde036a4,
+    - target: {fileID: 82270336141773892, guid: 6ec8842d451254e3c87195f1bde036a4,
         type: 2}
-      propertyPath: PlayerLayerMask.m_Bits
-      value: 256
+      propertyPath: m_Volume
+      value: 0.751
+      objectReference: {fileID: 0}
+    - target: {fileID: 82270336141773892, guid: 6ec8842d451254e3c87195f1bde036a4,
+        type: 2}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ec8842d451254e3c87195f1bde036a4, type: 2}
@@ -784,10 +789,10 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: eab60975aed5843bdb4fef8fdb9ea01e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.331
+  m_Volume: 0.031
   m_Pitch: 1
   Loop: 1
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 138
@@ -828,7 +833,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -4073,7 +4078,7 @@ MonoBehaviour:
   WoodUi: {fileID: 895127931}
   Mining: {fileID: 8300000, guid: 0b618fede503940cdaf3443bd520790d, type: 3}
   TreeFalling: {fileID: 8300000, guid: e70351f52b85c49a49a62e86b2b64d98, type: 3}
-  StructurePlacement: {fileID: 8300000, guid: 12c62cffe6cbe4db48136181ae668976, type: 3}
+  StructurePlacement: {fileID: 8300000, guid: 5c798c48c211a4c1e9b64e72f03c524b, type: 3}
 --- !u!4 &1991757896
 Transform:
   m_ObjectHideFlags: 0
@@ -4311,7 +4316,7 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2029945142}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 291c64b5cdf30478484ec1bfdd8debd7, type: 3}
@@ -4360,7 +4365,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

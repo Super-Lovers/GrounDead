@@ -22,16 +22,18 @@ public class ZombieController : MonoBehaviour
         float radius = (float) 0.64 * 5;
         Vector2 dir = new Vector2(1f, 1f);
 		
-        RaycastHit2D hit = Physics2D.CircleCast(pos, radius, dir, distance, PlayerLayerMask);
+        RaycastHit2D isPlayerClose = Physics2D.CircleCast(pos, radius, dir, distance, PlayerLayerMask);
 		
-        if (hit && CloseToAWall == false)
+        if (isPlayerClose && CloseToAWall == false)
         {
             // Make the zombie walk when the player is in radius
             gameObject.GetComponent<Animator>().SetBool("isWalking", true);
-            transform.position = Vector2.MoveTowards(transform.position, hit.transform.position, 0.03f);
+           // _audioSource.Play();
+            transform.position = Vector2.MoveTowards(transform.position, isPlayerClose.transform.position, 0.03f);
         }
         else
         {
+            //_audioSource.Stop();
             gameObject.GetComponent<Animator>().SetBool("isWalking", false);
         }
     }
