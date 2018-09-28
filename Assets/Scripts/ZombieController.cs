@@ -49,4 +49,13 @@ public class ZombieController : MonoBehaviour
                 RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
         }
     }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.transform.tag == "Player")
+        {
+            gameObject.GetComponent<Rigidbody2D>().constraints =
+                RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        }
+    }
 }

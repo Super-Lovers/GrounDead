@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
     private bool _isWalking;
     private int _lastDir;
     private bool _strafing;
+    private bool _isItDay = true;
     
     // Zombie parameter responsible for the rate of zombie spawns
     public int NumberOfZombiesToSpawn;
@@ -78,6 +80,12 @@ public class PlayerController : MonoBehaviour
         
         _gunHole = GameObject.FindGameObjectWithTag("GunHole").transform;
         _gunHolePos = _gunHole.position;
+        
+        // *******
+        // Day/Night Cycle (work in progress)
+        // *******
+        // Changing the light (dark/bright) for debug purposes
+        InvokeRepeating("UpdateWorldTime", 20, 20);
     }
 	
     void Update () {
@@ -177,29 +185,6 @@ public class PlayerController : MonoBehaviour
             _audioSource.Stop();
             _isWalking = false;
         }
-        
-        // *******
-        // Day/Night Cycle (work in progress)
-        // *******
-        if (gameObject.GetComponentInChildren<Light>().transform.rotation.x > 0 &&
-                   gameObject.GetComponentInChildren<Light>().transform.rotation.x < 46)
-        {
-            //Debug.Log("Day time");
-            //_cameraAudioSource.clip = DayTheme;
-        }
-        else
-        {
-            //Debug.Log("Night time");
-        }
-
-        // Changing the light (dark/bright) for debug purposes
-        if (Input.GetKey(KeyCode.J))
-        {
-            gameObject.GetComponentInChildren<Light>().transform.Rotate(-0.5f, 0, 0);
-        } else if (Input.GetKey(KeyCode.K))
-        {
-            gameObject.GetComponentInChildren<Light>().transform.Rotate(0.5f, 0, 0);
-        }
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -243,6 +228,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        /*
         if (Input.GetKeyDown(KeyCode.T))
         {
             SpawnZombies();
@@ -250,7 +236,7 @@ public class PlayerController : MonoBehaviour
             // When the zombies are spawned, the wave counter is increased
             CurrentWave++;
             GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Wave: " + CurrentWave;
-        }
+        }*/
     }
 
     void FixedUpdate()
@@ -292,7 +278,7 @@ public class PlayerController : MonoBehaviour
         float currentX = 0.64f;
         float currentY = 24.96f;
         
-        for (int y = 40; y > 0; y--)
+        for (int y = 39; y > 1; y--)
         {
             for (int x = segmentStart; x < segmentEnd; x++)
             {
@@ -334,7 +320,7 @@ public class PlayerController : MonoBehaviour
         currentX = 53.36f;
         currentY = 24.96f;
         
-        for (int y = 40; y > 0; y--)
+        for (int y = 39; y > 1; y--)
         {
             for (int x = segmentStart; x < segmentBeachEnd; x++)
             {
@@ -369,5 +355,39 @@ public class PlayerController : MonoBehaviour
             currentX = 53.36f;
             currentY -= 0.64f;
         }
+        
+        // When the zombies are spawned, the wave counter is increased
+        CurrentWave++;
+        GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Wave: " + CurrentWave;
+    }
+
+    private void UpdateWorldTime()
+    {
+        StartCoroutine("UpdateWorldTimeSlowly");
+    }
+    private IEnumerator UpdateWorldTimeSlowly()
+    {
+        bool spawnZombies = false;
+        for (int i = 1; i < 5; i++) {
+            if (_isItDay)
+            {
+                gameObject.GetComponentInChildren<Light>().transform.Rotate(i * 5, 0, 0);
+                yield return new WaitForSeconds(1f);
+                spawnZombies = true;
+            }
+            else
+            {
+                gameObject.GetComponentInChildren<Light>().transform.Rotate(i * -5, 0, 0);
+                yield return new WaitForSeconds(1f);
+                spawnZombies = false;
+            }
+        }
+
+        if (spawnZombies)
+        {
+            SpawnZombies();
+        }
+
+        _isItDay = !_isItDay;
     }
 }
