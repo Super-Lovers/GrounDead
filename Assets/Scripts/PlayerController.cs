@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
     // Zombie parameter responsible for the rate of zombie spawns
     public int NumberOfZombiesToSpawn;
     public int ChanceOfZombieToSpawn;
+    public static int CurrentZombiesAlive;
+    public static int CurrentWave;
     public GameObject ZombieBasic;
 	
     void Start ()
@@ -159,7 +161,14 @@ public class PlayerController : MonoBehaviour
         else // Idle
         {
             Animator.SetInteger("direction", _lastDir);
-            Animator.enabled = false;
+            if (_strafing)
+            {
+                Animator.enabled = true;
+            }
+            else
+            {
+                Animator.enabled = false;
+            }
             
             _gunHolePos.x = transform.position.x;
             _gunHolePos.y = transform.position.y - 0.16f;
@@ -172,13 +181,15 @@ public class PlayerController : MonoBehaviour
         // *******
         // Day/Night Cycle (work in progress)
         // *******
-        if (gameObject.GetComponentInChildren<Light>().transform.rotation.x < -45)
+        if (gameObject.GetComponentInChildren<Light>().transform.rotation.x > 0 &&
+                   gameObject.GetComponentInChildren<Light>().transform.rotation.x < 46)
         {
-            //_cameraAudioSource.clip = NightTheme;
-        } else if (gameObject.GetComponentInChildren<Light>().transform.rotation.x < 0 &&
-                   gameObject.GetComponentInChildren<Light>().transform.rotation.x > -46)
-        {
+            //Debug.Log("Day time");
             //_cameraAudioSource.clip = DayTheme;
+        }
+        else
+        {
+            //Debug.Log("Night time");
         }
 
         // Changing the light (dark/bright) for debug purposes
@@ -235,6 +246,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             SpawnZombies();
+            
+            // When the zombies are spawned, the wave counter is increased
+            CurrentWave++;
+            GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Wave: " + CurrentWave;
         }
     }
 
@@ -284,7 +299,7 @@ public class PlayerController : MonoBehaviour
                 if (NumberOfZombiesToSpawn > 0 && Random.Range(0, 101) < ChanceOfZombieToSpawn)
                 {
                     var spawnedZombie = Instantiate(ZombieBasic,
-                        new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Zombies").transform);
+                        new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
                     spawnedZombie.transform.tag = "Zombie";
                 
                     for (int i = 0; i < UiButtonController.PlacedBlocks.Count - 1; i++)
@@ -294,7 +309,6 @@ public class PlayerController : MonoBehaviour
                             spawnedZombie.transform.position.y != UiButtonController.PlacedBlocks[i].transform.position.y)
                         {
                             isItSafeToSpawn = true;
-                            NumberOfZombiesToSpawn++;
                         }
                         else
                         {
@@ -327,7 +341,7 @@ public class PlayerController : MonoBehaviour
                 if (NumberOfZombiesToSpawn > 0 && Random.Range(0, 101) < ChanceOfZombieToSpawn)
                 {
                     var spawnedZombie = Instantiate(ZombieBasic,
-                        new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Zombies").transform);
+                        new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
                     spawnedZombie.transform.tag = "Zombie";
                 
                     for (int i = 0; i < UiButtonController.PlacedBlocks.Count - 1; i++)
@@ -337,7 +351,6 @@ public class PlayerController : MonoBehaviour
                             spawnedZombie.transform.position.y != UiButtonController.PlacedBlocks[i].transform.position.y)
                         {
                             isItSafeToSpawn = true;
-                            NumberOfZombiesToSpawn++;
                         }
                         else
                         {

@@ -119,8 +119,15 @@ public class BulletController : MonoBehaviour
 				{
 					Destroy(_obstacle);
 					PlayerController.Score += 100;
+					PlayerController.CurrentZombiesAlive--;
 					// Updating the score UI and player score after a zombie is killed
 					GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
+
+					if (GameObject.FindGameObjectWithTag("Zombies").transform.childCount == 1)
+					{
+						// TODO: Something happens when all the zombies are defeated, like getting a notification.
+						Debug.Log("Wave is defeated!");
+					}
 					Destroy(gameObject);
 				}
 				else

@@ -10,6 +10,7 @@ public class HoverController : MonoBehaviour
     private Color _initialColors;
     private Renderer _renderer;
     private Transform _transform;
+    //private BoxCollider2D _collider2D;
 	
     //
     // INVENTORY GAME TEXTURES
@@ -26,6 +27,7 @@ public class HoverController : MonoBehaviour
         _actionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
         _pickUi = GameObject.FindGameObjectsWithTag("PickUI");
         _transform = GetComponent<Transform>();
+        //_collider2D = GetComponent<BoxCollider2D>();
     }
 
     private void OnMouseEnter()
@@ -34,7 +36,24 @@ public class HoverController : MonoBehaviour
         {
             BlockClickedX = _transform.position.x;
             BlockClickedY = _transform.position.y;
-			
+
+            // This statement checks if the player has encountered the
+            // error where the grass beneath a tree is highlighted instead
+            // of the tree itself, and redirects the mouse selector which will
+            // still give feedback to the player for the actual, intended, object.
+            if (_transform.name == "grass1(Clone)")
+            {
+                foreach (var block in UiButtonController.PlacedBlocks)
+                {
+                    if (BlockClickedX == block.transform.position.x &&
+                        BlockClickedY == block.transform.position.y)
+                    {
+                        block.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0.7f);
+                        block.GetComponent<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
+                    }
+                }
+            }
+            
             _spriteRenderer.color = new Color(0, 0, 0, 0.7f);
             _renderer.material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
         }
@@ -42,6 +61,16 @@ public class HoverController : MonoBehaviour
 
     private void OnMouseExit()
     {
+        foreach (var block in UiButtonController.PlacedBlocks)
+        {
+            if (BlockClickedX == block.transform.position.x &&
+                BlockClickedY == block.transform.position.y)
+            {
+                block.GetComponent<SpriteRenderer>().color = _initialColors;
+                block.GetComponent<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 1f);
+            }
+        }
+        
         _spriteRenderer.color = _initialColors;
         _renderer.material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 1f);
     }
