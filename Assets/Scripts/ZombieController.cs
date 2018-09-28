@@ -4,6 +4,9 @@ public class ZombieController : MonoBehaviour
 {
     public LayerMask PlayerLayerMask;
     public int HitPoints = 5;
+    public int Strength = 1;
+    public float MovementSpeed = 0.03f;
+    public float RangeOfDetection = 15;
     
     // Used to confirm that the zombie will collide with an obstacle
     public static bool CloseToAWall = false;
@@ -18,8 +21,8 @@ public class ZombieController : MonoBehaviour
          
         Vector2 pos = transform.position;
         // Distance length of the rays to be cast
-        float distance = (float)0.64 * 4; // 0.64 is the size of one tile
-        float radius = (float) 0.64 * 5;
+        float distance = (float)0.64 * RangeOfDetection; // 0.64 is the size of one tile
+        float radius = (float) 0.64 * RangeOfDetection;
         Vector2 dir = new Vector2(1f, 1f);
 		
         RaycastHit2D isPlayerClose = Physics2D.CircleCast(pos, radius, dir, distance, PlayerLayerMask);
@@ -29,7 +32,7 @@ public class ZombieController : MonoBehaviour
             // Make the zombie walk when the player is in radius
             gameObject.GetComponent<Animator>().SetBool("isWalking", true);
            // _audioSource.Play();
-            transform.position = Vector2.MoveTowards(transform.position, isPlayerClose.transform.position, 0.03f);
+            transform.position = Vector2.MoveTowards(transform.position, isPlayerClose.transform.position, MovementSpeed);
         }
         else
         {

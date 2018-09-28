@@ -45,6 +45,11 @@ public class PlayerController : MonoBehaviour
     private bool _isWalking;
     private int _lastDir;
     private bool _strafing;
+    
+    // Zombie parameter responsible for the rate of zombie spawns
+    public int NumberOfZombiesToSpawn;
+    public int ChanceOfZombieToSpawn;
+    public GameObject ZombieBasic;
 	
     void Start ()
     {
@@ -226,6 +231,11 @@ public class PlayerController : MonoBehaviour
                     , Quaternion.identity, transform);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SpawnZombies();
+        }
     }
 
     void FixedUpdate()
@@ -251,6 +261,100 @@ public class PlayerController : MonoBehaviour
             var uiPos = ui.transform.position;
             uiPos.x += 1000;
             ui.transform.position = uiPos;
+        }
+    }
+
+    public void SpawnZombies()
+    {
+        // Separating the zombie spawn areas
+        // from the free exploration areas of the player
+        int segmentStart = 0;
+        int segmentEnd = 20;
+        int segmentBeachEnd = 10;
+
+        
+        // We are starting to generate zombies one block down the top and left border
+        float currentX = 0.64f;
+        float currentY = 24.96f;
+        
+        for (int y = 40; y > 0; y--)
+        {
+            for (int x = segmentStart; x < segmentEnd; x++)
+            {
+                if (NumberOfZombiesToSpawn > 0 && Random.Range(0, 101) < ChanceOfZombieToSpawn)
+                {
+                    var spawnedZombie = Instantiate(ZombieBasic,
+                        new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Zombies").transform);
+                    spawnedZombie.transform.tag = "Zombie";
+                
+                    for (int i = 0; i < UiButtonController.PlacedBlocks.Count - 1; i++)
+                    {
+                        bool isItSafeToSpawn;
+                        if (spawnedZombie.transform.position.x != UiButtonController.PlacedBlocks[i].transform.position.x &&
+                            spawnedZombie.transform.position.y != UiButtonController.PlacedBlocks[i].transform.position.y)
+                        {
+                            isItSafeToSpawn = true;
+                            NumberOfZombiesToSpawn++;
+                        }
+                        else
+                        {
+                            isItSafeToSpawn = false;
+                        }
+
+                        if (isItSafeToSpawn == false)
+                        {
+                            Destroy(spawnedZombie);
+                        }
+                    }
+                }
+                currentX += 0.64f;
+            }
+
+            currentX = 0;
+            currentY -= 0.64f;
+        }
+        
+        // Resetting the coordinates of the borders for generating the zombies.
+        // We are starting to generate zombies one block down the top and right border.
+        
+        currentX = 53.36f;
+        currentY = 24.96f;
+        
+        for (int y = 40; y > 0; y--)
+        {
+            for (int x = segmentStart; x < segmentBeachEnd; x++)
+            {
+                if (NumberOfZombiesToSpawn > 0 && Random.Range(0, 101) < ChanceOfZombieToSpawn)
+                {
+                    var spawnedZombie = Instantiate(ZombieBasic,
+                        new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindWithTag("Zombies").transform);
+                    spawnedZombie.transform.tag = "Zombie";
+                
+                    for (int i = 0; i < UiButtonController.PlacedBlocks.Count - 1; i++)
+                    {
+                        bool isItSafeToSpawn;
+                        if (spawnedZombie.transform.position.x != UiButtonController.PlacedBlocks[i].transform.position.x &&
+                            spawnedZombie.transform.position.y != UiButtonController.PlacedBlocks[i].transform.position.y)
+                        {
+                            isItSafeToSpawn = true;
+                            NumberOfZombiesToSpawn++;
+                        }
+                        else
+                        {
+                            isItSafeToSpawn = false;
+                        }
+
+                        if (isItSafeToSpawn == false)
+                        {
+                            Destroy(spawnedZombie);
+                        }
+                    }
+                }
+                currentX -= 0.64f;
+            }
+
+            currentX = 53.36f;
+            currentY -= 0.64f;
         }
     }
 }

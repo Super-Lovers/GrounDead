@@ -28,6 +28,7 @@ TagManager:
   - Floor
   - PlayerScore
   - PlayerWave
+  - Zombies
   layers:
   - Default
   - TransparentFX
