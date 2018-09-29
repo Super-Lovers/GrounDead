@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212730292288176776}
   - component: {fileID: 61464502355617842}
   - component: {fileID: 114707516947615864}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: stone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1039069163428458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.8888507, y: 12.703438, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

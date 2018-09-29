@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         // Day/Night Cycle (work in progress)
         // *******
         // Changing the light (dark/bright) for debug purposes
-        InvokeRepeating("UpdateWorldTime", 20, 20);
+        //InvokeRepeating("UpdateWorldTime", 20, 20);
     }
 	
     void Update () {
@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        /*
+        
         if (Input.GetKeyDown(KeyCode.T))
         {
             SpawnZombies();
@@ -236,7 +236,7 @@ public class PlayerController : MonoBehaviour
             // When the zombies are spawned, the wave counter is increased
             CurrentWave++;
             GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Wave: " + CurrentWave;
-        }*/
+        }
     }
 
     void FixedUpdate()

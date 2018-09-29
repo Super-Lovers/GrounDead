@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class ZombieController : MonoBehaviour
 {
@@ -10,6 +12,12 @@ public class ZombieController : MonoBehaviour
     
     // Used to confirm that the zombie will collide with an obstacle
     public static bool CloseToAWall = false;
+    // Variable responsible for the delay between zombie attacks
+    private bool _canAttack = true;
+    private GameObject _obstacle;
+    public Material YellowFlash;
+    public Material WhiteFlash;
+    public AudioClip StructureHitSound;
 
     void Update () {
         /*
@@ -43,19 +51,71 @@ public class ZombieController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.transform.tag == "Player")
+        if (other.transform.tag == "Player" || other.gameObject.layer == 10)
         {
             gameObject.GetComponent<Rigidbody2D>().constraints =
                 RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
         }
     }
 
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        gameObject.GetComponent<Rigidbody2D>().constraints =
+            RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        
+        _obstacle = other.gameObject;
+        if (other.transform.tag == "Player" || other.gameObject.layer == 10 && _canAttack)
+        {
+            if (_obstacle.GetComponent<AudioSource>() != null)
+            {
+                _obstacle.GetComponent<AudioSource>().PlayOneShot(StructureHitSound);
+            }
+
+            if (_obstacle.GetComponent<HitPointsController>() != null)
+            {
+                _obstacle.GetComponent<HitPointsController>().HitPoints--;
+                if (_obstacle.GetComponent<HitPointsController>().HitPoints <= 0)
+                {
+                    Destroy(_obstacle);
+                    UiButtonController.PlacedBlocks.Remove(_obstacle);
+				
+                    GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
+                }
+                else
+                {
+                    StartCoroutine("FlashObstacle");
+                }
+            }
+            
+            Invoke("enableAttacks", 1);
+            
+            _canAttack = false;
+        }
+    }
+
+    private void enableAttacks()
+    {
+        _canAttack = true;
+        Debug.Log("Attack");
+    }
+
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (other.transform.tag == "Player")
+        if (other.transform.tag == "Player" || other.gameObject.layer == 10)
         {
             gameObject.GetComponent<Rigidbody2D>().constraints =
                 RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        }
+    }
+
+    private IEnumerator FlashObstacle()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            _obstacle.GetComponent<SpriteRenderer>().material = YellowFlash;
+            yield return new WaitForSeconds(.1f);
+            _obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
+            yield return new WaitForSeconds(.1f);	
         }
     }
 }

@@ -4281,7 +4281,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 100
   m_GravityScale: 0
@@ -4301,7 +4301,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 291c64b5cdf30478484ec1bfdd8debd7, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.605
+  m_Volume: 0.195
   m_Pitch: 1
   Loop: 1
   Mute: 0
