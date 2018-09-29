@@ -63,7 +63,7 @@ public class BulletController : MonoBehaviour
 			}
 		} */
 		
-		if (other.gameObject.layer == 11)
+		if ((other.gameObject.layer == 10 || other.gameObject.layer == 11) && other.transform.tag != "Player")
 		{
 			// Make the game object invisible and undetectable after it hits the
 			// zombie so that it can still run the flash animation but not look

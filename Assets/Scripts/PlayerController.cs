@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         // Day/Night Cycle (work in progress)
         // *******
         // Changing the light (dark/bright) for debug purposes
-        //InvokeRepeating("UpdateWorldTime", 20, 20);
+        InvokeRepeating("UpdateWorldTime", 20, 20);
     }
 	
     void Update () {

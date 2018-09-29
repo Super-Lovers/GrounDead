@@ -8,7 +8,7 @@ public class ZombieController : MonoBehaviour
     public int HitPoints = 5;
     public int Strength = 1;
     public float MovementSpeed = 0.03f;
-    public float RangeOfDetection = 15;
+    public float RangeOfDetection = 4;
     
     // Used to confirm that the zombie will collide with an obstacle
     public static bool CloseToAWall = false;
@@ -35,7 +35,7 @@ public class ZombieController : MonoBehaviour
 		
         RaycastHit2D isPlayerClose = Physics2D.CircleCast(pos, radius, dir, distance, PlayerLayerMask);
 		
-        if (isPlayerClose && CloseToAWall == false)
+        if (isPlayerClose)
         {
             // Make the zombie walk when the player is in radius
             gameObject.GetComponent<Animator>().SetBool("isWalking", true);
