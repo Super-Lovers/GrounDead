@@ -446,12 +446,12 @@ public class WorldGenerator : MonoBehaviour {
                 }
 
                 currentX += 0.64f;
+                sortingLayerGrass--;
             }
 
             currentX = 0;
             currentY += 0.64f;
             sortingLayerTrees--;
-            sortingLayerGrass--;
         }
     }
 }

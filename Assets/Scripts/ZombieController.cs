@@ -87,16 +87,15 @@ public class ZombieController : MonoBehaviour
                 }
             }
             
-            Invoke("enableAttacks", 1);
+            Invoke("EnableAttacks", 1);
             
             _canAttack = false;
         }
     }
 
-    private void enableAttacks()
+    private void EnableAttacks()
     {
         _canAttack = true;
-        Debug.Log("Attack");
     }
 
     private void OnCollisionExit2D(Collision2D other)
