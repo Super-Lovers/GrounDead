@@ -18,6 +18,7 @@ public class ZombieController : MonoBehaviour
     public Material YellowFlash;
     public Material WhiteFlash;
     public AudioClip StructureHitSound;
+    private bool _isHittingObject;
 
     void Update () {
         /*
@@ -38,7 +39,14 @@ public class ZombieController : MonoBehaviour
         if (isPlayerClose)
         {
             // Make the zombie walk when the player is in radius
-            gameObject.GetComponent<Animator>().SetBool("isWalking", true);
+            if (_isHittingObject == false)
+            {
+                gameObject.GetComponent<Animator>().SetBool("isWalking", true);
+            }
+            else
+            {
+                gameObject.GetComponent<Animator>().SetBool("isWalking", false);
+            }
            // _audioSource.Play();
             transform.position = Vector2.MoveTowards(transform.position, isPlayerClose.transform.position, MovementSpeed);
         }
@@ -51,15 +59,18 @@ public class ZombieController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        _isHittingObject = true;
         if (other.transform.tag == "Player" || other.gameObject.layer == 10)
         {
             gameObject.GetComponent<Rigidbody2D>().constraints =
                 RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
+            gameObject.GetComponent<Animator>().SetBool("isWalking", false);
         }
     }
 
     private void OnCollisionStay2D(Collision2D other)
     {
+        _isHittingObject = true;
         gameObject.GetComponent<Rigidbody2D>().constraints =
             RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         
@@ -73,17 +84,22 @@ public class ZombieController : MonoBehaviour
 
             if (_obstacle.GetComponent<HitPointsController>() != null)
             {
-                _obstacle.GetComponent<HitPointsController>().HitPoints--;
                 if (_obstacle.GetComponent<HitPointsController>().HitPoints <= 0)
                 {
+                    // Because the sound effect of destroying a building is halted
+                    // once its destroyed, we run another oneshot from the zombie
+                    // closest that destroyed it.
                     Destroy(_obstacle);
+                    gameObject.GetComponent<AudioSource>().PlayOneShot(StructureHitSound);
                     UiButtonController.PlacedBlocks.Remove(_obstacle);
 				
                     GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
+                    _isHittingObject = false;
                 }
                 else
                 {
                     StartCoroutine("FlashObstacle");
+                    _obstacle.GetComponent<HitPointsController>().HitPoints--;
                 }
             }
             
@@ -100,6 +116,7 @@ public class ZombieController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
+        _isHittingObject = false;
         if (other.transform.tag == "Player" || other.gameObject.layer == 10)
         {
             gameObject.GetComponent<Rigidbody2D>().constraints =
@@ -116,5 +133,7 @@ public class ZombieController : MonoBehaviour
             _obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
             yield return new WaitForSeconds(.1f);	
         }
+        
+        _obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
     }
 }

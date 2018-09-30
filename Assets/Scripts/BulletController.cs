@@ -151,6 +151,9 @@ public class BulletController : MonoBehaviour
 			_obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
 			yield return new WaitForSeconds(.1f);	
 		}
+		
+		
+		_obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
 				
 		Destroy(gameObject);
 	}
@@ -164,6 +167,9 @@ public class BulletController : MonoBehaviour
 			_obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
 			yield return new WaitForSeconds(.1f);	
 		}
+		
+		
+		_obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
 				
 		Destroy(gameObject);
 	}

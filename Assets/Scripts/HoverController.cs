@@ -18,6 +18,7 @@ public class HoverController : MonoBehaviour
     private GameObject[] _actionsUi;
     private GameObject[] _pickUi;
     private bool _canBuild = true;
+    private bool _isOutOfRange;
 	
     void Start ()
     {
@@ -32,7 +33,21 @@ public class HoverController : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        Vector3 hoverPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, -10f));
+        float playerPosX = GameObject.FindGameObjectWithTag("Player").transform.position.x;
+        float playerPosY = GameObject.FindGameObjectWithTag("Player").transform.position.y;
+        
+        if ((playerPosX + 1 < hoverPosition.x || playerPosX - 1 > hoverPosition.x) ||
+            playerPosY + 1 < hoverPosition.y || playerPosY - 1 > hoverPosition.y)
+        {
+            _isOutOfRange = true;
+        }
+        else
+        {
+            _isOutOfRange = false;
+        }
+        
+        if (!EventSystem.current.IsPointerOverGameObject() && _isOutOfRange == false)
         {
             BlockClickedX = _transform.position.x;
             BlockClickedY = _transform.position.y;
@@ -77,7 +92,7 @@ public class HoverController : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(1) && PlayerController.PlayMode == "Creative") // If player right clicks (1), left click (0)
+        if (Input.GetMouseButtonDown(1) && PlayerController.PlayMode == "Creative" && _isOutOfRange == false) // If player right clicks (1), left click (0)
         {
             if (gameObject.tag == "PlacedBlock")
             {

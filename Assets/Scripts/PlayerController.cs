@@ -22,11 +22,14 @@ public class PlayerController : MonoBehaviour
     protected static GameObject[] ActionsUi;
     protected static GameObject[] PickUi;
     private GameObject _notification;
-    public static int Wood = 0;
+    public static int Wood = 50;
     public static int Stone = 0;
     public static int Copper = 0;
     public static int GunPowder = 0;
     public static int Apples = 0;
+    public Texture playerPortrait;
+    public Texture healthTexture;
+    public static float PlayerHealth;
     
     // Player play modes
     public static string PlayMode = "Creative";
@@ -71,6 +74,8 @@ public class PlayerController : MonoBehaviour
         _audioSource = gameObject.GetComponent<AudioSource>();
         _cameraAudioSource = CameraAudioSource.GetComponent<AudioSource>();
         _notification = GameObject.FindGameObjectWithTag("NotificationUi");
+
+        PlayerHealth = gameObject.GetComponent<HitPointsController>().HitPoints * 27;
         
         // Hide the UI at the start of the game AFTER you select the components
         CloseButtonOnClick();
@@ -87,7 +92,19 @@ public class PlayerController : MonoBehaviour
         // Changing the light (dark/bright) for debug purposes
         InvokeRepeating("UpdateWorldTime", 20, 20);
     }
-	
+
+    private void OnGUI()
+    {
+        // Drawing the player's health bar when its updated
+        PlayerHealth = gameObject.GetComponent<HitPointsController>().HitPoints * 27;
+        
+        // Player UI Health bar and portrait
+        Rect playerPortraitRect = new Rect(10, Screen.height - 110, 120, 100);
+        Rect healthRect = new Rect(150, Screen.height - 70, PlayerHealth, 30);
+        GUI.DrawTexture(playerPortraitRect, playerPortrait);
+        GUI.DrawTexture(healthRect, healthTexture);
+    }
+
     void Update () {
         // Setting the animation of the player to face the right direction
         // whenever he is pressing the buttons on the axis
