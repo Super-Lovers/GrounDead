@@ -92,8 +92,9 @@ public class HoverController : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(1) && PlayerController.PlayMode == "Creative" && _isOutOfRange == false) // If player right clicks (1), left click (0)
+        if (Input.GetMouseButtonDown(1)  && _isOutOfRange == false) // If player right clicks (1), left click (0)
         {
+            PlayerController.PlayMode = "Creative";
             if (gameObject.tag == "PlacedBlock")
             {
                 _canBuild = false;
@@ -136,8 +137,8 @@ public class HoverController : MonoBehaviour
                     }
                     else if (ui.name == "CloseButton")
                     {
-                        actionsUiPos.x = Input.mousePosition.x + 172;
-                        actionsUiPos.y = Input.mousePosition.y + 135;
+                        actionsUiPos.x = Input.mousePosition.x + 169;
+                        actionsUiPos.y = Input.mousePosition.y + 129;
                     }
                     else if (ui.name == "Panel")
                     {

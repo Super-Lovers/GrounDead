@@ -106,8 +106,8 @@ public class UiButtonController : MonoBehaviour
             else if (ui.name == "CloseButton")
             {
                 ui.SetActive(true);
-                actionsUiPos.x = Input.mousePosition.x + 223;
-                actionsUiPos.y = Input.mousePosition.y + 167;
+                actionsUiPos.x = Input.mousePosition.x + 220;
+                actionsUiPos.y = Input.mousePosition.y + 161;
             }
             else if (ui.name == "Panel")
             {
@@ -193,6 +193,7 @@ public class UiButtonController : MonoBehaviour
                 Destroy(block);
                 PlacedBlocks.Remove(block);
         
+                PlayerController.PlayMode = "Survival";
                 foreach (var ui in _actionsUi)
                 {
                     var uiPos = ui.transform.position;
@@ -224,6 +225,8 @@ public class UiButtonController : MonoBehaviour
 
     public void CloseButtonOnClick()
     {
+        
+        PlayerController.PlayMode = "Survival";
         foreach (var ui in _actionsUi)
         {
             var uiPos = ui.transform.position;
@@ -263,6 +266,7 @@ public class UiButtonController : MonoBehaviour
         
             ClosePickingBlocks();
         
+            PlayerController.PlayMode = "Survival";
             foreach (var ui in _actionsUi)
             {
                 var uiPos = ui.transform.position;
@@ -290,6 +294,7 @@ public class UiButtonController : MonoBehaviour
         
             ClosePickingBlocks();
         
+            PlayerController.PlayMode = "Survival";
             foreach (var ui in _actionsUi)
             {
                 var uiPos = ui.transform.position;
@@ -336,6 +341,7 @@ public class UiButtonController : MonoBehaviour
         
             ClosePickingBlocks();
         
+            PlayerController.PlayMode = "Survival";
             foreach (var ui in _actionsUi)
             {
                 var uiPos = ui.transform.position;
@@ -363,6 +369,7 @@ public class UiButtonController : MonoBehaviour
         
             ClosePickingBlocks();
         
+            PlayerController.PlayMode = "Survival";
             foreach (var ui in _actionsUi)
             {
                 var uiPos = ui.transform.position;
@@ -394,6 +401,7 @@ public class UiButtonController : MonoBehaviour
         
             ClosePickingBlocks();
         
+            PlayerController.PlayMode = "Survival";
             foreach (var ui in _actionsUi)
             {
                 var uiPos = ui.transform.position;

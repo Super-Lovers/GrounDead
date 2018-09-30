@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     // Ui
     protected static GameObject[] ActionsUi;
     protected static GameObject[] PickUi;
-    private GameObject _notification;
+    //private GameObject _notification;
     public static int Wood = 50;
     public static int Stone = 0;
     public static int Copper = 0;
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         PickUi = GameObject.FindGameObjectsWithTag("PickUI");
         _audioSource = gameObject.GetComponent<AudioSource>();
         _cameraAudioSource = CameraAudioSource.GetComponent<AudioSource>();
-        _notification = GameObject.FindGameObjectWithTag("NotificationUi");
+        //_notification = GameObject.FindGameObjectWithTag("NotificationUi");
 
         PlayerHealth = gameObject.GetComponent<HitPointsController>().HitPoints * 27;
         
@@ -218,7 +218,7 @@ public class PlayerController : MonoBehaviour
             _strafing = false;
         }
         
-        if (Input.GetKeyDown(KeyCode.Q))
+        /*if (Input.GetKeyDown(KeyCode.Q))
         {
             ClosePickingBlocks();
             CloseButtonOnClick();
@@ -232,7 +232,7 @@ public class PlayerController : MonoBehaviour
                 PlayMode = "Creative";
                 _notification.GetComponentInChildren<Text>().text = "You are now in " + PlayMode + " mode";
             }
-        }
+        }*/
 
         if (Input.GetMouseButtonDown(0) && PlayMode == "Survival" && _canShoot)
         {
@@ -278,6 +278,7 @@ public class PlayerController : MonoBehaviour
 
     public static void CloseButtonOnClick()
     {
+        PlayMode = "Survival";
         foreach (var ui in ActionsUi)
         {
             var uiPos = ui.transform.position;
@@ -288,6 +289,7 @@ public class PlayerController : MonoBehaviour
 
     public static void ClosePickingBlocks()
     {
+        PlayMode = "Survival";
         foreach (var ui in PickUi)
         {
             var uiPos = ui.transform.position;
