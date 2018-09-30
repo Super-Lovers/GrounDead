@@ -17,6 +17,9 @@ public class UiButtonController : MonoBehaviour
     static public List<GameObject> PlacedWaterBlocks = new List<GameObject>();
 
     public GameObject WoodUi;
+    public GameObject StoneUi;
+    public GameObject CopperUi;
+    public GameObject ApplesUi;
 	
     // *******************************
     // SECTION FOR DISPLAYING ACTIONS ON GROUND
@@ -122,6 +125,21 @@ public class UiButtonController : MonoBehaviour
         WoodUi.GetComponent<Animator>().SetBool("shineWood", false);
     }
 
+    private void StopStoneShineAnimation()
+    {
+        StoneUi.GetComponent<Animator>().SetBool("shineStone", false);
+    }
+
+    private void StopCopperShineAnimation()
+    {
+        CopperUi.GetComponent<Animator>().SetBool("shineCopper", false);
+    }
+
+    private void StopApplesShineAnimation()
+    {
+        ApplesUi.GetComponent<Animator>().SetBool("shineApples", false);
+    }
+
     public void DestroyBlockButton()
     {
         foreach (GameObject block in PlacedBlocks.ToArray())
@@ -136,7 +154,9 @@ public class UiButtonController : MonoBehaviour
                     if (nameOfBlock == "tree")
                     {
                         WoodUi.GetComponent<Animator>().SetBool("shineWood", true);
+                        ApplesUi.GetComponent<Animator>().SetBool("shineApples", true);
                         Invoke("StopWoodShineAnimation", 1);
+                        Invoke("StopApplesShineAnimation", 1);
                         
                         PlayerPrefs.SetFloat("Wood", PlayerController.Wood += 1);
                         PlayerPrefs.SetFloat("Apples", (Random.Range(0, 101) > 49) ? PlayerController.Apples += 2 : PlayerController.Apples += 4);
@@ -150,6 +170,9 @@ public class UiButtonController : MonoBehaviour
 
                     if (nameOfBlock == "stone" || nameOfBlock == "fence")
                     {
+                        StoneUi.GetComponent<Animator>().SetBool("shineStone", true);
+                        Invoke("StopStoneShineAnimation", 1);
+                        
                         PlayerPrefs.SetFloat("Stone", PlayerController.Stone += 1);
                         GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerPrefs.GetFloat("Stone").ToString();
                         _cameraAudioSource.PlayOneShot(Mining);
@@ -157,6 +180,9 @@ public class UiButtonController : MonoBehaviour
                     }
                     if (nameOfBlock == "copper")
                     {
+                        CopperUi.GetComponent<Animator>().SetBool("shineCopper", true);
+                        Invoke("StopCopperShineAnimation", 1);
+                        
                         PlayerPrefs.SetFloat("Copper", PlayerController.Copper += 1);
                         GameObject.FindGameObjectWithTag("PlayerCopper").GetComponent<Text>().text = PlayerPrefs.GetFloat("Copper").ToString();
                         _cameraAudioSource.PlayOneShot(Mining);

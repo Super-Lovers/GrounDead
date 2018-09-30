@@ -1,68 +1,68 @@
 fileFormatVersion: 2
-guid: 3b223b7aeaef14b028336195f965140a
+guid: c9add267e8c684dc5a489ae2d1d96b87
 TextureImporter:
   fileIDToRecycleName:
-    21300000: wood_0
-    21300002: wood_1
-    21300004: wood_2
-    21300006: wood_3
-    21300008: wood_4
-    21300010: wood_5
-    21300012: wood_6
-    21300014: wood_7
-    21300016: wood_8
-    21300018: wood_9
-    21300020: wood_10
-    21300022: wood_11
-    21300024: wood_12
-    21300026: wood_13
-    21300028: wood_14
-    21300030: wood_15
-    21300032: wood_16
-    21300034: wood_17
-    21300036: wood_18
-    21300038: wood_19
-    21300040: wood_20
-    21300042: wood_21
-    21300044: wood_22
-    21300046: wood_23
-    21300048: wood_24
-    21300050: wood_25
-    21300052: wood_26
-    21300054: wood_27
-    21300056: wood_28
-    21300058: wood_29
-    21300060: wood_30
-    21300062: wood_31
-    21300064: wood_32
-    21300066: wood_33
-    21300068: wood_34
-    21300070: wood_35
-    21300072: wood_36
-    21300074: wood_37
-    21300076: wood_38
-    21300078: wood_39
-    21300080: wood_40
-    21300082: wood_41
-    21300084: wood_42
-    21300086: wood_43
-    21300088: wood_44
-    21300090: wood_45
-    21300092: wood_46
-    21300094: wood_47
-    21300096: wood_48
-    21300098: wood_49
-    21300100: wood_50
-    21300102: wood_51
-    21300104: wood_52
-    21300106: wood_53
-    21300108: wood_54
-    21300110: wood_55
-    21300112: wood_56
-    21300114: wood_57
-    21300116: wood_58
+    21300000: woodAnim_0
+    21300002: woodAnim_1
+    21300004: woodAnim_2
+    21300006: woodAnim_3
+    21300008: woodAnim_4
+    21300010: woodAnim_5
+    21300012: woodAnim_6
+    21300014: woodAnim_7
+    21300016: woodAnim_8
+    21300018: woodAnim_9
+    21300020: woodAnim_10
+    21300022: woodAnim_11
+    21300024: woodAnim_12
+    21300026: woodAnim_13
+    21300028: woodAnim_14
+    21300030: woodAnim_15
+    21300032: woodAnim_16
+    21300034: woodAnim_17
+    21300036: woodAnim_18
+    21300038: woodAnim_19
+    21300040: woodAnim_20
+    21300042: woodAnim_21
+    21300044: woodAnim_22
+    21300046: woodAnim_23
+    21300048: woodAnim_24
+    21300050: woodAnim_25
+    21300052: woodAnim_26
+    21300054: woodAnim_27
+    21300056: woodAnim_28
+    21300058: woodAnim_29
+    21300060: woodAnim_30
+    21300062: woodAnim_31
+    21300064: woodAnim_32
+    21300066: woodAnim_33
+    21300068: woodAnim_34
+    21300070: woodAnim_35
+    21300072: woodAnim_36
+    21300074: woodAnim_37
+    21300076: woodAnim_38
+    21300078: woodAnim_39
+    21300080: woodAnim_40
+    21300082: woodAnim_41
+    21300084: woodAnim_42
+    21300086: woodAnim_43
+    21300088: woodAnim_44
+    21300090: woodAnim_45
+    21300092: woodAnim_46
+    21300094: woodAnim_47
+    21300096: woodAnim_48
+    21300098: woodAnim_49
+    21300100: woodAnim_50
+    21300102: woodAnim_51
+    21300104: woodAnim_52
+    21300106: woodAnim_53
+    21300108: woodAnim_54
+    21300110: woodAnim_55
+    21300112: woodAnim_56
+    21300114: woodAnim_57
+    21300116: woodAnim_58
   externalObjects: {}
-  serializedVersion: 6
+  serializedVersion: 7
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -90,7 +90,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -119,10 +119,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -130,10 +130,32 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Standalone
-    maxTextureSize: 4096
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -143,7 +165,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: wood_0
+      name: woodAnim_0
       rect:
         serializedVersion: 2
         x: 0
@@ -157,13 +179,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2cf94d6fe5fd4183bb2cf7d6377b6f4
+      spriteID: 74eb4b415f3e646218375343d2a677ad
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_1
+      name: woodAnim_1
       rect:
         serializedVersion: 2
         x: 64
@@ -177,13 +199,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe316edc6aa1b48848a7c2b404b804b6
+      spriteID: 34f58fc80687e475c9f68ab077c037a9
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_2
+      name: woodAnim_2
       rect:
         serializedVersion: 2
         x: 128
@@ -197,13 +219,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05fb87cc14e544650902722308f1bfad
+      spriteID: f40ef09edd5314c9fab388c5f5953b84
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_3
+      name: woodAnim_3
       rect:
         serializedVersion: 2
         x: 192
@@ -217,13 +239,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 671c6d03a89294b62ae06cf8b1d7e095
+      spriteID: 607a15839f189481e941d01cabe60b60
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_4
+      name: woodAnim_4
       rect:
         serializedVersion: 2
         x: 256
@@ -237,13 +259,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b6bb14c1acd04330b4c089af9eb5bba
+      spriteID: fbb3ba208c1764fc0867f21f58beb860
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_5
+      name: woodAnim_5
       rect:
         serializedVersion: 2
         x: 320
@@ -257,13 +279,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3306c6b07ddca4940b5d01b0c45cdffe
+      spriteID: 82b7577a31a5d463f89d10e09787bc99
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_6
+      name: woodAnim_6
       rect:
         serializedVersion: 2
         x: 384
@@ -277,13 +299,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75c052654020044c29d23890c1f4840d
+      spriteID: c1bd6c4533bad4d449c1a0262606983d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_7
+      name: woodAnim_7
       rect:
         serializedVersion: 2
         x: 448
@@ -297,13 +319,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12fe10017220741c28936864fe703104
+      spriteID: bd06a4612a7f04b91994b12f98218c24
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_8
+      name: woodAnim_8
       rect:
         serializedVersion: 2
         x: 512
@@ -317,13 +339,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5ed931bdcf1e4428b5ca2635e01bc19
+      spriteID: 1081357734ddf455a9fb6d03ec5b1518
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_9
+      name: woodAnim_9
       rect:
         serializedVersion: 2
         x: 576
@@ -337,13 +359,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c17461f1ff0e4cab9437574e4c07552
+      spriteID: e81efdbd1b14441cabc3412298de437d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_10
+      name: woodAnim_10
       rect:
         serializedVersion: 2
         x: 640
@@ -357,13 +379,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55ebc7b0e10a74a159a277ed97fa46c6
+      spriteID: 63ae7d24044174b60a68f3bf1fadcb51
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_11
+      name: woodAnim_11
       rect:
         serializedVersion: 2
         x: 704
@@ -377,13 +399,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b1b3d4f2c9b6473ebea5a783d4d7189
+      spriteID: cb4e70d4af4d54fe4a93457e6cc1ec2c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_12
+      name: woodAnim_12
       rect:
         serializedVersion: 2
         x: 768
@@ -397,13 +419,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e2db2b4627a94378b94773e84dd4d9d
+      spriteID: ec31d1399f5ec495a801215f5ae67c6b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_13
+      name: woodAnim_13
       rect:
         serializedVersion: 2
         x: 832
@@ -417,13 +439,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b09c92464fc554c70a5ea2720870fabb
+      spriteID: f2bc1582bc7db4312a2825c109d0337a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_14
+      name: woodAnim_14
       rect:
         serializedVersion: 2
         x: 896
@@ -437,13 +459,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 195b73ade3ec4411ab315a0519006852
+      spriteID: 4a67b05d75cb34c5f82341da7453e4af
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_15
+      name: woodAnim_15
       rect:
         serializedVersion: 2
         x: 960
@@ -457,13 +479,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 92e2a07f32f004c3c9798fb3da1ff0ca
+      spriteID: 59605f38de06941689b152b5fe49f313
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_16
+      name: woodAnim_16
       rect:
         serializedVersion: 2
         x: 1024
@@ -477,13 +499,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4dfc20f47107e4692b68cfe96b00033e
+      spriteID: dbb9a0ddadf2140e7b64ac7a136a8df4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_17
+      name: woodAnim_17
       rect:
         serializedVersion: 2
         x: 1088
@@ -497,13 +519,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98f8d8f0a6337407bb2328a0a1671744
+      spriteID: 6599ea130adc544129ad48191db97621
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_18
+      name: woodAnim_18
       rect:
         serializedVersion: 2
         x: 1152
@@ -517,13 +539,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba3cf2db3cfb842e2a187db555cb1d68
+      spriteID: 620470822b838479781ab4f6a0208e11
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_19
+      name: woodAnim_19
       rect:
         serializedVersion: 2
         x: 1216
@@ -537,13 +559,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0a19093726f54f2fada9aad6caecf73
+      spriteID: 66f4e2eba77794215af9e3c06756e1b5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_20
+      name: woodAnim_20
       rect:
         serializedVersion: 2
         x: 1280
@@ -557,13 +579,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56a2260248c284ce3aede5c81a08d7f4
+      spriteID: 3df964b5f13264da8a5463dac237e520
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_21
+      name: woodAnim_21
       rect:
         serializedVersion: 2
         x: 1344
@@ -577,13 +599,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db9f1c7b013ce4406a55bedc1bd4a6dd
+      spriteID: 05d6598fc145e49048ec2ab5425f2810
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_22
+      name: woodAnim_22
       rect:
         serializedVersion: 2
         x: 1408
@@ -597,13 +619,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ec1c0b478bf64e059086c7d8526eafd
+      spriteID: e85964df22b7c4f5f9887934ae1886f6
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_23
+      name: woodAnim_23
       rect:
         serializedVersion: 2
         x: 1472
@@ -617,13 +639,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb2a45ae8f7e24cf685ac4051bb62bad
+      spriteID: 5489e2ec1becf488da64eef4a8605fb2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_24
+      name: woodAnim_24
       rect:
         serializedVersion: 2
         x: 1536
@@ -637,13 +659,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 342dabd5c50364ccc843a1f9c4049cf4
+      spriteID: 309c997230f914228b3df48c6f3f680c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_25
+      name: woodAnim_25
       rect:
         serializedVersion: 2
         x: 1600
@@ -657,13 +679,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 867ad8f6c42f146069478d924825535f
+      spriteID: 6fc76e1fafa984fa5920ce85a800a214
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_26
+      name: woodAnim_26
       rect:
         serializedVersion: 2
         x: 1664
@@ -677,13 +699,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 779b0ab9d25db463dab7dd9fc0042012
+      spriteID: d70551ddc0bf84d0ba1c473edad6316d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_27
+      name: woodAnim_27
       rect:
         serializedVersion: 2
         x: 1728
@@ -697,13 +719,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9e6226fa0dae41839ff85dc5e0b1219
+      spriteID: 5fdf66f64ff19470593600a91fd533a3
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_28
+      name: woodAnim_28
       rect:
         serializedVersion: 2
         x: 1792
@@ -717,13 +739,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80ac1c729881d4c40a70bff2bade9df4
+      spriteID: 30bdd4569c213498ea0299e179ce34a5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_29
+      name: woodAnim_29
       rect:
         serializedVersion: 2
         x: 1856
@@ -737,13 +759,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d3c04e1108814ae788bec3e6014d23e
+      spriteID: 1b9787fedb980442a95fe8e9498113a5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_30
+      name: woodAnim_30
       rect:
         serializedVersion: 2
         x: 1920
@@ -757,13 +779,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d88d15811e70a4d388c9d58ce9cd519f
+      spriteID: a7fc6af6240704b5e97ac4e266216dcc
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_31
+      name: woodAnim_31
       rect:
         serializedVersion: 2
         x: 1984
@@ -777,13 +799,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f8562aa9e4954f02815dd1eb5a57bf6
+      spriteID: b2592e5540ca7402e949157817868714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_32
+      name: woodAnim_32
       rect:
         serializedVersion: 2
         x: 2048
@@ -797,13 +819,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81d504f40212f430fa9797fb2580d090
+      spriteID: 79f0d89f9f6f941e1a88403782460c03
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_33
+      name: woodAnim_33
       rect:
         serializedVersion: 2
         x: 2112
@@ -817,13 +839,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 171a142d1782e4fd2be553e34b698e9c
+      spriteID: 360080c4e7270419184f97972dcfe99b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_34
+      name: woodAnim_34
       rect:
         serializedVersion: 2
         x: 2176
@@ -837,13 +859,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ac04b228bc784b03925d555eba97d42
+      spriteID: 8833ab80eb6c2444a953deded6bcb49e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_35
+      name: woodAnim_35
       rect:
         serializedVersion: 2
         x: 2240
@@ -857,13 +879,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33bc0a4deab764d1d86b71788222ef64
+      spriteID: f775d151abd9c4b82b011f5ce9c34ad2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_36
+      name: woodAnim_36
       rect:
         serializedVersion: 2
         x: 2304
@@ -877,13 +899,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b8070b17fc1f48be9f389220cd132d1
+      spriteID: d69f480df286b4c53935d223fe7567a7
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_37
+      name: woodAnim_37
       rect:
         serializedVersion: 2
         x: 2368
@@ -897,13 +919,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f05500b8f101a46e5928c051862be9b3
+      spriteID: 1926b12fbb2b8457b90bce53f469e0e9
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_38
+      name: woodAnim_38
       rect:
         serializedVersion: 2
         x: 2432
@@ -917,13 +939,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e76a932dbe93c45b5bf680176a1577d4
+      spriteID: c05c2bc3ab1724cbe87ad61d3f940a57
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_39
+      name: woodAnim_39
       rect:
         serializedVersion: 2
         x: 2496
@@ -937,13 +959,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a39f3531976d47139e0abf932dc10e5
+      spriteID: f12b4c967c1a942cda67e37182f220af
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_40
+      name: woodAnim_40
       rect:
         serializedVersion: 2
         x: 2560
@@ -957,13 +979,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27f692e584d1841d293d243c4201ff43
+      spriteID: b82421bb1898f430cb784f4d51a66540
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_41
+      name: woodAnim_41
       rect:
         serializedVersion: 2
         x: 2624
@@ -977,13 +999,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37cdb22413c6a47aeb16a3f46980ee78
+      spriteID: 57a9236403ed3495cad42b8bfb59f363
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_42
+      name: woodAnim_42
       rect:
         serializedVersion: 2
         x: 2688
@@ -997,13 +1019,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3a3a9378ac2e4848af7af2799306276
+      spriteID: 760fe31b8e28f4e1380c042ccd5b3ee6
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_43
+      name: woodAnim_43
       rect:
         serializedVersion: 2
         x: 2752
@@ -1017,13 +1039,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04ed618a78ae0445292e311d778183a7
+      spriteID: c381524eb80614336881eb7c4e08fae8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_44
+      name: woodAnim_44
       rect:
         serializedVersion: 2
         x: 2816
@@ -1037,13 +1059,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ec229b3d3caa48bcbd4d684e2f2c3eb
+      spriteID: 0d45efc3aa4a84235a207460eb15a584
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_45
+      name: woodAnim_45
       rect:
         serializedVersion: 2
         x: 2880
@@ -1057,13 +1079,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2cc64f3c133a4ece802cdc54de3d381
+      spriteID: bb2a21b02f23140c8bbc64f0ad13cc8e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_46
+      name: woodAnim_46
       rect:
         serializedVersion: 2
         x: 2944
@@ -1077,13 +1099,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 336214987be794f6c9d019e3c5c5dccb
+      spriteID: fc17e5927abdf4f71a2f084b01b3735a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_47
+      name: woodAnim_47
       rect:
         serializedVersion: 2
         x: 3008
@@ -1097,13 +1119,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 377c67a45135644c998d3294c94edcf3
+      spriteID: f71b9d98ca9ed49039863b543f28fa4c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_48
+      name: woodAnim_48
       rect:
         serializedVersion: 2
         x: 3072
@@ -1117,13 +1139,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48197c2d5526f430a88bc3c964431860
+      spriteID: 671b729c92e644738b50f7cd8bcb00f4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_49
+      name: woodAnim_49
       rect:
         serializedVersion: 2
         x: 3136
@@ -1137,13 +1159,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d691ee46dfa904dec916afa160e56730
+      spriteID: fff99c4c516ff4082901bcc6c37a123f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_50
+      name: woodAnim_50
       rect:
         serializedVersion: 2
         x: 3200
@@ -1157,13 +1179,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 554d241218de24896b2cc30214160b7f
+      spriteID: 4cbf98c525ba94f2b81560faae11741b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_51
+      name: woodAnim_51
       rect:
         serializedVersion: 2
         x: 3264
@@ -1177,13 +1199,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d993aab93913b455d9635a0c9aee5d8b
+      spriteID: 97c9370dd9eb642ad86fcf52ede51d9a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_52
+      name: woodAnim_52
       rect:
         serializedVersion: 2
         x: 3328
@@ -1197,13 +1219,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c770b9ae16324dfa8d36459c011f874
+      spriteID: cc080780a326e44e7875fd3f73be218c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_53
+      name: woodAnim_53
       rect:
         serializedVersion: 2
         x: 3392
@@ -1217,13 +1239,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f8ecc6c693004323a9ceb525695f293
+      spriteID: dba16f13a5a8541aa8582beaa7779f38
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_54
+      name: woodAnim_54
       rect:
         serializedVersion: 2
         x: 3456
@@ -1237,13 +1259,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1dcd2c63fbcf04403860a97f11025c08
+      spriteID: 8a81c1623d45540129cf03b66f7dc00f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_55
+      name: woodAnim_55
       rect:
         serializedVersion: 2
         x: 3520
@@ -1257,13 +1279,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f5458161c4ed42cea09bd8dd75ab7c1
+      spriteID: b9bcb1c0f74ed4d6a8d0325f8f7cee2d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_56
+      name: woodAnim_56
       rect:
         serializedVersion: 2
         x: 3584
@@ -1277,13 +1299,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6766ce8a98007493691f66faf88b72ce
+      spriteID: a3a483d7656ff4df287438bd65518985
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_57
+      name: woodAnim_57
       rect:
         serializedVersion: 2
         x: 3648
@@ -1297,13 +1319,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3722811e5013b405689e4edd81445279
+      spriteID: 83d6ef50b61c94a599fe24c8fd132326
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wood_58
+      name: woodAnim_58
       rect:
         serializedVersion: 2
         x: 3712
@@ -1317,7 +1339,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9129ff66c85a44d52aa099118ca9ca1a
+      spriteID: 30c8a8a6cff1e4a8db7947d99536467b
       vertices: []
       indices: 
       edges: []
@@ -1325,12 +1347,14 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 4909f46651e12499891127c170660247
+    spriteID: cbceda76ebbb94d2c8c74b4d5bac64d0
     vertices: []
     indices: 
     edges: []
     weights: []
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

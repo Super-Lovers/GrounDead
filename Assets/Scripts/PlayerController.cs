@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public static int Apples = 0;
     public Texture playerPortrait;
     public Texture healthTexture;
+    public Texture healthBackgroundTexture;
     public static float PlayerHealth;
     
     // Player play modes
@@ -100,8 +101,12 @@ public class PlayerController : MonoBehaviour
         
         // Player UI Health bar and portrait
         Rect playerPortraitRect = new Rect(10, Screen.height - 110, 120, 100);
-        Rect healthRect = new Rect(150, Screen.height - 70, PlayerHealth, 30);
         GUI.DrawTexture(playerPortraitRect, playerPortrait);
+        
+        Rect healthBackgroundRect = new Rect(150, Screen.height - 70, 270, 30);
+        GUI.DrawTexture(healthBackgroundRect, healthBackgroundTexture);
+        
+        Rect healthRect = new Rect(150, Screen.height - 70, PlayerHealth, 30);
         GUI.DrawTexture(healthRect, healthTexture);
     }
 
