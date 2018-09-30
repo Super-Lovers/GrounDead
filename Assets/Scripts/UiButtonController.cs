@@ -106,8 +106,8 @@ public class UiButtonController : MonoBehaviour
             else if (ui.name == "CloseButton")
             {
                 ui.SetActive(true);
-                actionsUiPos.x = Input.mousePosition.x + 295;
-                actionsUiPos.y = Input.mousePosition.y + 133;
+                actionsUiPos.x = Input.mousePosition.x + 223;
+                actionsUiPos.y = Input.mousePosition.y + 167;
             }
             else if (ui.name == "Panel")
             {

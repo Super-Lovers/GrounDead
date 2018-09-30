@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ZombieController : MonoBehaviour
@@ -75,43 +76,58 @@ public class ZombieController : MonoBehaviour
             RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         
         _obstacle = other.gameObject;
-        if (other.transform.tag == "Player" || other.gameObject.layer == 10 && _canAttack)
+        if (other.transform.tag == "Player" || other.gameObject.layer == 10)
         {
-            if (_obstacle.GetComponent<AudioSource>() != null)
-            {
-                _obstacle.GetComponent<AudioSource>().PlayOneShot(StructureHitSound);
-            }
-
             if (_obstacle.GetComponent<HitPointsController>() != null)
             {
                 if (_obstacle.GetComponent<HitPointsController>().HitPoints <= 0)
                 {
-                    // Because the sound effect of destroying a building is halted
-                    // once its destroyed, we run another oneshot from the zombie
-                    // closest that destroyed it.
-                    Destroy(_obstacle);
-                    gameObject.GetComponent<AudioSource>().PlayOneShot(StructureHitSound);
-                    UiButtonController.PlacedBlocks.Remove(_obstacle);
+
+                    // End game conditional
+                    if (other.transform.tag == "Player")
+                    {
+                        SceneManager.LoadScene("GameOverScene");
+                    }
+                    else
+                    {
+                    
+                        _isHittingObject = false;
+                    
+                        // Because the sound effect of destroying a building is halted
+                        // once its destroyed, we run another oneshot from the zombie
+                        // closest that destroyed it.
+                        Destroy(_obstacle);
+                        UiButtonController.PlacedBlocks.Remove(_obstacle);
 				
-                    GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
-                    _isHittingObject = false;
+                        GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
+                    }
                 }
                 else
                 {
-                    StartCoroutine("FlashObstacle");
-                    _obstacle.GetComponent<HitPointsController>().HitPoints--;
+                    if (_canAttack)
+                    {
+                        if (_obstacle.GetComponent<AudioSource>() != null)
+                        {
+                            _obstacle.GetComponent<AudioSource>().PlayOneShot(StructureHitSound);
+                        }
+
+                        StartCoroutine("FlashObstacle");
+                        
+                        _obstacle.GetComponent<HitPointsController>().HitPoints--;
+                        
+                        _canAttack = false;
+                        
+                        Invoke("EnableAttacks", 1.5f);
+                    }
                 }
             }
-            
-            Invoke("EnableAttacks", 1);
-            
-            _canAttack = false;
         }
     }
 
     private void EnableAttacks()
     {
         _canAttack = true;
+        _obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -133,7 +149,5 @@ public class ZombieController : MonoBehaviour
             _obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
             yield return new WaitForSeconds(.1f);	
         }
-        
-        _obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
     }
 }

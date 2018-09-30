@@ -27,9 +27,9 @@ public class PlayerController : MonoBehaviour
     public static int Copper = 0;
     public static int GunPowder = 0;
     public static int Apples = 0;
-    public Texture playerPortrait;
-    public Texture healthTexture;
-    public Texture healthBackgroundTexture;
+    public Texture PlayerPortrait;
+    public Texture HealthTexture;
+    public Texture HealthBackgroundTexture;
     public static float PlayerHealth;
     
     // Player play modes
@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     private int _lastDir;
     private bool _strafing;
     private bool _isItDay = true;
+    private bool _canShoot = true;
     
     // Zombie parameter responsible for the rate of zombie spawns
     public int NumberOfZombiesToSpawn;
@@ -101,13 +102,13 @@ public class PlayerController : MonoBehaviour
         
         // Player UI Health bar and portrait
         Rect playerPortraitRect = new Rect(10, Screen.height - 110, 120, 100);
-        GUI.DrawTexture(playerPortraitRect, playerPortrait);
+        GUI.DrawTexture(playerPortraitRect, PlayerPortrait);
         
         Rect healthBackgroundRect = new Rect(150, Screen.height - 70, 270, 30);
-        GUI.DrawTexture(healthBackgroundRect, healthBackgroundTexture);
+        GUI.DrawTexture(healthBackgroundRect, HealthBackgroundTexture);
         
         Rect healthRect = new Rect(150, Screen.height - 70, PlayerHealth, 30);
-        GUI.DrawTexture(healthRect, healthTexture);
+        GUI.DrawTexture(healthRect, HealthTexture);
     }
 
     void Update () {
@@ -233,7 +234,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0) && PlayMode == "Survival")
+        if (Input.GetMouseButtonDown(0) && PlayMode == "Survival" && _canShoot)
         {
             if (Animator.GetInteger("direction") == 1 || Animator.GetInteger("direction") == 2)
             {
@@ -241,12 +242,20 @@ public class PlayerController : MonoBehaviour
                     new Vector3(transform.position.x, transform.position.y, transform.position.z)
                     , Quaternion.identity, transform);
                 bullet.GetComponent<Transform>().Rotate(0, 0, 90);
+                
+                // The second parameter in the invoke is equivalent to the
+                // rate of fire the player has.
+                _canShoot = false;
+                Invoke("CanShoot", 0.7f);
             }
             else if (Animator.GetInteger("direction") == 3 || Animator.GetInteger("direction") == 4)
             {
                 Instantiate(Ammo,
                     new Vector3(transform.position.x, transform.position.y, transform.position.z)
                     , Quaternion.identity, transform);
+                
+                _canShoot = false;
+                Invoke("CanShoot", 0.7f);
             }
         }
 
@@ -381,6 +390,11 @@ public class PlayerController : MonoBehaviour
         // When the zombies are spawned, the wave counter is increased
         CurrentWave++;
         GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Wave: " + CurrentWave;
+    }
+
+    private void CanShoot()
+    {
+        _canShoot = true;
     }
 
     private void UpdateWorldTime()

@@ -269,8 +269,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 239.9, y: 160.8}
-  m_SizeDelta: {x: -54.11499, y: -53.19995}
+  m_AnchoredPosition: {x: 178.5, y: 227.2}
+  m_SizeDelta: {x: -72.68, y: -72.14}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &186335773
 MonoBehaviour:
@@ -1137,7 +1137,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -34, y: 141.2}
+  m_AnchoredPosition: {x: -25, y: 167.59999}
   m_SizeDelta: {x: -44.79, y: -43.76}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &581621774
@@ -2012,7 +2012,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 103.6, y: 141.20001}
+  m_AnchoredPosition: {x: 112.6, y: 167.6}
   m_SizeDelta: {x: -44.789993, y: -43.76}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1150059436
@@ -2135,8 +2135,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 635.4498, y: 263.4999}
-  m_SizeDelta: {x: -54.11499, y: -53.19995}
+  m_AnchoredPosition: {x: 71.2, y: 352}
+  m_SizeDelta: {x: -71.2, y: -70.6}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1152111472
 MonoBehaviour:
@@ -2333,8 +2333,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -730.55005, y: -184.00009}
-  m_SizeDelta: {x: 2.0999756, y: 4}
+  m_AnchoredPosition: {x: -709, y: -120}
+  m_SizeDelta: {x: -23.3, y: -21.837}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1218378144
 MonoBehaviour:
@@ -2583,7 +2583,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 35.5, y: 75.5}
+  m_AnchoredPosition: {x: 44.5, y: 101.899994}
   m_SizeDelta: {x: -44.789993, y: -43.76}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1330208454
@@ -2860,7 +2860,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -34, y: 75.5}
+  m_AnchoredPosition: {x: -25, y: 101.899994}
   m_SizeDelta: {x: -44.789993, y: -43.76}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1473245535
@@ -2981,8 +2981,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -50.799988, y: 30}
-  m_SizeDelta: {x: 1598.1001, y: 797}
+  m_AnchoredPosition: {x: -44.6, y: 64.98}
+  m_SizeDelta: {x: 1154.94, y: 858.01}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1484172975
 MonoBehaviour:
@@ -2996,15 +2996,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 4aa975e40e362430db3dcffd5cbc3a11, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3270,8 +3270,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -106.54999, y: -184.00009}
-  m_SizeDelta: {x: 2.0999756, y: 4}
+  m_AnchoredPosition: {x: -270, y: -118.91}
+  m_SizeDelta: {x: -24.3, y: -22.928}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1607806445
 MonoBehaviour:
@@ -4184,7 +4184,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 35.5, y: 141.20001}
+  m_AnchoredPosition: {x: 44.5, y: 167.6}
   m_SizeDelta: {x: -44.789993, y: -43.76}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1966261251
@@ -4414,9 +4414,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e29292c1814c9489e8892248911c5c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPortrait: {fileID: 2800000, guid: 206c144bb11674d99b6c77630550de30, type: 3}
-  healthTexture: {fileID: 2800000, guid: 489d980aea74c4ec897cc3e693338f3b, type: 3}
-  healthBackgroundTexture: {fileID: 2800000, guid: 8163b600ecd1e42758411189f05dc703,
+  PlayerPortrait: {fileID: 2800000, guid: 206c144bb11674d99b6c77630550de30, type: 3}
+  HealthTexture: {fileID: 2800000, guid: 489d980aea74c4ec897cc3e693338f3b, type: 3}
+  HealthBackgroundTexture: {fileID: 2800000, guid: 8163b600ecd1e42758411189f05dc703,
     type: 3}
   CameraAudioSource: {fileID: 519420028}
   Walking: {fileID: 8300000, guid: 291c64b5cdf30478484ec1bfdd8debd7, type: 3}
@@ -4563,7 +4563,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 291c64b5cdf30478484ec1bfdd8debd7, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.195
+  m_Volume: 0.264
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4691,8 +4691,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -799.05, y: -398.50006}
-  m_SizeDelta: {x: 1598.1001, y: 797}
+  m_AnchoredPosition: {x: -799.05, y: -307.7}
+  m_SizeDelta: {x: 911.3, y: 706.2}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &2111421876
 MonoBehaviour:
@@ -4706,15 +4706,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 4aa975e40e362430db3dcffd5cbc3a11, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

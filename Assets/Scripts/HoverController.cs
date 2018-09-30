@@ -117,12 +117,12 @@ public class HoverController : MonoBehaviour
 				
                     if (ui.name == "BuildButton" && _canBuild)
                     {
-                        actionsUiPos.x = Input.mousePosition.x + 25;
+                        actionsUiPos.x = Input.mousePosition.x + 18;
                         actionsUiPos.y = Input.mousePosition.y + 50;
                     }
                     else
                     {
-                        actionsUiPos.x = Input.mousePosition.x + 25;
+                        actionsUiPos.x = Input.mousePosition.x + 18;
                         actionsUiPos.y = Input.mousePosition.y + 50;
                         if (ui.name == "BuildButton")
                         {
@@ -131,13 +131,13 @@ public class HoverController : MonoBehaviour
                     }
                     if (ui.name == "DestroyButton")
                     {
-                        actionsUiPos.x = Input.mousePosition.x + 156;
+                        actionsUiPos.x = Input.mousePosition.x + 110;
                         actionsUiPos.y = Input.mousePosition.y + 50;
                     }
                     else if (ui.name == "CloseButton")
                     {
-                        actionsUiPos.x = Input.mousePosition.x + 295;
-                        actionsUiPos.y = Input.mousePosition.y + 133;
+                        actionsUiPos.x = Input.mousePosition.x + 172;
+                        actionsUiPos.y = Input.mousePosition.y + 135;
                     }
                     else if (ui.name == "Panel")
                     {
