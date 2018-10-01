@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     protected static GameObject[] PickUi;
     //private GameObject _notification;
     public static int Wood = 50;
-    public static int Stone = 0;
-    public static int Copper = 0;
+    public static int Stone = 50;
+    public static int Copper = 50;
     public static int GunPowder = 0;
     public static int Apples = 0;
     public Texture PlayerPortrait;

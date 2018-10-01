@@ -16,6 +16,7 @@ public class ZombieController : MonoBehaviour
     // Variable responsible for the delay between zombie attacks
     private bool _canAttack = true;
     private GameObject _obstacle;
+    public Material RedFlash;
     public Material YellowFlash;
     public Material WhiteFlash;
     public AudioClip StructureHitSound;
@@ -76,13 +77,13 @@ public class ZombieController : MonoBehaviour
             RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         
         _obstacle = other.gameObject;
-        if (other.transform.tag == "Player" || other.gameObject.layer == 10)
+        
+        if (other.transform.tag == "Player" || other.gameObject.layer == 10 || _obstacle.transform.name == "BlockSpikes(Clone)" || _obstacle.transform.name == "BlockElectricFence(Clone)")
         {
             if (_obstacle.GetComponent<HitPointsController>() != null)
             {
                 if (_obstacle.GetComponent<HitPointsController>().HitPoints <= 0)
                 {
-
                     // End game conditional
                     if (other.transform.tag == "Player")
                     {
@@ -90,7 +91,6 @@ public class ZombieController : MonoBehaviour
                     }
                     else
                     {
-                    
                         _isHittingObject = false;
                     
                         // Because the sound effect of destroying a building is halted
@@ -110,8 +110,21 @@ public class ZombieController : MonoBehaviour
                         {
                             _obstacle.GetComponent<AudioSource>().PlayOneShot(StructureHitSound);
                         }
-
-                        StartCoroutine("FlashObstacle");
+        
+                        // This is used to check whether the zombie is colliding with a trap.
+                        if (_obstacle.transform.name == "BlockSpikes(Clone)" || _obstacle.transform.name == "BlockElectricFence(Clone)")
+                        {
+                            if (HitPoints <= 0)
+                            {
+                                Destroy(gameObject);
+                            }
+                            else
+                            {
+                                StartCoroutine("FlashZombie");
+                                StartCoroutine("FlashObstacle");
+                                HitPoints--;
+                            }
+                        }
                         
                         _obstacle.GetComponent<HitPointsController>().HitPoints--;
                         
@@ -138,6 +151,19 @@ public class ZombieController : MonoBehaviour
             gameObject.GetComponent<Rigidbody2D>().constraints =
                 RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         }
+    }
+
+    private IEnumerator FlashZombie()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            gameObject.GetComponent<SpriteRenderer>().material = RedFlash;
+            yield return new WaitForSeconds(.1f);
+            gameObject.GetComponent<SpriteRenderer>().material = WhiteFlash;
+            yield return new WaitForSeconds(.1f);	
+        }
+		
+        gameObject.GetComponent<SpriteRenderer>().material = WhiteFlash;
     }
 
     private IEnumerator FlashObstacle()
