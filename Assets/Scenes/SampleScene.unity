@@ -4419,6 +4419,7 @@ MonoBehaviour:
   HealthBackgroundTexture: {fileID: 2800000, guid: 8163b600ecd1e42758411189f05dc703,
     type: 3}
   CameraAudioSource: {fileID: 519420028}
+  ApplesUi: {fileID: 186987501}
   Walking: {fileID: 8300000, guid: 291c64b5cdf30478484ec1bfdd8debd7, type: 3}
   DayTheme: {fileID: 8300000, guid: eab60975aed5843bdb4fef8fdb9ea01e, type: 3}
   NightTheme: {fileID: 8300000, guid: 85a290018abba4c20a209abdfabc3a62, type: 3}

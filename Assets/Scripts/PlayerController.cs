@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     public GameObject CameraAudioSource;
     private AudioSource _cameraAudioSource;
     private AudioSource _audioSource;
+    public GameObject ApplesUi;
     
     public AudioClip Walking;
     public AudioClip DayTheme;
@@ -261,8 +262,10 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Q) && PlayerPrefs.GetFloat("Apples") > 0 && gameObject.GetComponent<HitPointsController>().HitPoints < 10)
         {
-            Apples -= Random.Range(0, 3);
-            PlayerPrefs.SetFloat("Apples", Apples);
+            ApplesUi.GetComponent<Animator>().SetBool("shineApples", true);
+            Invoke("StopApplesShineAnimation", 1);
+            
+            PlayerPrefs.SetFloat("Apples", Apples--);
             GameObject.FindGameObjectWithTag("PlayerApples").GetComponent<Text>().text = PlayerPrefs.GetFloat("Apples").ToString();
 
             gameObject.GetComponent<HitPointsController>().HitPoints += 1;
@@ -279,6 +282,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void StopApplesShineAnimation()
+    {
+        ApplesUi.GetComponent<Animator>().SetBool("shineApples", false);
+    }
+    
     void FixedUpdate()
     {
         Vector2 newPlayerVelocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
