@@ -258,8 +258,17 @@ public class PlayerController : MonoBehaviour
                 Invoke("CanShoot", 0.7f);
             }
         }
-
         
+        if (Input.GetKeyDown(KeyCode.Q) && PlayerPrefs.GetFloat("Apples") > 0 && gameObject.GetComponent<HitPointsController>().HitPoints < 10)
+        {
+            Apples -= Random.Range(0, 3);
+            PlayerPrefs.SetFloat("Apples", Apples);
+            GameObject.FindGameObjectWithTag("PlayerApples").GetComponent<Text>().text = PlayerPrefs.GetFloat("Apples").ToString();
+
+            gameObject.GetComponent<HitPointsController>().HitPoints += 1;
+        }
+        
+        // Healing mechanic
         if (Input.GetKeyDown(KeyCode.T))
         {
             SpawnZombies();
