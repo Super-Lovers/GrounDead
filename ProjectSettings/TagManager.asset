@@ -29,6 +29,7 @@ TagManager:
   - PlayerScore
   - PlayerWave
   - Zombies
+  - PlayerDetector
   layers:
   - Default
   - TransparentFX
@@ -42,7 +43,7 @@ TagManager:
   - ZombieObstacles
   - BulletObstacles
   - StopBullets
-  - Detect
+  - DetectPlayer
   - 
   - 
   - 

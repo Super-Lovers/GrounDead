@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ZombieController : MonoBehaviour
 {
     public LayerMask PlayerLayerMask;
+    public LayerMask PlayerDetectorLayerMask;
     public int HitPoints = 5;
     public int Strength = 1;
     public float MovementSpeed = 0.03f;
@@ -22,13 +23,19 @@ public class ZombieController : MonoBehaviour
     public AudioClip StructureHitSound;
     private bool _isHittingObject;
     private GameObject _player;
+    private GameObject _playerDetector;
 
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        _playerDetector = GameObject.FindGameObjectWithTag("PlayerDetector");
     }
 
-    void Update () {
+    void Update ()
+    {
+        var playerDetectorPos = _playerDetector.transform.position;
+        playerDetectorPos = _player.transform.position;
+        _playerDetector.transform.position = playerDetectorPos;
         /*
         Ray2D rayLeft = new Ray2D(transform.position, Vector2.left);
         Ray2D rayRight = new Ray2D(transform.position, Vector2.right);
@@ -41,26 +48,27 @@ public class ZombieController : MonoBehaviour
         float distance = (float)0.64 * RangeOfDetection; // 0.64 is the size of one tile
         float radius = (float) 0.64 * RangeOfDetection;
         Vector2 dir = new Vector2(1f, 1f);
-		
-        RaycastHit2D castResult = Physics2D.CircleCast(pos, radius, dir, distance, PlayerLayerMask);
-        //if (castResult)
-        //{
-        Debug.Log(castResult.transform.name);
+        
+        RaycastHit2D castResult = Physics2D.CircleCast(pos, radius, dir, distance, PlayerDetectorLayerMask);
         RaycastHit2D linecastResult = Physics2D.Linecast(transform.position, _player.transform.position, PlayerLayerMask);
-        if (linecastResult.transform.tag == "Player")
+        if (castResult)
         {
-            //Debug.Log(linecastResult.transform.name);
-            //Debug.DrawLine(transform.position, _player.transform.position, Color.green, 1.0f);
-            transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, MovementSpeed);
-            gameObject.GetComponent<Animator>().SetBool("isWalking", true);
+            if (linecastResult.transform.tag == "Player")
+            {
+                Debug.DrawLine(transform.position, _player.transform.position, Color.green, 1.0f);
+                transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, MovementSpeed);
+                gameObject.GetComponent<Animator>().SetBool("isWalking", true);
+            }
+            else
+            {
+                Debug.DrawLine(transform.position, _player.transform.position, Color.red, 1.0f);
+                gameObject.GetComponent<Animator>().SetBool("isWalking", false);
+            }   
         }
         else
         {
-            //Debug.Log(linecastResult.transform.name);
-            //Debug.DrawLine(transform.position, _player.transform.position, Color.red, 1.0f);
-            gameObject.GetComponent<Animator>().SetBool("isWalking", false);
+            Debug.DrawLine(transform.position, _playerDetector.transform.position, Color.blue, 1.0f);
         }
-        //}
         // _audioSource.Play();
     }
 

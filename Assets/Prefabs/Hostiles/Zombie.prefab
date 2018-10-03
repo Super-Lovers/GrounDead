@@ -419,6 +419,9 @@ MonoBehaviour:
   PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 1024
+  PlayerDetectorLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
   HitPoints: 5
   Strength: 1
   MovementSpeed: 0.03
