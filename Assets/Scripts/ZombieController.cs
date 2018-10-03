@@ -21,6 +21,12 @@ public class ZombieController : MonoBehaviour
     public Material WhiteFlash;
     public AudioClip StructureHitSound;
     private bool _isHittingObject;
+    private GameObject _player;
+
+    private void Start()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     void Update () {
         /*
@@ -36,27 +42,26 @@ public class ZombieController : MonoBehaviour
         float radius = (float) 0.64 * RangeOfDetection;
         Vector2 dir = new Vector2(1f, 1f);
 		
-        RaycastHit2D isPlayerClose = Physics2D.CircleCast(pos, radius, dir, distance, PlayerLayerMask);
-		
-        if (isPlayerClose)
+        RaycastHit2D castResult = Physics2D.CircleCast(pos, radius, dir, distance, PlayerLayerMask);
+        //if (castResult)
+        //{
+        Debug.Log(castResult.transform.name);
+        RaycastHit2D linecastResult = Physics2D.Linecast(transform.position, _player.transform.position, PlayerLayerMask);
+        if (linecastResult.transform.tag == "Player")
         {
-            // Make the zombie walk when the player is in radius
-            if (_isHittingObject == false)
-            {
-                gameObject.GetComponent<Animator>().SetBool("isWalking", true);
-            }
-            else
-            {
-                gameObject.GetComponent<Animator>().SetBool("isWalking", false);
-            }
-           // _audioSource.Play();
-            transform.position = Vector2.MoveTowards(transform.position, isPlayerClose.transform.position, MovementSpeed);
+            //Debug.Log(linecastResult.transform.name);
+            //Debug.DrawLine(transform.position, _player.transform.position, Color.green, 1.0f);
+            transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, MovementSpeed);
+            gameObject.GetComponent<Animator>().SetBool("isWalking", true);
         }
         else
         {
-            //_audioSource.Stop();
+            //Debug.Log(linecastResult.transform.name);
+            //Debug.DrawLine(transform.position, _player.transform.position, Color.red, 1.0f);
             gameObject.GetComponent<Animator>().SetBool("isWalking", false);
         }
+        //}
+        // _audioSource.Play();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
