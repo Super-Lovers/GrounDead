@@ -2,13 +2,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class ZombieController : MonoBehaviour
 {
     public LayerMask PlayerLayerMask;
     public LayerMask PlayerDetectorLayerMask;
-    public int HitPoints = 5;
-    public int Strength = 1;
+    public int HitPoints = 80;
+    public int Strength = 20;
     public float MovementSpeed = 0.03f;
     public float RangeOfDetection = 4;
     
@@ -24,11 +25,31 @@ public class ZombieController : MonoBehaviour
     private bool _isHittingObject;
     private GameObject _player;
     private GameObject _playerDetector;
+    private string _zombieType = "Normal";
 
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
         _playerDetector = GameObject.FindGameObjectWithTag("PlayerDetector");
+
+        var randomNum = Random.Range(0, 101);
+
+        if (randomNum > 66.6f && randomNum < 87)
+        {
+            _zombieType = "Advanced";
+            HitPoints = 120;
+            Strength = 30;
+        } else if (randomNum > 86.6f && randomNum < 101)
+        {
+            _zombieType = "Armored";
+            HitPoints = 230;
+        }
+        else
+        {
+            _zombieType = "Normal";
+            HitPoints = 80;
+            Strength = 30;
+        }
     }
 
     void Update ()
@@ -90,8 +111,9 @@ public class ZombieController : MonoBehaviour
             RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         
         _obstacle = other.gameObject;
-        
-        if (other.transform.tag == "Player" || other.gameObject.layer == 10 || _obstacle.transform.name == "BlockSpikes(Clone)" || _obstacle.transform.name == "BlockElectricFence(Clone)")
+
+        if (_obstacle.transform.tag == "Player" || _obstacle.gameObject.layer == 10 ||
+            _obstacle.transform.name == "BlockSpikes(Clone)" || _obstacle.transform.name == "BlockElectricFence(Clone)")
         {
             if (_obstacle.GetComponent<HitPointsController>() != null)
             {
@@ -105,14 +127,16 @@ public class ZombieController : MonoBehaviour
                     else
                     {
                         _isHittingObject = false;
-                    
+
                         // Because the sound effect of destroying a building is halted
                         // once its destroyed, we run another oneshot from the zombie
                         // closest that destroyed it.
                         Destroy(_obstacle);
                         UiButtonController.PlacedBlocks.Remove(_obstacle);
-				
-                        GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
+
+                        PlayerController.Score += 100;
+                        GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text =
+                            "Score: " + PlayerController.Score;
                     }
                 }
                 else
@@ -123,26 +147,58 @@ public class ZombieController : MonoBehaviour
                         {
                             _obstacle.GetComponent<AudioSource>().PlayOneShot(StructureHitSound);
                         }
-        
+
                         // This is used to check whether the zombie is colliding with a trap.
-                        if (_obstacle.transform.name == "BlockSpikes(Clone)" || _obstacle.transform.name == "BlockElectricFence(Clone)")
+                        if (_obstacle.transform.tag == "Player" || _obstacle.transform.name == "BlockSpikes(Clone)" ||
+                            _obstacle.transform.name == "BlockElectricFence(Clone)")
                         {
                             if (HitPoints <= 0)
                             {
                                 Destroy(gameObject);
+                                PlayerController.Score += 100;
+                                GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text =
+                                    "Score: " + PlayerController.Score;
                             }
                             else
                             {
                                 StartCoroutine("FlashZombie");
                                 StartCoroutine("FlashObstacle");
-                                HitPoints--;
+                                if (_obstacle.transform.name == "BlockSpikes(Clone)")
+                                {
+                                    HitPoints -= 15;
+                                }
+                                else if (_obstacle.transform.name == "BlockElectricFence(Clone)")
+                                {
+                                    HitPoints -= 35;
+                                }
                             }
                         }
-                        
-                        _obstacle.GetComponent<HitPointsController>().HitPoints--;
-                        
+
+                        if (_zombieType == "Normal" || _zombieType == "Armored")
+                        {
+                            if (_obstacle.transform.name == "BlockSpikes(Clone)" ||
+                                _obstacle.transform.name == "BlockElectricFence(Clone)")
+                            {
+                                _obstacle.GetComponent<HitPointsController>().HitPoints -= 5;
+                            } else if (_obstacle.transform.tag == "Player")
+                            {
+                                _obstacle.GetComponent<HitPointsController>().HitPoints -= 20; 
+                            }
+                        }
+                        else if (_zombieType == "Advanced")
+                        {
+                            if (_obstacle.transform.name == "BlockSpikes(Clone)" ||
+                                _obstacle.transform.name == "BlockElectricFence(Clone)")
+                            {
+                                _obstacle.GetComponent<HitPointsController>().HitPoints -= 10;
+                            } else if (_obstacle.transform.tag == "Player")
+                            {
+                                _obstacle.GetComponent<HitPointsController>().HitPoints -= 30; 
+                            }
+                        }
+
                         _canAttack = false;
-                        
+
                         Invoke("EnableAttacks", 1.5f);
                     }
                 }

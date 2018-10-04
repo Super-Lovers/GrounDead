@@ -83,7 +83,7 @@ public class BulletController : MonoBehaviour
 
 			if (_obstacle.GetComponent<HitPointsController>() != null)
 			{
-				_obstacle.GetComponent<HitPointsController>().HitPoints--;
+				_obstacle.GetComponent<HitPointsController>().HitPoints -= 100;
 				if (_obstacle.GetComponent<HitPointsController>().HitPoints <= 0)
 				{
 					// If the structure the bullet is hitting has no hitpoints left,
@@ -114,7 +114,7 @@ public class BulletController : MonoBehaviour
 				
 				_obstacle = other.gameObject;
 				_obstacle.GetComponent<AudioSource>().PlayOneShot(ZombieHitSound);
-				_obstacle.GetComponent<ZombieController>().HitPoints--;
+				_obstacle.GetComponent<ZombieController>().HitPoints -= 100;
 				if (_obstacle.GetComponent<ZombieController>().HitPoints <= 0)
 				{
 					Destroy(_obstacle);

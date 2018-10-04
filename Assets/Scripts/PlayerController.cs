@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     // Player stats
-    public static int HitPoints = 10;
+    public static int HitPoints = 100;
     public static ulong Score = 0;
     
     public static Animator Animator;
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     public static int Stone = 50;
     public static int Copper = 50;
     public static int GunPowder = 0;
-    public static int Apples = 0;
+    public static int Apples;
     public Texture PlayerPortrait;
     public Texture HealthTexture;
     public Texture HealthBackgroundTexture;
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         _cameraAudioSource = CameraAudioSource.GetComponent<AudioSource>();
         //_notification = GameObject.FindGameObjectWithTag("NotificationUi");
 
-        PlayerHealth = gameObject.GetComponent<HitPointsController>().HitPoints * 27;
+        PlayerHealth = (gameObject.GetComponent<HitPointsController>().HitPoints * 27) / 10f;
         
         // Hide the UI at the start of the game AFTER you select the components
         CloseButtonOnClick();
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
     private void OnGUI()
     {
         // Drawing the player's health bar when its updated
-        PlayerHealth = gameObject.GetComponent<HitPointsController>().HitPoints * 27;
+        PlayerHealth = (gameObject.GetComponent<HitPointsController>().HitPoints * 27) / 10f;
         
         // Player UI Health bar and portrait
         Rect playerPortraitRect = new Rect(10, Screen.height - 110, 120, 100);

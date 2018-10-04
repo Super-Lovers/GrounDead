@@ -154,14 +154,20 @@ public class UiButtonController : MonoBehaviour
                     if (nameOfBlock == "tree")
                     {
                         WoodUi.GetComponent<Animator>().SetBool("shineWood", true);
-                        ApplesUi.GetComponent<Animator>().SetBool("shineApples", true);
                         Invoke("StopWoodShineAnimation", 1);
-                        Invoke("StopApplesShineAnimation", 1);
                         
-                        PlayerPrefs.SetFloat("Wood", PlayerController.Wood += 1);
-                        PlayerPrefs.SetFloat("Apples", (Random.Range(0, 101) > 49) ? PlayerController.Apples += 2 : PlayerController.Apples += 4);
+                        PlayerPrefs.SetFloat("Wood", PlayerController.Wood += Random.Range(4, 9));
+                        
+                        if (Random.Range(0, 101) < 36)
+                        {
+                            PlayerPrefs.SetFloat("Apples", PlayerController.Apples += 1);
+                            GameObject.FindGameObjectWithTag("PlayerApples").GetComponent<Text>().text = PlayerPrefs.GetFloat("Apples").ToString();
+                            
+                            ApplesUi.GetComponent<Animator>().SetBool("shineApples", true);
+                            Invoke("StopApplesShineAnimation", 1);
+                        }
+                        
                         GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerPrefs.GetFloat("Wood").ToString();
-                        GameObject.FindGameObjectWithTag("PlayerApples").GetComponent<Text>().text = PlayerPrefs.GetFloat("Apples").ToString();
                         
                         //Playing a sound effect
                         _cameraAudioSource.PlayOneShot(TreeFalling);
@@ -173,7 +179,7 @@ public class UiButtonController : MonoBehaviour
                         StoneUi.GetComponent<Animator>().SetBool("shineStone", true);
                         Invoke("StopStoneShineAnimation", 1);
                         
-                        PlayerPrefs.SetFloat("Stone", PlayerController.Stone += 1);
+                        PlayerPrefs.SetFloat("Stone", PlayerController.Stone += Random.Range(2, 5));
                         GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerPrefs.GetFloat("Stone").ToString();
                         _cameraAudioSource.PlayOneShot(Mining);
                         break;
@@ -183,7 +189,7 @@ public class UiButtonController : MonoBehaviour
                         CopperUi.GetComponent<Animator>().SetBool("shineCopper", true);
                         Invoke("StopCopperShineAnimation", 1);
                         
-                        PlayerPrefs.SetFloat("Copper", PlayerController.Copper += 1);
+                        PlayerPrefs.SetFloat("Copper", PlayerController.Copper += 3);
                         GameObject.FindGameObjectWithTag("PlayerCopper").GetComponent<Text>().text = PlayerPrefs.GetFloat("Copper").ToString();
                         _cameraAudioSource.PlayOneShot(Mining);
                         break;
@@ -251,16 +257,17 @@ public class UiButtonController : MonoBehaviour
 
     public void BuildWoodWall()
     {
-        if (PlayerPrefs.GetFloat("Wood") > 1)
+        if (PlayerPrefs.GetFloat("Wood") > 5)
         {
             // Updating the player's inventory
-            PlayerPrefs.SetFloat("Wood", PlayerController.Wood -= 2);
+            PlayerPrefs.SetFloat("Wood", PlayerController.Wood -= 6);
             GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerPrefs.GetFloat("Wood").ToString();
             
             var woodWall = Instantiate(Wood, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
             woodWall.GetComponent<SpriteRenderer>().sortingOrder = 40;
             woodWall.AddComponent<HitPointsController>();
             woodWall.tag = "PlacedBlock";
+            woodWall.GetComponent<HitPointsController>().HitPoints = 100;
 		
             PlacedBlocks.Add(woodWall);
         
@@ -280,14 +287,15 @@ public class UiButtonController : MonoBehaviour
 	
     public void BuildStonewall()
     {
-        if (PlayerPrefs.GetFloat("Stone") > 1)
+        if (PlayerPrefs.GetFloat("Stone") > 5)
         {
-            PlayerPrefs.SetFloat("Stone", PlayerController.Stone -= 2);
+            PlayerPrefs.SetFloat("Stone", PlayerController.Stone -= 6);
             GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerPrefs.GetFloat("Stone").ToString();
             
             var stoneWall = Instantiate(Stone, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
             stoneWall.GetComponent<SpriteRenderer>().sortingOrder = 40;
             stoneWall.AddComponent<HitPointsController>();
+            stoneWall.GetComponent<HitPointsController>().HitPoints = 200;
             stoneWall.tag = "PlacedBlock";
 		
             PlacedBlocks.Add(stoneWall);
@@ -308,10 +316,10 @@ public class UiButtonController : MonoBehaviour
 	
     public void BuildPlatform()
     {
-        if (PlayerPrefs.GetFloat("Wood") > 1)
+        if (PlayerPrefs.GetFloat("Wood") > 7)
         {
             // Updating the player's inventory
-            PlayerPrefs.SetFloat("Wood", PlayerController.Wood -= 2);
+            PlayerPrefs.SetFloat("Wood", PlayerController.Wood -= 8);
             GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text =
                 PlayerPrefs.GetFloat("Wood").ToString();
 
@@ -355,14 +363,18 @@ public class UiButtonController : MonoBehaviour
 	
     public void BuildSpikes()
     {
-        if (PlayerPrefs.GetFloat("Stone") > 2)
+        if (PlayerPrefs.GetFloat("Stone") > 5 && PlayerPrefs.GetFloat("Wood") > 9)
         {
-            PlayerPrefs.SetFloat("Stone", PlayerController.Stone -= 3);
+            PlayerPrefs.SetFloat("Stone", PlayerController.Stone -= 6);
             GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerPrefs.GetFloat("Stone").ToString();
+            
+            PlayerPrefs.SetFloat("Wood", PlayerController.Wood -= 10);
+            GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerPrefs.GetFloat("Wood").ToString();
             
             var spikes = Instantiate(Spikes, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
             spikes.GetComponent<SpriteRenderer>().sortingOrder = 40;
             spikes.AddComponent<HitPointsController>();
+            spikes.GetComponent<HitPointsController>().HitPoints = 20;
             spikes.tag = "PlacedBlock";
 		
             PlacedBlocks.Add(spikes);
@@ -383,18 +395,27 @@ public class UiButtonController : MonoBehaviour
 	
     public void BuildFence()
     {
-        if (PlayerPrefs.GetFloat("Stone") > 0 && PlayerPrefs.GetFloat("Copper") > 1)
+        if (PlayerPrefs.GetFloat("Stone") > 11 && PlayerPrefs.GetFloat("Copper") > 5)
         {
+            /*
             PlayerPrefs.SetFloat("Stone", PlayerController.Stone -= 1);
             PlayerPrefs.SetFloat("Copper", PlayerController.Copper -= 2);
             GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text =
                 PlayerPrefs.GetFloat("Stone").ToString();
             GameObject.FindGameObjectWithTag("PlayerCopper").GetComponent<Text>().text =
                 PlayerPrefs.GetFloat("Copper").ToString();
+            */
+            
+            PlayerPrefs.SetFloat("Stone", PlayerController.Stone -= 12);
+            GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerPrefs.GetFloat("Stone").ToString();
+            
+            PlayerPrefs.SetFloat("Copper", PlayerController.Copper -= 6);
+            GameObject.FindGameObjectWithTag("PlayerCopper").GetComponent<Text>().text = PlayerPrefs.GetFloat("Copper").ToString();
 
             var fence = Instantiate(Fence, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
             fence.GetComponent<SpriteRenderer>().sortingOrder = 40;
             fence.AddComponent<HitPointsController>();
+            fence.GetComponent<HitPointsController>().HitPoints = Random.Range(40, 61);
             fence.tag = "PlacedBlock";
 		
             PlacedBlocks.Add(fence);
