@@ -104,6 +104,15 @@ public class ZombieController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.transform.tag == "Knife")
+        {
+            HitPoints -= 30;
+            StartCoroutine("FlashZombie");
+        }
+    }
+
     private void OnCollisionStay2D(Collision2D other)
     {
         _isHittingObject = true;
@@ -150,7 +159,7 @@ public class ZombieController : MonoBehaviour
 
                         // This is used to check whether the zombie is colliding with a trap.
                         if (_obstacle.transform.tag == "Player" || _obstacle.transform.name == "BlockSpikes(Clone)" ||
-                            _obstacle.transform.name == "BlockElectricFence(Clone)")
+                            _obstacle.transform.name == "BlockElectricFence(Clone)" || _obstacle.transform.tag == "Knife")
                         {
                             if (HitPoints <= 0)
                             {
@@ -221,6 +230,7 @@ public class ZombieController : MonoBehaviour
                 RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         }
     }
+    
 
     private IEnumerator FlashZombie()
     {

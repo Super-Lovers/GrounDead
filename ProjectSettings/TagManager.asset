@@ -30,6 +30,8 @@ TagManager:
   - PlayerWave
   - Zombies
   - PlayerDetector
+  - Knife
+  - Melee Weapon
   layers:
   - Default
   - TransparentFX

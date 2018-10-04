@@ -44,7 +44,6 @@ public class PlayerController : MonoBehaviour
     public AudioClip Walking;
     public AudioClip DayTheme;
     public AudioClip NightTheme;
-    public GameObject Weapon;
     public GameObject Ammo;
     private Transform _gunHole;
     private Vector3 _gunHolePos;
@@ -60,6 +59,9 @@ public class PlayerController : MonoBehaviour
     public static int CurrentZombiesAlive;
     public static int CurrentWave;
     public GameObject ZombieBasic;
+    public GameObject Weapon;
+    public Sprite Knife;
+    public Sprite Axe;
 	
     void Start ()
     {
@@ -69,7 +71,12 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetFloat("Copper", Copper);
         PlayerPrefs.SetFloat("Gun Powder", GunPowder);
         PlayerPrefs.SetFloat("Apples", Apples);
+
+        Weapon = GameObject.FindGameObjectWithTag("Melee Weapon");
+        // Setting the starting weapon
+        Weapon.GetComponent<SpriteRenderer>().sprite = Knife;
         
+        Weapon.SetActive(false);
         Animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         ActionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
@@ -117,9 +124,15 @@ public class PlayerController : MonoBehaviour
         // whenever he is pressing the buttons on the axis
         var horizontalMovement = Input.GetAxis("Horizontal");
         var verticalMovement = Input.GetAxis("Vertical");
+        var weaponTransform = Weapon.transform;
+        var weaponPos = Weapon.transform.position;
         
         if (horizontalMovement > 0 && _strafing == false) // Right
         {
+            weaponPos.x = transform.position.x + 0.4f;
+            weaponPos.y = transform.position.y + 0.007f;
+            weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            
             Animator.enabled = true;
             // If the player moves when he has the menu for actions
             // up then it will be automatically closed
@@ -140,6 +153,10 @@ public class PlayerController : MonoBehaviour
             _lastDir = 3;
         } else if (horizontalMovement < 0 && _strafing == false) // Left
         {
+            weaponPos.x = transform.position.x + (0.4f * -1);
+            weaponPos.y = transform.position.y + 0.007f;
+            weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+            
             Animator.enabled = true;
             CloseButtonOnClick();
             ClosePickingBlocks();
@@ -157,6 +174,10 @@ public class PlayerController : MonoBehaviour
             _lastDir = 4;
         } else  if (verticalMovement > 0 && _strafing == false) // Top
         {
+            weaponPos.x = transform.position.x + 0.01f;
+            weaponPos.y = transform.position.y + 0.45f;
+            weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+            
             Animator.enabled = true;
             CloseButtonOnClick();
             ClosePickingBlocks();
@@ -174,6 +195,10 @@ public class PlayerController : MonoBehaviour
             _lastDir = 2;
         } else  if (verticalMovement < 0 && _strafing == false) // Bottom
         {
+            weaponPos.x = transform.position.x + 0.01f;
+            weaponPos.y = transform.position.y + (0.45f * -1);
+            weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 270));
+            
             Animator.enabled = true;
             CloseButtonOnClick();
             ClosePickingBlocks();
@@ -209,6 +234,8 @@ public class PlayerController : MonoBehaviour
             _audioSource.Stop();
             _isWalking = false;
         }
+
+        Weapon.transform.position = weaponPos;
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -280,6 +307,40 @@ public class PlayerController : MonoBehaviour
             CurrentWave++;
             GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Wave: " + CurrentWave;
         }
+        
+        // *********************
+        // Melee attack keybinding
+        // *********************
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Weapon.SetActive(true);
+            Invoke("DisableKnife", 0.2f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (Weapon.GetComponent<SpriteRenderer>().sprite == Knife)
+            {
+                Weapon.GetComponent<SpriteRenderer>().sprite = Axe;
+                var weaponCollider = Weapon.GetComponent<BoxCollider2D>().size;
+                weaponCollider.x = 0.80f;
+                weaponCollider.y = 0.50f;
+                Weapon.GetComponent<BoxCollider2D>().size = weaponCollider;
+            }
+            else
+            {
+                Weapon.GetComponent<SpriteRenderer>().sprite = Knife;
+                var weaponCollider = Weapon.GetComponent<BoxCollider2D>().size;
+                weaponCollider.x = 0.64f;
+                weaponCollider.y = 0.25f;
+                Weapon.GetComponent<BoxCollider2D>().size = weaponCollider;
+            }
+        }
+    }
+
+    private void DisableKnife()
+    {
+        Weapon.SetActive(false);
     }
 
     private void StopApplesShineAnimation()
