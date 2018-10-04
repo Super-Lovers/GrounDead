@@ -76,19 +76,19 @@ public class ZombieController : MonoBehaviour
         {
             if (linecastResult.transform.tag == "Player")
             {
-                Debug.DrawLine(transform.position, _player.transform.position, Color.green, 1.0f);
+                //Debug.DrawLine(transform.position, _player.transform.position, Color.green, 1.0f);
                 transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, MovementSpeed);
                 gameObject.GetComponent<Animator>().SetBool("isWalking", true);
             }
             else
             {
-                Debug.DrawLine(transform.position, _player.transform.position, Color.red, 1.0f);
+                //Debug.DrawLine(transform.position, _player.transform.position, Color.red, 1.0f);
                 gameObject.GetComponent<Animator>().SetBool("isWalking", false);
             }   
         }
         else
         {
-            Debug.DrawLine(transform.position, _playerDetector.transform.position, Color.blue, 1.0f);
+            //Debug.DrawLine(transform.position, _playerDetector.transform.position, Color.blue, 1.0f);
         }
         // _audioSource.Play();
     }
@@ -106,10 +106,18 @@ public class ZombieController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.transform.tag == "Knife")
+        if (other.transform.tag == "Melee Weapon")
         {
-            HitPoints -= 30;
-            StartCoroutine("FlashZombie");
+            if (other.GetComponent<SpriteRenderer>().sprite == other.GetComponentInParent<PlayerController>().Knife)
+            {
+                HitPoints -= 30;
+                StartCoroutine("FlashZombie");
+            }
+            else if (other.GetComponent<SpriteRenderer>().sprite == other.GetComponentInParent<PlayerController>().Axe)
+            {
+                HitPoints -= 60;
+                StartCoroutine("FlashZombie");   
+            }
         }
     }
 

@@ -126,7 +126,7 @@ public class BulletController : MonoBehaviour
 					if (GameObject.FindGameObjectWithTag("Zombies").transform.childCount == 1)
 					{
 						// TODO: Something happens when all the zombies are defeated, like getting a notification.
-						Debug.Log("Wave is defeated!");
+						//Debug.Log("Wave is defeated!");
 					}
 					Destroy(gameObject);
 				}

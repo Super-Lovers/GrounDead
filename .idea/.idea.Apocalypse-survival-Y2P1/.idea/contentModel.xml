@@ -22,7 +22,6 @@
           <e p="UiButtonController.cs" t="Include" />
           <e p="WorldGenerator.cs" t="Include" />
           <e p="ZombieController.cs" t="Include" />
-          <e p="ZombieNavigationController.cs" t="Include" />
         </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />
