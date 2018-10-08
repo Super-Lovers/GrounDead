@@ -455,7 +455,7 @@ public class UiButtonController : MonoBehaviour
             GameObject.FindGameObjectWithTag("PlayerGunPowder").GetComponent<Text>().text = PlayerPrefs.GetFloat("Gun Powder").ToString();
 
             var torch = Instantiate(Torch, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            torch.GetComponent<SpriteRenderer>().sortingOrder = 40;
+            torch.GetComponent<SpriteRenderer>().sortingOrder = 39;
             torch.AddComponent<HitPointsController>();
             torch.GetComponent<HitPointsController>().HitPoints = Random.Range(40, 61);
             torch.tag = "PlacedBlock";

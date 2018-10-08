@@ -178,7 +178,7 @@ public class ZombieController : MonoBehaviour
 
                         // This is used to check whether the zombie is colliding with a trap.
                         if (_obstacle.transform.tag == "Player" || _obstacle.transform.name == "BlockSpikes(Clone)" ||
-                            _obstacle.transform.name == "BlockElectricFence(Clone)" || _obstacle.transform.tag == "Melee Weapon")
+                            _obstacle.transform.name == "BlockElectricFence(Clone)")
                         {
                             if (HitPoints <= 0)
                             {
@@ -195,7 +195,42 @@ public class ZombieController : MonoBehaviour
                             }
                             else
                             {
-                                StartCoroutine("FlashZombie");
+                                if (_obstacle.transform.name == "BlockSpikes(Clone)" ||
+                                    _obstacle.transform.name == "BlockElectricFence(Clone)")
+                                {
+                                    StartCoroutine("FlashZombie");   
+                                }
+                                else
+                                {
+                                    StartCoroutine("FlashObstacle");
+                                    HitPoints -= 30;
+                                }
+                                if (_obstacle.transform.name == "BlockSpikes(Clone)")
+                                {
+                                    HitPoints -= 15;
+                                }
+                                else if (_obstacle.transform.name == "BlockElectricFence(Clone)")
+                                {
+                                    HitPoints -= 35;
+                                }
+                            }
+                        } else if (_obstacle.gameObject.layer == 10 || _obstacle.transform.tag != "Player")
+                        {
+                            if (HitPoints <= 0)
+                            {
+                                PlayerController.Score += 100;
+                                if (Random.Range(0, 101) > 15)
+                                {
+                                    Instantiate(GunPowderPickUp, new Vector2(other.transform.position.x, other.transform.position.y), Quaternion.identity);
+                                }
+                                GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text =
+                                    "Score: " + PlayerController.Score;
+                                
+                                PlayerController.NumberOfZombiesKilled++;
+                                Destroy(gameObject);
+                            }
+                            else
+                            {
                                 StartCoroutine("FlashObstacle");
                                 if (_obstacle.transform.name == "BlockSpikes(Clone)")
                                 {
@@ -218,6 +253,10 @@ public class ZombieController : MonoBehaviour
                             {
                                 _obstacle.GetComponent<HitPointsController>().HitPoints -= 20; 
                             }
+                            else
+                            {
+                                _obstacle.GetComponent<HitPointsController>().HitPoints -= 20;
+                            }
                         }
                         else if (_zombieType == "Advanced")
                         {
@@ -228,6 +267,10 @@ public class ZombieController : MonoBehaviour
                             } else if (_obstacle.transform.tag == "Player")
                             {
                                 _obstacle.GetComponent<HitPointsController>().HitPoints -= 30; 
+                            }
+                            else
+                            {
+                                _obstacle.GetComponent<HitPointsController>().HitPoints -= 30;
                             }
                         }
 
