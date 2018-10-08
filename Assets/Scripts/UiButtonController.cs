@@ -13,6 +13,7 @@ public class UiButtonController : MonoBehaviour
     public GameObject Platform;
     public GameObject Spikes;
     public GameObject Fence;
+    public GameObject Torch;
     static public List<GameObject> PlacedBlocks = new List<GameObject>();
     static public List<GameObject> PlacedWaterBlocks = new List<GameObject>();
 
@@ -30,6 +31,7 @@ public class UiButtonController : MonoBehaviour
     private bool _showPlatform = true;
     private bool _showSpike = true;
     private bool _showFence = true;
+    private bool _showTorch = true;
 
     private AudioSource _cameraAudioSource;
     public AudioClip Mining;
@@ -57,6 +59,7 @@ public class UiButtonController : MonoBehaviour
                 _showPlatform = false;
                 _showSpike = false;
                 _showFence = false;
+                _showTorch = false;
             }
             else
             {
@@ -65,6 +68,7 @@ public class UiButtonController : MonoBehaviour
                 _showPlatform = true;
                 _showSpike = true;
                 _showFence = true;
+                _showTorch = true;
             }
         }
         
@@ -101,6 +105,12 @@ public class UiButtonController : MonoBehaviour
             {
                 ui.SetActive(true);
                 actionsUiPos.x = Input.mousePosition.x + 64 + 25;
+                actionsUiPos.y = Input.mousePosition.y + 30;
+            }
+            else if (ui.name == "BlockTorch" && _showTorch)
+            {
+                ui.SetActive(true);
+                actionsUiPos.x = Input.mousePosition.x + 128 + 25;
                 actionsUiPos.y = Input.mousePosition.y + 30;
             }
             else if (ui.name == "CloseButton")
@@ -433,12 +443,52 @@ public class UiButtonController : MonoBehaviour
             _cameraAudioSource.PlayOneShot(StructurePlacement);
         }
     }
+	
+    public void BuildTorch()
+    {
+        if (PlayerPrefs.GetFloat("Gun Powder") > 0 && PlayerPrefs.GetFloat("Wood") > 0)
+        {
+            PlayerPrefs.SetFloat("Wood", PlayerController.Wood -= 1);
+            GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerPrefs.GetFloat("Wood").ToString();
+            
+            PlayerPrefs.SetFloat("Gun Powder", PlayerController.GunPowder -= 1);
+            GameObject.FindGameObjectWithTag("PlayerGunPowder").GetComponent<Text>().text = PlayerPrefs.GetFloat("Gun Powder").ToString();
+
+            var torch = Instantiate(Torch, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
+            torch.GetComponent<SpriteRenderer>().sortingOrder = 40;
+            torch.AddComponent<HitPointsController>();
+            torch.GetComponent<HitPointsController>().HitPoints = Random.Range(40, 61);
+            torch.tag = "PlacedBlock";
+		
+            PlacedBlocks.Add(torch);
+        
+            ClosePickingBlocks();
+        
+            PlayerController.PlayMode = "Survival";
+            foreach (var ui in _actionsUi)
+            {
+                var uiPos = ui.transform.position;
+                uiPos.x += 1000;
+                ui.transform.position = uiPos;
+            }
+            
+            _cameraAudioSource.PlayOneShot(StructurePlacement);
+        }
+    }
 
     public void AddBullets()
     {
         if (PlayerPrefs.GetFloat("Gun Powder") > 5 && PlayerPrefs.GetFloat("Copper") > 5)
         {
+            PlayerPrefs.SetFloat("Gun Powder", PlayerController.GunPowder -= 5);
+            PlayerPrefs.SetFloat("Copper", PlayerController.Copper -= 5);
+            PlayerPrefs.SetFloat("Bullets", PlayerController.Bullets++);
             
+            
+            GameObject.FindGameObjectWithTag("PlayerGunPowder").GetComponent<Text>().text = PlayerPrefs.GetFloat("Gun Powder").ToString();
+            GameObject.FindGameObjectWithTag("PlayerCopper").GetComponent<Text>().text = PlayerPrefs.GetFloat("Copper").ToString();
         }
+        
+        Debug.Log("Added a bullet: " + PlayerController.Bullets);
     }
 }

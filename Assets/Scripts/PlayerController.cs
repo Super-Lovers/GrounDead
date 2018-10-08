@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public static int Copper = 50;
     public static int GunPowder = 0;
     public static int Apples;
+    public static int Bullets = 100;
     public Texture PlayerPortrait;
     public Texture HealthTexture;
     public Texture HealthBackgroundTexture;
@@ -72,7 +74,7 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetFloat("Copper", Copper);
         PlayerPrefs.SetFloat("Gun Powder", GunPowder);
         PlayerPrefs.SetFloat("Apples", Apples);
-        PlayerPrefs.SetFloat("Bullets", 0);
+        PlayerPrefs.SetFloat("Bullets", Bullets);
 
         Weapon = GameObject.FindGameObjectWithTag("Melee Weapon");
         // Setting the starting weapon
@@ -264,7 +266,7 @@ public class PlayerController : MonoBehaviour
             }
         }*/
 
-        if (Input.GetMouseButtonDown(0) && PlayMode == "Survival" && _canShoot)
+        if (Input.GetMouseButtonDown(0) && PlayMode == "Survival" && _canShoot && !EventSystem.current.IsPointerOverGameObject())
         {
             if (Animator.GetInteger("direction") == 1 || Animator.GetInteger("direction") == 2)
             {
@@ -287,6 +289,9 @@ public class PlayerController : MonoBehaviour
                 _canShoot = false;
                 Invoke("CanShoot", 0.7f);
             }
+
+            Bullets--;
+            Debug.Log(Bullets);
         }
         
         if (Input.GetKeyDown(KeyCode.Q) && PlayerPrefs.GetFloat("Apples") > 0 && gameObject.GetComponent<HitPointsController>().HitPoints < 10)

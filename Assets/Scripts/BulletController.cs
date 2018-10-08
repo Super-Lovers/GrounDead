@@ -99,11 +99,6 @@ public class BulletController : MonoBehaviour
 					// Updating the score UI and player score after a obstacle is destroyed
 					GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
 					
-					if (Random.Range(0, 101) > 15)
-					{
-						Instantiate(GunPowderPickUp, new Vector2(other.transform.position.x, other.transform.position.y), Quaternion.identity);
-					}
-					
 					PlayerController.NumberOfZombiesKilled++;
 					Destroy(gameObject);
 				}
