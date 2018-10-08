@@ -32,6 +32,8 @@ TagManager:
   - PlayerDetector
   - Knife
   - Melee Weapon
+  - Gun powders
+  - AddBulletsButton
   layers:
   - Default
   - TransparentFX

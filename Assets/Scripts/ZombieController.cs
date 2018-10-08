@@ -22,6 +22,7 @@ public class ZombieController : MonoBehaviour
     public Material YellowFlash;
     public Material WhiteFlash;
     public AudioClip StructureHitSound;
+    public GameObject GunPowderPickUp;
     private bool _isHittingObject;
     private GameObject _player;
     private GameObject _playerDetector;
@@ -108,6 +109,16 @@ public class ZombieController : MonoBehaviour
     {
         if (other.transform.tag == "Melee Weapon")
         {
+            if (HitPoints <= 0)
+            {
+                if (Random.Range(0, 101) > 15)
+                {
+                    Instantiate(GunPowderPickUp, new Vector2(other.transform.position.x, other.transform.position.y), Quaternion.identity);
+                }
+
+                PlayerController.NumberOfZombiesKilled++;
+                Destroy(gameObject);
+            }
             if (other.GetComponent<SpriteRenderer>().sprite == other.GetComponentInParent<PlayerController>().Knife)
             {
                 HitPoints -= 30;
@@ -167,14 +178,20 @@ public class ZombieController : MonoBehaviour
 
                         // This is used to check whether the zombie is colliding with a trap.
                         if (_obstacle.transform.tag == "Player" || _obstacle.transform.name == "BlockSpikes(Clone)" ||
-                            _obstacle.transform.name == "BlockElectricFence(Clone)" || _obstacle.transform.tag == "Knife")
+                            _obstacle.transform.name == "BlockElectricFence(Clone)" || _obstacle.transform.tag == "Melee Weapon")
                         {
                             if (HitPoints <= 0)
                             {
-                                Destroy(gameObject);
                                 PlayerController.Score += 100;
+                                if (Random.Range(0, 101) > 15)
+                                {
+                                    Instantiate(GunPowderPickUp, new Vector2(other.transform.position.x, other.transform.position.y), Quaternion.identity);
+                                }
                                 GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text =
                                     "Score: " + PlayerController.Score;
+                                
+                                PlayerController.NumberOfZombiesKilled++;
+                                Destroy(gameObject);
                             }
                             else
                             {

@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Weapon;
     public Sprite Knife;
     public Sprite Axe;
+    public static int NumberOfZombiesKilled;
 	
     void Start ()
     {
@@ -71,6 +72,7 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetFloat("Copper", Copper);
         PlayerPrefs.SetFloat("Gun Powder", GunPowder);
         PlayerPrefs.SetFloat("Apples", Apples);
+        PlayerPrefs.SetFloat("Bullets", 0);
 
         Weapon = GameObject.FindGameObjectWithTag("Melee Weapon");
         // Setting the starting weapon

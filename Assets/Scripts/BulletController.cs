@@ -16,6 +16,7 @@ public class BulletController : MonoBehaviour
 	public Material WhiteFlash;
 	public AudioClip ZombieHitSound;
 	public AudioClip StructureHitSound;
+	public GameObject GunPowderPickUp;
 	
 	void Start ()
 	{
@@ -97,6 +98,13 @@ public class BulletController : MonoBehaviour
 					PlayerController.Score += 50;
 					// Updating the score UI and player score after a obstacle is destroyed
 					GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
+					
+					if (Random.Range(0, 101) > 15)
+					{
+						Instantiate(GunPowderPickUp, new Vector2(other.transform.position.x, other.transform.position.y), Quaternion.identity);
+					}
+					
+					PlayerController.NumberOfZombiesKilled++;
 					Destroy(gameObject);
 				}
 				else
@@ -117,7 +125,6 @@ public class BulletController : MonoBehaviour
 				_obstacle.GetComponent<ZombieController>().HitPoints -= 100;
 				if (_obstacle.GetComponent<ZombieController>().HitPoints <= 0)
 				{
-					Destroy(_obstacle);
 					PlayerController.Score += 100;
 					PlayerController.CurrentZombiesAlive--;
 					// Updating the score UI and player score after a zombie is killed
@@ -128,6 +135,14 @@ public class BulletController : MonoBehaviour
 						// TODO: Something happens when all the zombies are defeated, like getting a notification.
 						//Debug.Log("Wave is defeated!");
 					}
+					
+					if (Random.Range(0, 101) > 15)
+					{
+						Instantiate(GunPowderPickUp, new Vector2(other.transform.position.x, other.transform.position.y), Quaternion.identity);
+					}
+					
+					PlayerController.NumberOfZombiesKilled++;
+					Destroy(_obstacle);
 					Destroy(gameObject);
 				}
 				else
@@ -155,6 +170,7 @@ public class BulletController : MonoBehaviour
 		
 		_obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
 				
+		PlayerController.NumberOfZombiesKilled++;
 		Destroy(gameObject);
 	}
 

@@ -96,6 +96,8 @@ MonoBehaviour:
   WhiteFlash: {fileID: 2100000, guid: 23d84b0917bfe4e469f1c377ec34e789, type: 2}
   ZombieHitSound: {fileID: 8300000, guid: 4ef24df35f2a140e6a663cece382211f, type: 3}
   StructureHitSound: {fileID: 8300000, guid: 328d0a2bede3e409d9e0bbdf34a3c439, type: 3}
+  GunPowderPickUp: {fileID: 1404153925095454, guid: 53a3cbe254cc74a379ff32c61430a75a,
+    type: 2}
 --- !u!212 &212739821171354462
 SpriteRenderer:
   m_ObjectHideFlags: 1

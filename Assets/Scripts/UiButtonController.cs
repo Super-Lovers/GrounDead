@@ -433,4 +433,12 @@ public class UiButtonController : MonoBehaviour
             _cameraAudioSource.PlayOneShot(StructurePlacement);
         }
     }
+
+    public void AddBullets()
+    {
+        if (PlayerPrefs.GetFloat("Gun Powder") > 5 && PlayerPrefs.GetFloat("Copper") > 5)
+        {
+            
+        }
+    }
 }

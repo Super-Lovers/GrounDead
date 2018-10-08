@@ -58,6 +58,7 @@
     <Compile Include="Assets\Scripts\BulletController.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\ForestGenerator.cs" />
+    <Compile Include="Assets\Scripts\GunpowderController.cs" />
     <Compile Include="Assets\Scripts\HitPointsController.cs" />
     <Compile Include="Assets\Scripts\HoverController.cs" />
     <Compile Include="Assets\Scripts\MenuController.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Assets\Scripts\UiButtonController.cs" />
     <Compile Include="Assets\Scripts\WorldGenerator.cs" />
     <Compile Include="Assets\Scripts\ZombieController.cs" />
+    <Compile Include="Assets\Scripts\ZombieNavigationController.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>/home/sdsquid/Documents/Unity Projects/Apocalypse-game-Y2P1/Apocalypse-survival-Y2P1/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
