@@ -74,20 +74,6 @@ public class ZombieController : MonoBehaviour
         playerDetectorPos = _player.transform.position;
         _playerDetector.transform.position = playerDetectorPos;
         
-        Vector2 pos = transform.position;
-
-        if (pos.x > playerDetectorPos.x)
-        {
-            //Debug.Log(pos.x + " " + prevPos.x);
-            gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", -1);
-            gameObject.GetComponent<SpriteRenderer>().flipX = true;
-        }
-        else if (pos.x < playerDetectorPos.x)
-        {
-            gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
-            gameObject.GetComponent<SpriteRenderer>().flipX = false;
-        }
-        
         // Distance length of the rays to be cast
         //float distance = (float)0.64 * RangeOfDetection; // 0.64 is the size of one tile
         //float radius = (float) 0.64 * RangeOfDetection;
@@ -107,6 +93,46 @@ public class ZombieController : MonoBehaviour
         {
             //Debug.DrawLine(transform.position, _player.transform.position, Color.red, 1.0f);
             gameObject.GetComponent<Animator>().SetBool("isWalking", false);
+        }
+        
+        Vector2 pos = transform.position;
+
+        RaycastHit2D rayUp = Physics2D.Raycast(transform.position, Vector2.up, 5, PlayerDetectorLayerMask);
+        RaycastHit2D rayDown = Physics2D.Raycast(transform.position, Vector2.down, 5, PlayerDetectorLayerMask);
+        
+        if (rayDown || rayUp)
+        {
+            gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 0);
+            gameObject.GetComponent<Animator>().SetFloat("directionVertical", 1);
+        }
+        else
+        {
+            if (pos.x > playerDetectorPos.x)
+            {
+                gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
+                gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
+                if (_zombieType == "Armored")
+                {
+                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                }
+                else
+                {
+                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                }
+            }
+            else if (pos.x < playerDetectorPos.x)
+            {
+                gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
+                gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
+                if (_zombieType == "Armored")
+                {
+                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                }
+                else
+                {
+                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                }
+            }
         }
 
         prevPos = transform.position;
