@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
     public static int CurrentZombiesAlive;
     public static int CurrentWave;
     public GameObject ZombieBasic;
+    public GameObject ZombieCop;
+    public GameObject ZombieBoss;
     public GameObject Weapon;
     public Sprite Knife;
     public Sprite Axe;
@@ -249,22 +251,6 @@ public class PlayerController : MonoBehaviour
         {
             _strafing = false;
         }
-        
-        /*if (Input.GetKeyDown(KeyCode.Q))
-        {
-            ClosePickingBlocks();
-            CloseButtonOnClick();
-            if (PlayMode == "Creative")
-            {
-                PlayMode = "Survival";
-                _notification.GetComponentInChildren<Text>().text = "You are now in " + PlayMode + " mode";
-            }
-            else
-            {
-                PlayMode = "Creative";
-                _notification.GetComponentInChildren<Text>().text = "You are now in " + PlayMode + " mode";
-            }
-        }*/
 
         if (Input.GetMouseButtonDown(0) && PlayMode == "Survival" && _canShoot && !EventSystem.current.IsPointerOverGameObject())
         {
@@ -449,9 +435,32 @@ public class PlayerController : MonoBehaviour
             {
                 if (NumberOfZombiesToSpawn > 0 && Random.Range(0, 101) < ChanceOfZombieToSpawn)
                 {
-                    var spawnedZombie = Instantiate(ZombieBasic,
-                        new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
-                    spawnedZombie.transform.tag = "Zombie";
+                    var randomZombie = Random.Range(0, 3);
+                    GameObject spawnedZombie;
+                    if (randomZombie == 0)
+                    {
+                        spawnedZombie = Instantiate(ZombieBasic,
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
+                        spawnedZombie.transform.tag = "Zombie";
+                    }
+                    else if (randomZombie == 1)
+                    {
+                        spawnedZombie = Instantiate(ZombieBoss,
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
+                        spawnedZombie.transform.tag = "Zombie Boss";
+                    }
+                    else if (randomZombie == 2)
+                    {
+                        spawnedZombie = Instantiate(ZombieCop,
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
+                        spawnedZombie.transform.tag = "Zombie Cop";
+                    }
+                    else
+                    {
+                        spawnedZombie = Instantiate(ZombieBasic,
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
+                        spawnedZombie.transform.tag = "Zombie";
+                    }
                 
                     for (int i = 0; i < UiButtonController.PlacedBlocks.Count - 1; i++)
                     {

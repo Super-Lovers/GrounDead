@@ -35,6 +35,8 @@ TagManager:
   - Gun powders
   - AddBulletsButton
   - PlayerBullets
+  - Zombie Boss
+  - Zombie Cop
   layers:
   - Default
   - TransparentFX

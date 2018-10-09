@@ -482,6 +482,6 @@ public class UiButtonController : MonoBehaviour
             GameObject.FindGameObjectWithTag("PlayerBullets").GetComponent<Text>().text = "Bullets: " + PlayerController.Bullets;
         }
         
-        Debug.Log("Added a bullet: " + PlayerController.Bullets);
+        //Debug.Log("Added a bullet: " + PlayerController.Bullets);
     }
 }

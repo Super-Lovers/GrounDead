@@ -111,7 +111,7 @@ public class BulletController : MonoBehaviour
 		
 		if (other.transform.tag != "Player")
 		{
-			if (other.transform.tag == "Zombie")
+			if (other.transform.tag == "Zombie" || other.transform.tag == "Zombie Boss" || other.transform.tag == "Zombie Cop")
 			{
 				DisableBullet();
 				

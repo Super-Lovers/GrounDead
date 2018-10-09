@@ -27,12 +27,15 @@ public class ZombieController : MonoBehaviour
     private GameObject _player;
     private GameObject _playerDetector;
     private string _zombieType = "Normal";
-
+        
+    Vector2 prevPos;
+    
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
         _playerDetector = GameObject.FindGameObjectWithTag("PlayerDetector");
 
+        /*
         var randomNum = Random.Range(0, 101);
 
         if (randomNum > 66.6f && randomNum < 87)
@@ -51,47 +54,62 @@ public class ZombieController : MonoBehaviour
             HitPoints = 80;
             Strength = 30;
         }
+        */
+
+        if (gameObject.tag == "Zombie Boss")
+        {
+            _zombieType = "Armored";
+        } else if (gameObject.tag == "Zombie")
+        {
+            _zombieType = "Normal";
+        } else if (gameObject.tag == "Zombie Cop")
+        {
+            _zombieType = "Advanced";
+        }
     }
 
     void Update ()
-    {
+    {   
         var playerDetectorPos = _playerDetector.transform.position;
         playerDetectorPos = _player.transform.position;
         _playerDetector.transform.position = playerDetectorPos;
-        /*
-        Ray2D rayLeft = new Ray2D(transform.position, Vector2.left);
-        Ray2D rayRight = new Ray2D(transform.position, Vector2.right);
-        Ray2D rayUp = new Ray2D(transform.position, Vector2.up);
-        Ray2D rayDown = new Ray2D(transform.position, Vector2.down);
-		*/
-         
+        
         Vector2 pos = transform.position;
+
+        if (pos.x > playerDetectorPos.x)
+        {
+            //Debug.Log(pos.x + " " + prevPos.x);
+            gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", -1);
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else if (pos.x < playerDetectorPos.x)
+        {
+            gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        }
+        
         // Distance length of the rays to be cast
-        float distance = (float)0.64 * RangeOfDetection; // 0.64 is the size of one tile
-        float radius = (float) 0.64 * RangeOfDetection;
-        Vector2 dir = new Vector2(1f, 1f);
+        //float distance = (float)0.64 * RangeOfDetection; // 0.64 is the size of one tile
+        //float radius = (float) 0.64 * RangeOfDetection;
+        //Vector2 dir = new Vector2(1f, 1f);
         
         //RaycastHit2D castResult = Physics2D.CircleCast(pos, radius, dir, distance, PlayerDetectorLayerMask);
         RaycastHit2D linecastResult = Physics2D.Linecast(transform.position, _player.transform.position, PlayerLayerMask);
         //if (castResult)
         //{
-            if (linecastResult.transform.tag == "Player")
-            {
-                Debug.DrawLine(transform.position, _player.transform.position, Color.green, 1.0f);
-                transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, MovementSpeed);
-                gameObject.GetComponent<Animator>().SetBool("isWalking", true);
-            }
-            else
-            {
-                Debug.DrawLine(transform.position, _player.transform.position, Color.red, 1.0f);
-                gameObject.GetComponent<Animator>().SetBool("isWalking", false);
-            }   
-        //}
-        //else
-        //{
-            //Debug.DrawLine(transform.position, _playerDetector.transform.position, Color.blue, 1.0f);
-        //}
-        // _audioSource.Play();
+        if (linecastResult.transform.tag == "Player")
+        {
+            //Debug.DrawLine(transform.position, _player.transform.position, Color.green, 1.0f);
+            transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, MovementSpeed);
+            gameObject.GetComponent<Animator>().SetBool("isWalking", true);
+        }
+        else
+        {
+            //Debug.DrawLine(transform.position, _player.transform.position, Color.red, 1.0f);
+            gameObject.GetComponent<Animator>().SetBool("isWalking", false);
+        }
+
+        prevPos = transform.position;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
