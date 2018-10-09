@@ -34,6 +34,7 @@ TagManager:
   - Melee Weapon
   - Gun powders
   - AddBulletsButton
+  - PlayerBullets
   layers:
   - Default
   - TransparentFX

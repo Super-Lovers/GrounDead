@@ -170,7 +170,8 @@ public class UiButtonController : MonoBehaviour
                         
                         if (Random.Range(0, 101) < 36)
                         {
-                            PlayerPrefs.SetFloat("Apples", PlayerController.Apples += 1);
+                            PlayerController.Apples += 1;
+                            PlayerPrefs.SetFloat("Apples", PlayerController.Apples);
                             GameObject.FindGameObjectWithTag("PlayerApples").GetComponent<Text>().text = PlayerPrefs.GetFloat("Apples").ToString();
                             
                             ApplesUi.GetComponent<Animator>().SetBool("shineApples", true);
@@ -407,15 +408,6 @@ public class UiButtonController : MonoBehaviour
     {
         if (PlayerPrefs.GetFloat("Stone") > 11 && PlayerPrefs.GetFloat("Copper") > 5)
         {
-            /*
-            PlayerPrefs.SetFloat("Stone", PlayerController.Stone -= 1);
-            PlayerPrefs.SetFloat("Copper", PlayerController.Copper -= 2);
-            GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text =
-                PlayerPrefs.GetFloat("Stone").ToString();
-            GameObject.FindGameObjectWithTag("PlayerCopper").GetComponent<Text>().text =
-                PlayerPrefs.GetFloat("Copper").ToString();
-            */
-            
             PlayerPrefs.SetFloat("Stone", PlayerController.Stone -= 12);
             GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerPrefs.GetFloat("Stone").ToString();
             
@@ -482,11 +474,12 @@ public class UiButtonController : MonoBehaviour
         {
             PlayerPrefs.SetFloat("Gun Powder", PlayerController.GunPowder -= 5);
             PlayerPrefs.SetFloat("Copper", PlayerController.Copper -= 5);
-            PlayerPrefs.SetFloat("Bullets", PlayerController.Bullets++);
+            PlayerPrefs.SetFloat("Bullets", PlayerController.Bullets += 20);
             
             
             GameObject.FindGameObjectWithTag("PlayerGunPowder").GetComponent<Text>().text = PlayerPrefs.GetFloat("Gun Powder").ToString();
             GameObject.FindGameObjectWithTag("PlayerCopper").GetComponent<Text>().text = PlayerPrefs.GetFloat("Copper").ToString();
+            GameObject.FindGameObjectWithTag("PlayerBullets").GetComponent<Text>().text = "Bullets: " + PlayerController.Bullets;
         }
         
         Debug.Log("Added a bullet: " + PlayerController.Bullets);

@@ -71,26 +71,26 @@ public class ZombieController : MonoBehaviour
         float radius = (float) 0.64 * RangeOfDetection;
         Vector2 dir = new Vector2(1f, 1f);
         
-        RaycastHit2D castResult = Physics2D.CircleCast(pos, radius, dir, distance, PlayerDetectorLayerMask);
+        //RaycastHit2D castResult = Physics2D.CircleCast(pos, radius, dir, distance, PlayerDetectorLayerMask);
         RaycastHit2D linecastResult = Physics2D.Linecast(transform.position, _player.transform.position, PlayerLayerMask);
-        if (castResult)
-        {
+        //if (castResult)
+        //{
             if (linecastResult.transform.tag == "Player")
             {
-                //Debug.DrawLine(transform.position, _player.transform.position, Color.green, 1.0f);
+                Debug.DrawLine(transform.position, _player.transform.position, Color.green, 1.0f);
                 transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, MovementSpeed);
                 gameObject.GetComponent<Animator>().SetBool("isWalking", true);
             }
             else
             {
-                //Debug.DrawLine(transform.position, _player.transform.position, Color.red, 1.0f);
+                Debug.DrawLine(transform.position, _player.transform.position, Color.red, 1.0f);
                 gameObject.GetComponent<Animator>().SetBool("isWalking", false);
             }   
-        }
-        else
-        {
+        //}
+        //else
+        //{
             //Debug.DrawLine(transform.position, _playerDetector.transform.position, Color.blue, 1.0f);
-        }
+        //}
         // _audioSource.Play();
     }
 

@@ -291,18 +291,23 @@ public class PlayerController : MonoBehaviour
             }
 
             Bullets--;
-            Debug.Log(Bullets);
+            GameObject.FindGameObjectWithTag("PlayerBullets").GetComponent<Text>().text = "Bullets: " + Bullets;
         }
         
-        if (Input.GetKeyDown(KeyCode.Q) && PlayerPrefs.GetFloat("Apples") > 0 && gameObject.GetComponent<HitPointsController>().HitPoints < 10)
+        if (Input.GetKeyDown(KeyCode.Q) && Apples > 0 && PlayerHealth < 270)
         {
             ApplesUi.GetComponent<Animator>().SetBool("shineApples", true);
             Invoke("StopApplesShineAnimation", 1);
-            
-            PlayerPrefs.SetFloat("Apples", Apples--);
+
+            Apples--;
+            PlayerPrefs.SetFloat("Apples", Apples);
             GameObject.FindGameObjectWithTag("PlayerApples").GetComponent<Text>().text = PlayerPrefs.GetFloat("Apples").ToString();
 
-            gameObject.GetComponent<HitPointsController>().HitPoints += 1;
+            gameObject.GetComponent<HitPointsController>().HitPoints += 27;
+            if (gameObject.GetComponent<HitPointsController>().HitPoints > 270)
+            {
+                gameObject.GetComponent<HitPointsController>().HitPoints = 270;
+            }
         }
         
         // Healing mechanic

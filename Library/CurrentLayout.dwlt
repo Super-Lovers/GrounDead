@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 521}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -107,10 +107,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 935
-  m_MinSize: {x: 713, y: 492}
-  m_MaxSize: {x: 18008, y: 14042}
+  m_MinSize: {x: 711, y: 471}
+  m_MaxSize: {x: 18006, y: 14021}
   vertical: 0
-  controlID: 51
+  controlID: 114
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -160,10 +160,10 @@ MonoBehaviour:
     y: 0
     width: 402
     height: 935
-  m_MinSize: {x: 234, y: 492}
-  m_MaxSize: {x: 10004, y: 14042}
+  m_MinSize: {x: 234, y: 471}
+  m_MaxSize: {x: 10004, y: 14021}
   vertical: 1
-  controlID: 52
+  controlID: 47
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -182,8 +182,8 @@ MonoBehaviour:
     y: 0
     width: 402
     height: 499
-  m_MinSize: {x: 204, y: 221}
-  m_MaxSize: {x: 4004, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -233,8 +233,8 @@ MonoBehaviour:
     y: 0
     width: 484
     height: 935
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -345,14 +345,14 @@ MonoBehaviour:
     height: 914
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 120883.50408101082
+  lastFramingTime: 15704.307502031326
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 489.58713, y: 393.43857, z: -5.375}
+    m_Target: {x: 43.585594, y: 14.396556, z: -3.6035156}
     speed: 2
-    m_Value: {x: 489.58713, y: 393.43857, z: -5.375}
+    m_Value: {x: 43.585594, y: 14.396556, z: -3.6035156}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -384,9 +384,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 823.3157
+    m_Target: 7.7242208
     speed: 2
-    m_Value: 823.3157
+    m_Value: 7.7242208
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -680,7 +680,7 @@ MonoBehaviour:
   m_AnimEditor: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -9429972
+  m_LastSelectedObjectID: 12948
 --- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -708,9 +708,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 602e0000
+    m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 96376fff2c1c70ff702070ff183a70ffa23a70ff90c185ff50c285ffe8c385ff42c785ff04c885ff4ac985ffcece85ff94cf85ffdad085ffd6d585ff96d685ffdcd785fffe9c9effc09d9eff829f9eff20cdd4ffdacdd4ff22cfd4ff60d2d4ff18d3d4ff60d4d4ff6850d9ff3858d9ffa06ad9ff4274d9fff4a6dfff62a7dfff4c3ae1ff0ab1e1ff2e96e2ff6ad4e2ff944be3ff00b8e3ff92e1f2ffe4fbffff00000000322f0000422f00004c2f0000742f0000842f00009c2f0000a02f0000a62f0000aa2f0000be2f0000d62f0000e02f0000f22f000002300000063000002030000030300000423000004a300000523000005c3000006c30000084300000aa300000ba300000be300000c230000018a0000032a000005aa0000090a0000028a1000030a1000042a1000086a10000a0a10000
+    m_ExpandedIDs: 960fe7ff6c10e7ffbc10e7ff2411e7ff9a11e7ff765beaff8c5beafffe65eaff3c60f9ff6269f9ffe4fbffff0000000030310000743100008e310000f03100001c3200003632000094320000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -771,34 +771,34 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Prefabs/Structures/Player Structures
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Prefabs/Structures/Player Structures
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /home/sdsquid/Documents/Unity Projects/Apocalypse-game-Y2P1/Apocalypse-survival-Y2P1
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 278}
-    m_SelectedIDs: fa290000
-    m_LastClickedID: 10746
-    m_ExpandedIDs: 00000000aa290000ec290000a02a0000b62a0000e42a0000042d00009a2d0000ca2d0000be2e0000f42e000000ca9a3b
+    scrollPos: {x: 0, y: 277}
+    m_SelectedIDs: 262c0000
+    m_LastClickedID: 11302
+    m_ExpandedIDs: 00000000ae290000f6290000ae2a0000c42a0000f22a0000a02e0000be2e0000fa2e000072300000a830000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Coppers
+      m_OriginalName: Coppers
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 10980
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 9}
     m_SearchString: 
@@ -812,7 +812,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000aa290000ec290000a02a0000b62a0000e42a0000042d00009a2d0000ca2d0000be2e0000f42e0000
+    m_ExpandedIDs: 00000000ae290000f6290000ae2a0000c42a0000f22a0000a02e0000be2e0000fa2e000072300000a8300000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -840,7 +840,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: 722d000024410000ce2d0000c62a0000
+    m_ExpandedInstanceIDs: 722d000024410000ce2d0000c62a00005c2a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -887,9 +887,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1035
+    x: 1036
     y: 643
-    width: 397
+    width: 398
     height: 415
   m_PersistentViewDataDictionary: {fileID: 0}
 --- !u!114 &19
