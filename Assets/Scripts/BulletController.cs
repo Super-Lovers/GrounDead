@@ -99,6 +99,20 @@ public class BulletController : MonoBehaviour
 					// Updating the score UI and player score after a obstacle is destroyed
 					GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
 					
+					// Player Statistics
+					MenuController.TotalZombiesDefeated++;
+					if (gameObject.tag == "Zombie Boss")
+					{
+						MenuController.TotalZombieBossesDefeated++;
+					} else if (gameObject.tag == "Zombie")
+					{
+						MenuController.TotalZombieCitizensDefeated++;
+					} else if (gameObject.tag == "Zombie Cop")
+					{
+						MenuController.TotalZombieCopsDefeated++;
+					}
+					MenuController.TotalHostilityScore += 100;
+					
 					PlayerController.NumberOfZombiesKilled++;
 					Destroy(gameObject);
 				}
@@ -136,7 +150,22 @@ public class BulletController : MonoBehaviour
 						Instantiate(GunPowderPickUp, new Vector2(other.transform.position.x, other.transform.position.y), Quaternion.identity);
 					}
 					
+					// Player Statistics
+					MenuController.TotalZombiesDefeated++;
+					if (gameObject.tag == "Zombie Boss")
+					{
+						MenuController.TotalZombieBossesDefeated++;
+					} else if (gameObject.tag == "Zombie")
+					{
+						MenuController.TotalZombieCitizensDefeated++;
+					} else if (gameObject.tag == "Zombie Cop")
+					{
+						MenuController.TotalZombieCopsDefeated++;
+					}
+					MenuController.TotalHostilityScore += 100;
+					
 					PlayerController.NumberOfZombiesKilled++;
+					
 					Destroy(_obstacle);
 					Destroy(gameObject);
 				}
@@ -149,7 +178,7 @@ public class BulletController : MonoBehaviour
 		}
 		// And if the bullet doesnt hit anything, itll dissapear
 		// after a second, so that it doesnt go forever.
-		Invoke("DestroyObject", 1f);
+		Invoke("DestroyBullet", 1f);
 	}
 
 	private IEnumerator FlashZombie()
@@ -162,10 +191,9 @@ public class BulletController : MonoBehaviour
 			yield return new WaitForSeconds(.1f);	
 		}
 		
-		
 		_obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
 				
-		PlayerController.NumberOfZombiesKilled++;
+		
 		Destroy(gameObject);
 	}
 
@@ -179,13 +207,13 @@ public class BulletController : MonoBehaviour
 			yield return new WaitForSeconds(.1f);	
 		}
 		
-		
 		_obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
-				
+		
+		
 		Destroy(gameObject);
 	}
 
-	private void DestroyObject()
+	private void DestroyBullet()
 	{
 		Destroy(gameObject);
 	}

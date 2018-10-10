@@ -176,9 +176,17 @@ public class UiButtonController : MonoBehaviour
                             
                             ApplesUi.GetComponent<Animator>().SetBool("shineApples", true);
                             Invoke("StopApplesShineAnimation", 1);
+            
+                            // Player Statistics
+                            MenuController.TotalApplesCollected++;
+                            MenuController.TotalGatheringScore += 100;
                         }
                         
                         GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerPrefs.GetFloat("Wood").ToString();
+            
+                        // Player Statistics
+                        MenuController.TotalTreesChopped++;
+                        MenuController.TotalGatheringScore += 100;
                         
                         //Playing a sound effect
                         _cameraAudioSource.PlayOneShot(TreeFalling);
@@ -193,6 +201,10 @@ public class UiButtonController : MonoBehaviour
                         PlayerPrefs.SetFloat("Stone", PlayerController.Stone += Random.Range(2, 5));
                         GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerPrefs.GetFloat("Stone").ToString();
                         _cameraAudioSource.PlayOneShot(Mining);
+
+                        MenuController.TotalStoneMined++;
+                        MenuController.TotalGatheringScore += 100;
+                        
                         break;
                     }
                     if (nameOfBlock == "copper")
@@ -203,6 +215,11 @@ public class UiButtonController : MonoBehaviour
                         PlayerPrefs.SetFloat("Copper", PlayerController.Copper += 3);
                         GameObject.FindGameObjectWithTag("PlayerCopper").GetComponent<Text>().text = PlayerPrefs.GetFloat("Copper").ToString();
                         _cameraAudioSource.PlayOneShot(Mining);
+                        
+                        // Player Statistics
+                        MenuController.TotalCopperMined++;
+                        MenuController.TotalGatheringScore += 100;
+                        
                         break;
                     }
                 }
@@ -292,6 +309,10 @@ public class UiButtonController : MonoBehaviour
                 ui.transform.position = uiPos;
             }
             
+            // Player Statistics
+            MenuController.TotalWoodenWallsBuilt++;
+            MenuController.TotalBuildingScore += 100;
+            
             _cameraAudioSource.PlayOneShot(StructurePlacement);
         }
     }
@@ -320,6 +341,10 @@ public class UiButtonController : MonoBehaviour
                 uiPos.x += 1000;
                 ui.transform.position = uiPos;
             }
+            
+            // Player Statistics
+            MenuController.TotalStoneWallsBuilt++;
+            MenuController.TotalBuildingScore += 100;
             
             _cameraAudioSource.PlayOneShot(StructurePlacement);
         }
@@ -368,6 +393,10 @@ public class UiButtonController : MonoBehaviour
                 ui.transform.position = uiPos;
             }
             
+            // Player Statistics
+            MenuController.TotalPlatformsBuilt++;
+            MenuController.TotalBuildingScore += 100;
+            
             _cameraAudioSource.PlayOneShot(StructurePlacement);
         }
     }
@@ -399,6 +428,10 @@ public class UiButtonController : MonoBehaviour
                 uiPos.x += 1000;
                 ui.transform.position = uiPos;
             }
+            
+            // Player Statistics
+            MenuController.TotalSpikeTrapsBuilt++;
+            MenuController.TotalBuildingScore += 100;
             
             _cameraAudioSource.PlayOneShot(StructurePlacement);
         }
@@ -432,6 +465,10 @@ public class UiButtonController : MonoBehaviour
                 ui.transform.position = uiPos;
             }
             
+            // Player Statistics
+            MenuController.TotalElectricFencesBuilt++;
+            MenuController.TotalBuildingScore += 100;
+            
             _cameraAudioSource.PlayOneShot(StructurePlacement);
         }
     }
@@ -463,6 +500,10 @@ public class UiButtonController : MonoBehaviour
                 uiPos.x += 1000;
                 ui.transform.position = uiPos;
             }
+            
+            // Player Statistics
+            MenuController.TotalTorchesBuilt++;
+            MenuController.TotalBuildingScore += 100;
             
             _cameraAudioSource.PlayOneShot(StructurePlacement);
         }

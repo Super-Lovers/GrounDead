@@ -11,6 +11,10 @@ public class GunpowderController : MonoBehaviour {
 			PlayerPrefs.SetFloat("Gun Powder", PlayerController.GunPowder);
 			GameObject.FindGameObjectWithTag("PlayerGunPowder").GetComponent<Text>().text = PlayerPrefs.GetFloat("Gun Powder").ToString();
 		
+			// Player Statistics
+			MenuController.TotalGunPowderCollected++;
+			MenuController.TotalGatheringScore += 100;
+			
 			Destroy(gameObject);
 		}
 	}

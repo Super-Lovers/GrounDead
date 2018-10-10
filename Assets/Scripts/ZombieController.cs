@@ -161,6 +161,22 @@ public class ZombieController : MonoBehaviour
                 }
 
                 PlayerController.NumberOfZombiesKilled++;
+                
+                // Player Statistics
+                MenuController.TotalZombiesDefeated++;
+                if (gameObject.tag == "Zombie Boss")
+                {
+                    MenuController.TotalZombieBossesDefeated++;
+                } else if (gameObject.tag == "Zombie")
+                {
+                    MenuController.TotalZombieCitizensDefeated++;
+                } else if (gameObject.tag == "Zombie Cop")
+                {
+                    MenuController.TotalZombieCopsDefeated++;
+                }
+
+                MenuController.TotalHostilityScore += 100;
+                
                 Destroy(gameObject);
             }
             if (other.GetComponent<SpriteRenderer>().sprite == other.GetComponentInParent<PlayerController>().Knife)
@@ -203,6 +219,32 @@ public class ZombieController : MonoBehaviour
                         // Because the sound effect of destroying a building is halted
                         // once its destroyed, we run another oneshot from the zombie
                         // closest that destroyed it.
+                        
+                        // Player Statistics
+                        /*if (_obstacle.name == "BlockSpikes(Clone)")
+                        {
+                            MenuController.TotalSpikeTrapsBuilt++;
+                        } else if (_obstacle.name == "BlockElectricFence(Clone)")
+                        {
+                            MenuController.TotalElectricFencesBuilt++;
+                        } else if (_obstacle.name == "BlockWood(Clone)")
+                        {
+                            MenuController.TotalWoodenWallsBuilt++;
+                        } else if (_obstacle.name == "BlockStoneWall(Clone)")
+                        {
+                            MenuController.TotalStoneWallsBuilt++;
+                        } else if (_obstacle.name == "BlockPlatform(Clone)")
+                        {
+                            MenuController.TotalPlatformsBuilt++;
+                        } else if (_obstacle.name == "BlockTorch(Clone)")
+                        {
+                            MenuController.TotalTorchesBuilt++;
+                        }*/
+                        
+                        MenuController.TotalBuildingsDestroyed++;
+                        MenuController.TotalBuildingScore += 100;
+                        MenuController.TotalHostilityScore += 100;
+                        
                         Destroy(_obstacle);
                         UiButtonController.PlacedBlocks.Remove(_obstacle);
 

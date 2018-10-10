@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
     public int NumberOfZombiesToSpawn;
     public int ChanceOfZombieToSpawn;
     public static int CurrentZombiesAlive;
-    public static int CurrentWave;
+    public static int CurrentDay;
     public GameObject ZombieBasic;
     public GameObject ZombieCop;
     public GameObject ZombieBoss;
@@ -302,8 +302,8 @@ public class PlayerController : MonoBehaviour
             SpawnZombies();
             
             // When the zombies are spawned, the wave counter is increased
-            CurrentWave++;
-            GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Wave: " + CurrentWave;
+            CurrentDay++;
+            GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Day: " + CurrentDay;
         }
         
         // *********************
@@ -488,9 +488,9 @@ public class PlayerController : MonoBehaviour
             currentY -= 0.64f;
         }
         
-        // When the zombies are spawned, the wave counter is increased
-        CurrentWave++;
-        GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Wave: " + CurrentWave;
+        // When the zombies are spawned, the day counter is increased
+        CurrentDay++;
+        GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Day: " + CurrentDay;
     }
 
     private void CanShoot()

@@ -37,6 +37,7 @@ TagManager:
   - PlayerBullets
   - Zombie Boss
   - Zombie Cop
+  - Tutorial
   layers:
   - Default
   - TransparentFX
