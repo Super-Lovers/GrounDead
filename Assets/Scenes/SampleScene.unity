@@ -1029,7 +1029,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: eab60975aed5843bdb4fef8fdb9ea01e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.005
+  m_Volume: 0.11
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1322,7 +1322,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Bullets: 100'
+  m_Text: 'Bullets: 10'
 --- !u!222 &545489646
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4559,7 +4559,7 @@ GameObject:
   - component: {fileID: 1939272181}
   m_Layer: 5
   m_Name: Gunpowder
-  m_TagString: Untagged
+  m_TagString: PlayerGunPowderUi
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4590,9 +4590,9 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1939272179}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0938f4b990e2a4f07b0fc8945f9920ba, type: 2}
+  m_Controller: {fileID: 9100000, guid: e6df675ecb73b4489b4c25f3adfadbed, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4636,7 +4636,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c91db3febfdcf4bbe96617eea3f30517, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 82bca58a8b40e4477a85d5558aa0a7f8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4666,7 +4666,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c91db3febfdcf4bbe96617eea3f30517, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 82bca58a8b40e4477a85d5558aa0a7f8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5116,7 +5116,7 @@ GameObject:
   - component: {fileID: 1989225530}
   - component: {fileID: 1989225529}
   m_Layer: 5
-  m_Name: ScoreAndWave (1)
+  m_Name: Bullets
   m_TagString: NotificationUi
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5327,7 +5327,7 @@ MonoBehaviour:
   DayTheme: {fileID: 8300000, guid: eab60975aed5843bdb4fef8fdb9ea01e, type: 3}
   NightTheme: {fileID: 8300000, guid: 85a290018abba4c20a209abdfabc3a62, type: 3}
   Ammo: {fileID: 1424667368842196, guid: 30b22b472983a405f9b863da6db8e9f7, type: 2}
-  NumberOfZombiesToSpawn: 5
+  NumberOfZombiesToSpawn: 13
   ChanceOfZombieToSpawn: 1
   ZombieBasic: {fileID: 1828038574458888, guid: 6ec8842d451254e3c87195f1bde036a4,
     type: 2}

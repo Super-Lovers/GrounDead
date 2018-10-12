@@ -38,6 +38,7 @@ TagManager:
   - Zombie Boss
   - Zombie Cop
   - Tutorial
+  - PlayerGunPowderUi
   layers:
   - Default
   - TransparentFX

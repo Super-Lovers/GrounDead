@@ -23,12 +23,12 @@ public class PlayerController : MonoBehaviour
     protected static GameObject[] ActionsUi;
     protected static GameObject[] PickUi;
     //private GameObject _notification;
-    public static int Wood = 50;
-    public static int Stone = 50;
-    public static int Copper = 50;
+    public static int Wood = 0;
+    public static int Stone = 0;
+    public static int Copper = 0;
     public static int GunPowder = 0;
     public static int Apples;
-    public static int Bullets = 100;
+    public static int Bullets = 10;
     public Texture PlayerPortrait;
     public Texture HealthTexture;
     public Texture HealthBackgroundTexture;
@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour
             _strafing = false;
         }
 
-        if (Input.GetMouseButtonDown(0) && PlayMode == "Survival" && _canShoot && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && PlayMode == "Survival" && _canShoot && !EventSystem.current.IsPointerOverGameObject() && Bullets > 0)
         {
             if (Animator.GetInteger("direction") == 1 || Animator.GetInteger("direction") == 2)
             {

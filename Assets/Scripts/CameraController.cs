@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour {
 	void Update ()
 	{
 		Vector3 cameraPos = Player.transform.position;
+		
 		cameraPos.z = -10;
 		gameObject.transform.position = cameraPos;
 	}
