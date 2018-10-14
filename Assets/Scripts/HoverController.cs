@@ -28,7 +28,6 @@ public class HoverController : MonoBehaviour
         _actionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
         _pickUi = GameObject.FindGameObjectsWithTag("PickUI");
         _transform = GetComponent<Transform>();
-        //_collider2D = GetComponent<BoxCollider2D>();
     }
 
     private void OnMouseEnter()
@@ -37,8 +36,8 @@ public class HoverController : MonoBehaviour
         float playerPosX = GameObject.FindGameObjectWithTag("Player").transform.position.x;
         float playerPosY = GameObject.FindGameObjectWithTag("Player").transform.position.y;
         
-        if ((playerPosX + 1 < hoverPosition.x || playerPosX - 1 > hoverPosition.x) ||
-            playerPosY + 1 < hoverPosition.y || playerPosY - 1 > hoverPosition.y)
+        if ((playerPosX + 1f < hoverPosition.x || playerPosX - 1f > hoverPosition.x) ||
+            playerPosY + 1f < hoverPosition.y || playerPosY - 1f > hoverPosition.y)
         {
             _isOutOfRange = true;
         }
@@ -56,7 +55,7 @@ public class HoverController : MonoBehaviour
             // error where the grass beneath a tree is highlighted instead
             // of the tree itself, and redirects the mouse selector which will
             // still give feedback to the player for the actual, intended, object.
-            if (_transform.name == "grass1(Clone)")
+            if (_transform.name == "grass1(Clone)" || _transform.name == "grass2(Clone)" || _transform.name == "grass3(Clone)" || _transform.name == "grass4(Clone)" || _transform.name == "grass5(Clone)" || _transform.name == "grass1Inverted(Clone)")
             {
                 foreach (var block in UiButtonController.PlacedBlocks)
                 {

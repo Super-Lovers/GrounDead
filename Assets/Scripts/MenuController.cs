@@ -30,7 +30,7 @@ public class MenuController : MonoBehaviour {
 	public static int TotalGunPowderCollected;
 	
 	// Tutorial part counter
-	private int _tutorialPart = 0;
+	//private int _tutorialPart = 0;
 
 	public GameObject PartOne;
 	public GameObject PartTwo;

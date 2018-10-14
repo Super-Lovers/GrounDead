@@ -39,6 +39,7 @@ TagManager:
   - Zombie Cop
   - Tutorial
   - PlayerGunPowderUi
+  - Pop-upUi
   layers:
   - Default
   - TransparentFX
@@ -53,7 +54,7 @@ TagManager:
   - BulletObstacles
   - StopBullets
   - DetectPlayer
-  - 
+  - BuildingBlock
   - 
   - 
   - 

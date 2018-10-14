@@ -25,15 +25,15 @@ public class ZombieController : MonoBehaviour
     public GameObject GunPowderPickUp;
     private bool _isHittingObject;
     private GameObject _player;
-    private GameObject _playerDetector;
+    private GameObject[] _playerDetector;
+    private System.Collections.Generic.List<GameObject> _playerDetectorList;
     private string _zombieType = "Normal";
         
-    Vector2 prevPos;
+    //Vector2 prevPos;
     
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
-        _playerDetector = GameObject.FindGameObjectWithTag("PlayerDetector");
 
         /*
         var randomNum = Random.Range(0, 101);
@@ -69,73 +69,107 @@ public class ZombieController : MonoBehaviour
     }
 
     void Update ()
-    {   
-        var playerDetectorPos = _playerDetector.transform.position;
-        playerDetectorPos = _player.transform.position;
-        _playerDetector.transform.position = playerDetectorPos;
+    {
+        _playerDetector = GameObject.FindGameObjectsWithTag("PlayerDetector");
         
-        // Distance length of the rays to be cast
-        //float distance = (float)0.64 * RangeOfDetection; // 0.64 is the size of one tile
-        //float radius = (float) 0.64 * RangeOfDetection;
-        //Vector2 dir = new Vector2(1f, 1f);
-        
-        //RaycastHit2D castResult = Physics2D.CircleCast(pos, radius, dir, distance, PlayerDetectorLayerMask);
-        RaycastHit2D linecastResult = Physics2D.Linecast(transform.position, _player.transform.position, PlayerLayerMask);
-        //if (castResult)
-        //{
-        if (linecastResult.transform.tag == "Player")
+        for (int i = 0; i < _playerDetector.Length; i++)
         {
-            //Debug.DrawLine(transform.position, _player.transform.position, Color.green, 1.0f);
+            var playerDetectorPos = _playerDetector[i].transform.position;
+        
+            // Distance length of the rays to be cast
+            //float distance = (float)0.64 * RangeOfDetection; // 0.64 is the size of one tile
+            //float radius = (float) 0.64 * RangeOfDetection;
+            //Vector2 dir = new Vector2(1f, 1f);
+        
+            //RaycastHit2D castResult = Physics2D.CircleCast(pos, radius, dir, distance, PlayerDetectorLayerMask);
+            RaycastHit2D linecastResult = Physics2D.Linecast(transform.position, playerDetectorPos, PlayerLayerMask);
+            //if (castResult)
+            //{
+            if (linecastResult.transform.tag == "Player")
+            {
+                Debug.DrawLine(transform.position, playerDetectorPos, Color.green, 1.0f);
+                transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, MovementSpeed);
+                gameObject.GetComponent<Animator>().SetBool("isWalking", true);
+            }
+            else if (linecastResult.transform.tag == "PlayerDetector")
+            {
+                Debug.DrawLine(transform.position, playerDetectorPos, Color.green, 1.0f);
+                transform.position = Vector2.MoveTowards(transform.position, _playerDetector[i].transform.position, MovementSpeed);
+                gameObject.GetComponent<Animator>().SetBool("isWalking", true);
+            }
+            else
+            {
+                Debug.DrawLine(transform.position, playerDetectorPos, Color.red, 1.0f);
+                gameObject.GetComponent<Animator>().SetBool("isWalking", false); 
+            }
+        
+            Vector2 pos = transform.position;
+
+            RaycastHit2D rayUp = Physics2D.Raycast(transform.position, Vector2.up, 5, PlayerDetectorLayerMask);
+            RaycastHit2D rayDown = Physics2D.Raycast(transform.position, Vector2.down, 5, PlayerDetectorLayerMask);
+        
+            if (rayDown || rayUp)
+            {
+                gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 0);
+                gameObject.GetComponent<Animator>().SetFloat("directionVertical", 1);
+            }
+            else
+            {
+                if (pos.x > playerDetectorPos.x)
+                {
+                    gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
+                    gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
+                    if (_zombieType == "Armored")
+                    {
+                        gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                    }
+                }
+                else if (pos.x < playerDetectorPos.x)
+                {
+                    gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
+                    gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
+                    if (_zombieType == "Armored")
+                    {
+                        gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                    }
+                }
+            }
+        }
+        
+        /* if (linecastResult.transform.tag == "Player")
+        {
+            Debug.DrawLine(transform.position, _player.transform.position, Color.green, 1.0f);
             transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, MovementSpeed);
             gameObject.GetComponent<Animator>().SetBool("isWalking", true);
         }
         else
         {
-            //Debug.DrawLine(transform.position, _player.transform.position, Color.red, 1.0f);
-            gameObject.GetComponent<Animator>().SetBool("isWalking", false);
-        }
-        
-        Vector2 pos = transform.position;
-
-        RaycastHit2D rayUp = Physics2D.Raycast(transform.position, Vector2.up, 5, PlayerDetectorLayerMask);
-        RaycastHit2D rayDown = Physics2D.Raycast(transform.position, Vector2.down, 5, PlayerDetectorLayerMask);
-        
-        if (rayDown || rayUp)
-        {
-            gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 0);
-            gameObject.GetComponent<Animator>().SetFloat("directionVertical", 1);
-        }
-        else
-        {
-            if (pos.x > playerDetectorPos.x)
+            foreach (var block in UiButtonController.PlacedBlocks)
             {
-                gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
-                gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
-                if (_zombieType == "Armored")
+                RaycastHit2D linecastBlockResult = Physics2D.Linecast(transform.position, block.transform.position, PlayerLayerMask);
+                if (linecastBlockResult.transform.tag == "PlayerDetector")
                 {
-                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                    transform.position = Vector2.MoveTowards(transform.position, block.transform.position, MovementSpeed);
+                    gameObject.GetComponent<Animator>().SetBool("isWalking", true);
                 }
                 else
                 {
-                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                    gameObject.GetComponent<Animator>().SetBool("isWalking", false); 
                 }
-            }
-            else if (pos.x < playerDetectorPos.x)
-            {
-                gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
-                gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
-                if (_zombieType == "Armored")
-                {
-                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
-                }
-                else
-                {
-                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                }
+                Debug.DrawLine(transform.position, block.transform.position, Color.red, 1.0f);
             }
         }
+        */
 
-        prevPos = transform.position;
+        //prevPos = transform.position;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -245,12 +279,14 @@ public class ZombieController : MonoBehaviour
                         MenuController.TotalBuildingScore += 100;
                         MenuController.TotalHostilityScore += 100;
                         
-                        Destroy(_obstacle);
+                        //_playerDetectorList.Remove(_obstacle);
                         UiButtonController.PlacedBlocks.Remove(_obstacle);
 
                         PlayerController.Score += 100;
                         GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text =
                             "Score: " + PlayerController.Score;
+                        
+                        Destroy(_obstacle);
                     }
                 }
                 else

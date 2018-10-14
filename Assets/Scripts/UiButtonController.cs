@@ -14,6 +14,7 @@ public class UiButtonController : MonoBehaviour
     public GameObject Spikes;
     public GameObject Fence;
     public GameObject Torch;
+    public GameObject PopUp;
     static public List<GameObject> PlacedBlocks = new List<GameObject>();
     static public List<GameObject> PlacedWaterBlocks = new List<GameObject>();
 
@@ -124,6 +125,12 @@ public class UiButtonController : MonoBehaviour
                 ui.SetActive(true);
                 actionsUiPos.x = Input.mousePosition.x;
                 actionsUiPos.y = Input.mousePosition.y;
+            }
+            else if (ui.name == "Pop-ups")
+            {
+                ui.SetActive(true);
+                actionsUiPos.x = Input.mousePosition.x + 330;
+                actionsUiPos.y = Input.mousePosition.y + 100;
             }
 
             ui.transform.position = actionsUiPos;
@@ -298,6 +305,7 @@ public class UiButtonController : MonoBehaviour
             woodWall.GetComponent<HitPointsController>().HitPoints = 100;
 		
             PlacedBlocks.Add(woodWall);
+            //ZombieController._playerDetectorList.Add(woodWall);
         
             ClosePickingBlocks();
         
