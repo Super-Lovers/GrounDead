@@ -38,6 +38,10 @@ public class BulletController : MonoBehaviour
 		{
 			SpeedX *= -1;
 			SpeedY = 0;
+		} else if (PlayerController.Animator.GetInteger("direction") == 5)
+		{
+			SpeedY *= -1;
+			SpeedX = 0;
 		}
 	}
 	

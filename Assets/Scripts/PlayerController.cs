@@ -282,6 +282,15 @@ public class PlayerController : MonoBehaviour
                 
                 _canShoot = false;
                 Invoke("CanShoot", 0.7f);
+            } else if (Animator.GetInteger("direction") == 5)
+            {
+                var bullet = Instantiate(Ammo,
+                    new Vector3(transform.position.x, transform.position.y, transform.position.z)
+                    , Quaternion.identity, transform);
+                bullet.GetComponent<Transform>().Rotate(0, 0, 90);
+                
+                _canShoot = false;
+                Invoke("CanShoot", 0.7f);
             }
 
             Bullets--;

@@ -201,9 +201,10 @@ public class ZombieController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        _isHittingObject = true;
+        
         if (other.transform.tag == "Player" || other.gameObject.layer == 10)
         {
+            gameObject.GetComponent<Animator>().SetBool("isHittingObject", true);
             gameObject.GetComponent<Rigidbody2D>().constraints =
                 RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
             gameObject.GetComponent<Animator>().SetBool("isWalking", false);
@@ -255,7 +256,6 @@ public class ZombieController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        _isHittingObject = true;
         gameObject.GetComponent<Rigidbody2D>().constraints =
             RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         
@@ -440,9 +440,9 @@ public class ZombieController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        _isHittingObject = false;
         if (other.transform.tag == "Player" || other.gameObject.layer == 10)
         {
+            gameObject.GetComponent<Animator>().SetBool("isHittingObject", false);
             gameObject.GetComponent<Rigidbody2D>().constraints =
                 RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         }

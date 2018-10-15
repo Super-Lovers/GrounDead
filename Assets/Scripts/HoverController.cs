@@ -36,8 +36,8 @@ public class HoverController : MonoBehaviour
         float playerPosX = GameObject.FindGameObjectWithTag("Player").transform.position.x;
         float playerPosY = GameObject.FindGameObjectWithTag("Player").transform.position.y;
         
-        if ((playerPosX + 1f < hoverPosition.x || playerPosX - 1f > hoverPosition.x) ||
-            playerPosY + 1f < hoverPosition.y || playerPosY - 1f > hoverPosition.y)
+        if ((playerPosX + 0.64f < hoverPosition.x || playerPosX - 0.96f > hoverPosition.x) ||
+            playerPosY + 0.64f < hoverPosition.y || playerPosY - 0.96f > hoverPosition.y)
         {
             _isOutOfRange = true;
         }
