@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
     
     public static Animator Animator;
     private Rigidbody2D _rb;
-
+    //private SpriteRenderer _spriteRenderer;
+    
     private bool _right;
     private bool _left;
     private bool _top;
@@ -89,6 +90,7 @@ public class PlayerController : MonoBehaviour
         PickUi = GameObject.FindGameObjectsWithTag("PickUI");
         _audioSource = gameObject.GetComponent<AudioSource>();
         _cameraAudioSource = CameraAudioSource.GetComponent<AudioSource>();
+        //_spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         //_notification = GameObject.FindGameObjectWithTag("NotificationUi");
 
         PlayerHealth = (gameObject.GetComponent<HitPointsController>().HitPoints * 27) / 10f;
@@ -139,7 +141,7 @@ public class PlayerController : MonoBehaviour
             weaponPos.y = transform.position.y + 0.007f;
             weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             
-            Animator.enabled = true;
+            //Animator.enabled = true;
             // If the player moves when he has the menu for actions
             // up then it will be automatically closed
             CloseButtonOnClick();
@@ -163,7 +165,7 @@ public class PlayerController : MonoBehaviour
             weaponPos.y = transform.position.y + 0.007f;
             weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
             
-            Animator.enabled = true;
+            //Animator.enabled = true;
             CloseButtonOnClick();
             ClosePickingBlocks();
 
@@ -184,7 +186,7 @@ public class PlayerController : MonoBehaviour
             weaponPos.y = transform.position.y + 0.45f;
             weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
             
-            Animator.enabled = true;
+            //Animator.enabled = true;
             CloseButtonOnClick();
             ClosePickingBlocks();
             
@@ -205,7 +207,7 @@ public class PlayerController : MonoBehaviour
             weaponPos.y = transform.position.y + (0.45f * -1);
             weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 270));
             
-            Animator.enabled = true;
+            //Animator.enabled = true;
             CloseButtonOnClick();
             ClosePickingBlocks();
             
@@ -223,14 +225,20 @@ public class PlayerController : MonoBehaviour
         }
         else // Idle
         {
-            Animator.SetInteger("direction", _lastDir);
             if (_strafing)
             {
-                Animator.enabled = true;
+                if (horizontalMovement == 0 && verticalMovement == 0)
+                {
+                    Animator.SetInteger("direction", 5);
+                }
+                else
+                {
+                    Animator.SetInteger("direction", _lastDir);
+                }
             }
             else
             {
-                Animator.enabled = false;
+                Animator.SetInteger("direction", 5);
             }
             
             _gunHolePos.x = transform.position.x;
