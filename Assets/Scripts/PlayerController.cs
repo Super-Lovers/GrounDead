@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
     private bool _strafing;
     private bool _isItDay = true;
     private bool _canShoot = true;
+    public static bool IsPaused;
+    private GameObject _pauseMenu;
     
     // Zombie parameter responsible for the rate of zombie spawns
     public int NumberOfZombiesToSpawn;
@@ -90,8 +92,14 @@ public class PlayerController : MonoBehaviour
         PickUi = GameObject.FindGameObjectsWithTag("PickUI");
         _audioSource = gameObject.GetComponent<AudioSource>();
         _cameraAudioSource = CameraAudioSource.GetComponent<AudioSource>();
+        _pauseMenu = GameObject.Find("PauseMenu");
         //_spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         //_notification = GameObject.FindGameObjectWithTag("NotificationUi");
+        
+        // Hide the pause menu when the game begins, so we can
+        // show it only when the player presses backspace.
+        _pauseMenu.SetActive(false);
+
 
         PlayerHealth = (gameObject.GetComponent<HitPointsController>().HitPoints * 27) / 10f;
         
@@ -107,7 +115,6 @@ public class PlayerController : MonoBehaviour
         // *******
         // Day/Night Cycle (work in progress)
         // *******
-        // Changing the light (dark/bright) for debug purposes
         InvokeRepeating("UpdateWorldTime", 20, 20);
     }
 
@@ -130,225 +137,255 @@ public class PlayerController : MonoBehaviour
     void Update () {
         // Setting the animation of the player to face the right direction
         // whenever he is pressing the buttons on the axis
-        var horizontalMovement = Input.GetAxis("Horizontal");
-        var verticalMovement = Input.GetAxis("Vertical");
-        var weaponTransform = Weapon.transform;
-        var weaponPos = Weapon.transform.position;
+        float horizontalMovement;
+        float verticalMovement;
         
-        if (horizontalMovement > 0 && _strafing == false) // Right
+        if (!IsPaused)
         {
-            weaponPos.x = transform.position.x + 0.4f;
-            weaponPos.y = transform.position.y + 0.007f;
-            weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            horizontalMovement = Input.GetAxis("Horizontal");
+            verticalMovement = Input.GetAxis("Vertical");
             
-            //Animator.enabled = true;
-            // If the player moves when he has the menu for actions
-            // up then it will be automatically closed
-            CloseButtonOnClick();
-            ClosePickingBlocks();
+            var weaponTransform = Weapon.transform;
+            var weaponPos = Weapon.transform.position;
             
-            // Play the walking sound effect
-            if (!_isWalking)
+            if (horizontalMovement > 0 && _strafing == false) // Right
             {
-                _audioSource.Play();
-                _isWalking = true;
-            }
-
-            _gunHolePos.x = transform.position.x + 0.32f;
-            _gunHole.position = _gunHolePos;
+                weaponPos.x = transform.position.x + 0.4f;
+                weaponPos.y = transform.position.y + 0.007f;
+                weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             
-            Animator.SetInteger("direction", 3);
-            _lastDir = 3;
-        } else if (horizontalMovement < 0 && _strafing == false) // Left
-        {
-            weaponPos.x = transform.position.x + (0.4f * -1);
-            weaponPos.y = transform.position.y + 0.007f;
-            weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+                //Animator.enabled = true;
+                // If the player moves when he has the menu for actions
+                // up then it will be automatically closed
+                CloseButtonOnClick();
+                ClosePickingBlocks();
             
-            //Animator.enabled = true;
-            CloseButtonOnClick();
-            ClosePickingBlocks();
-
-            if (!_isWalking)
-            {
-                _audioSource.Play();
-                _isWalking = true;
-            }
-
-            _gunHolePos.x = transform.position.x - 0.32f;
-            _gunHole.position = _gunHolePos;
-            
-            Animator.SetInteger("direction", 4);
-            _lastDir = 4;
-        } else  if (verticalMovement > 0 && _strafing == false) // Top
-        {
-            weaponPos.x = transform.position.x + 0.01f;
-            weaponPos.y = transform.position.y + 0.45f;
-            weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
-            
-            //Animator.enabled = true;
-            CloseButtonOnClick();
-            ClosePickingBlocks();
-            
-            if (!_isWalking)
-            {
-                _audioSource.Play();
-                _isWalking = true;
-            }
-
-            _gunHolePos.y = transform.position.y + 0.32f;
-            _gunHole.position = _gunHolePos;
-            
-            Animator.SetInteger("direction", 2);
-            _lastDir = 2;
-        } else  if (verticalMovement < 0 && _strafing == false) // Bottom
-        {
-            weaponPos.x = transform.position.x + 0.01f;
-            weaponPos.y = transform.position.y + (0.45f * -1);
-            weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 270));
-            
-            //Animator.enabled = true;
-            CloseButtonOnClick();
-            ClosePickingBlocks();
-            
-            if (!_isWalking)
-            {
-                _audioSource.Play();
-                _isWalking = true;
-            }
-
-            _gunHolePos.y = transform.position.y - 0.32f;
-            _gunHole.position = _gunHolePos;
-            
-            Animator.SetInteger("direction", 1);
-            _lastDir = 1;
-        }
-        else // Idle
-        {
-            if (_strafing)
-            {
-                if (horizontalMovement == 0 && verticalMovement == 0)
+                // Play the walking sound effect
+                if (!_isWalking)
                 {
-                    Animator.SetInteger("direction", 5);
+                    _audioSource.Play();
+                    _isWalking = true;
+                }
+
+                _gunHolePos.x = transform.position.x + 0.32f;
+                _gunHole.position = _gunHolePos;
+            
+                Animator.SetInteger("direction", 3);
+                _lastDir = 3;
+            } else if (horizontalMovement < 0 && _strafing == false) // Left
+            {
+                weaponPos.x = transform.position.x + (0.4f * -1);
+                weaponPos.y = transform.position.y + 0.007f;
+                weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
+            
+                //Animator.enabled = true;
+                CloseButtonOnClick();
+                ClosePickingBlocks();
+
+                if (!_isWalking)
+                {
+                    _audioSource.Play();
+                    _isWalking = true;
+                }
+
+                _gunHolePos.x = transform.position.x - 0.32f;
+                _gunHole.position = _gunHolePos;
+            
+                Animator.SetInteger("direction", 4);
+                _lastDir = 4;
+            } else  if (verticalMovement > 0 && _strafing == false) // Top
+            {
+                weaponPos.x = transform.position.x + 0.01f;
+                weaponPos.y = transform.position.y + 0.45f;
+                weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+            
+                //Animator.enabled = true;
+                CloseButtonOnClick();
+                ClosePickingBlocks();
+            
+                if (!_isWalking)
+                {
+                    _audioSource.Play();
+                    _isWalking = true;
+                }
+
+                _gunHolePos.y = transform.position.y + 0.32f;
+                _gunHole.position = _gunHolePos;
+            
+                Animator.SetInteger("direction", 2);
+                _lastDir = 2;
+            } else  if (verticalMovement < 0 && _strafing == false) // Bottom
+            {
+                weaponPos.x = transform.position.x + 0.01f;
+                weaponPos.y = transform.position.y + (0.45f * -1);
+                weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 270));
+            
+                //Animator.enabled = true;
+                CloseButtonOnClick();
+                ClosePickingBlocks();
+            
+                if (!_isWalking)
+                {
+                    _audioSource.Play();
+                    _isWalking = true;
+                }
+
+                _gunHolePos.y = transform.position.y - 0.32f;
+                _gunHole.position = _gunHolePos;
+            
+                Animator.SetInteger("direction", 1);
+                _lastDir = 1;
+            }
+            else // Idle
+            {
+                if (_strafing)
+                {
+                    if (horizontalMovement == 0 && verticalMovement == 0)
+                    {
+                        Animator.SetInteger("direction", 5);
+                    }
+                    else
+                    {
+                        Animator.SetInteger("direction", _lastDir);
+                    }
                 }
                 else
                 {
-                    Animator.SetInteger("direction", _lastDir);
+                    Animator.SetInteger("direction", 5);
+                }
+            
+                _gunHolePos.x = transform.position.x;
+                _gunHolePos.y = transform.position.y - 0.16f;
+                _gunHole.position = _gunHolePos;
+            
+                _audioSource.Stop();
+                _isWalking = false;
+            }
+
+            Weapon.transform.position = weaponPos;
+            
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                _strafing = true;
+            }
+            else
+            {
+                _strafing = false;
+            }
+
+            if (Input.GetMouseButtonDown(0) && PlayMode == "Survival" && _canShoot && !EventSystem.current.IsPointerOverGameObject() && Bullets > 0)
+            {
+                if (Animator.GetInteger("direction") == 1 || Animator.GetInteger("direction") == 2)
+                {
+                    var bullet = Instantiate(Ammo,
+                        new Vector3(transform.position.x, transform.position.y, transform.position.z)
+                        , Quaternion.identity, transform);
+                    bullet.GetComponent<Transform>().Rotate(0, 0, 90);
+                
+                    // The second parameter in the invoke is equivalent to the
+                    // rate of fire the player has.
+                    _canShoot = false;
+                    Invoke("CanShoot", 0.7f);
+                }
+                else if (Animator.GetInteger("direction") == 3 || Animator.GetInteger("direction") == 4)
+                {
+                    Instantiate(Ammo,
+                        new Vector3(transform.position.x, transform.position.y, transform.position.z)
+                        , Quaternion.identity, transform);
+                
+                    _canShoot = false;
+                    Invoke("CanShoot", 0.7f);
+                } else if (Animator.GetInteger("direction") == 5)
+                {
+                    var bullet = Instantiate(Ammo,
+                        new Vector3(transform.position.x, transform.position.y, transform.position.z)
+                        , Quaternion.identity, transform);
+                    bullet.GetComponent<Transform>().Rotate(0, 0, 90);
+                
+                    _canShoot = false;
+                    Invoke("CanShoot", 0.7f);
+                }
+
+                Bullets--;
+                GameObject.FindGameObjectWithTag("PlayerBullets").GetComponent<Text>().text = "Bullets: " + Bullets;
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Q) && Apples > 0 && PlayerHealth < 270)
+            {
+                ApplesUi.GetComponent<Animator>().SetBool("shineApples", true);
+                Invoke("StopApplesShineAnimation", 1);
+
+                Apples--;
+                PlayerPrefs.SetFloat("Apples", Apples);
+                GameObject.FindGameObjectWithTag("PlayerApples").GetComponent<Text>().text = PlayerPrefs.GetFloat("Apples").ToString();
+
+                gameObject.GetComponent<HitPointsController>().HitPoints += 27;
+                if (gameObject.GetComponent<HitPointsController>().HitPoints > 270)
+                {
+                    gameObject.GetComponent<HitPointsController>().HitPoints = 270;
                 }
             }
-            else
-            {
-                Animator.SetInteger("direction", 5);
-            }
-            
-            _gunHolePos.x = transform.position.x;
-            _gunHolePos.y = transform.position.y - 0.16f;
-            _gunHole.position = _gunHolePos;
-            
-            _audioSource.Stop();
-            _isWalking = false;
-        }
-
-        Weapon.transform.position = weaponPos;
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            _strafing = true;
-        }
-        else
-        {
-            _strafing = false;
-        }
-
-        if (Input.GetMouseButtonDown(0) && PlayMode == "Survival" && _canShoot && !EventSystem.current.IsPointerOverGameObject() && Bullets > 0)
-        {
-            if (Animator.GetInteger("direction") == 1 || Animator.GetInteger("direction") == 2)
-            {
-                var bullet = Instantiate(Ammo,
-                    new Vector3(transform.position.x, transform.position.y, transform.position.z)
-                    , Quaternion.identity, transform);
-                bullet.GetComponent<Transform>().Rotate(0, 0, 90);
-                
-                // The second parameter in the invoke is equivalent to the
-                // rate of fire the player has.
-                _canShoot = false;
-                Invoke("CanShoot", 0.7f);
-            }
-            else if (Animator.GetInteger("direction") == 3 || Animator.GetInteger("direction") == 4)
-            {
-                Instantiate(Ammo,
-                    new Vector3(transform.position.x, transform.position.y, transform.position.z)
-                    , Quaternion.identity, transform);
-                
-                _canShoot = false;
-                Invoke("CanShoot", 0.7f);
-            } else if (Animator.GetInteger("direction") == 5)
-            {
-                var bullet = Instantiate(Ammo,
-                    new Vector3(transform.position.x, transform.position.y, transform.position.z)
-                    , Quaternion.identity, transform);
-                bullet.GetComponent<Transform>().Rotate(0, 0, 90);
-                
-                _canShoot = false;
-                Invoke("CanShoot", 0.7f);
-            }
-
-            Bullets--;
-            GameObject.FindGameObjectWithTag("PlayerBullets").GetComponent<Text>().text = "Bullets: " + Bullets;
-        }
         
-        if (Input.GetKeyDown(KeyCode.Q) && Apples > 0 && PlayerHealth < 270)
-        {
-            ApplesUi.GetComponent<Animator>().SetBool("shineApples", true);
-            Invoke("StopApplesShineAnimation", 1);
-
-            Apples--;
-            PlayerPrefs.SetFloat("Apples", Apples);
-            GameObject.FindGameObjectWithTag("PlayerApples").GetComponent<Text>().text = PlayerPrefs.GetFloat("Apples").ToString();
-
-            gameObject.GetComponent<HitPointsController>().HitPoints += 27;
-            if (gameObject.GetComponent<HitPointsController>().HitPoints > 270)
+            // Healing mechanic
+            if (Input.GetKeyDown(KeyCode.T))
             {
-                gameObject.GetComponent<HitPointsController>().HitPoints = 270;
+                SpawnZombies();
+            
+                // When the zombies are spawned, the wave counter is increased
+                CurrentDay++;
+                GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Day: " + CurrentDay;
+            }
+        
+            // *********************
+            // Melee attack keybinding
+            // *********************
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Weapon.SetActive(true);
+                Invoke("DisableKnife", 0.2f);
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (Weapon.GetComponent<SpriteRenderer>().sprite == Knife)
+                {
+                    Weapon.GetComponent<SpriteRenderer>().sprite = Axe;
+                    var weaponCollider = Weapon.GetComponent<BoxCollider2D>().size;
+                    weaponCollider.x = 0.80f;
+                    weaponCollider.y = 0.50f;
+                    Weapon.GetComponent<BoxCollider2D>().size = weaponCollider;
+                }
+                else
+                {
+                    Weapon.GetComponent<SpriteRenderer>().sprite = Knife;
+                    var weaponCollider = Weapon.GetComponent<BoxCollider2D>().size;
+                    weaponCollider.x = 0.64f;
+                    weaponCollider.y = 0.25f;
+                    Weapon.GetComponent<BoxCollider2D>().size = weaponCollider;
+                }
             }
         }
         
-        // Healing mechanic
-        if (Input.GetKeyDown(KeyCode.T))
+        // ***********
+        // Pause Functionality
+        // ***********
+        if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            SpawnZombies();
+            IsPaused = !IsPaused;
             
-            // When the zombies are spawned, the wave counter is increased
-            CurrentDay++;
-            GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Day: " + CurrentDay;
-        }
-        
-        // *********************
-        // Melee attack keybinding
-        // *********************
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Weapon.SetActive(true);
-            Invoke("DisableKnife", 0.2f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (Weapon.GetComponent<SpriteRenderer>().sprite == Knife)
+            if (IsPaused)
             {
-                Weapon.GetComponent<SpriteRenderer>().sprite = Axe;
-                var weaponCollider = Weapon.GetComponent<BoxCollider2D>().size;
-                weaponCollider.x = 0.80f;
-                weaponCollider.y = 0.50f;
-                Weapon.GetComponent<BoxCollider2D>().size = weaponCollider;
+                Time.timeScale = 0;
+                _cameraAudioSource.enabled = false;
+                _audioSource.enabled = false;
+                _pauseMenu.SetActive(true);
             }
             else
             {
-                Weapon.GetComponent<SpriteRenderer>().sprite = Knife;
-                var weaponCollider = Weapon.GetComponent<BoxCollider2D>().size;
-                weaponCollider.x = 0.64f;
-                weaponCollider.y = 0.25f;
-                Weapon.GetComponent<BoxCollider2D>().size = weaponCollider;
+                Time.timeScale = 1;
+                _cameraAudioSource.enabled = true;
+                _audioSource.enabled = true;
+                _pauseMenu.SetActive(false);
             }
         }
     }

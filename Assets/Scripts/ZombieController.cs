@@ -22,6 +22,7 @@ public class ZombieController : MonoBehaviour
     public Material YellowFlash;
     public Material WhiteFlash;
     public AudioClip StructureHitSound;
+    private AudioSource _audioSource;
     public GameObject GunPowderPickUp;
     private bool _isHittingObject;
     private GameObject _player;
@@ -34,6 +35,7 @@ public class ZombieController : MonoBehaviour
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        _audioSource = GetComponent<AudioSource>();
 
         /*
         var randomNum = Random.Range(0, 101);
@@ -70,105 +72,79 @@ public class ZombieController : MonoBehaviour
 
     void Update ()
     {
-        _playerDetector = GameObject.FindGameObjectWithTag("Player");
-        /*
-        for (int i = 0; i < _playerDetector.Length; i++)
+        if (!PlayerController.IsPaused)
         {
-            var playerDetectorPos = _playerDetector[i].transform.position;
+            _audioSource.enabled = true;
+            _playerDetector = GameObject.FindGameObjectWithTag("Player");
         
-            // Distance length of the rays to be cast
-        
-            //if (castResult)
-            //{
-            if (linecastResult.transform.tag == "Player")
-            {
-                Debug.DrawLine(transform.position, playerDetectorPos, Color.green, 1.0f);
-                transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, MovementSpeed);
-                gameObject.GetComponent<Animator>().SetBool("isWalking", true);
-            }
-            else if (linecastResult.transform.tag == "PlayerDetector")
-            {
-                Debug.DrawLine(transform.position, playerDetectorPos, Color.green, 1.0f);
-                transform.position = Vector2.MoveTowards(transform.position, _playerDetector[i].transform.position, MovementSpeed);
-                gameObject.GetComponent<Animator>().SetBool("isWalking", true);
-            }
-            else if (linecastResult.transform.tag == "Player" && linecastResult.transform.tag == "PlayerDetector")
-            {
-                Debug.DrawLine(transform.position, playerDetectorPos, Color.green, 1.0f);
-                transform.position = Vector2.MoveTowards(transform.position, _playerDetector[i].transform.position, MovementSpeed);
-                gameObject.GetComponent<Animator>().SetBool("isWalking", true);
-            }
-            else
-            {
-                Debug.DrawLine(transform.position, playerDetectorPos, Color.red, 1.0f);
-                gameObject.GetComponent<Animator>().SetBool("isWalking", false); 
-            }*/
-        
-        Vector2 pos = transform.position;
-        float distance = (float)0.64 * RangeOfDetection; // 0.64 is the size of one tile
-        float radius = (float) 0.64 * RangeOfDetection;
-        Vector2 dir = new Vector2(1f, 1f);
-        RaycastHit2D castResult = Physics2D.CircleCast(pos, radius, dir, distance, PlayerDetectorLayerMask);
+            Vector2 pos = transform.position;
+            float distance = (float)0.64 * RangeOfDetection; // 0.64 is the size of one tile
+            float radius = (float) 0.64 * RangeOfDetection;
+            Vector2 dir = new Vector2(1f, 1f);
+            RaycastHit2D castResult = Physics2D.CircleCast(pos, radius, dir, distance, PlayerDetectorLayerMask);
 
-        if (castResult)
-        {
-            Debug.DrawLine(transform.position, castResult.transform.position, Color.green, 1.0f);
+            if (castResult)
+            {
+                Debug.DrawLine(transform.position, castResult.transform.position, Color.green, 1.0f);
             
-            RaycastHit2D linecastResult = Physics2D.Linecast(transform.position, castResult.transform.position, PlayerLayerMask);
-            if (linecastResult.transform.tag == "Player" || linecastResult.transform.tag == "PlayerDetector")
-            {transform.position = Vector2.MoveTowards(transform.position, linecastResult.transform.position, MovementSpeed);
-                gameObject.GetComponent<Animator>().SetBool("isWalking", true);
+                RaycastHit2D linecastResult = Physics2D.Linecast(transform.position, castResult.transform.position, PlayerLayerMask);
+                if (linecastResult.transform.tag == "Player" || linecastResult.transform.tag == "PlayerDetector")
+                {transform.position = Vector2.MoveTowards(transform.position, linecastResult.transform.position, MovementSpeed);
+                    gameObject.GetComponent<Animator>().SetBool("isWalking", true);
             
-                RaycastHit2D rayUp = Physics2D.Raycast(transform.position, Vector2.up, 5, PlayerDetectorLayerMask);
-                RaycastHit2D rayDown = Physics2D.Raycast(transform.position, Vector2.down, 5, PlayerDetectorLayerMask);
+                    RaycastHit2D rayUp = Physics2D.Raycast(transform.position, Vector2.up, 5, PlayerDetectorLayerMask);
+                    RaycastHit2D rayDown = Physics2D.Raycast(transform.position, Vector2.down, 5, PlayerDetectorLayerMask);
         
-                if (rayDown || rayUp)
-                {
-                    gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 0);
-                    gameObject.GetComponent<Animator>().SetFloat("directionVertical", 1);
+                    if (rayDown || rayUp)
+                    {
+                        gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 0);
+                        gameObject.GetComponent<Animator>().SetFloat("directionVertical", 1);
+                    }
+                    else
+                    {
+                        if (pos.x > linecastResult.transform.position.x)
+                        {
+                            gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
+                            gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
+                            if (_zombieType == "Armored")
+                            {
+                                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                            }
+                            else
+                            {
+                                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                            }
+                        }
+                        else if (pos.x < linecastResult.transform.position.x)
+                        {
+                            gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
+                            gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
+                            if (_zombieType == "Armored")
+                            {
+                                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                            }
+                            else
+                            {
+                                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    if (pos.x > linecastResult.transform.position.x)
-                    {
-                        gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
-                        gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
-                        if (_zombieType == "Armored")
-                        {
-                            gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                        }
-                        else
-                        {
-                            gameObject.GetComponent<SpriteRenderer>().flipX = true;
-                        }
-                    }
-                    else if (pos.x < linecastResult.transform.position.x)
-                    {
-                        gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
-                        gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
-                        if (_zombieType == "Armored")
-                        {
-                            gameObject.GetComponent<SpriteRenderer>().flipX = true;
-                        }
-                        else
-                        {
-                            gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                        }
-                    }
+                    Debug.DrawLine(transform.position, castResult.transform.position, Color.red, 1.0f); 
+                    gameObject.GetComponent<Animator>().SetBool("isWalking", false);
                 }
             }
             else
             {
-                Debug.DrawLine(transform.position, castResult.transform.position, Color.red, 1.0f); 
-                gameObject.GetComponent<Animator>().SetBool("isWalking", false);
+                gameObject.GetComponent<Animator>().SetBool("isWalking", false);  
             }
         }
         else
         {
-            gameObject.GetComponent<Animator>().SetBool("isWalking", false);  
+            _audioSource.enabled = false;
         }
-
-        
     }
         
     /* if (linecastResult.transform.tag == "Player")
