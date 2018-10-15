@@ -39,7 +39,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4829629525746644}
   - component: {fileID: 61250356165502606}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Detector
   m_TagString: PlayerDetector
   m_Icon: {fileID: 0}

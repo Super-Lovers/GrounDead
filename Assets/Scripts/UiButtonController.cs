@@ -126,12 +126,6 @@ public class UiButtonController : MonoBehaviour
                 actionsUiPos.x = Input.mousePosition.x;
                 actionsUiPos.y = Input.mousePosition.y;
             }
-            else if (ui.name == "Pop-ups")
-            {
-                ui.SetActive(true);
-                actionsUiPos.x = Input.mousePosition.x + 330;
-                actionsUiPos.y = Input.mousePosition.y + 100;
-            }
 
             ui.transform.position = actionsUiPos;
         }

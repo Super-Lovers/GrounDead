@@ -418,7 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerLayerMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 5120
   PlayerDetectorLayerMask:
     serializedVersion: 2
     m_Bits: 4096

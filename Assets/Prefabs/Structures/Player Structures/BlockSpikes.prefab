@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4074101609331606}
   - component: {fileID: 61702654360143750}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Detector (2)
   m_TagString: PlayerDetector
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1200054051289844}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.85342026, y: 1.8092566, z: 0}
+  m_LocalPosition: {x: -0.002, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4597121997851856}
@@ -65,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1687940884881650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.7476, y: 12.877463, z: 0}
+  m_LocalPosition: {x: 44.94468, y: 13.346529, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4074101609331606}
