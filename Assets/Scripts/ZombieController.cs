@@ -29,6 +29,7 @@ public class ZombieController : MonoBehaviour
     private GameObject _playerDetector;
     private System.Collections.Generic.List<GameObject> _playerDetectorList;
     private string _zombieType = "Normal";
+    private bool _isZombieGoingDown = false;
         
     //Vector2 prevPos;
     
@@ -95,13 +96,21 @@ public class ZombieController : MonoBehaviour
                     RaycastHit2D rayUp = Physics2D.Raycast(transform.position, Vector2.up, 5, PlayerDetectorLayerMask);
                     RaycastHit2D rayDown = Physics2D.Raycast(transform.position, Vector2.down, 5, PlayerDetectorLayerMask);
         
-                    if (rayDown || rayUp)
+                    if (rayUp)
                     {
                         gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 0);
                         gameObject.GetComponent<Animator>().SetFloat("directionVertical", 1);
+                        _isZombieGoingDown = false;
+                    }
+                    else if (rayDown)
+                    {
+                        gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 0);
+                        gameObject.GetComponent<Animator>().SetFloat("directionVertical", 1);
+                        _isZombieGoingDown = true;
                     }
                     else
                     {
+                        _isZombieGoingDown = false;
                         if (pos.x > linecastResult.transform.position.x)
                         {
                             gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
@@ -180,7 +189,16 @@ public class ZombieController : MonoBehaviour
         
         if (other.transform.tag == "Player" || other.gameObject.layer == 10)
         {
-            gameObject.GetComponent<Animator>().SetBool("isHittingObject", true);
+            
+            if (_isZombieGoingDown)
+            {
+                gameObject.GetComponent<Animator>().SetBool("isHittingObjectDown", true); 
+            }
+            else
+            {
+                gameObject.GetComponent<Animator>().SetBool("isHittingObjectDown", false); 
+                gameObject.GetComponent<Animator>().SetBool("isHittingObject", true);
+            }
             gameObject.GetComponent<Rigidbody2D>().constraints =
                 RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
             gameObject.GetComponent<Animator>().SetBool("isWalking", false);
@@ -251,8 +269,6 @@ public class ZombieController : MonoBehaviour
                     }
                     else
                     {
-                        _isHittingObject = false;
-
                         // Because the sound effect of destroying a building is halted
                         // once its destroyed, we run another oneshot from the zombie
                         // closest that destroyed it.
@@ -418,7 +434,15 @@ public class ZombieController : MonoBehaviour
     {
         if (other.transform.tag == "Player" || other.gameObject.layer == 10)
         {
-            gameObject.GetComponent<Animator>().SetBool("isHittingObject", false);
+            if (_isZombieGoingDown)
+            {
+                gameObject.GetComponent<Animator>().SetBool("isHittingObjectDown", true); 
+            }
+            else
+            {
+                gameObject.GetComponent<Animator>().SetBool("isHittingObjectDown", false); 
+                gameObject.GetComponent<Animator>().SetBool("isHittingObject", true);
+            }
             gameObject.GetComponent<Rigidbody2D>().constraints =
                 RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         }

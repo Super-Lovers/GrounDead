@@ -143,7 +143,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1828038574458888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.173, y: 12.354, z: 0}
+  m_LocalPosition: {x: 814.2776, y: 187.97882, z: 0}
   m_LocalScale: {x: 1.5607346, y: 1.5607346, z: 1.5607346}
   m_Children:
   - {fileID: 4963888840588240}
@@ -418,7 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerLayerMask:
     serializedVersion: 2
-    m_Bits: 7168
+    m_Bits: 23552
   PlayerDetectorLayerMask:
     serializedVersion: 2
     m_Bits: 4096
