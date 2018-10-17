@@ -440,7 +440,7 @@ public class ZombieController : MonoBehaviour
             }
             else
             {
-                gameObject.GetComponent<Animator>().SetBool("isHittingObjectDown", false); 
+                gameObject.GetComponent<Animator>().SetBool("isHittingObjectDown", false);
                 gameObject.GetComponent<Animator>().SetBool("isHittingObject", true);
             }
             gameObject.GetComponent<Rigidbody2D>().constraints =

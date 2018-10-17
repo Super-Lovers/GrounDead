@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
     private bool _canShoot = true;
     public static bool IsPaused;
     private GameObject _pauseMenu;
+    public GameObject NotificationDamage;
     
     // Zombie parameter responsible for the rate of zombie spawns
     public int NumberOfZombiesToSpawn;

@@ -13,6 +13,7 @@
           <e p="BuildPopUpController.cs" t="Include" />
           <e p="BulletController.cs" t="Include" />
           <e p="CameraController.cs" t="Include" />
+          <e p="FeedbackController.cs" t="Include" />
           <e p="ForestGenerator.cs" t="Include" />
           <e p="GunpowderController.cs" t="Include" />
           <e p="HitPointsController.cs" t="Include" />

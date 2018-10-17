@@ -98,6 +98,8 @@ MonoBehaviour:
   StructureHitSound: {fileID: 8300000, guid: 328d0a2bede3e409d9e0bbdf34a3c439, type: 3}
   GunPowderPickUp: {fileID: 1404153925095454, guid: 53a3cbe254cc74a379ff32c61430a75a,
     type: 2}
+  NotificationDamage: {fileID: 1199130486568902, guid: 06ff37092c1ed4cac9ea059df23109ee,
+    type: 2}
 --- !u!212 &212739821171354462
 SpriteRenderer:
   m_ObjectHideFlags: 1

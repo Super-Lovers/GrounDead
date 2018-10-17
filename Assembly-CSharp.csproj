@@ -58,6 +58,7 @@
     <Compile Include="Assets\Scripts\BuildPopUpController.cs" />
     <Compile Include="Assets\Scripts\BulletController.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\FeedbackController.cs" />
     <Compile Include="Assets\Scripts\ForestGenerator.cs" />
     <Compile Include="Assets\Scripts\GunpowderController.cs" />
     <Compile Include="Assets\Scripts\HitPointsController.cs" />

@@ -22,6 +22,7 @@ public class UiButtonController : MonoBehaviour
     public GameObject StoneUi;
     public GameObject CopperUi;
     public GameObject ApplesUi;
+    public GameObject GatheredMaterials;
 	
     // *******************************
     // SECTION FOR DISPLAYING ACTIONS ON GROUND
@@ -164,10 +165,16 @@ public class UiButtonController : MonoBehaviour
                     nameOfBlock += block.name[i];
                     if (nameOfBlock == "tree")
                     {
+                        // Total wood gathered
+                        var gatheredWood = Random.Range(4, 9);
+                        PlayerPrefs.SetFloat("Wood", PlayerController.Wood += gatheredWood);
+                        
+                        // Notification for feedback
+                        var notification = Instantiate(GatheredMaterials, Camera.main.WorldToScreenPoint(block.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
+                        notification.GetComponentInChildren<Text>().text = "+" + gatheredWood;
+                        
                         WoodUi.GetComponent<Animator>().SetBool("shineWood", true);
                         Invoke("StopWoodShineAnimation", 1);
-                        
-                        PlayerPrefs.SetFloat("Wood", PlayerController.Wood += Random.Range(4, 9));
                         
                         if (Random.Range(0, 101) < 36)
                         {
@@ -196,10 +203,14 @@ public class UiButtonController : MonoBehaviour
 
                     if (nameOfBlock == "stone" || nameOfBlock == "fence")
                     {
+                        var gatheredStone = Random.Range(2, 5);
+                        var notification = Instantiate(GatheredMaterials, Camera.main.WorldToScreenPoint(block.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
+                        notification.GetComponentInChildren<Text>().text = "+" + gatheredStone;
+                        
                         StoneUi.GetComponent<Animator>().SetBool("shineStone", true);
                         Invoke("StopStoneShineAnimation", 1);
                         
-                        PlayerPrefs.SetFloat("Stone", PlayerController.Stone += Random.Range(2, 5));
+                        PlayerPrefs.SetFloat("Stone", PlayerController.Stone += gatheredStone);
                         GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerPrefs.GetFloat("Stone").ToString();
                         _cameraAudioSource.PlayOneShot(Mining);
 
@@ -210,6 +221,10 @@ public class UiButtonController : MonoBehaviour
                     }
                     if (nameOfBlock == "copper")
                     {
+                        
+                        var notification = Instantiate(GatheredMaterials, Camera.main.WorldToScreenPoint(block.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
+                        notification.GetComponentInChildren<Text>().text = "+" + 3;
+                        
                         CopperUi.GetComponent<Animator>().SetBool("shineCopper", true);
                         Invoke("StopCopperShineAnimation", 1);
                         

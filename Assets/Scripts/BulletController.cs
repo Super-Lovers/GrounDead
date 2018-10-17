@@ -17,6 +17,7 @@ public class BulletController : MonoBehaviour
 	public AudioClip ZombieHitSound;
 	public AudioClip StructureHitSound;
 	public GameObject GunPowderPickUp;
+	public GameObject NotificationDamage;
 	
 	void Start ()
 	{
@@ -89,6 +90,9 @@ public class BulletController : MonoBehaviour
 			if (_obstacle.GetComponent<HitPointsController>() != null)
 			{
 				_obstacle.GetComponent<HitPointsController>().HitPoints -= 100;
+				var notification = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(_obstacle.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
+				notification.GetComponentInChildren<Text>().text = "-" + 100;
+				
 				if (_obstacle.GetComponent<HitPointsController>().HitPoints <= 0)
 				{
 					// If the structure the bullet is hitting has no hitpoints left,
@@ -136,6 +140,8 @@ public class BulletController : MonoBehaviour
 				_obstacle = other.gameObject;
 				_obstacle.GetComponent<AudioSource>().PlayOneShot(ZombieHitSound);
 				_obstacle.GetComponent<ZombieController>().HitPoints -= 100;
+				var notification = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(_obstacle.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
+				notification.GetComponentInChildren<Text>().text = "-" + 100;
 				if (_obstacle.GetComponent<ZombieController>().HitPoints <= 0)
 				{
 					PlayerController.Score += 100;
