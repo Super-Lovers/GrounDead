@@ -29,7 +29,7 @@ public class ZombieController : MonoBehaviour
     private GameObject _playerDetector;
     private System.Collections.Generic.List<GameObject> _playerDetectorList;
     private string _zombieType = "Normal";
-    private bool _isZombieGoingDown = false;
+    private bool _isZombieGoingDown;
         
     //Vector2 prevPos;
     
@@ -304,7 +304,9 @@ public class ZombieController : MonoBehaviour
                         PlayerController.Score += 100;
                         GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text =
                             "Score: " + PlayerController.Score;
-                        
+
+                        gameObject.GetComponent<Animator>().SetBool("isHittingObject", false);
+                        gameObject.GetComponent<Animator>().SetBool("isHittingObjectDown", false);
                         Destroy(_obstacle);
                     }
                 }
