@@ -40,6 +40,9 @@ TagManager:
   - Tutorial
   - PlayerGunPowderUi
   - Pop-upUi
+  - TasksWindow
+  - Task Title
+  - Task Description
   layers:
   - Default
   - TransparentFX
