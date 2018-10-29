@@ -30,6 +30,7 @@ public class ZombieController : MonoBehaviour
     private System.Collections.Generic.List<GameObject> _playerDetectorList;
     private string _zombieType = "Normal";
     private bool _isZombieGoingDown;
+    public GameObject NotificationDamage;
         
     //Vector2 prevPos;
     
@@ -239,11 +240,17 @@ public class ZombieController : MonoBehaviour
             {
                 HitPoints -= 30;
                 StartCoroutine("FlashZombie");
+                
+                var notification = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(gameObject.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
+                notification.GetComponentInChildren<Text>().text = "-" + 30;
             }
             else if (other.GetComponent<SpriteRenderer>().sprite == other.GetComponentInParent<PlayerController>().Axe)
             {
                 HitPoints -= 60;
                 StartCoroutine("FlashZombie");   
+                
+                var notification = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(gameObject.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
+                notification.GetComponentInChildren<Text>().text = "-" + 60;
             }
         }
     }
@@ -430,6 +437,16 @@ public class ZombieController : MonoBehaviour
     {
         _canAttack = true;
         _obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.transform.tag == "MainCamera")
+        {
+            Destroy(gameObject);
+            // Clearing all the zombies that spawn on top of the player.
+            Camera.main.GetComponent<BoxCollider2D>().enabled = false;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D other)

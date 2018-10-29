@@ -65,7 +65,7 @@ public class MenuController : MonoBehaviour {
 			"Total Zombie Bosses Defeated: " + TotalZombieBossesDefeated;
 		GameObject.Find("Total Buildings Destroyed").GetComponent<Text>().text =
 			"Total Buildings Destroyed: " + TotalBuildingsDestroyed;
-		TotalDaysSurvived = PlayerController.CurrentDay;
+		TotalDaysSurvived = ObjectivesController.CurrentDay;
 		GameObject.Find("Total Days Survived").GetComponent<Text>().text =
 			"Total Days Survived: " + TotalDaysSurvived;
 		

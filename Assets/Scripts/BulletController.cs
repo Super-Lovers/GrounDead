@@ -23,19 +23,19 @@ public class BulletController : MonoBehaviour
 	{
 		_rb = GetComponent<Rigidbody2D>();
 
-		if (PlayerController.Animator.GetInteger("direction") == 1)
+		if (PlayerController.Animator.GetInteger("direction") == 1 || PlayerController.Animator.GetInteger("lastDirection") == 1)
 		{
 			SpeedY *= -1;
 			SpeedX = 0;
-		} else if (PlayerController.Animator.GetInteger("direction") == 2)
+		} else if (PlayerController.Animator.GetInteger("direction") == 2 || PlayerController.Animator.GetInteger("lastDirection") == 2)
 		{
 			SpeedY *= 1;
 			SpeedX = 0;
-		} else if (PlayerController.Animator.GetInteger("direction") == 3)
+		} else if (PlayerController.Animator.GetInteger("direction") == 3 || PlayerController.Animator.GetInteger("lastDirection") == 3)
 		{
 			SpeedX *= 1;
 			SpeedY = 0;
-		} else if (PlayerController.Animator.GetInteger("direction") == 4)
+		} else if (PlayerController.Animator.GetInteger("direction") == 4 || PlayerController.Animator.GetInteger("lastDirection") == 4)
 		{
 			SpeedX *= -1;
 			SpeedY = 0;
@@ -69,7 +69,7 @@ public class BulletController : MonoBehaviour
 			}
 		} */
 		
-		if ((other.gameObject.layer == 10 || other.gameObject.layer == 11) && other.transform.tag != "Player")
+		if (other.transform.tag != "Player" && (other.gameObject.layer == 10 || other.gameObject.layer == 11))
 		{
 			// Make the game object invisible and undetectable after it hits the
 			// zombie so that it can still run the flash animation but not look
@@ -145,7 +145,7 @@ public class BulletController : MonoBehaviour
 				if (_obstacle.GetComponent<ZombieController>().HitPoints <= 0)
 				{
 					PlayerController.Score += 100;
-					PlayerController.CurrentZombiesAlive--;
+					ObjectivesController.CurrentZombiesAlive--;
 					// Updating the score UI and player score after a zombie is killed
 					GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
 

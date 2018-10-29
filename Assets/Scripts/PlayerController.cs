@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -53,24 +52,17 @@ public class PlayerController : MonoBehaviour
     private bool _isWalking;
     private int _lastDir;
     private bool _strafing;
-    private bool _isItDay = true;
     private bool _canShoot = true;
     public static bool IsPaused;
     private GameObject _pauseMenu;
     public GameObject NotificationDamage;
     
     // Zombie parameter responsible for the rate of zombie spawns
-    public int NumberOfZombiesToSpawn;
-    public int ChanceOfZombieToSpawn;
-    public static int CurrentZombiesAlive;
-    public static int CurrentDay;
-    public GameObject ZombieBasic;
-    public GameObject ZombieCop;
-    public GameObject ZombieBoss;
     public GameObject Weapon;
     public Sprite Knife;
     public Sprite Axe;
     public static int NumberOfZombiesKilled;
+    public static bool CanBuildOnTile = false;
 	
     void Start ()
     {
@@ -116,9 +108,9 @@ public class PlayerController : MonoBehaviour
         // *******
         // Day/Night Cycle (work in progress)
         // *******
-        InvokeRepeating("UpdateWorldTime", 20, 20);
+        //InvokeRepeating("UpdateWorldTime", 20, 20);
     }
-
+    
     private void OnGUI()
     {
         // Drawing the player's health bar when its updated
@@ -151,6 +143,7 @@ public class PlayerController : MonoBehaviour
             
             if (horizontalMovement > 0 && _strafing == false) // Right
             {
+                ObjectivesController.WalkedRight = true;
                 weaponPos.x = transform.position.x + 0.4f;
                 weaponPos.y = transform.position.y + 0.007f;
                 weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
@@ -171,10 +164,12 @@ public class PlayerController : MonoBehaviour
                 _gunHolePos.x = transform.position.x + 0.32f;
                 _gunHole.position = _gunHolePos;
             
+                Animator.SetBool("isWalking", true);
                 Animator.SetInteger("direction", 3);
                 _lastDir = 3;
             } else if (horizontalMovement < 0 && _strafing == false) // Left
             {
+                ObjectivesController.WalkedLeft = true;
                 weaponPos.x = transform.position.x + (0.4f * -1);
                 weaponPos.y = transform.position.y + 0.007f;
                 weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
@@ -192,10 +187,12 @@ public class PlayerController : MonoBehaviour
                 _gunHolePos.x = transform.position.x - 0.32f;
                 _gunHole.position = _gunHolePos;
             
+                Animator.SetBool("isWalking", true);
                 Animator.SetInteger("direction", 4);
                 _lastDir = 4;
             } else  if (verticalMovement > 0 && _strafing == false) // Top
             {
+                ObjectivesController.WalkedUp = true;
                 weaponPos.x = transform.position.x + 0.01f;
                 weaponPos.y = transform.position.y + 0.45f;
                 weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
@@ -213,10 +210,12 @@ public class PlayerController : MonoBehaviour
                 _gunHolePos.y = transform.position.y + 0.32f;
                 _gunHole.position = _gunHolePos;
             
+                Animator.SetBool("isWalking", true);
                 Animator.SetInteger("direction", 2);
                 _lastDir = 2;
             } else  if (verticalMovement < 0 && _strafing == false) // Bottom
             {
+                ObjectivesController.WalkedDown = true;
                 weaponPos.x = transform.position.x + 0.01f;
                 weaponPos.y = transform.position.y + (0.45f * -1);
                 weaponTransform.rotation = Quaternion.Euler(new Vector3(0, 0, 270));
@@ -234,11 +233,14 @@ public class PlayerController : MonoBehaviour
                 _gunHolePos.y = transform.position.y - 0.32f;
                 _gunHole.position = _gunHolePos;
             
+                Animator.SetBool("isWalking", true);
                 Animator.SetInteger("direction", 1);
                 _lastDir = 1;
             }
             else // Idle
             {
+                Animator.SetInteger("direction", 0);
+                Animator.SetBool("isWalking", false);
                 if (_strafing)
                 {
                     if (horizontalMovement == 0 && verticalMovement == 0)
@@ -247,12 +249,12 @@ public class PlayerController : MonoBehaviour
                     }
                     else
                     {
-                        Animator.SetInteger("direction", _lastDir);
+                        Animator.SetInteger("lastDirection", _lastDir);
                     }
                 }
                 else
                 {
-                    Animator.SetInteger("direction", 5);
+                    Animator.SetInteger("lastDirection", _lastDir);
                 }
             
                 _gunHolePos.x = transform.position.x;
@@ -276,7 +278,10 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && PlayMode == "Survival" && _canShoot && !EventSystem.current.IsPointerOverGameObject() && Bullets > 0)
             {
-                if (Animator.GetInteger("direction") == 1 || Animator.GetInteger("direction") == 2)
+                ObjectivesController.HasAttackedRange = true;
+                
+                if ((Animator.GetInteger("direction") == 1 || Animator.GetInteger("direction") == 2) ||
+                    (Animator.GetInteger("lastDirection") == 1 || Animator.GetInteger("lastDirection") == 2))
                 {
                     var bullet = Instantiate(Ammo,
                         new Vector3(transform.position.x, transform.position.y, transform.position.z)
@@ -288,7 +293,8 @@ public class PlayerController : MonoBehaviour
                     _canShoot = false;
                     Invoke("CanShoot", 0.7f);
                 }
-                else if (Animator.GetInteger("direction") == 3 || Animator.GetInteger("direction") == 4)
+                else if ((Animator.GetInteger("direction") == 3 || Animator.GetInteger("direction") == 4) ||
+                         (Animator.GetInteger("lastDirection") == 3 || Animator.GetInteger("lastDirection") == 4))
                 {
                     Instantiate(Ammo,
                         new Vector3(transform.position.x, transform.position.y, transform.position.z)
@@ -296,7 +302,7 @@ public class PlayerController : MonoBehaviour
                 
                     _canShoot = false;
                     Invoke("CanShoot", 0.7f);
-                } else if (Animator.GetInteger("direction") == 5)
+                } else if (Animator.GetInteger("direction") == 5 || Animator.GetInteger("direction") == 0)
                 {
                     var bullet = Instantiate(Ammo,
                         new Vector3(transform.position.x, transform.position.y, transform.position.z)
@@ -311,6 +317,7 @@ public class PlayerController : MonoBehaviour
                 GameObject.FindGameObjectWithTag("PlayerBullets").GetComponent<Text>().text = "Bullets: " + Bullets;
             }
             
+            // Healing mechanic
             if (Input.GetKeyDown(KeyCode.Q) && Apples > 0 && PlayerHealth < 270)
             {
                 ApplesUi.GetComponent<Animator>().SetBool("shineApples", true);
@@ -327,27 +334,21 @@ public class PlayerController : MonoBehaviour
                 }
             }
         
-            // Healing mechanic
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                SpawnZombies();
-            
-                // When the zombies are spawned, the wave counter is increased
-                CurrentDay++;
-                GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Day: " + CurrentDay;
-            }
-        
             // *********************
             // Melee attack keybinding
             // *********************
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                ObjectivesController.HasAttackedMelee = true;
+                
                 Weapon.SetActive(true);
                 Invoke("DisableKnife", 0.2f);
             }
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                ObjectivesController.HasSwitchedWeapons = true;
+                
                 if (Weapon.GetComponent<SpriteRenderer>().sprite == Knife)
                 {
                     Weapon.GetComponent<SpriteRenderer>().sprite = Axe;
@@ -429,157 +430,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SpawnZombies()
-    {
-        // Separating the zombie spawn areas
-        // from the free exploration areas of the player
-        int segmentStart = 0;
-        int segmentEnd = 20;
-        int segmentBeachEnd = 10;
-
-        
-        // We are starting to generate zombies one block down the top and left border
-        float currentX = 0.64f;
-        float currentY = 24.96f;
-        
-        for (int y = 39; y > 1; y--)
-        {
-            for (int x = segmentStart; x < segmentEnd; x++)
-            {
-                if (NumberOfZombiesToSpawn > 0 && Random.Range(0, 101) < ChanceOfZombieToSpawn)
-                {
-                    var spawnedZombie = Instantiate(ZombieBasic,
-                        new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
-                    spawnedZombie.transform.tag = "Zombie";
-                
-                    for (int i = 0; i < UiButtonController.PlacedBlocks.Count - 1; i++)
-                    {
-                        bool isItSafeToSpawn;
-                        if (spawnedZombie.transform.position.x != UiButtonController.PlacedBlocks[i].transform.position.x &&
-                            spawnedZombie.transform.position.y != UiButtonController.PlacedBlocks[i].transform.position.y)
-                        {
-                            isItSafeToSpawn = true;
-                        }
-                        else
-                        {
-                            isItSafeToSpawn = false;
-                        }
-
-                        if (isItSafeToSpawn == false)
-                        {
-                            Destroy(spawnedZombie);
-                        }
-                    }
-                }
-                currentX += 0.64f;
-            }
-
-            currentX = 0;
-            currentY -= 0.64f;
-        }
-        
-        // Resetting the coordinates of the borders for generating the zombies.
-        // We are starting to generate zombies one block down the top and right border.
-        
-        currentX = 53.36f;
-        currentY = 24.96f;
-        
-        for (int y = 39; y > 1; y--)
-        {
-            for (int x = segmentStart; x < segmentBeachEnd; x++)
-            {
-                if (NumberOfZombiesToSpawn > 0 && Random.Range(0, 101) < ChanceOfZombieToSpawn)
-                {
-                    var randomZombie = Random.Range(0, 3);
-                    GameObject spawnedZombie;
-                    if (randomZombie == 0)
-                    {
-                        spawnedZombie = Instantiate(ZombieBasic,
-                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
-                        spawnedZombie.transform.tag = "Zombie";
-                    }
-                    else if (randomZombie == 1)
-                    {
-                        spawnedZombie = Instantiate(ZombieBoss,
-                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
-                        spawnedZombie.transform.tag = "Zombie Boss";
-                    }
-                    else if (randomZombie == 2)
-                    {
-                        spawnedZombie = Instantiate(ZombieCop,
-                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
-                        spawnedZombie.transform.tag = "Zombie Cop";
-                    }
-                    else
-                    {
-                        spawnedZombie = Instantiate(ZombieBasic,
-                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
-                        spawnedZombie.transform.tag = "Zombie";
-                    }
-                
-                    for (int i = 0; i < UiButtonController.PlacedBlocks.Count - 1; i++)
-                    {
-                        bool isItSafeToSpawn;
-                        if (spawnedZombie.transform.position.x != UiButtonController.PlacedBlocks[i].transform.position.x &&
-                            spawnedZombie.transform.position.y != UiButtonController.PlacedBlocks[i].transform.position.y)
-                        {
-                            isItSafeToSpawn = true;
-                        }
-                        else
-                        {
-                            isItSafeToSpawn = false;
-                        }
-
-                        if (isItSafeToSpawn == false)
-                        {
-                            Destroy(spawnedZombie);
-                        }
-                    }
-                }
-                currentX -= 0.64f;
-            }
-
-            currentX = 53.36f;
-            currentY -= 0.64f;
-        }
-        
-        // When the zombies are spawned, the day counter is increased
-        CurrentDay++;
-        GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Day: " + CurrentDay;
-    }
-
     private void CanShoot()
     {
         _canShoot = true;
-    }
-
-    private void UpdateWorldTime()
-    {
-        StartCoroutine("UpdateWorldTimeSlowly");
-    }
-    private IEnumerator UpdateWorldTimeSlowly()
-    {
-        bool spawnZombies = false;
-        for (int i = 1; i < 5; i++) {
-            if (_isItDay)
-            {
-                gameObject.GetComponentInChildren<Light>().transform.Rotate(i * 5, 0, 0);
-                yield return new WaitForSeconds(1f);
-                spawnZombies = true;
-            }
-            else
-            {
-                gameObject.GetComponentInChildren<Light>().transform.Rotate(i * -5, 0, 0);
-                yield return new WaitForSeconds(1f);
-                spawnZombies = false;
-            }
-        }
-
-        if (spawnZombies)
-        {
-            SpawnZombies();
-        }
-
-        _isItDay = !_isItDay;
     }
 }

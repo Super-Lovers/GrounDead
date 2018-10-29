@@ -774,8 +774,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -353.5, y: 243.7}
-  m_SizeDelta: {x: -737.9, y: -649.2}
+  m_AnchoredPosition: {x: -353.5, y: 213.48}
+  m_SizeDelta: {x: -737.9, y: -588.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &323856483
 MonoBehaviour:
@@ -1184,6 +1184,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1358,6 +1359,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 2029945142}
+--- !u!61 &519420034
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 8, y: 6}
+  m_EdgeRadius: 0
 --- !u!1 &540256198
 GameObject:
   m_ObjectHideFlags: 0
@@ -1918,8 +1944,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000076293945, y: 0}
-  m_SizeDelta: {x: 72.8, y: 70.1}
+  m_AnchoredPosition: {x: -0.0000019073, y: -0.000026703}
+  m_SizeDelta: {x: 108.96, y: 104.92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &674704750
 MonoBehaviour:
@@ -1942,11 +1968,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 57
+    m_FontSize: 93
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
-    m_MaxSize: 70
+    m_MaxSize: 93
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2517,60 +2543,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1027433437
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1027433438}
-  - component: {fileID: 1027433440}
-  m_Layer: 10
-  m_Name: RangeOfBuilding
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1027433438
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1027433437}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2029945147}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1027433440
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1027433437}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.9725771, y: 1.9725771}
-  m_EdgeRadius: 0
 --- !u!1 &1046268802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2705,7 +2677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.247775, g: 0.8207547, b: 0.30963075, a: 1}
+  m_Color: {r: 0.45656815, g: 0.8962264, b: 0.5047499, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2743,8 +2715,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -353.5, y: 243.70001}
-  m_SizeDelta: {x: -737.9, y: -649.2}
+  m_AnchoredPosition: {x: -353.5, y: 213.48}
+  m_SizeDelta: {x: -737.9, y: -588.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1125312382
 GameObject:
@@ -4456,7 +4428,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4, y: 37}
+  m_AnchoredPosition: {x: 4, y: 69.1}
   m_SizeDelta: {x: 279.1, y: 20.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1514106311
@@ -4601,8 +4573,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4, y: -20.488}
-  m_SizeDelta: {x: 279.1, y: 77.824}
+  m_AnchoredPosition: {x: 3.75, y: -15.94}
+  m_SizeDelta: {x: 278.6, y: 128.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1538921460
 MonoBehaviour:
@@ -6829,12 +6801,6 @@ MonoBehaviour:
   NightTheme: {fileID: 8300000, guid: 85a290018abba4c20a209abdfabc3a62, type: 3}
   Ammo: {fileID: 1424667368842196, guid: 30b22b472983a405f9b863da6db8e9f7, type: 2}
   NotificationDamage: {fileID: 0}
-  NumberOfZombiesToSpawn: 13
-  ChanceOfZombieToSpawn: 1
-  ZombieBasic: {fileID: 1828038574458888, guid: 6ec8842d451254e3c87195f1bde036a4,
-    type: 2}
-  ZombieCop: {fileID: 1828038574458888, guid: 8b2c32318d9084f1e90bae0b5b501a74, type: 2}
-  ZombieBoss: {fileID: 1828038574458888, guid: 2197b22a299be4398b8a3e51e2383bdb, type: 2}
   Weapon: {fileID: 0}
   Knife: {fileID: 21300000, guid: 9272ee6bf90844c38a56f403e206089b, type: 3}
   Axe: {fileID: 21300000, guid: 6610f21fa11a34ad2be10c6a42acc8b3, type: 3}
@@ -6940,7 +6906,6 @@ Transform:
   - {fileID: 627497717}
   - {fileID: 1861925820}
   - {fileID: 1833665013}
-  - {fileID: 1027433438}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7084,6 +7049,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TasksWindow: {fileID: 323856481}
   CompletedTaskPopUp: {fileID: 1106051954}
+  NumberOfZombiesToSpawnLeft: 6
+  NumberOfZombiesToSpawnRight: 6
+  ChanceOfZombieToSpawn: 3
+  ZombieBasic: {fileID: 1828038574458888, guid: 6ec8842d451254e3c87195f1bde036a4,
+    type: 2}
+  ZombieCop: {fileID: 1828038574458888, guid: 8b2c32318d9084f1e90bae0b5b501a74, type: 2}
+  ZombieBoss: {fileID: 1828038574458888, guid: 2197b22a299be4398b8a3e51e2383bdb, type: 2}
+  Camera: {fileID: 519420028}
 --- !u!1 &2049032486
 GameObject:
   m_ObjectHideFlags: 0

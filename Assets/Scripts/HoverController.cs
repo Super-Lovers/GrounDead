@@ -19,6 +19,15 @@ public class HoverController : MonoBehaviour
     private GameObject[] _pickUi;
     private bool _canBuild = true;
     private bool _isOutOfRange;
+
+    public Material RedFlash;
+    public Material GreenFlash;
+    public Material GrassMaterial;
+    public Material Tree1;
+    public Material Tree2;
+    public Material Tree3;
+    public Material Tree4;
+    public Material Tree5;
 	
     void Start ()
     {
@@ -32,12 +41,12 @@ public class HoverController : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        Vector3 hoverPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, -10f));
+        Vector3 hoverPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, 0));
         float playerPosX = GameObject.FindGameObjectWithTag("Player").transform.position.x;
         float playerPosY = GameObject.FindGameObjectWithTag("Player").transform.position.y;
         
-        if ((playerPosX + 0.64f < hoverPosition.x || playerPosX - 0.96f > hoverPosition.x) ||
-            playerPosY + 0.64f < hoverPosition.y || playerPosY - 0.96f > hoverPosition.y)
+        if ((playerPosX + 0.64f < hoverPosition.x || playerPosX - 0.64f > hoverPosition.x) ||
+            playerPosY + 0.64f < hoverPosition.y || playerPosY - 0.64f > hoverPosition.y)
         {
             _isOutOfRange = true;
         }
