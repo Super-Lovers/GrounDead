@@ -43,6 +43,7 @@ TagManager:
   - TasksWindow
   - Task Title
   - Task Description
+  - Water Tile
   layers:
   - Default
   - TransparentFX

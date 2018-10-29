@@ -25,8 +25,8 @@ public class PlayerController : MonoBehaviour
     //private GameObject _notification;
     public static int Wood = 200;
     public static int Stone = 200;
-    public static int Copper = 0;
-    public static int GunPowder = 0;
+    public static int Copper = 10;
+    public static int GunPowder = 10;
     public static int Apples;
     public static int Bullets = 10;
     public Texture PlayerPortrait;
@@ -320,6 +320,7 @@ public class PlayerController : MonoBehaviour
             // Healing mechanic
             if (Input.GetKeyDown(KeyCode.Q) && Apples > 0 && PlayerHealth < 270)
             {
+                ObjectivesController.HealedSelf = true;
                 ApplesUi.GetComponent<Animator>().SetBool("shineApples", true);
                 Invoke("StopApplesShineAnimation", 1);
 

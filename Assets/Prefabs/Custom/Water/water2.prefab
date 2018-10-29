@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 212824627508909192}
   - component: {fileID: 114066662955780256}
   - component: {fileID: 61705279840864312}
+  - component: {fileID: 95034726345866136}
   m_Layer: 9
   m_Name: water2
-  m_TagString: Untagged
+  m_TagString: Water Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,6 +68,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
+--- !u!95 &95034726345866136
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1616286932647844}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8f5ca3c032a784ad9b67fbfc62889c4b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114066662955780256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,6 +97,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8922cfa60c141388884649d9d36a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RedFlash: {fileID: 0}
+  GreenFlash: {fileID: 0}
+  GrassMaterial: {fileID: 0}
+  Tree1: {fileID: 0}
+  Tree2: {fileID: 0}
+  Tree3: {fileID: 0}
+  Tree4: {fileID: 0}
+  Tree5: {fileID: 0}
 --- !u!212 &212824627508909192
 SpriteRenderer:
   m_ObjectHideFlags: 1

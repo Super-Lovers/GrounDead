@@ -375,12 +375,12 @@ public class UiButtonController : MonoBehaviour
             PlayerPrefs.SetFloat("Wood", PlayerController.Wood -= 8);
             GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text =
                 PlayerPrefs.GetFloat("Wood").ToString();
-
+            
             var platform = Instantiate(Platform, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
             platform.GetComponent<SpriteRenderer>().sortingOrder = 39;
             platform.tag = "PlacedBlock";
             platform.AddComponent<HitPointsController>();
-        
+            
             foreach (GameObject block in PlacedWaterBlocks.ToArray())
             {
                 if (platform.transform.position.x == block.transform.position.x &&
@@ -392,6 +392,7 @@ public class UiButtonController : MonoBehaviour
                         nameOfBlock += block.name[i];
                         if (nameOfBlock == "water")
                         {
+                            ObjectivesController.HasPlacedWoodenPlatform = true;
                             block.GetComponent<BoxCollider2D>().enabled = false;
                         }
                     }
@@ -530,6 +531,8 @@ public class UiButtonController : MonoBehaviour
     {
         if (PlayerPrefs.GetFloat("Gun Powder") > 5 && PlayerPrefs.GetFloat("Copper") > 5)
         {
+            ObjectivesController.CraftedBullets = true;
+            
             PlayerPrefs.SetFloat("Gun Powder", PlayerController.GunPowder -= 5);
             PlayerPrefs.SetFloat("Copper", PlayerController.Copper -= 5);
             PlayerPrefs.SetFloat("Bullets", PlayerController.Bullets += 20);

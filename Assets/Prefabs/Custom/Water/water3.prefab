@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61705279840864312}
   m_Layer: 9
   m_Name: water3
-  m_TagString: Untagged
+  m_TagString: Water Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,6 +78,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8922cfa60c141388884649d9d36a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RedFlash: {fileID: 0}
+  GreenFlash: {fileID: 0}
+  GrassMaterial: {fileID: 0}
+  Tree1: {fileID: 0}
+  Tree2: {fileID: 0}
+  Tree3: {fileID: 0}
+  Tree4: {fileID: 0}
+  Tree5: {fileID: 0}
 --- !u!212 &212824627508909192
 SpriteRenderer:
   m_ObjectHideFlags: 1
