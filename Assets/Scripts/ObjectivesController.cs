@@ -80,6 +80,7 @@ public class ObjectivesController : MonoBehaviour {
         if (HasAttackedMelee && HasAttackedRange && HasSwitchedWeapons && _currentTask == 2)
         {
             CompleteTask("Learn To Defend Yourself");
+            ShowTasksWindow();
         }
 		
         if (PlayerController.Wood > 200 && _currentTask == 3)
@@ -107,8 +108,9 @@ public class ObjectivesController : MonoBehaviour {
         }
         
 
-        if (PlayerController.PlayerHealth < 270)
+        if (PlayerController.PlayerHealth < 270 && HealedSelf == false)
         {
+            TasksWindow.SetActive(true);
             _taskTitle.GetComponent<Text>().text = "How to Heal Yourself";
             _taskDescription.GetComponent<Text>().text = currentTasks["How to Heal Yourself"];
         }
@@ -389,8 +391,15 @@ public class ObjectivesController : MonoBehaviour {
     {
         CompletedTaskPopUp.SetActive(false);
         TasksWindow.SetActive(false);
-		
-        Invoke("ShowTasksWindow", 1);
+
+        if (_currentTask == 7 || _currentTask == 8)
+        {
+            TasksWindow.SetActive(false);
+        }
+        else
+        {
+            Invoke("ShowTasksWindow", 1);
+        }
     }
 
     private void ShowTasksWindow()

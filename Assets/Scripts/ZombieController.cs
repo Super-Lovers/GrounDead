@@ -31,11 +31,29 @@ public class ZombieController : MonoBehaviour
     private string _zombieType = "Normal";
     private bool _isZombieGoingDown;
     public GameObject NotificationDamage;
+    
+    // Objects to ignore collision with
+    public GameObject[] Stones;
+    public GameObject[] Coppers;
+    public GameObject[] Trees;
         
     //Vector2 prevPos;
     
     private void Start()
     {
+        foreach (GameObject block in UiButtonController.PlacedBlocks.ToArray())
+        {
+            string nameOfBlock = "";
+            for (int i = 0; i < block.name.Length; i++)
+            {
+                nameOfBlock += block.name[i];
+                if (nameOfBlock == "stone" || nameOfBlock == "copper" || nameOfBlock == "tree")
+                {
+                    Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), block.GetComponent<BoxCollider2D>());
+                }
+            }
+        }
+        
         _player = GameObject.FindGameObjectWithTag("Player");
         _audioSource = GetComponent<AudioSource>();
 
@@ -90,7 +108,7 @@ public class ZombieController : MonoBehaviour
                 Debug.DrawLine(transform.position, castResult.transform.position, Color.green, 1.0f);
             
                 RaycastHit2D linecastResult = Physics2D.Linecast(transform.position, castResult.transform.position, PlayerLayerMask);
-                if (linecastResult.transform.tag == "Player" || linecastResult.transform.tag == "PlayerDetector")
+                if (linecastResult.transform.tag == "Player" || linecastResult.transform.tag == "PlayerDetector" || linecastResult.transform.gameObject.layer == 11 || linecastResult.transform.gameObject.layer == 14)
                 {transform.position = Vector2.MoveTowards(transform.position, linecastResult.transform.position, MovementSpeed);
                     gameObject.GetComponent<Animator>().SetBool("isWalking", true);
             
