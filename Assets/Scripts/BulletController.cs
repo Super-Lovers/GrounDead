@@ -104,8 +104,6 @@ public class BulletController : MonoBehaviour
 					UiButtonController.PlacedBlocks.Remove(_obstacle);
 				
 					PlayerController.Score += 50;
-					// Updating the score UI and player score after a obstacle is destroyed
-					GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
 					
 					// Player Statistics
 					MenuController.TotalZombiesDefeated++;
@@ -122,6 +120,10 @@ public class BulletController : MonoBehaviour
 					MenuController.TotalHostilityScore += 100;
 					
 					PlayerController.NumberOfZombiesKilled++;
+					
+					// Updating the score UI and player score after a obstacle is destroyed
+					MenuController.UpdateScore();
+					
 					Destroy(gameObject);
 				}
 				else
@@ -146,8 +148,6 @@ public class BulletController : MonoBehaviour
 				{
 					PlayerController.Score += 100;
 					ObjectivesController.CurrentZombiesAlive--;
-					// Updating the score UI and player score after a zombie is killed
-					GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " + PlayerController.Score;
 
 					if (GameObject.FindGameObjectWithTag("Zombies").transform.childCount == 1)
 					{
@@ -175,6 +175,8 @@ public class BulletController : MonoBehaviour
 					MenuController.TotalHostilityScore += 100;
 					
 					PlayerController.NumberOfZombiesKilled++;
+					
+					MenuController.UpdateScore();
 					
 					Destroy(_obstacle);
 					Destroy(gameObject);

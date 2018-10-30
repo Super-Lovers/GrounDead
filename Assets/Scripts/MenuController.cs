@@ -54,7 +54,7 @@ public class MenuController : MonoBehaviour {
 		
 		// First Panel
 		GameObject.Find("Total Hostility Score").GetComponent<Text>().text =
-			"Total Hostility Score: " + TotalHostilityScore;
+			"Total Hostility Score: " + (TotalHostilityScore + ObjectivesController.CurrentDay * 100);
 		GameObject.Find("Total Zombies Defeated").GetComponent<Text>().text =
 			"Total Zombies Defeated: " + TotalZombiesDefeated;
 		GameObject.Find("Total Zombie Cops Defeated").GetComponent<Text>().text =
@@ -65,7 +65,6 @@ public class MenuController : MonoBehaviour {
 			"Total Zombie Bosses Defeated: " + TotalZombieBossesDefeated;
 		GameObject.Find("Total Buildings Destroyed").GetComponent<Text>().text =
 			"Total Buildings Destroyed: " + TotalBuildingsDestroyed;
-		TotalDaysSurvived = ObjectivesController.CurrentDay;
 		GameObject.Find("Total Days Survived").GetComponent<Text>().text =
 			"Total Days Survived: " + TotalDaysSurvived;
 		
@@ -100,7 +99,7 @@ public class MenuController : MonoBehaviour {
 			"Total Gun Powder Collected: " + TotalGunPowderCollected;
 		
 		// Final Score
-		long finalScore = TotalHostilityScore + TotalBuildingScore + TotalGatheringScore + (TotalDaysSurvived * 100);
+		long finalScore = TotalHostilityScore + TotalBuildingScore + TotalGatheringScore + (ObjectivesController.CurrentDay * 100);
 		GameObject.Find("Total Final Score Text").GetComponent<Text>().text =
 			"Total Final Score: " + finalScore;
 		
@@ -191,5 +190,14 @@ public class MenuController : MonoBehaviour {
 	public void ReturnToStartMenu()
 	{
 		SceneManager.LoadScene("StartMenuScene");
+	}
+
+	public static void UpdateScore()
+	{
+		GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text = "Score: " +
+		                                                                            (TotalHostilityScore +
+		                                                                             TotalBuildingScore +
+		                                                                             TotalGatheringScore +
+		                                                                             (ObjectivesController.CurrentDay * 100));
 	}
 }

@@ -39,6 +39,7 @@ public class ObjectivesController : MonoBehaviour {
     public GameObject ZombieBoss;
     private bool _isItDay = true;
     public GameObject Camera;
+    public GameObject NewWaveNotification;
 	
     // Use this for initialization
     void Start ()
@@ -124,8 +125,6 @@ public class ObjectivesController : MonoBehaviour {
         {
             SpawnZombies();
             
-            // When the zombies are spawned, the wave counter is increased
-            CurrentDay++;
             GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Day: " + CurrentDay;
         }
     }
@@ -212,6 +211,11 @@ public class ObjectivesController : MonoBehaviour {
 
     public void SpawnZombies()
     {
+        // When the zombies are spawned, the wave counter is increased
+        CurrentDay++;
+        
+        MenuController.UpdateScore();
+        
         Camera.GetComponent<BoxCollider2D>().enabled = true;
 	    
         // Separating the zombie spawn areas
@@ -379,7 +383,6 @@ public class ObjectivesController : MonoBehaviour {
         }
         
         // When the zombies are spawned, the day counter is increased
-        CurrentDay++;
         GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Day: " + CurrentDay;
         NumberOfZombiesToSpawnLeft = (int)_numberOfZombiesToSpawnOriginal / 2 + 1;
         NumberOfZombiesToSpawnRight = (int)_numberOfZombiesToSpawnOriginal / 2 + 1;
@@ -433,8 +436,17 @@ public class ObjectivesController : MonoBehaviour {
         if (spawnZombies)
         {
             SpawnZombies();
+            
+            NewWaveNotification.SetActive(true);
+            NewWaveNotification.GetComponentInChildren<Text>().text = "WAVE: " + CurrentDay;
+            Invoke("HideWaveNotification", 3f);
         }
 
         _isItDay = !_isItDay;
+    }
+
+    private void HideWaveNotification()
+    {
+        NewWaveNotification.SetActive(false);
     }
 }

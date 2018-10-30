@@ -29,6 +29,8 @@ public class GunpowderController : MonoBehaviour
 			MenuController.TotalGunPowderCollected++;
 			MenuController.TotalGatheringScore += 100;
 			
+			MenuController.UpdateScore();
+			
 		}
 	}
 

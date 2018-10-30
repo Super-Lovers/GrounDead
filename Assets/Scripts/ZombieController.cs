@@ -311,6 +311,8 @@ public class ZombieController : MonoBehaviour
 
                 MenuController.TotalHostilityScore += 100;
                 
+                MenuController.UpdateScore();
+                
                 Destroy(gameObject);
             }
             if (other.GetComponent<SpriteRenderer>().sprite == other.GetComponentInParent<PlayerController>().Knife)
@@ -393,6 +395,8 @@ public class ZombieController : MonoBehaviour
                         PlayerController.Score += 100;
                         GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text =
                             "Score: " + PlayerController.Score;
+                        
+                        MenuController.UpdateScore();
 
                         gameObject.GetComponent<Animator>().SetBool("isHittingObject", false);
                         gameObject.GetComponent<Animator>().SetBool("isHittingObjectDown", false);
@@ -423,6 +427,9 @@ public class ZombieController : MonoBehaviour
                                     "Score: " + PlayerController.Score;
                                 
                                 PlayerController.NumberOfZombiesKilled++;
+					
+                                MenuController.UpdateScore();
+                                
                                 Destroy(gameObject);
                             }
                             else
@@ -459,6 +466,9 @@ public class ZombieController : MonoBehaviour
                                     "Score: " + PlayerController.Score;
                                 
                                 PlayerController.NumberOfZombiesKilled++;
+					
+                                MenuController.UpdateScore();
+                                
                                 Destroy(gameObject);
                             }
                             else
