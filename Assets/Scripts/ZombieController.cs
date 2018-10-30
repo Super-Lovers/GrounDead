@@ -16,7 +16,8 @@ public class ZombieController : MonoBehaviour
     // Used to confirm that the zombie will collide with an obstacle
     public static bool CloseToAWall = false;
     // Variable responsible for the delay between zombie attacks
-    private bool _canAttack = true;
+    private bool _canAttack;
+    private bool _enableDamageEffect;
     private GameObject _obstacle;
     public Material RedFlash;
     public Material YellowFlash;
@@ -31,6 +32,8 @@ public class ZombieController : MonoBehaviour
     private string _zombieType = "Normal";
     private bool _isZombieGoingDown;
     public GameObject NotificationDamage;
+    private bool _isFatZombie;
+    private int _originalOrder;
     
     // Objects to ignore collision with
     public GameObject[] Stones;
@@ -41,15 +44,41 @@ public class ZombieController : MonoBehaviour
     
     private void Start()
     {
+        Invoke("EnableAttacks", 1.5f);
+
+        _originalOrder = GetComponent<SpriteRenderer>().sortingOrder;
+        
+        if (gameObject.tag == "Zombie Boss")
+        {
+            _zombieType = "Armored";
+            _isFatZombie = true;
+        } else if (gameObject.tag == "Zombie")
+        {
+            _zombieType = "Normal";
+        } else if (gameObject.tag == "Zombie Cop")
+        {
+            _zombieType = "Advanced";
+        }
+        
         foreach (GameObject block in UiButtonController.PlacedBlocks.ToArray())
         {
             string nameOfBlock = "";
             for (int i = 0; i < block.name.Length; i++)
             {
                 nameOfBlock += block.name[i];
-                if (nameOfBlock == "stone" || nameOfBlock == "copper" || nameOfBlock == "tree")
+                if (_isFatZombie)
                 {
-                    Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), block.GetComponent<BoxCollider2D>());
+                    if (nameOfBlock == "stone" || nameOfBlock == "copper")
+                    {
+                        Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), block.GetComponentInChildren<BoxCollider2D>());
+                    }
+                }
+                else
+                {
+                    if (nameOfBlock == "stone" || nameOfBlock == "copper"|| nameOfBlock == "tree")
+                    {
+                        Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), block.GetComponentInChildren<BoxCollider2D>());
+                    }
                 }
             }
         }
@@ -77,17 +106,6 @@ public class ZombieController : MonoBehaviour
             Strength = 30;
         }
         */
-
-        if (gameObject.tag == "Zombie Boss")
-        {
-            _zombieType = "Armored";
-        } else if (gameObject.tag == "Zombie")
-        {
-            _zombieType = "Normal";
-        } else if (gameObject.tag == "Zombie Cop")
-        {
-            _zombieType = "Advanced";
-        }
     }
 
     void Update ()
@@ -109,7 +127,16 @@ public class ZombieController : MonoBehaviour
             
                 RaycastHit2D linecastResult = Physics2D.Linecast(transform.position, castResult.transform.position, PlayerLayerMask);
                 if (linecastResult.transform.tag == "Player" || linecastResult.transform.tag == "PlayerDetector" || linecastResult.transform.gameObject.layer == 11 || linecastResult.transform.gameObject.layer == 14)
-                {transform.position = Vector2.MoveTowards(transform.position, linecastResult.transform.position, MovementSpeed);
+                {
+                    if (linecastResult.transform.tag == "PlayerDetector")
+                    {
+                        transform.position = Vector2.MoveTowards(transform.position, linecastResult.transform.position, MovementSpeed);
+                    }
+                    else
+                    {
+                        transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, MovementSpeed);
+                    }
+                    
                     gameObject.GetComponent<Animator>().SetBool("isWalking", true);
             
                     RaycastHit2D rayUp = Physics2D.Raycast(transform.position, Vector2.up, 5, PlayerDetectorLayerMask);
@@ -130,30 +157,62 @@ public class ZombieController : MonoBehaviour
                     else
                     {
                         _isZombieGoingDown = false;
-                        if (pos.x > linecastResult.transform.position.x)
+                        if (linecastResult.transform.tag == "PlayerDetector")
                         {
-                            gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
-                            gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
-                            if (_zombieType == "Armored")
+                            if (pos.x > linecastResult.transform.position.x)
                             {
-                                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                                gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
+                                gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
+                                if (_zombieType == "Armored")
+                                {
+                                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                                }
+                                else
+                                {
+                                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                                }
                             }
-                            else
+                            else if (pos.x < linecastResult.transform.position.x)
                             {
-                                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                                gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
+                                gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
+                                if (_zombieType == "Armored")
+                                {
+                                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                                }
+                                else
+                                {
+                                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                                }
                             }
                         }
-                        else if (pos.x < linecastResult.transform.position.x)
+                        else
                         {
-                            gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
-                            gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
-                            if (_zombieType == "Armored")
+                            if (pos.x > _player.transform.position.x)
                             {
-                                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                                gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
+                                gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
+                                if (_zombieType == "Armored")
+                                {
+                                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                                }
+                                else
+                                {
+                                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                                }
                             }
-                            else
+                            else if (pos.x < _player.transform.position.x)
                             {
-                                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                                gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
+                                gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
+                                if (_zombieType == "Armored")
+                                {
+                                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                                }
+                                else
+                                {
+                                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                                }
                             }
                         }
                     }
@@ -174,7 +233,7 @@ public class ZombieController : MonoBehaviour
             _audioSource.enabled = false;
         }
     }
-        
+
     /* if (linecastResult.transform.tag == "Player")
     {
         Debug.DrawLine(transform.position, _player.transform.position, Color.green, 1.0f);
@@ -275,6 +334,11 @@ public class ZombieController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other)
     {
+        if (other.gameObject.layer == 14 || other.gameObject.layer == 11)
+        {
+            MovementSpeed = 0.03f;
+        }
+        
         gameObject.GetComponent<Rigidbody2D>().constraints =
             RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         
@@ -454,7 +518,12 @@ public class ZombieController : MonoBehaviour
     private void EnableAttacks()
     {
         _canAttack = true;
-        _obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
+        if (_enableDamageEffect)
+        {
+            _obstacle.GetComponent<SpriteRenderer>().material = WhiteFlash;
+        }
+
+        _enableDamageEffect = true;
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -465,6 +534,37 @@ public class ZombieController : MonoBehaviour
             // Clearing all the zombies that spawn on top of the player.
             Camera.main.GetComponent<BoxCollider2D>().enabled = false;
         }
+        
+        // When the zombies are walking between trees, their movement speed
+        // will be decreased temporarily.
+        if (other.gameObject.layer == 14 || other.gameObject.layer == 11)
+        {
+            // Make the zombie look smaller when traversing in forests
+            GetComponent<Animator>().speed = 0.4f;
+            
+            MovementSpeed = 0.015f;
+        }
+        
+        if (other.transform.tag == "Zombie Layer Increase Detector")
+        {
+            var parentOfCollider = other.transform.parent.gameObject;
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = parentOfCollider.GetComponentInChildren<SpriteRenderer>().sortingOrder;
+        }
+    }
+    
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer == 14 || other.gameObject.layer == 11)
+        {
+            GetComponent<Animator>().speed = 1f;
+            MovementSpeed = 0.03f;
+        }
+        
+        if (other.transform.tag == "Zombie Layer Increase Detector")
+        {
+            GetComponent<SpriteRenderer>().sortingOrder = _originalOrder;
+        }
+
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -473,15 +573,20 @@ public class ZombieController : MonoBehaviour
         {
             if (_isZombieGoingDown)
             {
-                gameObject.GetComponent<Animator>().SetBool("isHittingObjectDown", true); 
+                gameObject.GetComponent<Animator>().SetBool("isHittingObjectDown", false); 
             }
             else
             {
                 gameObject.GetComponent<Animator>().SetBool("isHittingObjectDown", false);
-                gameObject.GetComponent<Animator>().SetBool("isHittingObject", true);
+                gameObject.GetComponent<Animator>().SetBool("isHittingObject", false);
             }
             gameObject.GetComponent<Rigidbody2D>().constraints =
                 RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        }
+        
+        if (other.gameObject.layer == 14 || other.gameObject.layer == 11)
+        {
+            MovementSpeed = 0.03f;
         }
     }
     

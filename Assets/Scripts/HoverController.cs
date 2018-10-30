@@ -71,8 +71,16 @@ public class HoverController : MonoBehaviour
                     if (BlockClickedX == block.transform.position.x &&
                         BlockClickedY == block.transform.position.y)
                     {
-                        block.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0.7f);
-                        block.GetComponent<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
+                        if (block.GetComponent<SpriteRenderer>() != null)
+                        {
+                            block.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0.7f);
+                            block.GetComponent<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
+                        }
+                        else
+                        {
+                            block.GetComponentInChildren<SpriteRenderer>().color = new Color(0, 0, 0, 0.7f);
+                            block.GetComponentInChildren<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
+                        }
                     }
                 }
             }
@@ -89,8 +97,16 @@ public class HoverController : MonoBehaviour
             if (BlockClickedX == block.transform.position.x &&
                 BlockClickedY == block.transform.position.y)
             {
-                block.GetComponent<SpriteRenderer>().color = _initialColors;
-                block.GetComponent<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 1f);
+                if (block.GetComponent<SpriteRenderer>() != null)
+                {
+                    block.GetComponent<SpriteRenderer>().color = _initialColors;
+                    block.GetComponent<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 1f);
+                }
+                else
+                {
+                    block.GetComponentInChildren<SpriteRenderer>().color = _initialColors;
+                    block.GetComponentInChildren<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 1f);
+                }
             }
         }
         

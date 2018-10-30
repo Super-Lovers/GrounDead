@@ -108,7 +108,7 @@ public class ObjectivesController : MonoBehaviour {
         }
         
 
-        if (PlayerController.PlayerHealth < 270 && HealedSelf == false)
+        if (PlayerController.PlayerHealth < 270 && HealedSelf == false && IsTutorialComplete)
         {
             TasksWindow.SetActive(true);
             _taskTitle.GetComponent<Text>().text = "How to Heal Yourself";
@@ -193,6 +193,7 @@ public class ObjectivesController : MonoBehaviour {
                 // Begin the game day/night cycle when the tutorial is complete.
                 InvokeRepeating("UpdateWorldTime", 20, 20);
                 _currentTask++;
+                IsTutorialComplete = true;
                 break;
             case "How to Heal Yourself":
                 currentTasks.Remove(taskKey);

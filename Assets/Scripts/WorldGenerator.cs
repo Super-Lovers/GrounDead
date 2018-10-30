@@ -406,10 +406,10 @@ public class WorldGenerator : MonoBehaviour {
                     case 0: // Trees
                         var grassTree = Instantiate(Ground[0],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Greener Ground").transform);
-                        grassTree.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        grassTree.GetComponentInChildren<SpriteRenderer>().sortingOrder = sortingLayerGrass;
                         var tree = Instantiate(ForestTrees[Random.Range(0, ForestTrees.Length)],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Forest Trees").transform);
-                        tree.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerTrees + 1;
+                        tree.GetComponentInChildren<SpriteRenderer>().sortingOrder = sortingLayerTrees + 1;
                         tree.tag = "PlacedBlock";
                         UiButtonController.PlacedBlocks.Add(tree);
                         break;
