@@ -37,8 +37,16 @@ public class BuildPopUpController : MonoBehaviour
 		_requirementOne.GetComponent<Image>().sprite = Wood;
 		_requirementOne.GetComponentInChildren<Text>().text = "6";
 		_requirementTwo.GetComponent<Image>().sprite = null;
-		_requirementTwo.GetComponent<Image>().color = new Color(0, 0, 0, 0);
 		_requirementTwo.GetComponentInChildren<Text>().text = "";
+		if (PlayerController.Wood >= 6)
+		{
+			_requirementOne.GetComponentInChildren<Text>().color = new Color(0, 130, 0, 1);
+		}
+		else
+		{
+			_requirementOne.GetComponentInChildren<Text>().color = new Color(190, 0, 0, 1);
+		}
+		_requirementTwo.GetComponent<Image>().color = new Color(0, 0, 0, 0);
 	}
 	public void ShowStoneRequirements()
 	{
@@ -51,8 +59,16 @@ public class BuildPopUpController : MonoBehaviour
 		_requirementOne.GetComponent<Image>().sprite = Stone;
 		_requirementOne.GetComponentInChildren<Text>().text = "6";
 		_requirementTwo.GetComponent<Image>().sprite = null;
-		_requirementTwo.GetComponent<Image>().color = new Color(0, 0, 0, 0);
 		_requirementTwo.GetComponentInChildren<Text>().text = "";
+		if (PlayerController.Stone >= 6)
+		{
+			_requirementOne.GetComponentInChildren<Text>().color = new Color(0, 130, 0, 1);
+		}
+		else
+		{
+			_requirementOne.GetComponentInChildren<Text>().color = new Color(190, 0, 0, 1);
+		}
+		_requirementTwo.GetComponent<Image>().color = new Color(0, 0, 0, 0);
 	}
 	public void ShowPlatformRequirements()
 	{
@@ -65,8 +81,16 @@ public class BuildPopUpController : MonoBehaviour
 		_requirementOne.GetComponent<Image>().sprite = Wood;
 		_requirementOne.GetComponentInChildren<Text>().text = "8";
 		_requirementTwo.GetComponent<Image>().sprite = null;
-		_requirementTwo.GetComponent<Image>().color = new Color(0, 0, 0, 0);
 		_requirementTwo.GetComponentInChildren<Text>().text = "";
+		if (PlayerController.Wood >= 8)
+		{
+			_requirementOne.GetComponentInChildren<Text>().color = new Color(0, 130, 0, 1);
+		}
+		else
+		{
+			_requirementOne.GetComponentInChildren<Text>().color = new Color(190, 0, 0, 1);
+		}
+		_requirementTwo.GetComponent<Image>().color = new Color(0, 0, 0, 0);
 	}
 	public void ShowSpikesRequirements()
 	{
@@ -79,8 +103,24 @@ public class BuildPopUpController : MonoBehaviour
 		_requirementOne.GetComponent<Image>().sprite = Stone;
 		_requirementOne.GetComponentInChildren<Text>().text = "6";
 		_requirementTwo.GetComponent<Image>().sprite = Wood;
-		_requirementTwo.GetComponent<Image>().color = new Color(255, 255, 255, 1);
 		_requirementTwo.GetComponentInChildren<Text>().text = "10";
+		if (PlayerController.Stone >= 6)
+		{
+			_requirementOne.GetComponentInChildren<Text>().color = new Color(0, 130, 0, 1);
+		}
+		else
+		{
+			_requirementOne.GetComponentInChildren<Text>().color = new Color(190, 0, 0, 1);
+		}
+		if (PlayerController.Wood >= 10)
+		{
+			_requirementTwo.GetComponentInChildren<Text>().color = new Color(0, 130, 0, 1);
+		}
+		else
+		{
+			_requirementTwo.GetComponentInChildren<Text>().color = new Color(190, 0, 0, 1);
+		}
+		_requirementTwo.GetComponent<Image>().color = new Color(255, 255, 255, 1);
 	}
 	public void ShowFenceRequirements()
 	{
@@ -93,8 +133,24 @@ public class BuildPopUpController : MonoBehaviour
 		_requirementOne.GetComponent<Image>().sprite = Stone;
 		_requirementOne.GetComponentInChildren<Text>().text = "12";
 		_requirementTwo.GetComponent<Image>().sprite = Copper;
-		_requirementTwo.GetComponent<Image>().color = new Color(255, 255, 255, 1);
 		_requirementTwo.GetComponentInChildren<Text>().text = "6";
+		if (PlayerController.Stone >= 12)
+		{
+			_requirementOne.GetComponentInChildren<Text>().color = new Color(0, 130, 0, 1);
+		}
+		else
+		{
+			_requirementOne.GetComponentInChildren<Text>().color = new Color(190, 0, 0, 1);
+		}
+		if (PlayerController.Copper >= 6)
+		{
+			_requirementTwo.GetComponentInChildren<Text>().color = new Color(0, 130, 0, 1);
+		}
+		else
+		{
+			_requirementTwo.GetComponentInChildren<Text>().color = new Color(190, 0, 0, 1);
+		}
+		_requirementTwo.GetComponent<Image>().color = new Color(255, 255, 255, 1);
 	}
 	public void ShowTorchRequirements()
 	{
@@ -107,8 +163,24 @@ public class BuildPopUpController : MonoBehaviour
 		_requirementOne.GetComponent<Image>().sprite = GunPowder;
 		_requirementOne.GetComponentInChildren<Text>().text = "1";
 		_requirementTwo.GetComponent<Image>().sprite = Wood;
-		_requirementTwo.GetComponent<Image>().color = new Color(255, 255, 255, 1);
 		_requirementTwo.GetComponentInChildren<Text>().text = "1";
+		if (PlayerController.GunPowder >= 1)
+		{
+			_requirementOne.GetComponentInChildren<Text>().color = new Color(0, 130, 0, 1);
+		}
+		else
+		{
+			_requirementOne.GetComponentInChildren<Text>().color = new Color(190, 0, 0, 1);
+		}
+		if (PlayerController.Wood >= 1)
+		{
+			_requirementTwo.GetComponentInChildren<Text>().color = new Color(0, 130, 0, 1);
+		}
+		else
+		{
+			_requirementTwo.GetComponentInChildren<Text>().color = new Color(190, 0, 0, 1);
+		}
+		_requirementTwo.GetComponent<Image>().color = new Color(255, 255, 255, 1);
 	}
 
 	public void HidePopUp()

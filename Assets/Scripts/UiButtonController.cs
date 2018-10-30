@@ -39,6 +39,7 @@ public class UiButtonController : MonoBehaviour
     public AudioClip Mining;
     public AudioClip TreeFalling;
     public AudioClip StructurePlacement;
+    public GameObject NotificationDamage;
     
     private void Start()
     {
@@ -315,6 +316,10 @@ public class UiButtonController : MonoBehaviour
 		
             PlacedBlocks.Add(woodWall);
             //ZombieController._playerDetectorList.Add(woodWall);
+            
+            // Notification feedback for building a wall
+            var notification = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(woodWall.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
+            notification.GetComponentInChildren<Text>().text = "-" + 6 + " Wood";
         
             ClosePickingBlocks();
         
@@ -348,6 +353,9 @@ public class UiButtonController : MonoBehaviour
             stoneWall.tag = "PlacedBlock";
 		
             PlacedBlocks.Add(stoneWall);
+            
+            var notification = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(stoneWall.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
+            notification.GetComponentInChildren<Text>().text = "-" + 6 + " Stone";
         
             ClosePickingBlocks();
         
@@ -400,6 +408,9 @@ public class UiButtonController : MonoBehaviour
             }
 		
             PlacedBlocks.Add(platform);
+            
+            var notification = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(platform.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
+            notification.GetComponentInChildren<Text>().text = "-" + 8 + " Wood";
         
             ClosePickingBlocks();
         
@@ -436,6 +447,12 @@ public class UiButtonController : MonoBehaviour
             spikes.tag = "PlacedBlock";
 		
             PlacedBlocks.Add(spikes);
+            
+            var notificationStone = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(spikes.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
+            notificationStone.GetComponentInChildren<Text>().text = "-" + 6 + " Stone";
+            var notificationWood = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(
+                new Vector3(spikes.transform.position.x, spikes.transform.position.y - 0.3f, spikes.transform.position.z)), Quaternion.identity, GameObject.Find("Canvas").transform);
+            notificationWood.GetComponentInChildren<Text>().text = "-" + 10 + " Wood";
         
             ClosePickingBlocks();
         
@@ -472,6 +489,12 @@ public class UiButtonController : MonoBehaviour
             fence.tag = "PlacedBlock";
 		
             PlacedBlocks.Add(fence);
+            
+            var notificationStone = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(fence.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
+            notificationStone.GetComponentInChildren<Text>().text = "-" + 12 + " Stone";
+            var notificationCopper = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(
+                new Vector3(fence.transform.position.x, fence.transform.position.y - 0.3f, fence.transform.position.z)), Quaternion.identity, GameObject.Find("Canvas").transform);
+            notificationCopper.GetComponentInChildren<Text>().text = "-" + 6 + " Copper";
         
             ClosePickingBlocks();
         
@@ -508,6 +531,12 @@ public class UiButtonController : MonoBehaviour
             torch.tag = "PlacedBlock";
 		
             PlacedBlocks.Add(torch);
+            
+            var notificationWood = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(torch.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
+            notificationWood.GetComponentInChildren<Text>().text = "-" + 1 + " Wood";
+            var notificationGunPowder = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(
+                new Vector3(torch.transform.position.x, torch.transform.position.y - 0.3f, torch.transform.position.z)), Quaternion.identity, GameObject.Find("Canvas").transform);
+            notificationGunPowder.GetComponentInChildren<Text>().text = "-" + 1 + " Gun Powder";
         
             ClosePickingBlocks();
         

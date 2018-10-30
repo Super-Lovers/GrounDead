@@ -16,7 +16,7 @@ public class FeedbackController : MonoBehaviour
 		currentPos = new Vector3(currentPos.x, currentPos.y + 1f, currentPos.z);
 		_rectTransform.localPosition = currentPos;
 		
-		Invoke("RemoveObject", 0.5f);
+		Invoke("RemoveObject", 0.7f);
 	}
 
 	void RemoveObject()

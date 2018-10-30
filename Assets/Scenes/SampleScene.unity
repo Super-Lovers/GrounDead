@@ -6874,6 +6874,8 @@ MonoBehaviour:
   Mining: {fileID: 8300000, guid: 0b618fede503940cdaf3443bd520790d, type: 3}
   TreeFalling: {fileID: 8300000, guid: e70351f52b85c49a49a62e86b2b64d98, type: 3}
   StructurePlacement: {fileID: 8300000, guid: 5c798c48c211a4c1e9b64e72f03c524b, type: 3}
+  NotificationDamage: {fileID: 1199130486568902, guid: 06ff37092c1ed4cac9ea059df23109ee,
+    type: 2}
 --- !u!4 &1991757896
 Transform:
   m_ObjectHideFlags: 0
