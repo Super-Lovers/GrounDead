@@ -9,6 +9,7 @@ public class WorldGenerator : MonoBehaviour {
     public GameObject[] WaterTypes;
     public GameObject[] ForestTrees;
     public GameObject[] RockyGround;
+    public GameObject[] RockyTransitions;
     public GameObject[] GrassPaths;
     public GameObject[] StoneTypes;
     public GameObject[] CopperTypes;
@@ -185,6 +186,30 @@ public class WorldGenerator : MonoBehaviour {
                 if (x == 80 && y == 14)
                 {
                     GameWorld[y, x] = 38; // Dirt bottom left
+                }
+                
+                if ((x >= 0 && x < 20) && y == 18) // rockBottom
+                {
+                    GameWorld[y, x] = 90;
+                }
+                if ((x >= 0 && x < 20) && y == 22) // rockTop
+                {
+                    GameWorld[y, x] = 91;
+                }
+
+                if ((x == 20 && (y >= 0 && y < 18)) || ((x == 20) && (y >= 23 && y < 40))) // rockLeft
+                {
+                    GameWorld[y, x] = 92;
+                }
+
+                if (x == 20 && y == 22) // rockTopLeft
+                {
+                    GameWorld[y, x] = 93;
+                }
+
+                if (x == 20 && y == 18) // rockBottomLeft
+                {
+                    GameWorld[y, x] = 94;
                 }
             }
         }
@@ -442,6 +467,31 @@ public class WorldGenerator : MonoBehaviour {
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Water Pools").transform);
                         water3.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
                         UiButtonController.PlacedWaterBlocks.Add(water3);
+                        break;
+                    case 90: // rockBottom
+                        var rockBottom = Instantiate(RockyTransitions[0],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Rocky Ground").transform);
+                        UiButtonController.PlacedWaterBlocks.Add(rockBottom);
+                        break;
+                    case 91: // rockTop
+                        var rockTop = Instantiate(RockyTransitions[3],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Rocky Ground").transform);
+                        UiButtonController.PlacedWaterBlocks.Add(rockTop);
+                        break;
+                    case 92: // rockLeft
+                        var rockLeft = Instantiate(RockyTransitions[2],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Rocky Ground").transform);
+                        UiButtonController.PlacedWaterBlocks.Add(rockLeft);
+                        break;
+                    case 93: // rockTopLeft
+                        var rockTopLeft = Instantiate(RockyTransitions[4],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Rocky Ground").transform);
+                        UiButtonController.PlacedWaterBlocks.Add(rockTopLeft);
+                        break;
+                    case 94: // rockBottomLeft
+                        var rockBottomLeft = Instantiate(RockyTransitions[1],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Rocky Ground").transform);
+                        UiButtonController.PlacedWaterBlocks.Add(rockBottomLeft);
                         break;
                 }
 

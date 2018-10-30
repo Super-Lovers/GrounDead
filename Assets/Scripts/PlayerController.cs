@@ -372,7 +372,7 @@ public class PlayerController : MonoBehaviour
         // ***********
         // Pause Functionality
         // ***********
-        if (Input.GetKeyDown(KeyCode.Backspace))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             IsPaused = !IsPaused;
             
