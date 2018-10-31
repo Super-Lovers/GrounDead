@@ -22,6 +22,7 @@ public class BulletController : MonoBehaviour
 	void Start ()
 	{
 		_rb = GetComponent<Rigidbody2D>();
+		PlayerController.Animator.SetInteger("direction", 1);
 
 		if (PlayerController.Animator.GetInteger("direction") == 1 || PlayerController.Animator.GetInteger("lastDirection") == 1)
 		{
@@ -69,7 +70,7 @@ public class BulletController : MonoBehaviour
 			}
 		} */
 		
-		if (other.transform.tag != "Player" && (other.gameObject.layer == 10 || other.gameObject.layer == 11))
+		if (other.transform.tag != "Player" && other.transform.tag != "Player Range" && (other.gameObject.layer == 10 || other.gameObject.layer == 11))
 		{
 			// Make the game object invisible and undetectable after it hits the
 			// zombie so that it can still run the flash animation but not look
@@ -133,7 +134,7 @@ public class BulletController : MonoBehaviour
 			}
 		}
 		
-		if (other.transform.tag != "Player")
+		if (other.transform.tag != "Player" && other.transform.tag != "Player Range")
 		{
 			if (other.transform.tag == "Zombie" || other.transform.tag == "Zombie Boss" || other.transform.tag == "Zombie Cop")
 			{

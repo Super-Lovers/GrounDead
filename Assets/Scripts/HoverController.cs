@@ -18,7 +18,7 @@ public class HoverController : MonoBehaviour
     private GameObject[] _actionsUi;
     private GameObject[] _pickUi;
     private bool _canBuild = true;
-    private bool _isOutOfRange;
+    private bool _isOutOfRange = true;
 
     public Material RedFlash;
     public Material GreenFlash;
@@ -28,6 +28,7 @@ public class HoverController : MonoBehaviour
     public Material Tree3;
     public Material Tree4;
     public Material Tree5;
+    private GameObject _player;
 	
     void Start ()
     {
@@ -37,57 +38,8 @@ public class HoverController : MonoBehaviour
         _actionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
         _pickUi = GameObject.FindGameObjectsWithTag("PickUI");
         _transform = GetComponent<Transform>();
-    }
-
-    private void OnMouseEnter()
-    {
-        Vector3 hoverPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, 0));
-        float playerPosX = GameObject.FindGameObjectWithTag("Player").transform.position.x;
-        float playerPosY = GameObject.FindGameObjectWithTag("Player").transform.position.y;
         
-        if ((playerPosX + 0.64f < hoverPosition.x || playerPosX - 0.64f > hoverPosition.x) ||
-            playerPosY + 0.64f < hoverPosition.y || playerPosY - 0.64f > hoverPosition.y)
-        {
-            _isOutOfRange = true;
-        }
-        else
-        {
-            _isOutOfRange = false;
-        }
-        
-        if (!EventSystem.current.IsPointerOverGameObject() && _isOutOfRange == false)
-        {
-            BlockClickedX = _transform.position.x;
-            BlockClickedY = _transform.position.y;
-
-            // This statement checks if the player has encountered the
-            // error where the grass beneath a tree is highlighted instead
-            // of the tree itself, and redirects the mouse selector which will
-            // still give feedback to the player for the actual, intended, object.
-            if (_transform.name == "grass1(Clone)" || _transform.name == "grass2(Clone)" || _transform.name == "grass3(Clone)" || _transform.name == "grass4(Clone)" || _transform.name == "grass5(Clone)" || _transform.name == "grass1Inverted(Clone)")
-            {
-                foreach (var block in UiButtonController.PlacedBlocks)
-                {
-                    if (BlockClickedX == block.transform.position.x &&
-                        BlockClickedY == block.transform.position.y)
-                    {
-                        if (block.GetComponent<SpriteRenderer>() != null)
-                        {
-                            block.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0.7f);
-                            block.GetComponent<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
-                        }
-                        else
-                        {
-                            block.GetComponentInChildren<SpriteRenderer>().color = new Color(0, 0, 0, 0.7f);
-                            block.GetComponentInChildren<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
-                        }
-                    }
-                }
-            }
-            
-            _spriteRenderer.color = new Color(0, 0, 0, 0.7f);
-            _renderer.material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
-        }
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void OnMouseExit()
@@ -114,9 +66,87 @@ public class HoverController : MonoBehaviour
         _renderer.material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 1f);
     }
 
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.transform.tag == "Player Range" ||
+            other.transform.tag == "Player" ||
+            other.transform.tag == "Melee Weapon" ||
+            other.transform.tag == "PlayerDetector")
+        {
+            _isOutOfRange = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.transform.tag == "Player" ||
+            other.transform.tag == "Melee Weapon" ||
+            other.transform.tag == "PlayerDetector")
+        {
+            _isOutOfRange = false;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.transform.tag == "Player" ||
+            other.transform.tag == "Melee Weapon" ||
+            other.transform.tag == "PlayerDetector")
+        {
+            _isOutOfRange = false;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.transform.tag == "Player Range" ||
+            other.transform.tag == _player.transform.tag ||
+            other.transform.tag == "Melee Weapon" ||
+            other.transform.tag == "PlayerDetector")
+        {
+            _isOutOfRange = true;
+        }
+    }
+
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(1)  && _isOutOfRange == false) // If player right clicks (1), left click (0)
+        /*
+        Vector3 hoverPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, 0));
+        float _playerPosX = _player.transform.position.x;
+        float _playerPosY = _player.transform.position.y;
+        */
+        
+        if (!EventSystem.current.IsPointerOverGameObject() && _isOutOfRange == false)
+        {
+            BlockClickedX = _transform.position.x;
+            BlockClickedY = _transform.position.y;
+
+            // This statement checks if the _player has encountered the
+            // error where the grass beneath a tree is highlighted instead
+            // of the tree itself, and redirects the mouse selector which will
+            // still give feedback to the _player for the actual, intended, object.
+                foreach (var block in UiButtonController.PlacedBlocks)
+                {
+                    if (BlockClickedX == block.transform.position.x &&
+                        BlockClickedY == block.transform.position.y)
+                    {
+                        if (block.GetComponent<SpriteRenderer>() != null)
+                        {
+                            block.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0.7f);
+                            block.GetComponent<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
+                        }
+                        else
+                        {
+                            block.GetComponentInChildren<SpriteRenderer>().color = new Color(0, 0, 0, 0.7f);
+                            block.GetComponentInChildren<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
+                        }
+                    }
+                }
+            
+            _spriteRenderer.color = new Color(0, 0, 0, 0.7f);
+            _renderer.material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
+        }
+        if (Input.GetMouseButtonDown(1)  && _isOutOfRange == false) // If _player right clicks (1), left click (0)
         {
             PlayerController.PlayMode = "Creative";
             if (gameObject.tag == "PlacedBlock")

@@ -45,6 +45,7 @@ TagManager:
   - Task Description
   - Water Tile
   - Zombie Layer Increase Detector
+  - Player Range
   layers:
   - Default
   - TransparentFX
