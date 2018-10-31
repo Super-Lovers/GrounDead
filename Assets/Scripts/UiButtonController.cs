@@ -40,6 +40,7 @@ public class UiButtonController : MonoBehaviour
     public AudioClip TreeFalling;
     public AudioClip StructurePlacement;
     public GameObject NotificationDamage;
+    private List<GameObject> PlacedStructures = new List<GameObject>();
     
     private void Start()
     {
@@ -314,13 +315,47 @@ public class UiButtonController : MonoBehaviour
             PlayerPrefs.SetFloat("Wood", PlayerController.Wood -= 6);
             GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerPrefs.GetFloat("Wood").ToString();
             
-            var woodWall = Instantiate(Wood, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            woodWall.GetComponent<SpriteRenderer>().sortingOrder = 40;
+            var woodWall = Instantiate(Wood, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);woodWall.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs((int)HoverController.ClickedBlock.transform.position.y);
+            if (PlacedStructures.Count > 0)
+            {
+                foreach (var structure in PlacedStructures)
+                {
+                    if (structure.transform.position.x == woodWall.transform.position.x &&
+                        structure.GetComponent<SpriteRenderer>().sortingOrder > woodWall.GetComponent<SpriteRenderer>().sortingOrder)
+                    {
+                        woodWall.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                    } else if (structure.transform.position.x == woodWall.transform.position.x &&
+                               structure.GetComponent<SpriteRenderer>().sortingOrder < woodWall.GetComponent<SpriteRenderer>().sortingOrder)
+                    {
+                        woodWall.GetComponent<SpriteRenderer>().sortingOrder -= 3;
+                    } else if (structure.transform.position.x == woodWall.transform.position.x &&
+                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
+                               woodWall.GetComponent<SpriteRenderer>().sortingOrder)
+                    {
+                        woodWall.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                    } else if (structure.transform.position.x == woodWall.transform.position.x &&
+                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
+                               woodWall.GetComponent<SpriteRenderer>().sortingOrder &&
+                               Mathf.Abs((int)structure.transform.position.y) > Mathf.Abs((int)woodWall.transform.position.y))
+                    {
+                        woodWall.GetComponent<SpriteRenderer>().sortingOrder -= 3;
+                        Debug.Log(">");
+                    } else if (structure.transform.position.x == woodWall.transform.position.x &&
+                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
+                               woodWall.GetComponent<SpriteRenderer>().sortingOrder &&
+                               Mathf.Abs((int)structure.transform.position.y) < Mathf.Abs((int)woodWall.transform.position.y))
+                    {
+                        woodWall.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                        Debug.Log("<");
+                    }
+                }
+            }
             woodWall.AddComponent<HitPointsController>();
             woodWall.tag = "PlacedBlock";
             woodWall.GetComponent<HitPointsController>().HitPoints = 100;
 		
             PlacedBlocks.Add(woodWall);
+            PlacedStructures.Add(woodWall);
             //ZombieController._playerDetectorList.Add(woodWall);
             
             // Notification feedback for building a wall
@@ -355,7 +390,7 @@ public class UiButtonController : MonoBehaviour
             GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerPrefs.GetFloat("Stone").ToString();
             
             var stoneWall = Instantiate(Stone, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            stoneWall.GetComponent<SpriteRenderer>().sortingOrder = 40;
+            stoneWall.GetComponent<SpriteRenderer>().sortingOrder = HoverController.BlockHoveredOver.GetComponent<SpriteRenderer>().sortingOrder;
             stoneWall.AddComponent<HitPointsController>();
             stoneWall.GetComponent<HitPointsController>().HitPoints = 200;
             stoneWall.tag = "PlacedBlock";
@@ -453,7 +488,7 @@ public class UiButtonController : MonoBehaviour
             GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerPrefs.GetFloat("Wood").ToString();
             
             var spikes = Instantiate(Spikes, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            spikes.GetComponent<SpriteRenderer>().sortingOrder = 40;
+            spikes.GetComponent<SpriteRenderer>().sortingOrder = HoverController.BlockHoveredOver.GetComponent<SpriteRenderer>().sortingOrder;
             spikes.AddComponent<HitPointsController>();
             spikes.GetComponent<HitPointsController>().HitPoints = 20;
             spikes.tag = "PlacedBlock";
@@ -497,7 +532,7 @@ public class UiButtonController : MonoBehaviour
             GameObject.FindGameObjectWithTag("PlayerCopper").GetComponent<Text>().text = PlayerPrefs.GetFloat("Copper").ToString();
 
             var fence = Instantiate(Fence, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            fence.GetComponent<SpriteRenderer>().sortingOrder = 40;
+            fence.GetComponent<SpriteRenderer>().sortingOrder = HoverController.BlockHoveredOver.GetComponent<SpriteRenderer>().sortingOrder;
             fence.AddComponent<HitPointsController>();
             fence.GetComponent<HitPointsController>().HitPoints = Random.Range(40, 61);
             fence.tag = "PlacedBlock";

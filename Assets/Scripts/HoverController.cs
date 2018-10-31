@@ -5,6 +5,7 @@ public class HoverController : MonoBehaviour
 {
     public static float BlockClickedX;
     public static float BlockClickedY;
+    public static GameObject BlockHoveredOver;
 	
     private SpriteRenderer _spriteRenderer;
     private Color _initialColors;
@@ -29,6 +30,7 @@ public class HoverController : MonoBehaviour
     public Material Tree4;
     public Material Tree5;
     private GameObject _player;
+    public static GameObject ClickedBlock;
 	
     void Start ()
     {
@@ -152,6 +154,7 @@ public class HoverController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1)  && _isOutOfRange == false) // If _player right clicks (1), left click (0)
         {
+            ClickedBlock = gameObject;
             PlayerController.PlayMode = "Creative";
             if (gameObject.tag == "PlacedBlock")
             {
