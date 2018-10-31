@@ -179,7 +179,7 @@ public class MenuController : MonoBehaviour {
 
 	public void StartTheGame()
 	{
-		SceneManager.LoadScene("TutorialScene");
+		SceneManager.LoadScene("SampleScene");
 	}
 
 	public void QuitTheGame()

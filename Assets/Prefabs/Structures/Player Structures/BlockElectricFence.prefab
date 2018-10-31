@@ -20,13 +20,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4384405641489726}
   - component: {fileID: 61822673073864580}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Detector (4)
   m_TagString: PlayerDetector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1687940884881650
 GameObject:
   m_ObjectHideFlags: 0
@@ -38,9 +38,9 @@ GameObject:
   - component: {fileID: 212141156879187630}
   - component: {fileID: 61052755656875738}
   - component: {fileID: 114718298268170676}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BlockElectricFence
-  m_TagString: Floor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1447141755356890}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.023, y: 0.028, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4597121997851856}
@@ -65,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1687940884881650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44.721817, y: 13.714512, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4384405641489726}
@@ -133,6 +133,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8922cfa60c141388884649d9d36a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RedFlash: {fileID: 0}
+  GreenFlash: {fileID: 0}
+  GrassMaterial: {fileID: 0}
+  Tree1: {fileID: 0}
+  Tree2: {fileID: 0}
+  Tree3: {fileID: 0}
+  Tree4: {fileID: 0}
+  Tree5: {fileID: 0}
 --- !u!212 &212141156879187630
 SpriteRenderer:
   m_ObjectHideFlags: 1

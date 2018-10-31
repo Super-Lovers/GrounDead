@@ -12,6 +12,7 @@
         <e p="Scripts" t="Include">
           <e p="BuildPopUpController.cs" t="Include" />
           <e p="BulletController.cs" t="Include" />
+          <e p="ButtonController.cs" t="Include" />
           <e p="CameraController.cs" t="Include" />
           <e p="FeedbackController.cs" t="Include" />
           <e p="ForestGenerator.cs" t="Include" />

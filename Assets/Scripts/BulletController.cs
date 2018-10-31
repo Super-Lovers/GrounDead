@@ -22,7 +22,6 @@ public class BulletController : MonoBehaviour
 	void Start ()
 	{
 		_rb = GetComponent<Rigidbody2D>();
-		PlayerController.Animator.SetInteger("direction", 1);
 
 		if (PlayerController.Animator.GetInteger("direction") == 1 || PlayerController.Animator.GetInteger("lastDirection") == 1)
 		{

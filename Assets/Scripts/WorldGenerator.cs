@@ -96,7 +96,7 @@ public class WorldGenerator : MonoBehaviour {
                 
                 if (x == 90)
                 {
-                    GameWorld[y, x] = 16;
+                    GameWorld[y, x] = 18;
                 }
                 
                 // Adding stone in the rocky forest biome
@@ -422,7 +422,7 @@ public class WorldGenerator : MonoBehaviour {
                             var fence = Instantiate(FenceObstacle,
                                 new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Fences").transform);
                             grassFence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
-                            fence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
+                            fence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 5000;
                             fence.tag = "PlacedBlock";
                             UiButtonController.PlacedBlocks.Add(fence);
                             fence.AddComponent<HitPointsController>();

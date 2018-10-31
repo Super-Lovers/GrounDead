@@ -71,17 +71,19 @@ public class HoverController : MonoBehaviour
         if (other.transform.tag == "Player Range" ||
             other.transform.tag == "Player" ||
             other.transform.tag == "Melee Weapon" ||
-            other.transform.tag == "PlayerDetector")
+            other.transform.tag == "PlayerDetector" ||
+            other.transform.tag == "PlacedBlock")
         {
             _isOutOfRange = false;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionStay2D(Collision2D other)
     {
         if (other.transform.tag == "Player" ||
             other.transform.tag == "Melee Weapon" ||
-            other.transform.tag == "PlayerDetector")
+            other.transform.tag == "PlayerDetector" ||
+            other.transform.tag == "PlacedBlock")
         {
             _isOutOfRange = false;
         }
@@ -91,7 +93,8 @@ public class HoverController : MonoBehaviour
     {
         if (other.transform.tag == "Player" ||
             other.transform.tag == "Melee Weapon" ||
-            other.transform.tag == "PlayerDetector")
+            other.transform.tag == "PlayerDetector" ||
+            other.transform.tag == "PlacedBlock")
         {
             _isOutOfRange = false;
         }
@@ -102,7 +105,8 @@ public class HoverController : MonoBehaviour
         if (other.transform.tag == "Player Range" ||
             other.transform.tag == _player.transform.tag ||
             other.transform.tag == "Melee Weapon" ||
-            other.transform.tag == "PlayerDetector")
+            other.transform.tag == "PlayerDetector" ||
+            other.transform.tag == "PlacedBlock")
         {
             _isOutOfRange = true;
         }

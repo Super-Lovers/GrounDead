@@ -126,9 +126,9 @@ public class ZombieController : MonoBehaviour
                 Debug.DrawLine(transform.position, castResult.transform.position, Color.green, 1.0f);
             
                 RaycastHit2D linecastResult = Physics2D.Linecast(transform.position, castResult.transform.position, PlayerLayerMask);
-                if (linecastResult.transform.tag == "Player" || linecastResult.transform.tag == "PlayerDetector" || linecastResult.transform.gameObject.layer == 11 || linecastResult.transform.gameObject.layer == 14)
+                if (linecastResult.transform.tag == "Player" || linecastResult.transform.gameObject.layer == 12 || linecastResult.transform.gameObject.layer == 11 || linecastResult.transform.gameObject.layer == 14)
                 {
-                    if (linecastResult.transform.tag == "PlayerDetector")
+                    if (linecastResult.transform.tag == "PlayerDetector" || linecastResult.transform.gameObject.layer == 12)
                     {
                         transform.position = Vector2.MoveTowards(transform.position, linecastResult.transform.position, MovementSpeed);
                     }
@@ -265,7 +265,7 @@ public class ZombieController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         
-        if (other.transform.tag == "Player" || other.gameObject.layer == 10)
+        if (other.transform.tag == "Player" || other.gameObject.layer == 10 || other.transform.gameObject.layer == 12)
         {
             
             if (_isZombieGoingDown)
@@ -347,7 +347,7 @@ public class ZombieController : MonoBehaviour
         _obstacle = other.gameObject;
 
         if (_obstacle.transform.tag == "Player" || _obstacle.gameObject.layer == 10 ||
-            _obstacle.transform.name == "BlockSpikes(Clone)" || _obstacle.transform.name == "BlockElectricFence(Clone)")
+            _obstacle.transform.name == "BlockSpikes(Clone)" || _obstacle.transform.name == "BlockElectricFence(Clone)" || _obstacle.transform.gameObject.layer == 12)
         {
             if (_obstacle.GetComponent<HitPointsController>() != null)
             {

@@ -198,7 +198,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.0031915903}
+  m_Offset: {x: 0, y: -0.1450106}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -209,7 +209,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.34, y: 0.6136168}
+  m_Size: {x: 0.34, y: 0.3299788}
   m_EdgeRadius: 0
 --- !u!61 &61424719133789940
 BoxCollider2D:
@@ -441,15 +441,15 @@ MonoBehaviour:
   - {fileID: 1055241724559338, guid: e515d7f7edcbb4d358c8789b19946168, type: 2}
   Coppers:
   - {fileID: 1757631602457850, guid: e88f120880cf84ec49b982ceaef566ed, type: 2}
-  - {fileID: 1306659553682236, guid: c7f7794a6029b498487403129cb59640, type: 2}
+  - {fileID: 0}
   - {fileID: 1687737921154872, guid: c33b59905b2204eb3b963ec3ee215820, type: 2}
   - {fileID: 1790799200689256, guid: 26435a081639e43c6b19f3da728d42c5, type: 2}
   Trees:
-  - {fileID: 1388966112541718, guid: ff388afdf1ef746118eed86155db9a55, type: 2}
-  - {fileID: 1569412327527046, guid: 3b11cc4d341bd4d14a29d685bb9bddde, type: 2}
-  - {fileID: 1368736098939180, guid: 3ce85380545024ae2bec2b1fd7d73666, type: 2}
-  - {fileID: 1863534369125234, guid: a9b7468ea229844c79f34ebbc40038cc, type: 2}
-  - {fileID: 1291883289115848, guid: 1ecc85c955bf64bb9a92fd859b801f24, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!212 &212745658519473328
 SpriteRenderer:
   m_ObjectHideFlags: 1
