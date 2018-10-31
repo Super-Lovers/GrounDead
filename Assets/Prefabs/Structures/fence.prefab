@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1687940884881650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37.656116, y: 12.141344, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4616527171636978}
@@ -85,18 +85,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.015644073, y: -0.13906765}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 0.64, y: 0.96}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.65, y: 0.65}
+  m_Size: {x: 0.1111145, y: 0.2501812}
   m_EdgeRadius: 0
 --- !u!82 &82622529363018566
 AudioSource:
@@ -241,6 +241,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8922cfa60c141388884649d9d36a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RedFlash: {fileID: 0}
+  GreenFlash: {fileID: 0}
+  GrassMaterial: {fileID: 0}
+  Tree1: {fileID: 0}
+  Tree2: {fileID: 0}
+  Tree3: {fileID: 0}
+  Tree4: {fileID: 0}
+  Tree5: {fileID: 0}
 --- !u!212 &212141156879187630
 SpriteRenderer:
   m_ObjectHideFlags: 1
