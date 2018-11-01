@@ -74,7 +74,8 @@ public class HoverController : MonoBehaviour
             other.transform.tag == "Player" ||
             other.transform.tag == "Melee Weapon" ||
             other.transform.tag == "PlayerDetector" ||
-            other.transform.tag == "PlacedBlock")
+            other.transform.tag == "PlacedBlock" ||
+            other.transform.tag == "Zombie Layer Increase Detector")
         {
             _isOutOfRange = false;
         }
@@ -108,7 +109,8 @@ public class HoverController : MonoBehaviour
             other.transform.tag == _player.transform.tag ||
             other.transform.tag == "Melee Weapon" ||
             other.transform.tag == "PlayerDetector" ||
-            other.transform.tag == "PlacedBlock")
+            other.transform.tag == "PlacedBlock" ||
+            other.transform.tag == "Zombie Layer Increase Detector")
         {
             _isOutOfRange = true;
         }
