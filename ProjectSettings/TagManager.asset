@@ -46,6 +46,7 @@ TagManager:
   - Water Tile
   - Zombie Layer Increase Detector
   - Player Range
+  - Player Visibility Detector
   layers:
   - Default
   - TransparentFX

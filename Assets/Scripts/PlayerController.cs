@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     public GameObject CameraAudioSource;
     private AudioSource _cameraAudioSource;
     private AudioSource _audioSource;
+    private SpriteRenderer _spriteRenderer;
     public GameObject ApplesUi;
     
     public AudioClip Walking;
@@ -81,6 +82,7 @@ public class PlayerController : MonoBehaviour
         Weapon.SetActive(false);
         Animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         ActionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
         PickUi = GameObject.FindGameObjectsWithTag("PickUI");
         _audioSource = gameObject.GetComponent<AudioSource>();

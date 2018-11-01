@@ -11,6 +11,24 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1377459839497030}
   m_IsPrefabAsset: 1
+--- !u!1 &1186306707837730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4140918551429360}
+  - component: {fileID: 58764846595208950}
+  - component: {fileID: 58095719254260612}
+  - component: {fileID: 58943233099009890}
+  m_Layer: 12
+  m_Name: playerVisibilityDetector
+  m_TagString: Player Visibility Detector
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1377459839497030
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,6 +80,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4140918551429360
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1186306707837730}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.08, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4451170379726026}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4451170379726026
 Transform:
   m_ObjectHideFlags: 1
@@ -74,6 +105,7 @@ Transform:
   m_Children:
   - {fileID: 4899849888216760}
   - {fileID: 4700864916381604}
+  - {fileID: 4140918551429360}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -103,6 +135,21 @@ Transform:
   m_Father: {fileID: 4451170379726026}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58095719254260612
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1186306707837730}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.06, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!58 &58166008254640726
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -133,6 +180,36 @@ CircleCollider2D:
   m_Offset: {x: -0.008735657, y: 0.04367581}
   serializedVersion: 2
   m_Radius: 0.31505832
+--- !u!58 &58764846595208950
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1186306707837730}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.32, y: -0.09}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!58 &58943233099009890
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1186306707837730}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.21, y: -0.12}
+  serializedVersion: 2
+  m_Radius: 0.47
 --- !u!61 &61422196533622006
 BoxCollider2D:
   m_ObjectHideFlags: 1

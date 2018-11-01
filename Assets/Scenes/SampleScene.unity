@@ -6072,6 +6072,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1861925820}
   - component: {fileID: 1861925821}
+  - component: {fileID: 1861925822}
   m_Layer: 12
   m_Name: Gun
   m_TagString: PlayerDetector
@@ -6105,7 +6106,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0020370483, y: 0.008580685}
+  m_Offset: {x: -0.0023899078, y: -0.0002732277}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6116,8 +6117,21 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.49726868, y: 0.72941685}
+  m_Size: {x: 0.32904434, y: 0.6408777}
   m_EdgeRadius: 0
+--- !u!114 &1861925822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1861925819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95763318b0b4d485488d1a14d9b5554a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultMaterial: {fileID: 2100000, guid: 23d84b0917bfe4e469f1c377ec34e789, type: 2}
+  GrassMap: {fileID: 2100000, guid: 0fea9b803a6eb4b1db9c4231b9780410, type: 2}
 --- !u!1 &1874429521
 GameObject:
   m_ObjectHideFlags: 0
@@ -7465,7 +7479,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 40
+  m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: 681f46526e4f14c989f342e139ff1f27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

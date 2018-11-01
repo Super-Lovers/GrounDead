@@ -250,6 +250,7 @@ public class UiButtonController : MonoBehaviour
                 
                 Destroy(block);
                 PlacedBlocks.Remove(block);
+                PlacedStructures.Remove(block);
         
                 PlayerController.PlayMode = "Survival";
                 foreach (var ui in _actionsUi)
@@ -316,7 +317,7 @@ public class UiButtonController : MonoBehaviour
             GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerPrefs.GetFloat("Wood").ToString();
             
             var woodWall = Instantiate(Wood, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            woodWall.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs((int)HoverController.ClickedBlock.transform.position.y);
+            woodWall.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs(Mathf.RoundToInt(HoverController.ClickedBlock.transform.position.y));
             if (PlacedStructures.Count > 0)
             {
                 foreach (var structure in PlacedStructures)
@@ -330,22 +331,15 @@ public class UiButtonController : MonoBehaviour
                     {
                         woodWall.GetComponent<SpriteRenderer>().sortingOrder -= 3;
                     } else if (structure.transform.position.x == woodWall.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               woodWall.GetComponent<SpriteRenderer>().sortingOrder)
+                               structure.GetComponent<SpriteRenderer>().sortingOrder == woodWall.GetComponent<SpriteRenderer>().sortingOrder &&
+                               structure.transform.position.y > woodWall.transform.position.y)
                     {
-                        woodWall.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                        woodWall.GetComponent<SpriteRenderer>().sortingOrder += 4;
                     } else if (structure.transform.position.x == woodWall.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               woodWall.GetComponent<SpriteRenderer>().sortingOrder &&
-                               Mathf.Abs((int)structure.transform.position.y) > Mathf.Abs((int)woodWall.transform.position.y))
+                               structure.GetComponent<SpriteRenderer>().sortingOrder == woodWall.GetComponent<SpriteRenderer>().sortingOrder &&
+                               woodWall.transform.position.y > structure.transform.position.y)
                     {
-                        woodWall.GetComponent<SpriteRenderer>().sortingOrder -= 3;
-                    } else if (structure.transform.position.x == woodWall.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               woodWall.GetComponent<SpriteRenderer>().sortingOrder &&
-                               Mathf.Abs((int)structure.transform.position.y) < Mathf.Abs((int)woodWall.transform.position.y))
-                    {
-                        woodWall.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                        woodWall.GetComponent<SpriteRenderer>().sortingOrder -= 4;
                     }
                 }
             }
@@ -389,7 +383,7 @@ public class UiButtonController : MonoBehaviour
             GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerPrefs.GetFloat("Stone").ToString();
             
             var stoneWall = Instantiate(Stone, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            stoneWall.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs((int)HoverController.ClickedBlock.transform.position.y);
+            stoneWall.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs(Mathf.RoundToInt(HoverController.ClickedBlock.transform.position.y));
             if (PlacedStructures.Count > 0)
             {
                 foreach (var structure in PlacedStructures)
@@ -403,22 +397,15 @@ public class UiButtonController : MonoBehaviour
                     {
                         stoneWall.GetComponent<SpriteRenderer>().sortingOrder -= 3;
                     } else if (structure.transform.position.x == stoneWall.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               stoneWall.GetComponent<SpriteRenderer>().sortingOrder)
+                               structure.GetComponent<SpriteRenderer>().sortingOrder == stoneWall.GetComponent<SpriteRenderer>().sortingOrder &&
+                               structure.transform.position.y > stoneWall.transform.position.y)
                     {
-                        stoneWall.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                        stoneWall.GetComponent<SpriteRenderer>().sortingOrder += 4;
                     } else if (structure.transform.position.x == stoneWall.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               stoneWall.GetComponent<SpriteRenderer>().sortingOrder &&
-                               Mathf.Abs((int)structure.transform.position.y) > Mathf.Abs((int)stoneWall.transform.position.y))
+                               structure.GetComponent<SpriteRenderer>().sortingOrder == stoneWall.GetComponent<SpriteRenderer>().sortingOrder &&
+                               stoneWall.transform.position.y > structure.transform.position.y)
                     {
-                        stoneWall.GetComponent<SpriteRenderer>().sortingOrder -= 3;
-                    } else if (structure.transform.position.x == stoneWall.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               stoneWall.GetComponent<SpriteRenderer>().sortingOrder &&
-                               Mathf.Abs((int)structure.transform.position.y) < Mathf.Abs((int)stoneWall.transform.position.y))
-                    {
-                        stoneWall.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                        stoneWall.GetComponent<SpriteRenderer>().sortingOrder -= 4;
                     }
                 }
             }
@@ -462,7 +449,7 @@ public class UiButtonController : MonoBehaviour
                 PlayerPrefs.GetFloat("Wood").ToString();
             
             var platform = Instantiate(Platform, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            platform.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs((int)HoverController.ClickedBlock.transform.position.y);
+            platform.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs(Mathf.RoundToInt(HoverController.ClickedBlock.transform.position.y));
             if (PlacedStructures.Count > 0)
             {
                 foreach (var structure in PlacedStructures)
@@ -476,26 +463,18 @@ public class UiButtonController : MonoBehaviour
                     {
                         platform.GetComponent<SpriteRenderer>().sortingOrder -= 3;
                     } else if (structure.transform.position.x == platform.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               platform.GetComponent<SpriteRenderer>().sortingOrder)
+                               structure.GetComponent<SpriteRenderer>().sortingOrder == platform.GetComponent<SpriteRenderer>().sortingOrder &&
+                               structure.transform.position.y > platform.transform.position.y)
                     {
-                        platform.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                        platform.GetComponent<SpriteRenderer>().sortingOrder += 4;
                     } else if (structure.transform.position.x == platform.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               platform.GetComponent<SpriteRenderer>().sortingOrder &&
-                               Mathf.Abs((int)structure.transform.position.y) > Mathf.Abs((int)platform.transform.position.y))
+                               structure.GetComponent<SpriteRenderer>().sortingOrder == platform.GetComponent<SpriteRenderer>().sortingOrder &&
+                               platform.transform.position.y > structure.transform.position.y)
                     {
-                        platform.GetComponent<SpriteRenderer>().sortingOrder -= 3;
-                    } else if (structure.transform.position.x == platform.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               platform.GetComponent<SpriteRenderer>().sortingOrder &&
-                               Mathf.Abs((int)structure.transform.position.y) < Mathf.Abs((int)platform.transform.position.y))
-                    {
-                        platform.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                        platform.GetComponent<SpriteRenderer>().sortingOrder -= 4;
                     }
                 }
             }
-            
             platform.tag = "PlacedBlock";
             platform.AddComponent<HitPointsController>();
             
@@ -554,7 +533,7 @@ public class UiButtonController : MonoBehaviour
             GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerPrefs.GetFloat("Wood").ToString();
             
             var spikes = Instantiate(Spikes, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            spikes.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs((int)HoverController.ClickedBlock.transform.position.y);
+            spikes.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs(Mathf.RoundToInt(HoverController.ClickedBlock.transform.position.y));
             if (PlacedStructures.Count > 0)
             {
                 foreach (var structure in PlacedStructures)
@@ -568,22 +547,15 @@ public class UiButtonController : MonoBehaviour
                     {
                         spikes.GetComponent<SpriteRenderer>().sortingOrder -= 3;
                     } else if (structure.transform.position.x == spikes.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               spikes.GetComponent<SpriteRenderer>().sortingOrder)
+                               structure.GetComponent<SpriteRenderer>().sortingOrder == spikes.GetComponent<SpriteRenderer>().sortingOrder &&
+                               structure.transform.position.y > spikes.transform.position.y)
                     {
-                        spikes.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                        spikes.GetComponent<SpriteRenderer>().sortingOrder += 4;
                     } else if (structure.transform.position.x == spikes.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               spikes.GetComponent<SpriteRenderer>().sortingOrder &&
-                               Mathf.Abs((int)structure.transform.position.y) > Mathf.Abs((int)spikes.transform.position.y))
+                               structure.GetComponent<SpriteRenderer>().sortingOrder == spikes.GetComponent<SpriteRenderer>().sortingOrder &&
+                               spikes.transform.position.y > structure.transform.position.y)
                     {
-                        spikes.GetComponent<SpriteRenderer>().sortingOrder -= 3;
-                    } else if (structure.transform.position.x == spikes.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               spikes.GetComponent<SpriteRenderer>().sortingOrder &&
-                               Mathf.Abs((int)structure.transform.position.y) < Mathf.Abs((int)spikes.transform.position.y))
-                    {
-                        spikes.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                        spikes.GetComponent<SpriteRenderer>().sortingOrder -= 4;
                     }
                 }
             }
@@ -631,7 +603,7 @@ public class UiButtonController : MonoBehaviour
             GameObject.FindGameObjectWithTag("PlayerCopper").GetComponent<Text>().text = PlayerPrefs.GetFloat("Copper").ToString();
 
             var fence = Instantiate(Fence, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            fence.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs((int)HoverController.ClickedBlock.transform.position.y);
+            fence.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs(Mathf.RoundToInt(HoverController.ClickedBlock.transform.position.y));
             if (PlacedStructures.Count > 0)
             {
                 foreach (var structure in PlacedStructures)
@@ -645,22 +617,15 @@ public class UiButtonController : MonoBehaviour
                     {
                         fence.GetComponent<SpriteRenderer>().sortingOrder -= 3;
                     } else if (structure.transform.position.x == fence.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               fence.GetComponent<SpriteRenderer>().sortingOrder)
+                               structure.GetComponent<SpriteRenderer>().sortingOrder == fence.GetComponent<SpriteRenderer>().sortingOrder &&
+                               structure.transform.position.y > fence.transform.position.y)
                     {
-                        fence.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                        fence.GetComponent<SpriteRenderer>().sortingOrder += 4;
                     } else if (structure.transform.position.x == fence.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               fence.GetComponent<SpriteRenderer>().sortingOrder &&
-                               Mathf.Abs((int)structure.transform.position.y) > Mathf.Abs((int)fence.transform.position.y))
+                               structure.GetComponent<SpriteRenderer>().sortingOrder == fence.GetComponent<SpriteRenderer>().sortingOrder &&
+                               fence.transform.position.y > structure.transform.position.y)
                     {
-                        fence.GetComponent<SpriteRenderer>().sortingOrder -= 3;
-                    } else if (structure.transform.position.x == fence.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               fence.GetComponent<SpriteRenderer>().sortingOrder &&
-                               Mathf.Abs((int)structure.transform.position.y) < Mathf.Abs((int)fence.transform.position.y))
-                    {
-                        fence.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                        fence.GetComponent<SpriteRenderer>().sortingOrder -= 4;
                     }
                 }
             }
@@ -708,7 +673,7 @@ public class UiButtonController : MonoBehaviour
             GameObject.FindGameObjectWithTag("PlayerGunPowder").GetComponent<Text>().text = PlayerPrefs.GetFloat("Gun Powder").ToString();
 
             var torch = Instantiate(Torch, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            torch.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs((int)HoverController.ClickedBlock.transform.position.y);
+            torch.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs(Mathf.RoundToInt(HoverController.ClickedBlock.transform.position.y));
             if (PlacedStructures.Count > 0)
             {
                 foreach (var structure in PlacedStructures)
@@ -722,22 +687,15 @@ public class UiButtonController : MonoBehaviour
                     {
                         torch.GetComponent<SpriteRenderer>().sortingOrder -= 3;
                     } else if (structure.transform.position.x == torch.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               torch.GetComponent<SpriteRenderer>().sortingOrder)
+                               structure.GetComponent<SpriteRenderer>().sortingOrder == torch.GetComponent<SpriteRenderer>().sortingOrder &&
+                               structure.transform.position.y > torch.transform.position.y)
                     {
-                        torch.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                        torch.GetComponent<SpriteRenderer>().sortingOrder += 4;
                     } else if (structure.transform.position.x == torch.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               torch.GetComponent<SpriteRenderer>().sortingOrder &&
-                               Mathf.Abs((int)structure.transform.position.y) > Mathf.Abs((int)torch.transform.position.y))
+                               structure.GetComponent<SpriteRenderer>().sortingOrder == torch.GetComponent<SpriteRenderer>().sortingOrder &&
+                               torch.transform.position.y > structure.transform.position.y)
                     {
-                        torch.GetComponent<SpriteRenderer>().sortingOrder -= 3;
-                    } else if (structure.transform.position.x == torch.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder ==
-                               torch.GetComponent<SpriteRenderer>().sortingOrder &&
-                               Mathf.Abs((int)structure.transform.position.y) < Mathf.Abs((int)torch.transform.position.y))
-                    {
-                        torch.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                        torch.GetComponent<SpriteRenderer>().sortingOrder -= 4;
                     }
                 }
             }
