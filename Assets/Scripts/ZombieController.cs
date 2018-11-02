@@ -78,6 +78,7 @@ public class ZombieController : MonoBehaviour
                     if (nameOfBlock == "stone" || nameOfBlock == "copper"|| nameOfBlock == "tree")
                     {
                         Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), block.GetComponentInChildren<BoxCollider2D>());
+                        Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), block.GetComponentInChildren<CircleCollider2D>());
                     }
                 }
             }
@@ -126,7 +127,7 @@ public class ZombieController : MonoBehaviour
                 Debug.DrawLine(transform.position, castResult.transform.position, Color.green, 1.0f);
             
                 RaycastHit2D linecastResult = Physics2D.Linecast(transform.position, castResult.transform.position, PlayerLayerMask);
-                if (linecastResult.transform.tag == "Player" || linecastResult.transform.gameObject.layer == 12 || linecastResult.transform.gameObject.layer == 11 || linecastResult.transform.gameObject.layer == 14)
+                if (linecastResult.transform.tag == "Player" || linecastResult.transform.gameObject.layer == 12 || linecastResult.transform.gameObject.layer == 11 || linecastResult.transform.gameObject.layer == 14 || linecastResult.transform.tag == "Player Visibility Detector" || linecastResult.transform.tag == "Player Range")
                 {
                     if (linecastResult.transform.tag == "PlayerDetector" || linecastResult.transform.gameObject.layer == 12)
                     {
@@ -547,7 +548,7 @@ public class ZombieController : MonoBehaviour
         
         // When the zombies are walking between trees, their movement speed
         // will be decreased temporarily.
-        if (other.gameObject.layer == 14 || other.gameObject.layer == 11)
+        if (other.gameObject.layer == 14 || other.gameObject.layer == 11 && gameObject.transform.name != "Zombie Boss(Clone)")
         {
             // Make the zombie look smaller when traversing in forests
             GetComponent<Animator>().speed = 0.4f;
@@ -574,7 +575,6 @@ public class ZombieController : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().sortingOrder = _originalOrder;
         }
-
     }
 
     private void OnCollisionExit2D(Collision2D other)

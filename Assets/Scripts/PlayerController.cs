@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
     public Sprite Axe;
     public static int NumberOfZombiesKilled;
     public static bool CanBuildOnTile = false;
+    private int _originalOrder;
 	
     void Start ()
     {
@@ -74,6 +75,8 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetFloat("Gun Powder", GunPowder);
         PlayerPrefs.SetFloat("Apples", Apples);
         PlayerPrefs.SetFloat("Bullets", Bullets);
+        
+        _originalOrder = GetComponent<SpriteRenderer>().sortingOrder;
 
         Weapon = GameObject.FindGameObjectWithTag("Melee Weapon");
         // Setting the starting weapon
@@ -282,6 +285,38 @@ public class PlayerController : MonoBehaviour
             {
                 ObjectivesController.HasAttackedRange = true;
                 
+                Vector3 distance = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                float rotationDeg = Mathf.Atan2(distance.y, distance.x) * Mathf.Rad2Deg;
+
+                if (rotationDeg < 45 && rotationDeg > -45)
+                {
+                    _lastDir = 3;
+                    Animator.SetInteger("direction", 3);
+                    Animator.SetInteger("lastDirection", _lastDir);
+                    Debug.Log("right");
+                }
+                else if (rotationDeg < -135 || rotationDeg > 135)
+                {
+                    _lastDir = 4;
+                    Animator.SetInteger("direction", 4);
+                    Animator.SetInteger("lastDirection", _lastDir);
+                    Debug.Log("left");
+                }
+                else if (rotationDeg <= 135 && rotationDeg >= 45)
+                {
+                    _lastDir = 2;
+                    Animator.SetInteger("direction", 2);
+                    Animator.SetInteger("lastDirection", _lastDir);
+                    Debug.Log("up");
+                }
+                else if (rotationDeg >= -135 && rotationDeg <= -45)
+                {
+                    _lastDir = 1;
+                    Animator.SetInteger("direction", 1);
+                    Animator.SetInteger("lastDirection", _lastDir);
+                    Debug.Log("down");
+                }
+                
                 if ((Animator.GetInteger("direction") == 1 || Animator.GetInteger("direction") == 2) ||
                     (Animator.GetInteger("lastDirection") == 1 || Animator.GetInteger("lastDirection") == 2))
                 {
@@ -314,7 +349,7 @@ public class PlayerController : MonoBehaviour
                     _canShoot = false;
                     Invoke("CanShoot", 0.7f);
                 }
-
+                
                 Bullets--;
                 GameObject.FindGameObjectWithTag("PlayerBullets").GetComponent<Text>().text = "Bullets: " + Bullets;
             }
@@ -401,6 +436,12 @@ public class PlayerController : MonoBehaviour
         {
             _spriteRenderer.sortingOrder = 40;
         }
+        
+        if (other.transform.tag == "Zombie Layer Increase Detector")
+        {
+            var parentOfCollider = other.transform.parent.gameObject;
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = parentOfCollider.GetComponentInChildren<SpriteRenderer>().sortingOrder + 10;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -408,6 +449,11 @@ public class PlayerController : MonoBehaviour
         if (other.transform.name == "BlockPlatform(Clone)")
         {
             _spriteRenderer.sortingOrder = 11;
+        }
+        
+        if (other.transform.tag == "Zombie Layer Increase Detector")
+        {
+            GetComponent<SpriteRenderer>().sortingOrder = _originalOrder;
         }
     }
 
