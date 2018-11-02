@@ -555,12 +555,6 @@ public class ZombieController : MonoBehaviour
             
             MovementSpeed = 0.015f;
         }
-        
-        if (other.transform.tag == "Zombie Layer Increase Detector")
-        {
-            var parentOfCollider = other.transform.parent.gameObject;
-            gameObject.GetComponent<SpriteRenderer>().sortingOrder = parentOfCollider.GetComponentInChildren<SpriteRenderer>().sortingOrder;
-        }
     }
     
     private void OnTriggerExit2D(Collider2D other)
@@ -569,11 +563,6 @@ public class ZombieController : MonoBehaviour
         {
             GetComponent<Animator>().speed = 1f;
             MovementSpeed = 0.03f;
-        }
-        
-        if (other.transform.tag == "Zombie Layer Increase Detector")
-        {
-            GetComponent<SpriteRenderer>().sortingOrder = _originalOrder;
         }
     }
 

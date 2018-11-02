@@ -293,28 +293,24 @@ public class PlayerController : MonoBehaviour
                     _lastDir = 3;
                     Animator.SetInteger("direction", 3);
                     Animator.SetInteger("lastDirection", _lastDir);
-                    Debug.Log("right");
                 }
                 else if (rotationDeg < -135 || rotationDeg > 135)
                 {
                     _lastDir = 4;
                     Animator.SetInteger("direction", 4);
                     Animator.SetInteger("lastDirection", _lastDir);
-                    Debug.Log("left");
                 }
                 else if (rotationDeg <= 135 && rotationDeg >= 45)
                 {
                     _lastDir = 2;
                     Animator.SetInteger("direction", 2);
                     Animator.SetInteger("lastDirection", _lastDir);
-                    Debug.Log("up");
                 }
                 else if (rotationDeg >= -135 && rotationDeg <= -45)
                 {
                     _lastDir = 1;
                     Animator.SetInteger("direction", 1);
                     Animator.SetInteger("lastDirection", _lastDir);
-                    Debug.Log("down");
                 }
                 
                 if ((Animator.GetInteger("direction") == 1 || Animator.GetInteger("direction") == 2) ||

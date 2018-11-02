@@ -46,6 +46,7 @@ public class HoverController : MonoBehaviour
 
     private void OnMouseExit()
     {
+        /*
         foreach (var block in UiButtonController.PlacedBlocks)
         {
             if (BlockClickedX == block.transform.position.x &&
@@ -63,6 +64,7 @@ public class HoverController : MonoBehaviour
                 }
             }
         }
+        */
         
         _spriteRenderer.color = _initialColors;
         _renderer.material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 1f);
@@ -78,6 +80,17 @@ public class HoverController : MonoBehaviour
             other.transform.tag == "Zombie Layer Increase Detector")
         {
             _isOutOfRange = false;
+        }
+
+        if (gameObject.layer == 14 &&
+            (other.transform.tag == "Zombie Cop" || other.transform.tag == "Zombie"))
+        {
+            other.GetComponent<SpriteRenderer>().sortingOrder = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
+        }
+        
+        if (gameObject.layer == 14 && other.transform.tag == "PlayerDetector")
+        {
+            other.transform.parent.GetComponent<SpriteRenderer>().sortingOrder = gameObject.GetComponent<SpriteRenderer>().sortingOrder + 10;
         }
     }
 
@@ -114,6 +127,17 @@ public class HoverController : MonoBehaviour
         {
             _isOutOfRange = true;
         }
+        
+        if (gameObject.layer == 14 &&
+             (other.transform.tag == "Zombie Cop" || other.transform.tag == "Zombie"))
+        {
+            other.GetComponent<SpriteRenderer>().sortingOrder = 41;
+        }
+
+        if (gameObject.layer == 14 && other.transform.tag == "PlayerDetector")
+        {
+            other.transform.parent.GetComponent<SpriteRenderer>().sortingOrder = 11;
+        }
     }
 
     private void OnMouseOver()
@@ -129,6 +153,7 @@ public class HoverController : MonoBehaviour
             BlockClickedX = _transform.position.x;
             BlockClickedY = _transform.position.y;
 
+            /*
             // This statement checks if the _player has encountered the
             // error where the grass beneath a tree is highlighted instead
             // of the tree itself, and redirects the mouse selector which will
@@ -150,6 +175,7 @@ public class HoverController : MonoBehaviour
                         }
                     }
                 }
+                */
             
             _spriteRenderer.color = new Color(0, 0, 0, 0.7f);
             _renderer.material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
