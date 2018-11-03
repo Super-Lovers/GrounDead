@@ -19,15 +19,15 @@ public class WorldGenerator : MonoBehaviour {
 	
     // This is where we will store all the map segments into one
     // whole game world as we create each segment
-    private static int mapWidth = 100;
-    private static int mapHeight = 40;
+    public static int MapWidth = 100;
+    public static int MapHeight = 40;
         
     // We need to constantly keep track of where to draw next
     // after a segment is completed
     public static int CurrentPositionX;
     public static int CurrentPositionY;
         
-    public static int[,] GameWorld = new int[mapHeight, mapWidth];
+    public static int[,] GameWorld = new int[MapHeight, MapWidth];
 
     void Start () {
         RockyPlains.GenerateRockyPlains(20, 20, 5);
@@ -56,14 +56,14 @@ public class WorldGenerator : MonoBehaviour {
         CurrentPositionY = 0;
         RiverGenerator.GenerateRiver(20, 40, 40);
 
-        for (int y = 0; y < mapHeight; y++)
+        for (int y = 0; y < MapHeight; y++)
         {
-            for (int x = 0; x < mapWidth; x++)
+            for (int x = 0; x < MapWidth; x++)
             { 
-                if ((x < 61) && (y == mapHeight / 2))
+                if ((x < 61) && (y == MapHeight / 2))
                 {
                     GameWorld[y, x] = 2; // path / road
-                } else if ((x == 75) && (y == mapHeight / 2))
+                } else if ((x == 75) && (y == MapHeight / 2))
                 {
                     GameWorld[y, x] = 3; // house of the player
                 } else if (x % 20 == 0 && x != 0 && x != 2 && x < 61 && x != 7)
@@ -72,7 +72,7 @@ public class WorldGenerator : MonoBehaviour {
                 }
                     
                 // Drawing the path head and tail
-                if ((x == 0 && y == mapHeight / 2))
+                if ((x == 0 && y == MapHeight / 2))
                 {
                     GameWorld[y, x] = 1; // path endings can be grass for simplicity
                 }
@@ -113,16 +113,16 @@ public class WorldGenerator : MonoBehaviour {
                 
                 // We also create the Boundaries of the
                 // game world in this code block
-                if ((x < 61) && (y == mapHeight / 2 - 1 || y == mapHeight / 2 + 1))
+                if ((x < 61) && (y == MapHeight / 2 - 1 || y == MapHeight / 2 + 1))
                 {
                     if (x > 20 && x % 13 == 0 && x != 0)
                     {
-                        for (int i = mapHeight / 2 - Random.Range(3, 7); i < mapHeight / 2; i++)
+                        for (int i = MapHeight / 2 - Random.Range(3, 7); i < MapHeight / 2; i++)
                         {
                             GameWorld[i, x] = 7; // path going down
                         }
 
-                        for (int i = mapHeight / 2 + 1; i < mapHeight / 2 + Random.Range(4, 7); i++)
+                        for (int i = MapHeight / 2 + 1; i < MapHeight / 2 + Random.Range(4, 7); i++)
                         {
                             GameWorld[i, x] = 6; // path going down
                         }
@@ -214,7 +214,7 @@ public class WorldGenerator : MonoBehaviour {
             }
         }
 
-        for (int waterX = 0; waterX < mapWidth; waterX++)
+        for (int waterX = 0; waterX < MapWidth; waterX++)
         {
             for (int waterY = 39; waterY > 0; waterY--)
             {
@@ -233,14 +233,14 @@ public class WorldGenerator : MonoBehaviour {
         float currentX = 0;
         float currentY = 0;
 
-        for (int y = 0; y < mapHeight; y++)
+        for (int y = 0; y < MapHeight; y++)
         {
             Instantiate(Boundaries,
                 new Vector2(currentX - 0.64f, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Boundaries").transform);
             currentY += 0.64f;
         }
 
-        for (int x = 0; x < mapWidth; x++)
+        for (int x = 0; x < MapWidth; x++)
         {
             Instantiate(Boundaries,
                 new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Boundaries").transform);
@@ -252,13 +252,13 @@ public class WorldGenerator : MonoBehaviour {
         currentX = 0;
         currentY = 0;
         
-        for (int x = 0; x < mapWidth; x++)
+        for (int x = 0; x < MapWidth; x++)
         {
             Instantiate(Boundaries,
                 new Vector2(currentX, currentY - 0.64f), Quaternion.identity, GameObject.FindGameObjectWithTag("Boundaries").transform);
             currentX += 0.64f;
         }
-        for (int y = mapHeight; y > 0; y--)
+        for (int y = MapHeight; y > 0; y--)
         {
             Instantiate(Boundaries,
                 new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Boundaries").transform);
@@ -267,14 +267,14 @@ public class WorldGenerator : MonoBehaviour {
 
         currentX = 0;
         currentY = 0;
-        int sortingLayerGrass = mapHeight;
-        int sortingLayerTrees = mapHeight * 2;
+        int sortingLayerGrass = MapHeight;
+        int sortingLayerTrees = MapHeight * 2;
 
         // We begin instantiating every object on the map so
         // that we can visualize it with randomized sprites
-        for (int y = 0; y < mapHeight; y++)
+        for (int y = 0; y < MapHeight; y++)
         {
-            for (int x = 0; x < mapWidth; x++)
+            for (int x = 0; x < MapWidth; x++)
             {
                 switch (GameWorld[y, x])
                 {

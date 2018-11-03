@@ -40,7 +40,7 @@ public class UiButtonController : MonoBehaviour
     public AudioClip TreeFalling;
     public AudioClip StructurePlacement;
     public GameObject NotificationDamage;
-    private List<GameObject> PlacedStructures = new List<GameObject>();
+    public static List<GameObject> PlacedStructures = new List<GameObject>();
     
     private void Start()
     {
@@ -173,7 +173,7 @@ public class UiButtonController : MonoBehaviour
                         
                         // Notification for feedback
                         var notification = Instantiate(GatheredMaterials, Camera.main.WorldToScreenPoint(block.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
-                        notification.GetComponentInChildren<Text>().text = "+" + gatheredWood;
+                        notification.GetComponentInChildren<Text>().text = "+" + gatheredWood + " Wood";
                         
                         WoodUi.GetComponent<Animator>().SetBool("shineWood", true);
                         Invoke("StopWoodShineAnimation", 1);
@@ -185,6 +185,11 @@ public class UiButtonController : MonoBehaviour
                             GameObject.FindGameObjectWithTag("PlayerApples").GetComponent<Text>().text = PlayerPrefs.GetFloat("Apples").ToString();
                             
                             ApplesUi.GetComponent<Animator>().SetBool("shineApples", true);
+                            
+                            var notificationApple = Instantiate(GatheredMaterials, Camera.main.WorldToScreenPoint(
+                                new Vector3(block.transform.position.x, block.transform.position.y - 0.3f, block.transform.position.z)), Quaternion.identity, GameObject.Find("Canvas").transform);
+                            notificationApple.GetComponentInChildren<Text>().text = "+" + 1 + " Apple";
+                            
                             Invoke("StopApplesShineAnimation", 1);
             
                             // Player Statistics
@@ -209,7 +214,7 @@ public class UiButtonController : MonoBehaviour
                     {
                         var gatheredStone = Random.Range(2, 5);
                         var notification = Instantiate(GatheredMaterials, Camera.main.WorldToScreenPoint(block.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
-                        notification.GetComponentInChildren<Text>().text = "+" + gatheredStone;
+                        notification.GetComponentInChildren<Text>().text = "+" + gatheredStone + " Stone";
                         
                         StoneUi.GetComponent<Animator>().SetBool("shineStone", true);
                         Invoke("StopStoneShineAnimation", 1);
@@ -229,7 +234,7 @@ public class UiButtonController : MonoBehaviour
                     {
                         
                         var notification = Instantiate(GatheredMaterials, Camera.main.WorldToScreenPoint(block.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
-                        notification.GetComponentInChildren<Text>().text = "+" + 3;
+                        notification.GetComponentInChildren<Text>().text = "+" + 3 + " Copper";
                         
                         CopperUi.GetComponent<Animator>().SetBool("shineCopper", true);
                         Invoke("StopCopperShineAnimation", 1);

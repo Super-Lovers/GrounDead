@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonController : MonoBehaviour {
 
@@ -34,5 +35,20 @@ public class ButtonController : MonoBehaviour {
 	public void QuitExitedButton()
 	{
 		ButtonExit.GetComponent<UnityEngine.UI.Image>().sprite = ExitedButtonImage;
+	}
+
+	public void StartTheGame()
+	{
+		SceneManager.LoadScene("SampleScene");
+	}
+
+	public void QuitTheGame()
+	{
+		Application.Quit();
+	}
+
+	public void ReturnToStartMenu()
+	{
+		SceneManager.LoadScene("StartMenuScene");
 	}
 }
