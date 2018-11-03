@@ -48,6 +48,7 @@ TagManager:
   - Player Range
   - Player Visibility Detector
   - Grass
+  - Pause Button To Return To Menu
   layers:
   - Default
   - TransparentFX

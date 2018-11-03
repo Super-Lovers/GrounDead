@@ -343,7 +343,6 @@ public class ObjectivesController : MonoBehaviour {
         
         // Resetting the coordinates of the borders for generating the zombies.
         // We are starting to generate zombies one block down the top and right border.
-        
         currentX = 53.36f;
         currentY = 24.96f;
         

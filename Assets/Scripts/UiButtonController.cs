@@ -323,39 +323,10 @@ public class UiButtonController : MonoBehaviour
             GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerPrefs.GetFloat("Wood").ToString();
             
             var woodWall = Instantiate(Wood, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            woodWall.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs(Mathf.RoundToInt(HoverController.ClickedBlock.transform.position.y));
-            if (PlacedStructures.Count > 0)
-            {
-                foreach (var structure in PlacedStructures)
-                {
-                    if (structure.transform.position.x == woodWall.transform.position.x &&
-                        structure.GetComponent<SpriteRenderer>().sortingOrder > woodWall.GetComponent<SpriteRenderer>().sortingOrder)
-                    {
-                        woodWall.GetComponent<SpriteRenderer>().sortingOrder += 3;
-                    } else if (structure.transform.position.x == woodWall.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder < woodWall.GetComponent<SpriteRenderer>().sortingOrder)
-                    {
-                        woodWall.GetComponent<SpriteRenderer>().sortingOrder -= 3;
-                    } else if (structure.transform.position.x == woodWall.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder == woodWall.GetComponent<SpriteRenderer>().sortingOrder &&
-                               structure.transform.position.y > woodWall.transform.position.y)
-                    {
-                        woodWall.GetComponent<SpriteRenderer>().sortingOrder += 4;
-                    } else if (structure.transform.position.x == woodWall.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder == woodWall.GetComponent<SpriteRenderer>().sortingOrder &&
-                               woodWall.transform.position.y > structure.transform.position.y)
-                    {
-                        woodWall.GetComponent<SpriteRenderer>().sortingOrder -= 4;
-                    }
-                }
-            }
-            woodWall.AddComponent<HitPointsController>();
-            woodWall.tag = "PlacedBlock";
+            
+            UpdateObject(woodWall);
+            
             woodWall.GetComponent<HitPointsController>().HitPoints = 100;
-		
-            PlacedBlocks.Add(woodWall);
-            PlacedStructures.Add(woodWall);
-            WorldGenerator.SumOfInteractableWorldObjects.Add(woodWall);
             //ZombieController._playerDetectorList.Add(woodWall);
             
             // Notification feedback for building a wall
@@ -390,39 +361,10 @@ public class UiButtonController : MonoBehaviour
             GameObject.FindGameObjectWithTag("PlayerStone").GetComponent<Text>().text = PlayerPrefs.GetFloat("Stone").ToString();
             
             var stoneWall = Instantiate(Stone, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            stoneWall.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs(Mathf.RoundToInt(HoverController.ClickedBlock.transform.position.y));
-            if (PlacedStructures.Count > 0)
-            {
-                foreach (var structure in PlacedStructures)
-                {
-                    if (structure.transform.position.x == stoneWall.transform.position.x &&
-                        structure.GetComponent<SpriteRenderer>().sortingOrder > stoneWall.GetComponent<SpriteRenderer>().sortingOrder)
-                    {
-                        stoneWall.GetComponent<SpriteRenderer>().sortingOrder += 3;
-                    } else if (structure.transform.position.x == stoneWall.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder < stoneWall.GetComponent<SpriteRenderer>().sortingOrder)
-                    {
-                        stoneWall.GetComponent<SpriteRenderer>().sortingOrder -= 3;
-                    } else if (structure.transform.position.x == stoneWall.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder == stoneWall.GetComponent<SpriteRenderer>().sortingOrder &&
-                               structure.transform.position.y > stoneWall.transform.position.y)
-                    {
-                        stoneWall.GetComponent<SpriteRenderer>().sortingOrder += 4;
-                    } else if (structure.transform.position.x == stoneWall.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder == stoneWall.GetComponent<SpriteRenderer>().sortingOrder &&
-                               stoneWall.transform.position.y > structure.transform.position.y)
-                    {
-                        stoneWall.GetComponent<SpriteRenderer>().sortingOrder -= 4;
-                    }
-                }
-            }
-            stoneWall.AddComponent<HitPointsController>();
+            
+            UpdateObject(stoneWall);
+            
             stoneWall.GetComponent<HitPointsController>().HitPoints = 200;
-            stoneWall.tag = "PlacedBlock";
-		
-            PlacedBlocks.Add(stoneWall);
-            PlacedStructures.Add(stoneWall);
-            WorldGenerator.SumOfInteractableWorldObjects.Add(stoneWall);
             
             var notification = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(stoneWall.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notification.GetComponentInChildren<Text>().text = "-" + 6 + " Stone";
@@ -457,34 +399,8 @@ public class UiButtonController : MonoBehaviour
                 PlayerPrefs.GetFloat("Wood").ToString();
             
             var platform = Instantiate(Platform, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            platform.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs(Mathf.RoundToInt(HoverController.ClickedBlock.transform.position.y));
-            if (PlacedStructures.Count > 0)
-            {
-                foreach (var structure in PlacedStructures)
-                {
-                    if (structure.transform.position.x == platform.transform.position.x &&
-                        structure.GetComponent<SpriteRenderer>().sortingOrder > platform.GetComponent<SpriteRenderer>().sortingOrder)
-                    {
-                        platform.GetComponent<SpriteRenderer>().sortingOrder += 3;
-                    } else if (structure.transform.position.x == platform.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder < platform.GetComponent<SpriteRenderer>().sortingOrder)
-                    {
-                        platform.GetComponent<SpriteRenderer>().sortingOrder -= 3;
-                    } else if (structure.transform.position.x == platform.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder == platform.GetComponent<SpriteRenderer>().sortingOrder &&
-                               structure.transform.position.y > platform.transform.position.y)
-                    {
-                        platform.GetComponent<SpriteRenderer>().sortingOrder += 4;
-                    } else if (structure.transform.position.x == platform.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder == platform.GetComponent<SpriteRenderer>().sortingOrder &&
-                               platform.transform.position.y > structure.transform.position.y)
-                    {
-                        platform.GetComponent<SpriteRenderer>().sortingOrder -= 4;
-                    }
-                }
-            }
-            platform.tag = "PlacedBlock";
-            platform.AddComponent<HitPointsController>();
+            
+            UpdateObject(platform);
             
             foreach (GameObject block in PlacedWaterBlocks.ToArray())
             {
@@ -503,10 +419,6 @@ public class UiButtonController : MonoBehaviour
                     }
                 }
             }
-		
-            PlacedBlocks.Add(platform);
-            PlacedStructures.Add(platform);
-            WorldGenerator.SumOfInteractableWorldObjects.Add(platform);
             
             var notification = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(platform.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notification.GetComponentInChildren<Text>().text = "-" + 8 + " Wood";
@@ -542,35 +454,10 @@ public class UiButtonController : MonoBehaviour
             GameObject.FindGameObjectWithTag("PlayerWood").GetComponent<Text>().text = PlayerPrefs.GetFloat("Wood").ToString();
             
             var spikes = Instantiate(Spikes, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            spikes.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs(Mathf.RoundToInt(HoverController.ClickedBlock.transform.position.y));
-            if (PlacedStructures.Count > 0)
-            {
-                foreach (var structure in PlacedStructures)
-                {
-                    if (structure.transform.position.x == spikes.transform.position.x &&
-                        structure.GetComponent<SpriteRenderer>().sortingOrder > spikes.GetComponent<SpriteRenderer>().sortingOrder)
-                    {
-                        spikes.GetComponent<SpriteRenderer>().sortingOrder += 3;
-                    } else if (structure.transform.position.x == spikes.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder < spikes.GetComponent<SpriteRenderer>().sortingOrder)
-                    {
-                        spikes.GetComponent<SpriteRenderer>().sortingOrder -= 3;
-                    } else if (structure.transform.position.x == spikes.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder == spikes.GetComponent<SpriteRenderer>().sortingOrder &&
-                               structure.transform.position.y > spikes.transform.position.y)
-                    {
-                        spikes.GetComponent<SpriteRenderer>().sortingOrder += 4;
-                    } else if (structure.transform.position.x == spikes.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder == spikes.GetComponent<SpriteRenderer>().sortingOrder &&
-                               spikes.transform.position.y > structure.transform.position.y)
-                    {
-                        spikes.GetComponent<SpriteRenderer>().sortingOrder -= 4;
-                    }
-                }
-            }
-            spikes.AddComponent<HitPointsController>();
+            
+            UpdateObject(spikes);
+            
             spikes.GetComponent<HitPointsController>().HitPoints = 20;
-            spikes.tag = "PlacedBlock";
 		
             PlacedBlocks.Add(spikes);
             PlacedStructures.Add(spikes);
@@ -613,39 +500,10 @@ public class UiButtonController : MonoBehaviour
             GameObject.FindGameObjectWithTag("PlayerCopper").GetComponent<Text>().text = PlayerPrefs.GetFloat("Copper").ToString();
 
             var fence = Instantiate(Fence, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            fence.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs(Mathf.RoundToInt(HoverController.ClickedBlock.transform.position.y));
-            if (PlacedStructures.Count > 0)
-            {
-                foreach (var structure in PlacedStructures)
-                {
-                    if (structure.transform.position.x == fence.transform.position.x &&
-                        structure.GetComponent<SpriteRenderer>().sortingOrder > fence.GetComponent<SpriteRenderer>().sortingOrder)
-                    {
-                        fence.GetComponent<SpriteRenderer>().sortingOrder += 3;
-                    } else if (structure.transform.position.x == fence.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder < fence.GetComponent<SpriteRenderer>().sortingOrder)
-                    {
-                        fence.GetComponent<SpriteRenderer>().sortingOrder -= 3;
-                    } else if (structure.transform.position.x == fence.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder == fence.GetComponent<SpriteRenderer>().sortingOrder &&
-                               structure.transform.position.y > fence.transform.position.y)
-                    {
-                        fence.GetComponent<SpriteRenderer>().sortingOrder += 4;
-                    } else if (structure.transform.position.x == fence.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder == fence.GetComponent<SpriteRenderer>().sortingOrder &&
-                               fence.transform.position.y > structure.transform.position.y)
-                    {
-                        fence.GetComponent<SpriteRenderer>().sortingOrder -= 4;
-                    }
-                }
-            }
-            fence.AddComponent<HitPointsController>();
+            
+            UpdateObject(fence);
+            
             fence.GetComponent<HitPointsController>().HitPoints = Random.Range(40, 61);
-            fence.tag = "PlacedBlock";
-		
-            PlacedBlocks.Add(fence);
-            PlacedStructures.Add(fence);
-            WorldGenerator.SumOfInteractableWorldObjects.Add(fence);
             
             var notificationStone = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(fence.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notificationStone.GetComponentInChildren<Text>().text = "-" + 12 + " Stone";
@@ -682,49 +540,19 @@ public class UiButtonController : MonoBehaviour
             
             PlayerPrefs.SetFloat("Gun Powder", PlayerController.GunPowder -= 1);
             GameObject.FindGameObjectWithTag("PlayerGunPowder").GetComponent<Text>().text = PlayerPrefs.GetFloat("Gun Powder").ToString();
+        
+            ClosePickingBlocks();
 
             var torch = Instantiate(Torch, new Vector2(HoverController.BlockClickedX, HoverController.BlockClickedY),  Quaternion.identity);
-            torch.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs(Mathf.RoundToInt(HoverController.ClickedBlock.transform.position.y));
-            if (PlacedStructures.Count > 0)
-            {
-                foreach (var structure in PlacedStructures)
-                {
-                    if (structure.transform.position.x == torch.transform.position.x &&
-                        structure.GetComponent<SpriteRenderer>().sortingOrder > torch.GetComponent<SpriteRenderer>().sortingOrder)
-                    {
-                        torch.GetComponent<SpriteRenderer>().sortingOrder += 3;
-                    } else if (structure.transform.position.x == torch.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder < torch.GetComponent<SpriteRenderer>().sortingOrder)
-                    {
-                        torch.GetComponent<SpriteRenderer>().sortingOrder -= 3;
-                    } else if (structure.transform.position.x == torch.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder == torch.GetComponent<SpriteRenderer>().sortingOrder &&
-                               structure.transform.position.y > torch.transform.position.y)
-                    {
-                        torch.GetComponent<SpriteRenderer>().sortingOrder += 4;
-                    } else if (structure.transform.position.x == torch.transform.position.x &&
-                               structure.GetComponent<SpriteRenderer>().sortingOrder == torch.GetComponent<SpriteRenderer>().sortingOrder &&
-                               torch.transform.position.y > structure.transform.position.y)
-                    {
-                        torch.GetComponent<SpriteRenderer>().sortingOrder -= 4;
-                    }
-                }
-            }
-            torch.AddComponent<HitPointsController>();
+            
+            UpdateObject(torch);
             torch.GetComponent<HitPointsController>().HitPoints = Random.Range(40, 61);
-            torch.tag = "PlacedBlock";
-		
-            PlacedBlocks.Add(torch);
-            PlacedStructures.Add(torch);
-            WorldGenerator.SumOfInteractableWorldObjects.Add(torch);
             
             var notificationWood = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(torch.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notificationWood.GetComponentInChildren<Text>().text = "-" + 1 + " Wood";
             var notificationGunPowder = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(
                 new Vector3(torch.transform.position.x, torch.transform.position.y - 0.3f, torch.transform.position.z)), Quaternion.identity, GameObject.Find("Canvas").transform);
             notificationGunPowder.GetComponentInChildren<Text>().text = "-" + 1 + " Gun Powder";
-        
-            ClosePickingBlocks();
         
             PlayerController.PlayMode = "Survival";
             foreach (var ui in _actionsUi)
@@ -761,5 +589,41 @@ public class UiButtonController : MonoBehaviour
         }
         
         //Debug.Log("Added a bullet: " + PlayerController.Bullets);
+    }
+
+    private void UpdateObject(GameObject obj)
+    {
+        obj.GetComponent<SpriteRenderer>().sortingOrder = Mathf.Abs(Mathf.RoundToInt(HoverController.ClickedBlock.transform.position.y));
+        if (PlacedStructures.Count > 0)
+        {
+            foreach (var structure in PlacedStructures)
+            {
+                if (structure.transform.position.x == obj.transform.position.x &&
+                    structure.GetComponent<SpriteRenderer>().sortingOrder > obj.GetComponent<SpriteRenderer>().sortingOrder)
+                {
+                    obj.GetComponent<SpriteRenderer>().sortingOrder += 3;
+                } else if (structure.transform.position.x == obj.transform.position.x &&
+                           structure.GetComponent<SpriteRenderer>().sortingOrder < obj.GetComponent<SpriteRenderer>().sortingOrder)
+                {
+                    obj.GetComponent<SpriteRenderer>().sortingOrder -= 3;
+                } else if (structure.transform.position.x == obj.transform.position.x &&
+                           structure.GetComponent<SpriteRenderer>().sortingOrder == obj.GetComponent<SpriteRenderer>().sortingOrder &&
+                           structure.transform.position.y > obj.transform.position.y)
+                {
+                    obj.GetComponent<SpriteRenderer>().sortingOrder += 4;
+                } else if (structure.transform.position.x == obj.transform.position.x &&
+                           structure.GetComponent<SpriteRenderer>().sortingOrder == obj.GetComponent<SpriteRenderer>().sortingOrder &&
+                           obj.transform.position.y > structure.transform.position.y)
+                {
+                    obj.GetComponent<SpriteRenderer>().sortingOrder -= 4;
+                }
+            }
+        }
+        obj.AddComponent<HitPointsController>();
+        obj.tag = "PlacedBlock";
+		
+        PlacedBlocks.Add(obj);
+        PlacedStructures.Add(obj);
+        WorldGenerator.SumOfInteractableWorldObjects.Add(obj);
     }
 }

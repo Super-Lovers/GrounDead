@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour {
 
@@ -11,30 +12,48 @@ public class ButtonController : MonoBehaviour {
 	public GameObject ButtonStart;
 	public GameObject ButtonExit;
 
+	private void Start()
+	{
+		// Unpause if the player is back in the main menu.
+		Time.timeScale = 1;
+	}
+
 	public void StartHoverButton()
 	{
-		ButtonStart.GetComponent<UnityEngine.UI.Image>().sprite = HoveredButtonImage;
+		ButtonStart.GetComponent<Image>().sprite = HoveredButtonImage;
+		var buttonTextPos = ButtonStart.GetComponentInChildren<Text>().transform.position;
+		buttonTextPos.y -= 4;
+		ButtonStart.GetComponentInChildren<Text>().transform.position = buttonTextPos;
 	}
 	public void StartClickedButton()
 	{
-		ButtonStart.GetComponent<UnityEngine.UI.Image>().sprite = ClickedButtonImage;
+		ButtonStart.GetComponent<Image>().sprite = ClickedButtonImage;
 	}
 	public void StartExitedButton()
 	{
-		ButtonStart.GetComponent<UnityEngine.UI.Image>().sprite = ExitedButtonImage;
+		ButtonStart.GetComponent<Image>().sprite = ExitedButtonImage;
+		var buttonTextPos = ButtonStart.GetComponentInChildren<Text>().transform.position;
+		buttonTextPos.y += 4;
+		ButtonStart.GetComponentInChildren<Text>().transform.position = buttonTextPos;
 	}
 	
 	public void QuitHoverButton()
 	{
-		ButtonExit.GetComponent<UnityEngine.UI.Image>().sprite = HoveredButtonImage;
+		ButtonExit.GetComponent<Image>().sprite = HoveredButtonImage;
+		var buttonExitTextPos = ButtonExit.GetComponentInChildren<Text>().transform.position;
+		buttonExitTextPos.y -= 4;
+		ButtonExit.GetComponentInChildren<Text>().transform.position = buttonExitTextPos;
 	}
 	public void QuitClickedButton()
 	{
-		ButtonExit.GetComponent<UnityEngine.UI.Image>().sprite = ClickedButtonImage;
+		ButtonExit.GetComponent<Image>().sprite = ClickedButtonImage;
 	}
 	public void QuitExitedButton()
 	{
-		ButtonExit.GetComponent<UnityEngine.UI.Image>().sprite = ExitedButtonImage;
+		ButtonExit.GetComponent<Image>().sprite = ExitedButtonImage;
+		var buttonExitTextPos = ButtonExit.GetComponentInChildren<Text>().transform.position;
+		buttonExitTextPos.y += 4;
+		ButtonExit.GetComponentInChildren<Text>().transform.position = buttonExitTextPos;
 	}
 
 	public void StartTheGame()
@@ -49,6 +68,8 @@ public class ButtonController : MonoBehaviour {
 
 	public void ReturnToStartMenu()
 	{
+		MenuController.ResetGameWorld();
+		
 		SceneManager.LoadScene("StartMenuScene");
 	}
 }

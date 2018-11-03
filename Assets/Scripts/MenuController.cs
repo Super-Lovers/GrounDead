@@ -107,67 +107,7 @@ public class MenuController : MonoBehaviour {
 
         if (PlayerController.PlayerHealth <= 0)
         {
-            // Resetting the world array and the placed blocks lists
-            WorldGenerator.GameWorld = new int[WorldGenerator.MapHeight, WorldGenerator.MapWidth];
-            UiButtonController.PlacedBlocks.Clear();
-            UiButtonController.PlacedWaterBlocks.Clear();
-            UiButtonController.PlacedStructures.Clear();
-            WorldGenerator.SumOfInteractableWorldObjects.Clear();
-			
-            // Resetting the starting point of generation
-            WorldGenerator.CurrentPositionX = 0;
-            WorldGenerator.CurrentPositionY = 0;
-			
-            // Resetting the scoreboard of the player
-
-            // First Panel
-            TotalHostilityScore = 0;
-            TotalZombiesDefeated = 0;
-            TotalZombieCopsDefeated = 0;
-            TotalZombieCitizensDefeated = 0;
-            TotalZombieBossesDefeated = 0;
-            TotalBuildingsDestroyed = 0;
-            TotalDaysSurvived = 0;
-			
-            // Second Panel
-            TotalBuildingScore = 0;
-            TotalWoodenWallsBuilt = 0;
-            TotalStoneWallsBuilt = 0;
-            TotalPlatformsBuilt = 0;
-            TotalSpikeTrapsBuilt = 0;
-            TotalElectricFencesBuilt = 0;
-            TotalTorchesBuilt = 0;
-			
-            // Third Panel
-            TotalGatheringScore = 0;
-            TotalTreesChopped = 0;
-            TotalStoneMined = 0;
-            TotalCopperMined = 0;
-            TotalApplesCollected = 0;
-            TotalGunPowderCollected = 0;
-
-            TotalTutorialsScore = 0;
-
-            // Resetting the zombies currently in game back to zero
-            var zombiesInGame = GameObject.FindGameObjectsWithTag("Zombie");
-            foreach (var zombie in zombiesInGame)
-            {
-                Destroy(zombie);
-            }
-			
-            var zombieCopsInGame = GameObject.FindGameObjectsWithTag("Zombie Cop");
-            foreach (var zombie in zombieCopsInGame)
-            {
-                Destroy(zombie);
-            }
-			
-            var zombieBossesInGame = GameObject.FindGameObjectsWithTag("Zombie Boss");
-            foreach (var zombie in zombieBossesInGame)
-            {
-                Destroy(zombie);
-            }
-
-            ObjectivesController.CurrentDay = 0;
+            ResetGameWorld();
         }
 		
         /*
@@ -254,5 +194,70 @@ public class MenuController : MonoBehaviour {
                                                                                      TotalGatheringScore +
                                                                                      (ObjectivesController.CurrentDay * 100) +
                                                                                      TotalTutorialsScore);
+    }
+
+    public static void ResetGameWorld()
+    {
+        // Resetting the world array and the placed blocks lists
+            WorldGenerator.GameWorld = new int[WorldGenerator.MapHeight, WorldGenerator.MapWidth];
+            UiButtonController.PlacedBlocks.Clear();
+            UiButtonController.PlacedWaterBlocks.Clear();
+            UiButtonController.PlacedStructures.Clear();
+            WorldGenerator.SumOfInteractableWorldObjects.Clear();
+			
+            // Resetting the starting point of generation
+            WorldGenerator.CurrentPositionX = 0;
+            WorldGenerator.CurrentPositionY = 0;
+			
+            // Resetting the scoreboard of the player
+
+            // First Panel
+            TotalHostilityScore = 0;
+            TotalZombiesDefeated = 0;
+            TotalZombieCopsDefeated = 0;
+            TotalZombieCitizensDefeated = 0;
+            TotalZombieBossesDefeated = 0;
+            TotalBuildingsDestroyed = 0;
+            TotalDaysSurvived = 0;
+			
+            // Second Panel
+            TotalBuildingScore = 0;
+            TotalWoodenWallsBuilt = 0;
+            TotalStoneWallsBuilt = 0;
+            TotalPlatformsBuilt = 0;
+            TotalSpikeTrapsBuilt = 0;
+            TotalElectricFencesBuilt = 0;
+            TotalTorchesBuilt = 0;
+			
+            // Third Panel
+            TotalGatheringScore = 0;
+            TotalTreesChopped = 0;
+            TotalStoneMined = 0;
+            TotalCopperMined = 0;
+            TotalApplesCollected = 0;
+            TotalGunPowderCollected = 0;
+
+            TotalTutorialsScore = 0;
+
+            // Resetting the zombies currently in game back to zero
+            var zombiesInGame = GameObject.FindGameObjectsWithTag("Zombie");
+            foreach (var zombie in zombiesInGame)
+            {
+                Destroy(zombie);
+            }
+			
+            var zombieCopsInGame = GameObject.FindGameObjectsWithTag("Zombie Cop");
+            foreach (var zombie in zombieCopsInGame)
+            {
+                Destroy(zombie);
+            }
+			
+            var zombieBossesInGame = GameObject.FindGameObjectsWithTag("Zombie Boss");
+            foreach (var zombie in zombieBossesInGame)
+            {
+                Destroy(zombie);
+            }
+
+            ObjectivesController.CurrentDay = 0;
     }
 }
