@@ -47,6 +47,7 @@ TagManager:
   - Zombie Layer Increase Detector
   - Player Range
   - Player Visibility Detector
+  - Grass
   layers:
   - Default
   - TransparentFX

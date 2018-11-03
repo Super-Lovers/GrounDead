@@ -112,6 +112,7 @@ public class MenuController : MonoBehaviour {
             UiButtonController.PlacedBlocks.Clear();
             UiButtonController.PlacedWaterBlocks.Clear();
             UiButtonController.PlacedStructures.Clear();
+            WorldGenerator.SumOfInteractableWorldObjects.Clear();
 			
             // Resetting the starting point of generation
             WorldGenerator.CurrentPositionX = 0;

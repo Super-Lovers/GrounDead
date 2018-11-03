@@ -392,6 +392,7 @@ public class ZombieController : MonoBehaviour
                         
                         //_playerDetectorList.Remove(_obstacle);
                         UiButtonController.PlacedBlocks.Remove(_obstacle);
+                        WorldGenerator.SumOfInteractableWorldObjects.Remove(_obstacle);
 
                         PlayerController.Score += 100;
                         GameObject.FindGameObjectWithTag("PlayerScore").GetComponent<Text>().text =

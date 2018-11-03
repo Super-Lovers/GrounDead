@@ -102,6 +102,7 @@ public class BulletController : MonoBehaviour
 					// that causes an error where the player is accessing an object that doesnt exist.
 					Destroy(_obstacle);
 					UiButtonController.PlacedBlocks.Remove(_obstacle);
+					WorldGenerator.SumOfInteractableWorldObjects.Remove(_obstacle);
 				
 					PlayerController.Score += 50;
 					

@@ -256,6 +256,7 @@ public class UiButtonController : MonoBehaviour
                 Destroy(block);
                 PlacedBlocks.Remove(block);
                 PlacedStructures.Remove(block);
+                WorldGenerator.SumOfInteractableWorldObjects.Remove(block);
         
                 PlayerController.PlayMode = "Survival";
                 foreach (var ui in _actionsUi)
@@ -354,6 +355,7 @@ public class UiButtonController : MonoBehaviour
 		
             PlacedBlocks.Add(woodWall);
             PlacedStructures.Add(woodWall);
+            WorldGenerator.SumOfInteractableWorldObjects.Add(woodWall);
             //ZombieController._playerDetectorList.Add(woodWall);
             
             // Notification feedback for building a wall
@@ -420,6 +422,7 @@ public class UiButtonController : MonoBehaviour
 		
             PlacedBlocks.Add(stoneWall);
             PlacedStructures.Add(stoneWall);
+            WorldGenerator.SumOfInteractableWorldObjects.Add(stoneWall);
             
             var notification = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(stoneWall.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notification.GetComponentInChildren<Text>().text = "-" + 6 + " Stone";
@@ -503,6 +506,7 @@ public class UiButtonController : MonoBehaviour
 		
             PlacedBlocks.Add(platform);
             PlacedStructures.Add(platform);
+            WorldGenerator.SumOfInteractableWorldObjects.Add(platform);
             
             var notification = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(platform.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notification.GetComponentInChildren<Text>().text = "-" + 8 + " Wood";
@@ -570,6 +574,7 @@ public class UiButtonController : MonoBehaviour
 		
             PlacedBlocks.Add(spikes);
             PlacedStructures.Add(spikes);
+            WorldGenerator.SumOfInteractableWorldObjects.Add(spikes);
             
             var notificationStone = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(spikes.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notificationStone.GetComponentInChildren<Text>().text = "-" + 6 + " Stone";
@@ -640,6 +645,7 @@ public class UiButtonController : MonoBehaviour
 		
             PlacedBlocks.Add(fence);
             PlacedStructures.Add(fence);
+            WorldGenerator.SumOfInteractableWorldObjects.Add(fence);
             
             var notificationStone = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(fence.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notificationStone.GetComponentInChildren<Text>().text = "-" + 12 + " Stone";
@@ -710,6 +716,7 @@ public class UiButtonController : MonoBehaviour
 		
             PlacedBlocks.Add(torch);
             PlacedStructures.Add(torch);
+            WorldGenerator.SumOfInteractableWorldObjects.Add(torch);
             
             var notificationWood = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(torch.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notificationWood.GetComponentInChildren<Text>().text = "-" + 1 + " Wood";

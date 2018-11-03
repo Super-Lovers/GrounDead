@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class WorldGenerator : MonoBehaviour {
     // Storing the collection of all the game objects we will
@@ -16,6 +18,7 @@ public class WorldGenerator : MonoBehaviour {
     public GameObject PlayerHouse;
     public GameObject FenceObstacle;
     public GameObject Boundaries;
+    public static List<GameObject> SumOfInteractableWorldObjects = new List<GameObject>();
 	
     // This is where we will store all the map segments into one
     // whole game world as we create each segment
@@ -26,8 +29,11 @@ public class WorldGenerator : MonoBehaviour {
     // after a segment is completed
     public static int CurrentPositionX;
     public static int CurrentPositionY;
+    private int _sortingLayerGrass;
+    private int _sortingLayerTrees;
         
     public static int[,] GameWorld = new int[MapHeight, MapWidth];
+    public GameObject NewTerrainNotification;
 
     void Start () {
         RockyPlains.GenerateRockyPlains(20, 20, 5);
@@ -267,8 +273,8 @@ public class WorldGenerator : MonoBehaviour {
 
         currentX = 0;
         currentY = 0;
-        int sortingLayerGrass = MapHeight;
-        int sortingLayerTrees = MapHeight * 2;
+        _sortingLayerGrass = MapHeight;
+        _sortingLayerTrees = MapHeight * 2;
 
         // We begin instantiating every object on the map so
         // that we can visualize it with randomized sprites
@@ -282,49 +288,49 @@ public class WorldGenerator : MonoBehaviour {
                         var dirtTopLeft = Instantiate(Ground[6],
                             new Vector2(currentX, currentY), Quaternion.identity,
                             GameObject.FindGameObjectWithTag("Greener Ground").transform);
-                        dirtTopLeft.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        dirtTopLeft.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 32: // Dirt bottom left
                         var dirtBottomLeft = Instantiate(Ground[7],
                             new Vector2(currentX, currentY), Quaternion.identity,
                             GameObject.FindGameObjectWithTag("Greener Ground").transform);
-                        dirtBottomLeft.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        dirtBottomLeft.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 33: // Dirt split left
                         var dirtSplitLeft = Instantiate(Ground[8],
                             new Vector2(currentX, currentY), Quaternion.identity,
                             GameObject.FindGameObjectWithTag("Greener Ground").transform);
-                        dirtSplitLeft.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        dirtSplitLeft.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 34: // Dirt split top
                         var dirtSplitTop = Instantiate(Ground[9],
                             new Vector2(currentX, currentY), Quaternion.identity,
                             GameObject.FindGameObjectWithTag("Greener Ground").transform);
-                        dirtSplitTop.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        dirtSplitTop.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 35: // Dirt split bottom
                         var dirtBottomSplit = Instantiate(Ground[10],
                             new Vector2(currentX, currentY), Quaternion.identity,
                             GameObject.FindGameObjectWithTag("Greener Ground").transform);
-                        dirtBottomSplit.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        dirtBottomSplit.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 36: // Dirt top right
                         var dirtTopRight = Instantiate(Ground[11],
                             new Vector2(currentX, currentY), Quaternion.identity,
                             GameObject.FindGameObjectWithTag("Greener Ground").transform);
-                        dirtTopRight.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        dirtTopRight.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 37: // Dirt bottom left edge
                         var dirtBottomLeftEdge = Instantiate(Ground[13],
                             new Vector2(currentX, currentY), Quaternion.identity,
                             GameObject.FindGameObjectWithTag("Greener Ground").transform);
-                        dirtBottomLeftEdge.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        dirtBottomLeftEdge.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 38: // Dirt top left edge
                         var dirtTopLeftEdge = Instantiate(Ground[14],
                             new Vector2(currentX, currentY), Quaternion.identity,
                             GameObject.FindGameObjectWithTag("Greener Ground").transform);
-                        dirtTopLeftEdge.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        dirtTopLeftEdge.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 1: // Grass 1
                         // The random range generator will help us pick
@@ -358,25 +364,26 @@ public class WorldGenerator : MonoBehaviour {
                             var invertedGrass = Instantiate(Ground[15],
                                 new Vector2(currentX, currentY), Quaternion.identity,
                                 GameObject.FindGameObjectWithTag("Greener Ground").transform);
-                            invertedGrass.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                            invertedGrass.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         }
                         else
                         {
                             var grass = Instantiate(Ground[pickedGrass],
                                 new Vector2(currentX, currentY), Quaternion.identity,
                                 GameObject.FindGameObjectWithTag("Greener Ground").transform);
-                            grass.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                            grass.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         }
                         break;
                     case 2: // Path
                         var path = Instantiate(Ground[5],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Grass Paths").transform);
-                        path.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        path.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
+                        SumOfInteractableWorldObjects.Add(path);
                         break;
                     case 3: // Player House
                         var house = Instantiate(Ground[5],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Greener Ground").transform);
-                        house.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        house.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         /*Instantiate(PlayerHouse,
                             new Vector2(currentX, currentY), Quaternion.identity);*/
                         break;
@@ -387,42 +394,48 @@ public class WorldGenerator : MonoBehaviour {
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Rocky Ground").transform);
                         var rockStone = Instantiate(StoneTypes[Random.Range(0, StoneTypes.Length)],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Stones").transform);
-                        groundStone.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
-                        rockStone.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
+                        groundStone.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
+                        rockStone.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass + 1;
                         rockStone.tag = "PlacedBlock";
                         UiButtonController.PlacedBlocks.Add(rockStone);
+                        SumOfInteractableWorldObjects.Add(rockStone);
                         break;
                     case 5: // Copper
                         var groundCopper = Instantiate(RockyGround[Random.Range(0, RockyGround.Length)],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Rocky Ground").transform);
                         var copper = Instantiate(CopperTypes[Random.Range(0, CopperTypes.Length)],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Coppers").transform);
-                        groundCopper.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
-                        copper.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
+                        groundCopper.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
+                        copper.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass + 1;
                         copper.tag = "PlacedBlock";
                         UiButtonController.PlacedBlocks.Add(copper);
+                        SumOfInteractableWorldObjects.Add(copper);
                         break;
                     case 6: // Path up
                         var pathUp = Instantiate(Ground[5],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Grass Paths").transform);
-                        pathUp.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        pathUp.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
+                        SumOfInteractableWorldObjects.Add(pathUp);
                         break;
                     case 7: // Path down
                         var pathDown = Instantiate(Ground[5],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Grass Paths").transform);
-                        pathDown.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        pathDown.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
+                        SumOfInteractableWorldObjects.Add(pathDown);
                         break; // x 18.92 y 17.87408
                     case 8: // Dirt
                         var dirt = Instantiate(Ground[5],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Greener Ground").transform);
-                        dirt.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        dirt.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
+                        SumOfInteractableWorldObjects.Add(dirt);
                         break;
                     case 9: // Boundaries / fences
                         if (Random.Range(0, 101) > 12)
                         {
                             var grassFence = Instantiate(Ground[0],
                                 new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Greener Ground").transform);
-                            grassFence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                            grassFence.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
+                            SumOfInteractableWorldObjects.Add(grassFence);
                         }
                         else
                         {
@@ -430,96 +443,188 @@ public class WorldGenerator : MonoBehaviour {
                                 new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Greener Ground").transform);
                             var fence = Instantiate(FenceObstacle,
                                 new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Fences").transform);
-                            grassFence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
-                            fence.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
+                            grassFence.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
+                            fence.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass + 1;
                             fence.tag = "PlacedBlock";
                             UiButtonController.PlacedBlocks.Add(fence);
+                            SumOfInteractableWorldObjects.Add(fence);
                             fence.AddComponent<HitPointsController>();
                         }
                         break;
                     case 0: // Trees
                         var grassTree = Instantiate(Ground[0],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Greener Ground").transform);
-                        grassTree.GetComponentInChildren<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        grassTree.GetComponentInChildren<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         var tree = Instantiate(ForestTrees[Random.Range(0, ForestTrees.Length)],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Forest Trees").transform);
-                        tree.GetComponentInChildren<SpriteRenderer>().sortingOrder = sortingLayerTrees + 1;
+                        tree.GetComponentInChildren<SpriteRenderer>().sortingOrder = _sortingLayerTrees + 1;
                         tree.tag = "PlacedBlock";
                         UiButtonController.PlacedBlocks.Add(tree);
+                        SumOfInteractableWorldObjects.Add(tree);
                         break;
                     case 14: // Rocky Ground for the natural resources
                         var groundRock = Instantiate(RockyGround[Random.Range(0, RockyGround.Length)],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Rocky Ground").transform);
-                        groundRock.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        groundRock.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 15: // Stone only in the forest
                         var grassStone = Instantiate(Ground[Random.Range(0, 2)],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Rocky Ground").transform);
                         var stone = Instantiate(StoneTypes[Random.Range(0, StoneTypes.Length)],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Stones").transform);
-                        grassStone.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
-                        stone.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
+                        grassStone.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
+                        stone.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass + 1;
                         stone.tag = "PlacedBlock";
                         UiButtonController.PlacedBlocks.Add(stone);
+                        SumOfInteractableWorldObjects.Add(stone);
                         break;
                     case 16: // Water tiles for "ponds" or small pools of water
                         var water1 = Instantiate(WaterTypes[0],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Water Pools").transform);
                         UiButtonController.PlacedWaterBlocks.Add(water1);
-                        water1.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        SumOfInteractableWorldObjects.Add(water1);
+                        water1.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 18: // Water tiles for "ponds" or small pools of water
                         var water2 = Instantiate(WaterTypes[2],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Water Pools").transform);
                         UiButtonController.PlacedWaterBlocks.Add(water2);
-                        water2.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        SumOfInteractableWorldObjects.Add(water2);
+                        water2.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 19: // Water tiles for "ponds" or small pools of water
                         var water3 = Instantiate(WaterTypes[1],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Water Pools").transform);
-                        water3.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass + 1;
+                        water3.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass + 1;
                         UiButtonController.PlacedWaterBlocks.Add(water3);
-                        water3.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        SumOfInteractableWorldObjects.Add(water3);
+                        water3.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 90: // rockBottom
                         var rockBottom = Instantiate(RockyTransitions[0],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Rocky Ground").transform);
-                        UiButtonController.PlacedWaterBlocks.Add(rockBottom);
-                        rockBottom.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        rockBottom.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 91: // rockTop
                         var rockTop = Instantiate(RockyTransitions[3],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Rocky Ground").transform);
-                        UiButtonController.PlacedWaterBlocks.Add(rockTop);
-                        rockTop.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        rockTop.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 92: // rockLeft
                         var rockLeft = Instantiate(RockyTransitions[2],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Rocky Ground").transform);
-                        UiButtonController.PlacedWaterBlocks.Add(rockLeft);
-                        rockLeft.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        rockLeft.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 93: // rockTopLeft
                         var rockTopLeft = Instantiate(RockyTransitions[4],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Rocky Ground").transform);
-                        UiButtonController.PlacedWaterBlocks.Add(rockTopLeft);
-                        rockTopLeft.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        rockTopLeft.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                     case 94: // rockBottomLeft
                         var rockBottomLeft = Instantiate(RockyTransitions[1],
                             new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Rocky Ground").transform);
-                        UiButtonController.PlacedWaterBlocks.Add(rockBottomLeft);
-                        rockBottomLeft.GetComponent<SpriteRenderer>().sortingOrder = sortingLayerGrass;
+                        rockBottomLeft.GetComponent<SpriteRenderer>().sortingOrder = _sortingLayerGrass;
                         break;
                 }
 
                 currentX += 0.64f;
-                sortingLayerGrass--;
+                _sortingLayerGrass--;
             }
 
             currentX = 0;
             currentY += 0.64f;
-            sortingLayerTrees--;
+            _sortingLayerTrees--;
         }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            NewTerrainNotification.SetActive(true);
+            Invoke("RegenerateWorld", 0.5f);
+        }
+    }
+
+    public void RegenerateWorld()
+    {
+        Invoke("HideNewTerrainNotification", 3);
+        
+        float currentX = 0;
+        float currentY = 0;
+        
+        _sortingLayerGrass = MapHeight;
+        _sortingLayerTrees = MapHeight * 2;
+        
+        List<GameObject> currentObjectsInTheWorld = SumOfInteractableWorldObjects.ToList();
+        var player = GameObject.FindGameObjectWithTag("Player");
+        
+        for (int y = 0; y < MapHeight; y++)
+        {
+            for (int x = 0; x < MapWidth; x++)
+            {
+                bool isItSafeToInstantiate = true;
+                foreach (var obj in currentObjectsInTheWorld)
+                {
+                    if ((obj.transform.position.x == currentX && obj.transform.position.y == currentY) ||
+                        (obj.transform.position.x == player.transform.position.x && obj.transform.position.y == player.transform.position.y))
+                    {
+                        isItSafeToInstantiate = false;
+                        break;
+                    }
+                }
+
+                if (isItSafeToInstantiate)
+                {
+                    // Adding stone in the rocky forest biome
+                    if (((x > 0 && x < 39) && ((y < 19) || (y > 22))) && Random.Range(0, 101) > 96)
+                    {
+                        if (Random.Range(0, 101) > 50)
+                        {
+                            var rockStone = Instantiate(StoneTypes[Random.Range(0, StoneTypes.Length)],
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Stones").transform);
+                            rockStone.tag = "PlacedBlock";
+                            rockStone.name += "Q";
+                            rockStone.GetComponentInChildren<SpriteRenderer>().sortingOrder = _sortingLayerGrass + 1;
+                            UiButtonController.PlacedBlocks.Add(rockStone);
+                            SumOfInteractableWorldObjects.Add(rockStone);
+                        }
+                        else
+                        {
+                            var copper = Instantiate(CopperTypes[Random.Range(0, CopperTypes.Length)],
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Coppers").transform);
+                            copper.tag = "PlacedBlock";
+                            copper.name += "Q";
+                            copper.GetComponentInChildren<SpriteRenderer>().sortingOrder = _sortingLayerGrass + 1;
+                            UiButtonController.PlacedBlocks.Add(copper);
+                            SumOfInteractableWorldObjects.Add(copper);
+                        }
+                    }
+
+                    if (((x > 20 && x < 80) && ((y < 19) || (y > 22))) && Random.Range(0, 101) > 98)
+                    {
+                        var tree = Instantiate(ForestTrees[Random.Range(0, ForestTrees.Length)],
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Forest Trees").transform);
+                        tree.tag = "PlacedBlock";
+                        tree.name += "Q";
+                        tree.GetComponentInChildren<SpriteRenderer>().sortingOrder = _sortingLayerTrees + 1;
+                        UiButtonController.PlacedBlocks.Add(tree);
+                        SumOfInteractableWorldObjects.Add(tree);
+                    }
+                }
+                
+                currentX += 0.64f;
+                _sortingLayerGrass--;
+            }
+            
+            currentX = 0;
+            currentY += 0.64f;
+            _sortingLayerTrees--;
+        }
+    }
+
+    private void HideNewTerrainNotification()
+    {
+        NewTerrainNotification.SetActive(false);
     }
 }
