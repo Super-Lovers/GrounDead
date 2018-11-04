@@ -20,9 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4952758706143740}
   - component: {fileID: 61507418091724218}
+  - component: {fileID: 114526164634545836}
   m_Layer: 12
-  m_Name: playerVisibilityDetector
-  m_TagString: Player Visibility Detector
+  m_Name: objectVisibilityDetector
+  m_TagString: Object Visibility Detector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -273,6 +274,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &114526164634545836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1295281095431426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95763318b0b4d485488d1a14d9b5554a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultMaterial: {fileID: 2100000, guid: 23d84b0917bfe4e469f1c377ec34e789, type: 2}
+  GrassMap: {fileID: 2100000, guid: 0fea9b803a6eb4b1db9c4231b9780410, type: 2}
 --- !u!114 &114718298268170676
 MonoBehaviour:
   m_ObjectHideFlags: 1

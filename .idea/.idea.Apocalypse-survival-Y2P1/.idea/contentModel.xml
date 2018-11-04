@@ -21,9 +21,9 @@
           <e p="HitPointsController.cs" t="Include" />
           <e p="HoverController.cs" t="Include" />
           <e p="MenuController.cs" t="Include" />
+          <e p="ObjectVisibilityDetector.cs" t="Include" />
           <e p="ObjectivesController.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
-          <e p="PlayerVisibilityDetector.cs" t="Include" />
           <e p="RiverGenerator.cs" t="Include" />
           <e p="RockyPlains.cs" t="Include" />
           <e p="UiButtonController.cs" t="Include" />

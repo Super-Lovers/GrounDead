@@ -49,6 +49,7 @@ TagManager:
   - Player Visibility Detector
   - Grass
   - Pause Button To Return To Menu
+  - Object Visibility Detector
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerVisibilityDetector : MonoBehaviour
+public class ObjectVisibilityDetector : MonoBehaviour
 {
 	public Material DefaultMaterial;
 	public Material GrassMap;
@@ -13,7 +13,7 @@ public class PlayerVisibilityDetector : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D other)
 	{
-		if (other.transform.tag == "Player Visibility Detector")
+		if (other.transform.tag == "Object Visibility Detector")
 		{
 			if (gameObject.layer == 14)
 			{
@@ -30,7 +30,7 @@ public class PlayerVisibilityDetector : MonoBehaviour
 
 	private void OnTriggerExit2D(Collider2D other)
 	{
-		if (other.transform.tag == "Player Visibility Detector")
+		if (other.transform.tag == "Object Visibility Detector")
 		{
 			_spriteRenderer.sortingOrder = 11;
 			_spriteRenderer.material = GrassMap;

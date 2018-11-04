@@ -77,6 +77,11 @@ public class ZombieController : MonoBehaviour
                 {
                     if (nameOfBlock == "stone" || nameOfBlock == "copper"|| nameOfBlock == "tree")
                     {
+                        var circleCollidersInTree = block.GetComponentsInChildren<CircleCollider2D>();
+                        foreach (var collider in circleCollidersInTree)
+                        {
+                            Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), collider);
+                        }
                         Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), block.GetComponentInChildren<BoxCollider2D>());
                         Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), block.GetComponentInChildren<CircleCollider2D>());
                     }
