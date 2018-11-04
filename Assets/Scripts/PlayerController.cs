@@ -383,9 +383,9 @@ public class PlayerController : MonoBehaviour
             {
                 ObjectivesController.HasSwitchedWeapons = true;
                 
-                if (Weapon.GetComponent<SpriteRenderer>().sprite == Knife)
+                if (Weapon.gameObject.layer == 15)
                 {
-                    Weapon.GetComponent<SpriteRenderer>().sprite = Axe;
+                    Weapon.gameObject.layer = 16;
                     var weaponCollider = Weapon.GetComponent<BoxCollider2D>().size;
                     weaponCollider.x = 0.80f;
                     weaponCollider.y = 0.50f;
@@ -393,7 +393,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    Weapon.GetComponent<SpriteRenderer>().sprite = Knife;
+                    Weapon.gameObject.layer = 15;
                     var weaponCollider = Weapon.GetComponent<BoxCollider2D>().size;
                     weaponCollider.x = 0.64f;
                     weaponCollider.y = 0.25f;

@@ -76,8 +76,7 @@ public class HoverController : MonoBehaviour
             other.transform.tag == "Player" ||
             other.transform.tag == "Melee Weapon" ||
             other.transform.tag == "PlayerDetector" ||
-            other.transform.tag == "PlacedBlock" ||
-            other.transform.tag == "Zombie Layer Increase Detector")
+            other.transform.tag == "PlacedBlock")
         {
             _isOutOfRange = false;
         }
@@ -85,7 +84,7 @@ public class HoverController : MonoBehaviour
         if (gameObject.layer == 14 &&
             (other.transform.tag == "Zombie Cop" || other.transform.tag == "Zombie"))
         {
-            other.GetComponent<SpriteRenderer>().sortingOrder = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
+            other.GetComponent<SpriteRenderer>().sortingOrder = gameObject.GetComponent<SpriteRenderer>().sortingOrder - 1;
         }
         
         if (gameObject.layer == 14 && other.transform.tag == "PlayerDetector")

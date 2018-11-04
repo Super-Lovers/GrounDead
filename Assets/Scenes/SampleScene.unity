@@ -6231,7 +6231,7 @@ GameObject:
   - component: {fileID: 1833665015}
   - component: {fileID: 1833665014}
   - component: {fileID: 1833665016}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: Melee Weapon
   m_TagString: Melee Weapon
   m_Icon: {fileID: 0}

@@ -458,10 +458,6 @@ public class UiButtonController : MonoBehaviour
             UpdateObject(spikes);
             
             spikes.GetComponent<HitPointsController>().HitPoints = 20;
-		
-            PlacedBlocks.Add(spikes);
-            PlacedStructures.Add(spikes);
-            WorldGenerator.SumOfInteractableWorldObjects.Add(spikes);
             
             var notificationStone = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(spikes.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notificationStone.GetComponentInChildren<Text>().text = "-" + 6 + " Stone";
