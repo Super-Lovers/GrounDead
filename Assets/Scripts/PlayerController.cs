@@ -111,9 +111,27 @@ public class PlayerController : MonoBehaviour
         _gunHolePos = _gunHole.position;
         
         // *******
-        // Day/Night Cycle (work in progress)
+        // Day/Night Cycle
         // *******
         //InvokeRepeating("UpdateWorldTime", 20, 20);
+        
+        // Unpause the game after it starts
+        IsPaused = false;
+        if (IsPaused)
+        {
+            Time.timeScale = 0;
+            _cameraAudioSource.enabled = false;
+            _audioSource.enabled = false;
+            _pauseMenu.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            _cameraAudioSource.enabled = true;
+            _audioSource.enabled = true;
+            _pauseMenu.SetActive(false);
+        }
+
     }
     
     private void OnGUI()

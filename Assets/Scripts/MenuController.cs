@@ -100,27 +100,21 @@ public class MenuController : MonoBehaviour {
             "Total Apples Collected: " + TotalApplesCollected;
         GameObject.Find("Total Gun Powder Collected").GetComponent<Text>().text =
             "Total Gun Powder Collected: " + TotalGunPowderCollected;
-		
+        
         // Final Score
         long finalScore = TotalHostilityScore + TotalBuildingScore + TotalGatheringScore + (ObjectivesController.CurrentDay * 100) + TotalTutorialsScore;
         // Adding the final score to the list of existing scores,
         // sorting it so that we can only retrieve the top 5 and then
         // making it from ascending to descending with the Reverse method.
-        ScoreboardController.ScoreboardList.Add(finalScore);
-        ScoreboardController.ScoreboardList.Sort();
-        ScoreboardController.ScoreboardList.Reverse();
-        
+		
         // Writing the new score to a local text file for storing and later use.
         string path = "Assets/Resources/player_scores.txt";
-        StreamWriter writer = new StreamWriter(path, false);
+        StreamWriter writer = new StreamWriter(path, true);
 
         using (writer)
         {
-            for (int i = 0; i < ScoreboardController.ScoreboardList.Count; i++)
-            {
-                writer.WriteLine(ScoreboardController.ScoreboardList[i]);
-                //Debug.Log(ScoreboardController.ScoreboardList[i]);
-            }
+            writer.WriteLine(finalScore);
+            //Debug.Log(ScoreboardController.ScoreboardList[i]);
         }
         
         GameObject.Find("Total Final Score Text").GetComponent<Text>().text =
