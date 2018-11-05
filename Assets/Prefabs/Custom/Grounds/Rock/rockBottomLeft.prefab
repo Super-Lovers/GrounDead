@@ -57,7 +57,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0.02}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.4}
     oldSize: {x: 0.78, y: 0.8}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
@@ -79,8 +79,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RedFlash: {fileID: 2100000, guid: f2ebd144b5006406eb47dfb7462ec15f, type: 2}
-  GreenFlash: {fileID: 0}
-  GrassMaterial: {fileID: 0}
+  GreenFlash: {fileID: 2100000, guid: 3a1db2ebb7c194482a46fa9b41c17373, type: 2}
+  GrassMaterial: {fileID: 2100000, guid: 0fea9b803a6eb4b1db9c4231b9780410, type: 2}
   Tree1: {fileID: 0}
   Tree2: {fileID: 0}
   Tree3: {fileID: 0}

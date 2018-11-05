@@ -79,7 +79,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RedFlash: {fileID: 2100000, guid: f2ebd144b5006406eb47dfb7462ec15f, type: 2}
-  GrassMap: {fileID: 2100000, guid: 0fea9b803a6eb4b1db9c4231b9780410, type: 2}
+  GreenFlash: {fileID: 2100000, guid: 3a1db2ebb7c194482a46fa9b41c17373, type: 2}
+  GrassMaterial: {fileID: 2100000, guid: 0fea9b803a6eb4b1db9c4231b9780410, type: 2}
+  Tree1: {fileID: 0}
+  Tree2: {fileID: 0}
+  Tree3: {fileID: 0}
+  Tree4: {fileID: 0}
+  Tree5: {fileID: 0}
 --- !u!212 &212824627508909192
 SpriteRenderer:
   m_ObjectHideFlags: 1

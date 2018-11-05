@@ -41,6 +41,8 @@ public class UiButtonController : MonoBehaviour
     public AudioClip StructurePlacement;
     public GameObject NotificationDamage;
     public static List<GameObject> PlacedStructures = new List<GameObject>();
+
+    public Font NotificationFonts;
     
     private void Start()
     {
@@ -174,6 +176,7 @@ public class UiButtonController : MonoBehaviour
                         // Notification for feedback
                         var notification = Instantiate(GatheredMaterials, Camera.main.WorldToScreenPoint(block.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
                         notification.GetComponentInChildren<Text>().text = "+" + gatheredWood + " Wood";
+                        notification.GetComponentInChildren<Text>().font = NotificationFonts;
                         
                         WoodUi.GetComponent<Animator>().SetBool("shineWood", true);
                         Invoke("StopWoodShineAnimation", 1);
@@ -189,6 +192,7 @@ public class UiButtonController : MonoBehaviour
                             var notificationApple = Instantiate(GatheredMaterials, Camera.main.WorldToScreenPoint(
                                 new Vector3(block.transform.position.x, block.transform.position.y - 0.3f, block.transform.position.z)), Quaternion.identity, GameObject.Find("Canvas").transform);
                             notificationApple.GetComponentInChildren<Text>().text = "+" + 1 + " Apple";
+                            notificationApple.GetComponentInChildren<Text>().font = NotificationFonts;
                             
                             Invoke("StopApplesShineAnimation", 1);
             
@@ -215,6 +219,7 @@ public class UiButtonController : MonoBehaviour
                         var gatheredStone = Random.Range(2, 5);
                         var notification = Instantiate(GatheredMaterials, Camera.main.WorldToScreenPoint(block.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
                         notification.GetComponentInChildren<Text>().text = "+" + gatheredStone + " Stone";
+                        notification.GetComponentInChildren<Text>().font = NotificationFonts;
                         
                         StoneUi.GetComponent<Animator>().SetBool("shineStone", true);
                         Invoke("StopStoneShineAnimation", 1);
@@ -235,6 +240,7 @@ public class UiButtonController : MonoBehaviour
                         
                         var notification = Instantiate(GatheredMaterials, Camera.main.WorldToScreenPoint(block.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
                         notification.GetComponentInChildren<Text>().text = "+" + 3 + " Copper";
+                        notification.GetComponentInChildren<Text>().font = NotificationFonts;
                         
                         CopperUi.GetComponent<Animator>().SetBool("shineCopper", true);
                         Invoke("StopCopperShineAnimation", 1);
@@ -332,6 +338,7 @@ public class UiButtonController : MonoBehaviour
             // Notification feedback for building a wall
             var notification = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(woodWall.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notification.GetComponentInChildren<Text>().text = "-" + 6 + " Wood";
+            notification.GetComponentInChildren<Text>().font = NotificationFonts;
         
             ClosePickingBlocks();
         
@@ -368,6 +375,7 @@ public class UiButtonController : MonoBehaviour
             
             var notification = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(stoneWall.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notification.GetComponentInChildren<Text>().text = "-" + 6 + " Stone";
+            notification.GetComponentInChildren<Text>().font = NotificationFonts;
         
             ClosePickingBlocks();
         
@@ -422,6 +430,7 @@ public class UiButtonController : MonoBehaviour
             
             var notification = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(platform.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notification.GetComponentInChildren<Text>().text = "-" + 8 + " Wood";
+            notification.GetComponentInChildren<Text>().font = NotificationFonts;
         
             ClosePickingBlocks();
         
@@ -461,9 +470,11 @@ public class UiButtonController : MonoBehaviour
             
             var notificationStone = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(spikes.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notificationStone.GetComponentInChildren<Text>().text = "-" + 6 + " Stone";
+            notificationStone.GetComponentInChildren<Text>().font = NotificationFonts;
             var notificationWood = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(
                 new Vector3(spikes.transform.position.x, spikes.transform.position.y - 0.3f, spikes.transform.position.z)), Quaternion.identity, GameObject.Find("Canvas").transform);
             notificationWood.GetComponentInChildren<Text>().text = "-" + 10 + " Wood";
+            notificationWood.GetComponentInChildren<Text>().font = NotificationFonts;
         
             ClosePickingBlocks();
         
@@ -503,6 +514,7 @@ public class UiButtonController : MonoBehaviour
             
             var notificationStone = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(fence.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notificationStone.GetComponentInChildren<Text>().text = "-" + 12 + " Stone";
+            notificationStone.GetComponentInChildren<Text>().font = NotificationFonts;
             var notificationCopper = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(
                 new Vector3(fence.transform.position.x, fence.transform.position.y - 0.3f, fence.transform.position.z)), Quaternion.identity, GameObject.Find("Canvas").transform);
             notificationCopper.GetComponentInChildren<Text>().text = "-" + 6 + " Copper";
@@ -546,6 +558,7 @@ public class UiButtonController : MonoBehaviour
             
             var notificationWood = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(torch.transform.position), Quaternion.identity, GameObject.Find("Canvas").transform);
             notificationWood.GetComponentInChildren<Text>().text = "-" + 1 + " Wood";
+            notificationWood.GetComponentInChildren<Text>().font = NotificationFonts;
             var notificationGunPowder = Instantiate(NotificationDamage, Camera.main.WorldToScreenPoint(
                 new Vector3(torch.transform.position.x, torch.transform.position.y - 0.3f, torch.transform.position.z)), Quaternion.identity, GameObject.Find("Canvas").transform);
             notificationGunPowder.GetComponentInChildren<Text>().text = "-" + 1 + " Gun Powder";

@@ -65,9 +65,8 @@ public class HoverController : MonoBehaviour
             }
         }
         */
-        
-        _spriteRenderer.color = _initialColors;
-        _renderer.material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 1f);
+
+        _spriteRenderer.material = GrassMaterial;
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -175,9 +174,8 @@ public class HoverController : MonoBehaviour
                     }
                 }
                 */
-            
-            _spriteRenderer.color = new Color(0, 0, 0, 0.7f);
-            _renderer.material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
+
+            _spriteRenderer.material = GreenFlash;
         }
         if (Input.GetMouseButtonDown(1)  && _isOutOfRange == false) // If _player right clicks (1), left click (0)
         {

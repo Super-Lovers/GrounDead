@@ -302,8 +302,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RedFlash: {fileID: 0}
-  GreenFlash: {fileID: 0}
-  GrassMaterial: {fileID: 0}
+  GreenFlash: {fileID: 2100000, guid: 3a1db2ebb7c194482a46fa9b41c17373, type: 2}
+  GrassMaterial: {fileID: 2100000, guid: ca6ffc26e2e8d43aea1b135f77795d42, type: 2}
   Tree1: {fileID: 0}
   Tree2: {fileID: 0}
   Tree3: {fileID: 0}
