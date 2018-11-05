@@ -57,6 +57,9 @@ public class PlayerController : MonoBehaviour
     public static bool IsPaused;
     private GameObject _pauseMenu;
     public GameObject NotificationDamage;
+    public GameObject GameOverNotification;
+    public Sprite PlayerTombstone;
+    private bool _isGameOver;
     
     // Zombie parameter responsible for the rate of zombie spawns
     public GameObject Weapon;
@@ -156,7 +159,7 @@ public class PlayerController : MonoBehaviour
         float horizontalMovement;
         float verticalMovement;
         
-        if (!IsPaused)
+        if (!IsPaused && _isGameOver == false)
         {
             horizontalMovement = Input.GetAxis("Horizontal");
             verticalMovement = Input.GetAxis("Vertical");
@@ -385,6 +388,19 @@ public class PlayerController : MonoBehaviour
                     gameObject.GetComponent<HitPointsController>().HitPoints = 270;
                 }
             }
+
+            if (gameObject.GetComponent<HitPointsController>().HitPoints <= 0)
+            {
+                GameOverNotification.SetActive(true);
+                Animator.enabled = false;
+                _spriteRenderer.GetComponent<SpriteRenderer>().sprite = PlayerTombstone;
+                
+                Time.timeScale = 0;
+                _cameraAudioSource.enabled = false;
+                _audioSource.enabled = false;
+                IsPaused = true;
+                _isGameOver = true;
+            }
         
             // *********************
             // Melee attack keybinding
@@ -423,7 +439,7 @@ public class PlayerController : MonoBehaviour
         // ***********
         // Pause Functionality
         // ***********
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && _isGameOver == false)
         {
             IsPaused = !IsPaused;
             

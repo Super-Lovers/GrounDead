@@ -51,6 +51,7 @@ TagManager:
   - Pause Button To Return To Menu
   - Object Visibility Detector
   - Structures collider
+  - Canvas
   layers:
   - Default
   - TransparentFX

@@ -364,7 +364,6 @@ public class ZombieController : MonoBehaviour
                     // End game conditional
                     if (other.transform.tag == "Player")
                     {
-                        SceneManager.LoadScene("GameOverScene");
                     }
                     else
                     {

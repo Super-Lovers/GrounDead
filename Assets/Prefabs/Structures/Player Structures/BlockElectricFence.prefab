@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 61052755656875738}
   - component: {fileID: 114718298268170676}
   - component: {fileID: 82256633962379780}
+  - component: {fileID: 95273369920001134}
   m_Layer: 12
   m_Name: BlockElectricFence
   m_TagString: Untagged
@@ -218,6 +219,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &95273369920001134
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1687940884881650}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 37518cf5438714853a62490840787f5a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114718298268170676
 MonoBehaviour:
   m_ObjectHideFlags: 1

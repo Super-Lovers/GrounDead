@@ -106,4 +106,9 @@ public class ButtonController : MonoBehaviour {
 		
 		SceneManager.LoadScene("StartMenuScene");
 	}
+
+	public void ContinueToEndScreen()
+	{
+		SceneManager.LoadScene("GameOverScene");
+	}
 }
