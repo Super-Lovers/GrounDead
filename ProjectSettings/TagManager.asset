@@ -50,6 +50,7 @@ TagManager:
   - Grass
   - Pause Button To Return To Menu
   - Object Visibility Detector
+  - Structures collider
   layers:
   - Default
   - TransparentFX

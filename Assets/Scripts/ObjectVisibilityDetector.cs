@@ -13,6 +13,12 @@ public class ObjectVisibilityDetector : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D other)
 	{
+		if (other == null)
+		{
+			_spriteRenderer.sortingOrder = 11;
+			_spriteRenderer.material = GrassMap;
+			_spriteRenderer.color = new Color(255, 255, 255, 1);
+		}
 		if (other.transform.tag == "Object Visibility Detector")
 		{
 			if (gameObject.layer == 14)

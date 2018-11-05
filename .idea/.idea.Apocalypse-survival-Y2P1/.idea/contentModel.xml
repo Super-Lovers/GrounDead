@@ -35,6 +35,7 @@
           <e p="ZombieController.cs" t="Include" />
           <e p="ZombieNavigationController.cs" t="Include" />
         </e>
+        <e p="StructuresColliderController.cs" t="Include" />
       </e>
       <e p="Library" t="ExcludeRecursive" />
       <e p="Temp" t="ExcludeRecursive">
