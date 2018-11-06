@@ -177,6 +177,10 @@ public class HoverController : MonoBehaviour
 
             _spriteRenderer.material = GreenFlash;
         }
+        else
+        {
+            _spriteRenderer.material = RedFlash;
+        }
         if (Input.GetMouseButtonDown(1)  && _isOutOfRange == false) // If _player right clicks (1), left click (0)
         {
             ClickedBlock = gameObject;

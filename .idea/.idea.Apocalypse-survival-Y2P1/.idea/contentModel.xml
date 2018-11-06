@@ -30,12 +30,12 @@
           <e p="RiverGenerator.cs" t="Include" />
           <e p="RockyPlains.cs" t="Include" />
           <e p="ScoreboardController.cs" t="Include" />
+          <e p="StructuresColliderController.cs" t="Include" />
           <e p="UiButtonController.cs" t="Include" />
           <e p="WorldGenerator.cs" t="Include" />
           <e p="ZombieController.cs" t="Include" />
           <e p="ZombieNavigationController.cs" t="Include" />
         </e>
-        <e p="StructuresColliderController.cs" t="Include" />
       </e>
       <e p="Library" t="ExcludeRecursive" />
       <e p="Temp" t="ExcludeRecursive">

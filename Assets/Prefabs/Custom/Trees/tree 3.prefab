@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8922cfa60c141388884649d9d36a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RedFlash: {fileID: 0}
+  RedFlash: {fileID: 2100000, guid: f2ebd144b5006406eb47dfb7462ec15f, type: 2}
   GreenFlash: {fileID: 2100000, guid: 3a1db2ebb7c194482a46fa9b41c17373, type: 2}
   GrassMaterial: {fileID: 2100000, guid: f419131eb334f4c76ac924a095c327c0, type: 2}
   Tree1: {fileID: 0}
