@@ -273,7 +273,7 @@ public class ZombieController : MonoBehaviour
         
         if (other.transform.tag == "Player" || other.gameObject.layer == 10 || other.transform.gameObject.layer == 12)
         {
-            
+            _obstacle.GetComponent<AudioSource>().PlayOneShot(StructureHitSound);
             if (_isZombieGoingDown)
             {
                 gameObject.GetComponent<Animator>().SetBool("isHittingObjectDown", true); 
@@ -490,7 +490,6 @@ public class ZombieController : MonoBehaviour
                                 _obstacle.GetComponent<HitPointsController>().HitPoints -= 30;
                             }
                         }
-
                         _canAttack = false;
 
                         Invoke("EnableAttacks", 1.5f);

@@ -65,8 +65,8 @@ public class HoverController : MonoBehaviour
             }
         }
         */
-
-        _spriteRenderer.material = GrassMaterial;
+            _spriteRenderer.material = GrassMaterial;
+        
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -145,41 +145,49 @@ public class HoverController : MonoBehaviour
         float _playerPosX = _player.transform.position.x;
         float _playerPosY = _player.transform.position.y;
         */
-        
-        if (!EventSystem.current.IsPointerOverGameObject() && _isOutOfRange == false)
-        {
-            BlockClickedX = _transform.position.x;
-            BlockClickedY = _transform.position.y;
 
-            /*
-            // This statement checks if the _player has encountered the
-            // error where the grass beneath a tree is highlighted instead
-            // of the tree itself, and redirects the mouse selector which will
-            // still give feedback to the _player for the actual, intended, object.
-                foreach (var block in UiButtonController.PlacedBlocks)
-                {
-                    if (BlockClickedX == block.transform.position.x &&
-                        BlockClickedY == block.transform.position.y)
+        if (PlayerController.IsPaused == false)
+        {
+            if (!EventSystem.current.IsPointerOverGameObject() && _isOutOfRange == false)
+            {
+                BlockClickedX = _transform.position.x;
+                BlockClickedY = _transform.position.y;
+
+                /*
+                // This statement checks if the _player has encountered the
+                // error where the grass beneath a tree is highlighted instead
+                // of the tree itself, and redirects the mouse selector which will
+                // still give feedback to the _player for the actual, intended, object.
+                    foreach (var block in UiButtonController.PlacedBlocks)
                     {
-                        if (block.GetComponent<SpriteRenderer>() != null)
+                        if (BlockClickedX == block.transform.position.x &&
+                            BlockClickedY == block.transform.position.y)
                         {
-                            block.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0.7f);
-                            block.GetComponent<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
-                        }
-                        else
-                        {
-                            block.GetComponentInChildren<SpriteRenderer>().color = new Color(0, 0, 0, 0.7f);
-                            block.GetComponentInChildren<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
+                            if (block.GetComponent<SpriteRenderer>() != null)
+                            {
+                                block.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0.7f);
+                                block.GetComponent<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
+                            }
+                            else
+                            {
+                                block.GetComponentInChildren<SpriteRenderer>().color = new Color(0, 0, 0, 0.7f);
+                                block.GetComponentInChildren<SpriteRenderer>().material.color = new Color(_renderer.material.color.r, _renderer.material.color.g, _renderer.material.color.b, 0.4f);
+                            }
                         }
                     }
-                }
-                */
+                    */
 
-            _spriteRenderer.material = GreenFlash;
+                _spriteRenderer.material = GreenFlash;
+            }
+            else
+            {
+                _spriteRenderer.material = RedFlash;
+            }
         }
-        else
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            _spriteRenderer.material = RedFlash;
+            _spriteRenderer.material = GrassMaterial;
         }
         if (Input.GetMouseButtonDown(1)  && _isOutOfRange == false) // If _player right clicks (1), left click (0)
         {
