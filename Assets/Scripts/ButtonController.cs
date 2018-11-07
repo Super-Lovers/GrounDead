@@ -13,6 +13,8 @@ public class ButtonController : MonoBehaviour {
 	public GameObject ButtonScores;
 	public GameObject ButtonExit;
 
+	public GameObject Loader;
+	
 	private void Start()
 	{
 		// Unpause if the player is back in the main menu.
@@ -87,7 +89,8 @@ public class ButtonController : MonoBehaviour {
 
 	public void StartTheGame()
 	{
-		SceneManager.LoadScene("SampleScene");
+		Loader.SetActive(true);
+		Invoke("DelayStartTheGame", 0.1f);
 	}
 
 	public void ShowHighScores()
@@ -102,13 +105,25 @@ public class ButtonController : MonoBehaviour {
 
 	public void ReturnToStartMenu()
 	{
+		if (ButtonStart.transform.name == "BackToMenu")
+		{
+			Loader.SetActive(true);
+		}
 		MenuController.ResetGameWorld();
-		
 		SceneManager.LoadScene("StartMenuScene");
 	}
 
 	public void ContinueToEndScreen()
 	{
+		Loader.SetActive(true);
 		SceneManager.LoadScene("GameOverScene");
+	}
+	
+	// ******************
+	// INVOKE FUNCTIONS
+	// ******************
+	private void DelayStartTheGame()
+	{
+		SceneManager.LoadScene("SampleScene");
 	}
 }

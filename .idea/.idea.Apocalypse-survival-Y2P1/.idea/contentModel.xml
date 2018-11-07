@@ -10,9 +10,6 @@
       <e p="Apocalypse-survival-Y2P1.sln" t="IncludeFlat" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="Resources" t="Include">
-          <e p="player_scores.txt" t="Include" />
-        </e>
         <e p="Scripts" t="Include">
           <e p="BuildPopUpController.cs" t="Include" />
           <e p="BulletController.cs" t="Include" />
@@ -35,6 +32,9 @@
           <e p="WorldGenerator.cs" t="Include" />
           <e p="ZombieController.cs" t="Include" />
           <e p="ZombieNavigationController.cs" t="Include" />
+        </e>
+        <e p="StreamingAssets" t="Include">
+          <e p="player_scores.txt" t="Include" />
         </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />
