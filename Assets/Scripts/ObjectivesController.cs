@@ -236,24 +236,6 @@ public class ObjectivesController : MonoBehaviour {
 
     public void SpawnZombies()
     {
-
-        GameObject[] zombiesAlive = GameObject.FindGameObjectsWithTag("Zombie");
-        GameObject[] zombiesCopsAlive = GameObject.FindGameObjectsWithTag("Zombie Cop");
-        GameObject[] zombiesBossesAlive = GameObject.FindGameObjectsWithTag("Zombie Boss");
-
-        foreach (var zombie in zombiesAlive)
-        {
-            Destroy(zombie);
-        }
-        foreach (var zombie in zombiesCopsAlive)
-        {
-            Destroy(zombie);
-        }
-        foreach (var zombie in zombiesBossesAlive)
-        {
-            Destroy(zombie);
-        }
-        
         // When the zombies are spawned, the wave counter is increased
         CurrentDay++;
         
@@ -469,6 +451,23 @@ public class ObjectivesController : MonoBehaviour {
             }
             else
             {
+                GameObject[] zombiesAlive = GameObject.FindGameObjectsWithTag("Zombie");
+                GameObject[] zombiesCopsAlive = GameObject.FindGameObjectsWithTag("Zombie Cop");
+                GameObject[] zombiesBossesAlive = GameObject.FindGameObjectsWithTag("Zombie Boss");
+
+                foreach (var zombie in zombiesAlive)
+                {
+                    Destroy(zombie);
+                }
+                foreach (var zombie in zombiesCopsAlive)
+                {
+                    Destroy(zombie);
+                }
+                foreach (var zombie in zombiesBossesAlive)
+                {
+                    Destroy(zombie);
+                }
+
                 gameObject.GetComponentInChildren<Light>().transform.Rotate(i * -5, 0, 0);
                 yield return new WaitForSeconds(1f);
                 spawnZombies = false;
