@@ -37,7 +37,7 @@ public class ObjectivesController : MonoBehaviour {
     public GameObject ZombieBasic;
     public GameObject ZombieCop;
     public GameObject ZombieBoss;
-    private bool _isItDay = true;
+    public static bool IsItDay = true;
     public GameObject Camera;
     public GameObject NewWaveNotification;
 	
@@ -62,8 +62,8 @@ public class ObjectivesController : MonoBehaviour {
             CurrentTasks.Clear();
             // Tasks for the player to accomplish
             CurrentTasks.Add("Learn To Move", "Using the W, S, A, D keys, try to move around to become comfortable with the controls.");
-            CurrentTasks.Add("Learn To Defend Yourself", "You press the <space> bar to attack using your melee weapon and the <left mouse button> to use your rifle, try it! \n\nYou can also try switch between your melee knife and axe using the <E> key!");
-            CurrentTasks.Add("Collect Wood", "Collect wood by right clicking on a tree and selecting the red hammer.");
+            CurrentTasks.Add("Learn To Defend Yourself", "You press the <space> bar to attack using your melee weapon and the <left mouse button> to use your rifle, try it!");
+            CurrentTasks.Add("Collect Wood", "Collect wood by right clicking on a tree or a tile beneath it and by selecting the red hammer.");
             CurrentTasks.Add("Place Wooden Wall", "Place a wooden wall by right clicking a ground tile, selecting the green hammer and clicking on the wooden wall.");
             CurrentTasks.Add("Place Wooden Platform", "Place a wooden platform by right clicking on a *water* tile, selecting the green hammer and clicking on the wooden platform.");
             CurrentTasks.Add("Craft Rifle Bullets", "If your rifle is out of bullets, you can easily craft them with 5 gun powder and 5 copper by clicking on the + button on the top-right corner next to your total bullets interface.");
@@ -75,9 +75,9 @@ public class ObjectivesController : MonoBehaviour {
         }
         else
         {
+            InvokeRepeating("UpdateWorldTime", 30, 30);
             TasksWindow.SetActive(false);
         }
-		
         CompletedTaskPopUp.SetActive(false);
         
         _numberOfZombiesToSpawnOriginal = NumberOfZombiesToSpawnLeft + NumberOfZombiesToSpawnRight;
@@ -98,13 +98,14 @@ public class ObjectivesController : MonoBehaviour {
                 HasAttackedRange = false;
             }
 		
-            if (HasAttackedMelee && HasAttackedRange && HasSwitchedWeapons && _currentTask == 2)
+            if (HasAttackedMelee && HasAttackedRange && _currentTask == 2)
             {
                 CompleteTask("Learn To Defend Yourself");
                 ShowTasksWindow();
             }
 		
-            if (PlayerController.Wood > 200 && _currentTask == 3)
+            
+            if (PlayerController.Wood > 20 && _currentTask == 3)
             {
                 CompleteTask("Collect Wood");
                 _currentWoodWallsBuilt = MenuController.TotalWoodenWallsBuilt;
@@ -214,7 +215,7 @@ public class ObjectivesController : MonoBehaviour {
 					
                 Invoke("HideCompletedPopUp", 1f);
                 // Begin the game day/night cycle when the tutorial is complete.
-                InvokeRepeating("UpdateWorldTime", 20, 20);
+                InvokeRepeating("UpdateWorldTime", 30, 30);
                 _currentTask++;
                 IsTutorialComplete = true;
                 break;
@@ -411,7 +412,7 @@ public class ObjectivesController : MonoBehaviour {
         NumberOfZombiesToSpawnRight = (int)_numberOfZombiesToSpawnOriginal / 2 + 1;
 	    
         // Slowly increasing the rate of zombies spawning!
-        ChanceOfZombieToSpawn += 0.4f;
+        ChanceOfZombieToSpawn += 1.4f;
     }
 
     private void HideCompletedPopUp()
@@ -442,7 +443,7 @@ public class ObjectivesController : MonoBehaviour {
     {
         bool spawnZombies = false;
         for (int i = 1; i < 5; i++) {
-            if (_isItDay)
+            if (IsItDay)
             {
                 gameObject.GetComponentInChildren<Light>().transform.Rotate(i * 5, 0, 0);
                 yield return new WaitForSeconds(1f);
@@ -465,7 +466,8 @@ public class ObjectivesController : MonoBehaviour {
             Invoke("HideWaveNotification", 3f);
         }
 
-        _isItDay = !_isItDay;
+        CameraController.ChangedTheme = false;
+        IsItDay = !IsItDay;
     }
 
     private void HideWaveNotification()

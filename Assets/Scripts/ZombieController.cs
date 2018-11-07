@@ -10,7 +10,7 @@ public class ZombieController : MonoBehaviour
     public LayerMask PlayerDetectorLayerMask;
     public int HitPoints = 80;
     public int Strength = 20;
-    public float MovementSpeed = 0.03f;
+    public float MovementSpeed = 0.02f;
     public float RangeOfDetection = 100;
     
     // Used to confirm that the zombie will collide with an obstacle
@@ -346,7 +346,7 @@ public class ZombieController : MonoBehaviour
     {
         if (other.gameObject.layer == 14 || other.gameObject.layer == 11)
         {
-            MovementSpeed = 0.03f;
+            MovementSpeed = 0.02f;
         }
         
         gameObject.GetComponent<Rigidbody2D>().constraints =
@@ -528,7 +528,7 @@ public class ZombieController : MonoBehaviour
             // Make the zombie look smaller when traversing in forests
             GetComponent<Animator>().speed = 0.4f;
             
-            MovementSpeed = 0.015f;
+            MovementSpeed = 0.012f;
         }
     }
     
@@ -537,7 +537,7 @@ public class ZombieController : MonoBehaviour
         if (other.gameObject.layer == 14 || other.gameObject.layer == 11)
         {
             GetComponent<Animator>().speed = 1f;
-            MovementSpeed = 0.03f;
+            MovementSpeed = 0.02f;
         }
     }
 
@@ -560,7 +560,7 @@ public class ZombieController : MonoBehaviour
         
         if (other.gameObject.layer == 14 || other.gameObject.layer == 11)
         {
-            MovementSpeed = 0.03f;
+            MovementSpeed = 0.02f;
         }
     }
     

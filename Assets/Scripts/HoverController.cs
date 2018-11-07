@@ -217,12 +217,12 @@ public class HoverController : MonoBehaviour
                     if (ui.name == "BuildButton" && _canBuild)
                     {
                         actionsUiPos.x = Input.mousePosition.x + 18;
-                        actionsUiPos.y = Input.mousePosition.y + 50;
+                        actionsUiPos.y = Input.mousePosition.y + 40;
                     }
                     else
                     {
                         actionsUiPos.x = Input.mousePosition.x + 18;
-                        actionsUiPos.y = Input.mousePosition.y + 50;
+                        actionsUiPos.y = Input.mousePosition.y + 40;
                         if (ui.name == "BuildButton")
                         {
                             ui.SetActive(false);
@@ -231,7 +231,7 @@ public class HoverController : MonoBehaviour
                     if (ui.name == "DestroyButton")
                     {
                         actionsUiPos.x = Input.mousePosition.x + 110;
-                        actionsUiPos.y = Input.mousePosition.y + 50;
+                        actionsUiPos.y = Input.mousePosition.y + 40;
                     }
                     else if (ui.name == "CloseButton")
                     {
