@@ -23,12 +23,12 @@ public class PlayerController : MonoBehaviour
     protected static GameObject[] ActionsUi;
     protected static GameObject[] PickUi;
     //private GameObject _notification;
-    public static int Wood = 200;
-    public static int Stone = 200;
-    public static int Copper = 10;
-    public static int GunPowder = 10;
+    public static int Wood = 20;
+    public static int Stone = 20;
+    public static int Copper = 15;
+    public static int GunPowder = 20;
     public static int Apples;
-    public static int Bullets = 10;
+    public static int Bullets = 20;
     public Texture PlayerPortrait;
     public Texture HealthTexture;
     public Texture HealthBackgroundTexture;

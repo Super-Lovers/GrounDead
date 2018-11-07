@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,6 +30,8 @@ public class MenuController : MonoBehaviour {
     public static int TotalCopperMined;
     public static int TotalApplesCollected;
     public static int TotalGunPowderCollected;
+    
+    public TextAsset ScoresAsset;
 	
     // Tutorial part counter
     //private int _tutorialPart = 0;
@@ -106,9 +109,8 @@ public class MenuController : MonoBehaviour {
         // Adding the final score to the list of existing scores,
         // sorting it so that we can only retrieve the top 5 and then
         // making it from ascending to descending with the Reverse method.
-		
-        // Writing the new score to a local text file for storing and later use.
-        string path = "Assets/Resources/player_scores.txt";
+        
+        string path = Application.dataPath + "/StreamingAssets/player_scores.txt";
         StreamWriter writer = new StreamWriter(path, true);
 
         using (writer)

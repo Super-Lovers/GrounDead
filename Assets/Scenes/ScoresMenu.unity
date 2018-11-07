@@ -5385,6 +5385,7 @@ MonoBehaviour:
   Score3: {fileID: 294093444}
   Score4: {fileID: 273156817}
   Score5: {fileID: 1965834846}
+  ScoresAsset: {fileID: 4900000, guid: eb4ea9a3f532244f78aa91bfcb1c368a, type: 3}
 --- !u!1 &407408959
 GameObject:
   m_ObjectHideFlags: 0
