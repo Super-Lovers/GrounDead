@@ -494,9 +494,9 @@ MonoBehaviour:
   PlayerDetectorLayerMask:
     serializedVersion: 2
     m_Bits: 4096
-  HitPoints: 5
+  HitPoints: 250
   Strength: 1
-  MovementSpeed: 0.03
+  MovementSpeed: 0.02
   RangeOfDetection: 100
   RedFlash: {fileID: 2100000, guid: f2ebd144b5006406eb47dfb7462ec15f, type: 2}
   YellowFlash: {fileID: 2100000, guid: 0c06ed59eaff84a359c3061ca412f9b2, type: 2}
@@ -506,9 +506,6 @@ MonoBehaviour:
     type: 2}
   NotificationDamage: {fileID: 1199130486568902, guid: 06ff37092c1ed4cac9ea059df23109ee,
     type: 2}
-  GameOverNotification: {fileID: 1410529568598258, guid: 5b591ec12b1bf43da839945c7b958d97,
-    type: 2}
-  PlayerTombstone: {fileID: 21300000, guid: 3dc32efca79bd47e7b9359a88389faa4, type: 3}
   Stones:
   - {fileID: 1724828210568118, guid: 4effb1fb9e6d44f7dade7b9b792ff0d6, type: 2}
   - {fileID: 1039069163428458, guid: 4688c33d8045341c49752213c7ac3fce, type: 2}
