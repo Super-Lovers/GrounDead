@@ -130,10 +130,14 @@ public class ZombieController : MonoBehaviour
             if (castResult)
             {
                 //Debug.DrawLine(transform.position, castResult.transform.position, Color.green, 1.0f);
-            
+                
                 RaycastHit2D linecastResult = Physics2D.Linecast(transform.position, castResult.transform.position, PlayerLayerMask);
-                if (linecastResult.transform.tag == "Player" || linecastResult.transform.gameObject.layer == 12 || linecastResult.transform.gameObject.layer == 11 || linecastResult.transform.gameObject.layer == 14 || linecastResult.transform.tag == "Player Visibility Detector" || linecastResult.transform.tag == "Player Range")
+                if (linecastResult.transform.tag == "Player" || linecastResult.transform.gameObject.layer == 12 || linecastResult.transform.gameObject.layer == 11 ||
+                    linecastResult.transform.gameObject.layer == 14 || linecastResult.transform.tag == "Player Visibility Detector" || linecastResult.transform.tag == "Player Range")
                 {
+                    gameObject.GetComponent<Animator>().SetBool("isWalking", true);
+                    gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
+                    
                     if (linecastResult.transform.tag == "PlayerDetector" || linecastResult.transform.gameObject.layer == 12)
                     {
                         transform.position = Vector2.MoveTowards(transform.position, linecastResult.transform.position, MovementSpeed);
@@ -142,34 +146,26 @@ public class ZombieController : MonoBehaviour
                     {
                         transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, MovementSpeed);
                     }
-                    
-                    gameObject.GetComponent<Animator>().SetBool("isWalking", true);
             
                     RaycastHit2D rayUp = Physics2D.Raycast(transform.position, Vector2.up, 5, PlayerDetectorLayerMask);
                     RaycastHit2D rayDown = Physics2D.Raycast(transform.position, Vector2.down, 5, PlayerDetectorLayerMask);
         
                     if (rayUp)
                     {
-                        gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 0);
-                        gameObject.GetComponent<Animator>().SetFloat("directionVertical", 1);
                         _isZombieGoingDown = false;
                     }
                     else if (rayDown)
                     {
-                        gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 0);
-                        gameObject.GetComponent<Animator>().SetFloat("directionVertical", 1);
                         _isZombieGoingDown = true;
                     }
                     else
                     {
                         _isZombieGoingDown = false;
-                        if (linecastResult.transform.tag == "PlayerDetector")
+                        if (linecastResult.transform.tag == "Player")
                         {
                             if (pos.x > linecastResult.transform.position.x)
                             {
-                                gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
-                                gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
-                                if (_zombieType == "Armored")
+                                if (_isFatZombie)
                                 {
                                     gameObject.GetComponent<SpriteRenderer>().flipX = false;
                                 }
@@ -180,9 +176,7 @@ public class ZombieController : MonoBehaviour
                             }
                             else if (pos.x < linecastResult.transform.position.x)
                             {
-                                gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
-                                gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
-                                if (_zombieType == "Armored")
+                                if (_isFatZombie)
                                 {
                                     gameObject.GetComponent<SpriteRenderer>().flipX = true;
                                 }
@@ -191,36 +185,29 @@ public class ZombieController : MonoBehaviour
                                     gameObject.GetComponent<SpriteRenderer>().flipX = false;
                                 }
                             }
-                        }
-                        else
+                        } else if (pos.x > linecastResult.transform.position.x)
                         {
-                            if (pos.x > _player.transform.position.x)
+                            if (_isFatZombie)
                             {
-                                gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
-                                gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
-                                if (_zombieType == "Armored")
-                                {
-                                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                                }
-                                else
-                                {
-                                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
-                                }
+                                gameObject.GetComponent<SpriteRenderer>().flipX = false;
                             }
-                            else if (pos.x < _player.transform.position.x)
+                            else
                             {
-                                gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
-                                gameObject.GetComponent<Animator>().SetFloat("directionHorizontal", 1);
-                                if (_zombieType == "Armored")
-                                {
-                                    gameObject.GetComponent<SpriteRenderer>().flipX = true;
-                                }
-                                else
-                                {
-                                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                                }
+                                gameObject.GetComponent<SpriteRenderer>().flipX = true;
                             }
                         }
+                        else if (pos.x < linecastResult.transform.position.x)
+                        {
+                            if (_isFatZombie)
+                            {
+                                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                            }
+                            else
+                            {
+                                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                            }
+                        }
+                        //gameObject.GetComponent<Animator>().SetFloat("directionVertical", 0);
                     }
                 }
                 else
@@ -548,6 +535,7 @@ public class ZombieController : MonoBehaviour
             if (_isZombieGoingDown)
             {
                 gameObject.GetComponent<Animator>().SetBool("isHittingObjectDown", false); 
+                gameObject.GetComponent<Animator>().SetBool("isHittingObject", false);
             }
             else
             {

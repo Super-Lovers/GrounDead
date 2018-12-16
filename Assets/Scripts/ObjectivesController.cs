@@ -253,166 +253,185 @@ public class ObjectivesController : MonoBehaviour {
         // We are starting to generate zombies one block down the top and left border
         float currentX = 0.64f;
         float currentY = 24.96f;
-        
-        for (int y = 39; y > 1; y--)
+
+        while (NumberOfZombiesToSpawnLeft > 0)
         {
-            for (int x = segmentStart; x < segmentEnd; x++)
+            for (int y = 39; y > 1; y--)
             {
+                for (int x = segmentStart; x < segmentEnd; x++)
+                {
 	            
-                if (NumberOfZombiesToSpawnLeft > 0 && Random.Range(0, 101) < ChanceOfZombieToSpawn)
-                {
-                    var randomZombie = Random.Range(0, 3);
-                    GameObject spawnedZombie;
-                    if (randomZombie == 0)
+                    if (NumberOfZombiesToSpawnLeft > 0 && Random.Range(0, 101) < ChanceOfZombieToSpawn)
                     {
-                        spawnedZombie = Instantiate(ZombieBasic,
-                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
-                        spawnedZombie.transform.tag = "Zombie";
-                    }
-                    else if (randomZombie == 1)
-                    {
-                        spawnedZombie = Instantiate(ZombieBoss,
-                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
-                        spawnedZombie.transform.tag = "Zombie Boss";
-                    }
-                    else if (randomZombie == 2)
-                    {
-                        spawnedZombie = Instantiate(ZombieCop,
-                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
-                        spawnedZombie.transform.tag = "Zombie Cop";
-                    }
-                    else
-                    {
-                        spawnedZombie = Instantiate(ZombieBasic,
-                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
-                        spawnedZombie.transform.tag = "Zombie";
-                    }
-                
-                    for (int i = 0; i < UiButtonController.PlacedBlocks.Count - 1; i++)
-                    {
-                        bool isItSafeToSpawn;
-                        if (spawnedZombie.transform.position.x != UiButtonController.PlacedBlocks[i].transform.position.x &&
-                            spawnedZombie.transform.position.y != UiButtonController.PlacedBlocks[i].transform.position.y)
+                        var randomZombie = Random.Range(0, 3);
+                        GameObject spawnedZombie;
+                        if (randomZombie == 0)
                         {
-                            isItSafeToSpawn = true;
+                            spawnedZombie = Instantiate(ZombieBasic,
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
+                            spawnedZombie.transform.tag = "Zombie";
+                        }
+                        else if (randomZombie == 1)
+                        {
+                            spawnedZombie = Instantiate(ZombieBoss,
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
+                            spawnedZombie.transform.tag = "Zombie Boss";
+                        }
+                        else if (randomZombie == 2)
+                        {
+                            spawnedZombie = Instantiate(ZombieCop,
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
+                            spawnedZombie.transform.tag = "Zombie Cop";
                         }
                         else
                         {
-                            isItSafeToSpawn = false;
+                            spawnedZombie = Instantiate(ZombieBasic,
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
+                            spawnedZombie.transform.tag = "Zombie";
                         }
-
-                        if (isItSafeToSpawn == false)
+                
+                        for (int i = 0; i < UiButtonController.PlacedBlocks.Count - 1; i++)
                         {
-                            Destroy(spawnedZombie);
+                            bool isItSafeToSpawn;
+                            if (spawnedZombie.transform.position.x != UiButtonController.PlacedBlocks[i].transform.position.x &&
+                                spawnedZombie.transform.position.y != UiButtonController.PlacedBlocks[i].transform.position.y)
+                            {
+                                isItSafeToSpawn = true;
+                            }
+                            else
+                            {
+                                isItSafeToSpawn = false;
+                            }
+
+                            if (isItSafeToSpawn == false)
+                            {
+                                Destroy(spawnedZombie);
+                            }
+                            else
+                            {
+                                NumberOfZombiesToSpawnLeft--;
+                                Debug.Log(NumberOfZombiesToSpawnLeft);
+                                break;
+                            }
                         }
                     }
-                }
                 
-                /*if (NumberOfZombiesToSpawnLeft > 0 && Random.Range(0, 101) < ChanceOfZombieToSpawn)
-                {
-                    var spawnedZombie = Instantiate(ZombieBasic,
-                        new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
-                    spawnedZombie.transform.tag = "Zombie";
-                
-                    for (int i = 0; i < UiButtonController.PlacedBlocks.Count - 1; i++)
+                    /*if (NumberOfZombiesToSpawnLeft > 0 && Random.Range(0, 101) < ChanceOfZombieToSpawn)
                     {
-                        bool isItSafeToSpawn;
-                        if (spawnedZombie.transform.position.x != UiButtonController.PlacedBlocks[i].transform.position.x &&
-                            spawnedZombie.transform.position.y != UiButtonController.PlacedBlocks[i].transform.position.y)
+                        var spawnedZombie = Instantiate(ZombieBasic,
+                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
+                        spawnedZombie.transform.tag = "Zombie";
+                    
+                        for (int i = 0; i < UiButtonController.PlacedBlocks.Count - 1; i++)
                         {
-                            isItSafeToSpawn = true;
-                            NumberOfZombiesToSpawnLeft--;
-                        }
-                        else
-                        {
-                            isItSafeToSpawn = false;
-                        }
-
-                        if (isItSafeToSpawn == false)
-                        {
-                            Destroy(spawnedZombie);
+                            bool isItSafeToSpawn;
+                            if (spawnedZombie.transform.position.x != UiButtonController.PlacedBlocks[i].transform.position.x &&
+                                spawnedZombie.transform.position.y != UiButtonController.PlacedBlocks[i].transform.position.y)
+                            {
+                                isItSafeToSpawn = true;
+                                NumberOfZombiesToSpawnLeft--;
+                            }
+                            else
+                            {
+                                isItSafeToSpawn = false;
+                            }
+    
+                            if (isItSafeToSpawn == false)
+                            {
+                                Destroy(spawnedZombie);
+                            }
                         }
                     }
+                    */
+                    currentX += 0.64f;
                 }
-                */
-                currentX += 0.64f;
+
+                currentX = 0;
+                currentY -= 0.64f;
             }
-
-            currentX = 0;
-            currentY -= 0.64f;
         }
         
         // Resetting the coordinates of the borders for generating the zombies.
         // We are starting to generate zombies one block down the top and right border.
         currentX = 53.36f;
         currentY = 24.96f;
-        
-        for (int y = 39; y > 1; y--)
+
+        while (NumberOfZombiesToSpawnRight > 0)
         {
-            for (int x = segmentStart; x < segmentBeachEnd; x++)
+            for (int y = 39; y > 1; y--)
             {
-                if (NumberOfZombiesToSpawnRight > 0 && Random.Range(0, 101) < ChanceOfZombieToSpawn)
+                for (int x = segmentStart; x < segmentBeachEnd; x++)
                 {
-                    var randomZombie = Random.Range(0, 3);
-                    GameObject spawnedZombie;
-                    if (randomZombie == 0)
+                    if (NumberOfZombiesToSpawnRight > 0 && Random.Range(0, 101) < ChanceOfZombieToSpawn)
                     {
-                        spawnedZombie = Instantiate(ZombieBasic,
-                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
-                        spawnedZombie.transform.tag = "Zombie";
-                    }
-                    else if (randomZombie == 1)
-                    {
-                        spawnedZombie = Instantiate(ZombieBoss,
-                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
-                        spawnedZombie.transform.tag = "Zombie Boss";
-                    }
-                    else if (randomZombie == 2)
-                    {
-                        spawnedZombie = Instantiate(ZombieCop,
-                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
-                        spawnedZombie.transform.tag = "Zombie Cop";
-                    }
-                    else
-                    {
-                        spawnedZombie = Instantiate(ZombieBasic,
-                            new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
-                        spawnedZombie.transform.tag = "Zombie";
-                    }
-                
-                    for (int i = 0; i < UiButtonController.PlacedBlocks.Count - 1; i++)
-                    {
-                        bool isItSafeToSpawn;
-                        if (spawnedZombie.transform.position.x != UiButtonController.PlacedBlocks[i].transform.position.x &&
-                            spawnedZombie.transform.position.y != UiButtonController.PlacedBlocks[i].transform.position.y)
+                        var randomZombie = Random.Range(0, 3);
+                        GameObject spawnedZombie;
+                        if (randomZombie == 0)
                         {
-                            isItSafeToSpawn = true;
+                            spawnedZombie = Instantiate(ZombieBasic,
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
+                            spawnedZombie.transform.tag = "Zombie";
+                        }
+                        else if (randomZombie == 1)
+                        {
+                            spawnedZombie = Instantiate(ZombieBoss,
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
+                            spawnedZombie.transform.tag = "Zombie Boss";
+                        }
+                        else if (randomZombie == 2)
+                        {
+                            spawnedZombie = Instantiate(ZombieCop,
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
+                            spawnedZombie.transform.tag = "Zombie Cop";
                         }
                         else
                         {
-                            isItSafeToSpawn = false;
+                            spawnedZombie = Instantiate(ZombieBasic,
+                                new Vector2(currentX, currentY), Quaternion.identity, GameObject.FindGameObjectWithTag("Zombies").transform);
+                            spawnedZombie.transform.tag = "Zombie";
                         }
-
-                        if (isItSafeToSpawn == false)
+                
+                        for (int i = 0; i < UiButtonController.PlacedBlocks.Count - 1; i++)
                         {
-                            Destroy(spawnedZombie);
+                            bool isItSafeToSpawn;
+                            if (spawnedZombie.transform.position.x != UiButtonController.PlacedBlocks[i].transform.position.x &&
+                                spawnedZombie.transform.position.y != UiButtonController.PlacedBlocks[i].transform.position.y)
+                            {
+                                isItSafeToSpawn = true;
+                            }
+                            else
+                            {
+                                isItSafeToSpawn = false;
+                            }
+
+                            if (isItSafeToSpawn == false)
+                            {
+                                Destroy(spawnedZombie);
+                            }
+                            else
+                            {
+                                NumberOfZombiesToSpawnRight--;
+                                Debug.Log(NumberOfZombiesToSpawnRight);
+                                break;
+                            }
                         }
                     }
+                    currentX -= 0.64f;
                 }
-                currentX -= 0.64f;
-            }
 
-            currentX = 53.36f;
-            currentY -= 0.64f;
+                currentX = 53.36f;
+                currentY -= 0.64f;
+            }
         }
+        
+        _numberOfZombiesToSpawnOriginal += 1;
+        NumberOfZombiesToSpawnLeft = (int)_numberOfZombiesToSpawnOriginal / 2;
+        NumberOfZombiesToSpawnRight = (int)_numberOfZombiesToSpawnOriginal / 2;
         
         // When the zombies are spawned, the day counter is increased
         GameObject.FindGameObjectWithTag("PlayerWave").GetComponent<Text>().text = "Day: " + CurrentDay;
-        NumberOfZombiesToSpawnLeft = (int)_numberOfZombiesToSpawnOriginal / 2 + 1;
-        NumberOfZombiesToSpawnRight = (int)_numberOfZombiesToSpawnOriginal / 2 + 1;
-	    
         // Slowly increasing the rate of zombies spawning!
-        ChanceOfZombieToSpawn += 0.9f;
+        //ChanceOfZombieToSpawn += 0.1f;
     }
 
     private void HideCompletedPopUp()

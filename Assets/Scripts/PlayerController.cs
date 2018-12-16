@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
         CloseButtonOnClick();
         ClosePickingBlocks();
         
-        _cameraAudioSource.Play();
+        //_cameraAudioSource.Play();
         
         _gunHole = GameObject.FindGameObjectWithTag("GunHole").transform;
         _gunHolePos = _gunHole.position;
@@ -123,15 +123,15 @@ public class PlayerController : MonoBehaviour
         if (IsPaused)
         {
             Time.timeScale = 0;
-            _cameraAudioSource.enabled = false;
-            _audioSource.enabled = false;
+            //_cameraAudioSource.enabled = false;
+            //_audioSource.enabled = false;
             _pauseMenu.SetActive(true);
         }
         else
         {
             Time.timeScale = 1;
-            _cameraAudioSource.enabled = true;
-            _audioSource.enabled = true;
+            //_cameraAudioSource.enabled = true;
+            //_audioSource.enabled = true;
             _pauseMenu.SetActive(false);
         }
 
@@ -161,8 +161,8 @@ public class PlayerController : MonoBehaviour
         
         if (!IsPaused && _isGameOver == false)
         {
-            horizontalMovement = Input.GetAxis("Horizontal");
-            verticalMovement = Input.GetAxis("Vertical");
+            horizontalMovement = Input.GetAxis("Horizontal") * Time.deltaTime;
+            verticalMovement = Input.GetAxis("Vertical") * Time.deltaTime;
             
             var weaponTransform = Weapon.transform;
             var weaponPos = Weapon.transform.position;

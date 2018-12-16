@@ -1362,7 +1362,7 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: eab60975aed5843bdb4fef8fdb9ea01e, type: 3}
@@ -7840,7 +7840,7 @@ RectTransform:
   - {fileID: 1246485142}
   - {fileID: 1132457994}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8669,7 +8669,7 @@ Transform:
   - {fileID: 1795260493}
   - {fileID: 511302936}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &2029945148
 Rigidbody2D:
@@ -8697,7 +8697,7 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2029945142}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 291c64b5cdf30478484ec1bfdd8debd7, type: 3}
@@ -8811,8 +8811,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TasksWindow: {fileID: 323856481}
   CompletedTaskPopUp: {fileID: 1106051954}
-  NumberOfZombiesToSpawnLeft: 5
-  NumberOfZombiesToSpawnRight: 5
+  NumberOfZombiesToSpawnLeft: 1
+  NumberOfZombiesToSpawnRight: 1
   ChanceOfZombieToSpawn: 3
   ZombieBasic: {fileID: 1828038574458888, guid: 6ec8842d451254e3c87195f1bde036a4,
     type: 2}
