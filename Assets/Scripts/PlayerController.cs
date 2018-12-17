@@ -101,14 +101,13 @@ public class PlayerController : MonoBehaviour
         // show it only when the player presses backspace.
         _pauseMenu.SetActive(false);
 
-
         PlayerHealth = (gameObject.GetComponent<HitPointsController>().HitPoints * 27) / 10f;
         
         // Hide the UI at the start of the game AFTER you select the components
         CloseButtonOnClick();
         ClosePickingBlocks();
         
-        //_cameraAudioSource.Play();
+        _cameraAudioSource.Play();
         
         _gunHole = GameObject.FindGameObjectWithTag("GunHole").transform;
         _gunHolePos = _gunHole.position;
@@ -123,15 +122,15 @@ public class PlayerController : MonoBehaviour
         if (IsPaused)
         {
             Time.timeScale = 0;
-            //_cameraAudioSource.enabled = false;
-            //_audioSource.enabled = false;
+            _cameraAudioSource.enabled = false;
+            _audioSource.enabled = false;
             _pauseMenu.SetActive(true);
         }
         else
         {
             Time.timeScale = 1;
-            //_cameraAudioSource.enabled = true;
-            //_audioSource.enabled = true;
+            _cameraAudioSource.enabled = true;
+            _audioSource.enabled = true;
             _pauseMenu.SetActive(false);
         }
 

@@ -43,9 +43,14 @@ public class UiButtonController : MonoBehaviour
     public static List<GameObject> PlacedStructures = new List<GameObject>();
 
     public Font NotificationFonts;
+    private List<GameObject> _audioSources = new List<GameObject>();
+    public static float CurrentVolume = 0.5f;
     
     private void Start()
     {
+        _audioSources.Add(GameObject.FindGameObjectWithTag("MainCamera"));
+        _audioSources.Add(GameObject.FindGameObjectWithTag("Player"));
+        
         _actionsUi = GameObject.FindGameObjectsWithTag("ActionUI");
         _pickUi = GameObject.FindGameObjectsWithTag("PickUI");
         _cameraAudioSource = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
@@ -598,6 +603,58 @@ public class UiButtonController : MonoBehaviour
         }
         
         //Debug.Log("Added a bullet: " + PlayerController.Bullets);
+    }
+
+    public void DecreaseVolume()
+    {
+        CurrentVolume -= 0.1f;
+        
+        var zombieAudioSources = GameObject.FindGameObjectsWithTag("Zombie");
+        var zombieCopAudioSources = GameObject.FindGameObjectsWithTag("Zombie Cop");
+        var zombieBossAudioSources = GameObject.FindGameObjectsWithTag("Zombie Boss");
+
+        foreach (var zombie in zombieAudioSources)
+        {
+            zombie.GetComponent<AudioSource>().volume = CurrentVolume;
+        }
+        foreach (var zombie in zombieCopAudioSources)
+        {
+            zombie.GetComponent<AudioSource>().volume = CurrentVolume;
+        }
+        foreach (var zombie in zombieBossAudioSources)
+        {
+            zombie.GetComponent<AudioSource>().volume = CurrentVolume;
+        }
+        foreach (var audiosource in _audioSources)
+        {
+            audiosource.GetComponent<AudioSource>().volume = CurrentVolume;
+        }
+    }
+    
+    public void IncreaseVolume()
+    {
+        CurrentVolume += 0.1f;
+        
+        var zombieAudioSources = GameObject.FindGameObjectsWithTag("Zombie");
+        var zombieCopAudioSources = GameObject.FindGameObjectsWithTag("Zombie Cop");
+        var zombieBossAudioSources = GameObject.FindGameObjectsWithTag("Zombie Boss");
+
+        foreach (var zombie in zombieAudioSources)
+        {
+            zombie.GetComponent<AudioSource>().volume = CurrentVolume;
+        }
+        foreach (var zombie in zombieCopAudioSources)
+        {
+            zombie.GetComponent<AudioSource>().volume = CurrentVolume;
+        }
+        foreach (var zombie in zombieBossAudioSources)
+        {
+            zombie.GetComponent<AudioSource>().volume = CurrentVolume;
+        }
+        foreach (var audiosource in _audioSources)
+        {
+            audiosource.GetComponent<AudioSource>().volume = CurrentVolume;
+        }
     }
 
     private void UpdateObject(GameObject obj)

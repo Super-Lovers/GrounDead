@@ -28,6 +28,7 @@ public class ObjectivesController : MonoBehaviour {
     private int _currentWoodWallsBuilt;
 	
     // Zombies and Day/Night Cycle variables
+    public int MaxNumberOfZombies;
     public int NumberOfZombiesToSpawnLeft;
     public int NumberOfZombiesToSpawnRight;
     private int _numberOfZombiesToSpawnOriginal;
@@ -40,10 +41,12 @@ public class ObjectivesController : MonoBehaviour {
     public static bool IsItDay = true;
     public GameObject Camera;
     public GameObject NewWaveNotification;
+    private GameObject _worldGenerator;
 	
     // Use this for initialization
     void Start ()
     {
+        _worldGenerator = GameObject.Find("God (World generator)");
         _taskTitle = GameObject.FindGameObjectWithTag("Task Title");
         _taskDescription = GameObject.FindGameObjectWithTag("Task Description");
         
@@ -238,6 +241,14 @@ public class ObjectivesController : MonoBehaviour {
     {
         // When the zombies are spawned, the wave counter is increased
         CurrentDay++;
+
+        // After a few days have passed, the world resources will be regenerated
+        if (CurrentDay % 3 == 0)
+        {
+            var worldGeneratorScript = _worldGenerator.GetComponent<WorldGenerator>();
+            worldGeneratorScript.HideNewTerrainNotification();
+            worldGeneratorScript.RegenerateWorld();
+        }
         
         MenuController.UpdateScore();
         
@@ -309,8 +320,11 @@ public class ObjectivesController : MonoBehaviour {
                             }
                             else
                             {
+                                // We set every new zombie's sound settings according to the current
+                                // sound settings of the player set.
+                                spawnedZombie.GetComponent<AudioSource>().volume = UiButtonController.CurrentVolume;
+                                
                                 NumberOfZombiesToSpawnLeft--;
-                                Debug.Log(NumberOfZombiesToSpawnLeft);
                                 break;
                             }
                         }
@@ -410,8 +424,9 @@ public class ObjectivesController : MonoBehaviour {
                             }
                             else
                             {
+                                spawnedZombie.GetComponent<AudioSource>().volume = UiButtonController.CurrentVolume;
+                                
                                 NumberOfZombiesToSpawnRight--;
-                                Debug.Log(NumberOfZombiesToSpawnRight);
                                 break;
                             }
                         }
@@ -423,8 +438,20 @@ public class ObjectivesController : MonoBehaviour {
                 currentY -= 0.64f;
             }
         }
-        
-        _numberOfZombiesToSpawnOriginal += 1;
+
+        if (_numberOfZombiesToSpawnOriginal < MaxNumberOfZombies)
+        {
+            if (Random.Range(0, 101) < 70)
+            {
+                _numberOfZombiesToSpawnOriginal += 1;
+                //Debug.Log("Increase zombie max");
+                //Debug.Log(_numberOfZombiesToSpawnOriginal);
+            }
+        }
+        else
+        {
+            _numberOfZombiesToSpawnOriginal = MaxNumberOfZombies;
+        }
         NumberOfZombiesToSpawnLeft = (int)_numberOfZombiesToSpawnOriginal / 2;
         NumberOfZombiesToSpawnRight = (int)_numberOfZombiesToSpawnOriginal / 2;
         

@@ -541,14 +541,13 @@ public class WorldGenerator : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
-            NewTerrainNotification.SetActive(true);
             Invoke("RegenerateWorld", 0.5f);
         }
     }
 
     public void RegenerateWorld()
     {
-        Invoke("HideNewTerrainNotification", 3);
+        NewTerrainNotification.SetActive(true);
         
         float currentX = 0;
         float currentY = 0;
@@ -623,7 +622,7 @@ public class WorldGenerator : MonoBehaviour {
         }
     }
 
-    private void HideNewTerrainNotification()
+    public void HideNewTerrainNotification()
     {
         NewTerrainNotification.SetActive(false);
     }
